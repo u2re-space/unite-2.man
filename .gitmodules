@@ -40,3 +40,9 @@
 [submodule "modules/webapp.runtime"]
 	path = modules/webapp.runtime
 	url = https://github.com/unite-2-ts/webapp.runtime
+[submodule "modules/string.js"]
+	path = modules/string.js
+	url = https://github.com/unite-2-ts/string.js
+[submodule "modules/codec.ts"]
+	path = modules/codec.ts
+	url = https://github.com/unite-2-ts/codec.ts

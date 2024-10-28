@@ -16,4 +16,7 @@ git submodule add https://github.com/unite-2-ts/interact.ts ./modules/interact.t
 git submodule add https://github.com/unite-2-ts/image.ts ./modules/image.ts
 git submodule add https://github.com/unite-2-ts/dom.ts ./modules/dom.ts
 
+git submodule add https://github.com/unite-2-ts/string.js ./modules/string.js
+git submodule add https://github.com/unite-2-ts/codec.ts ./modules/codec.ts
+
 pause
