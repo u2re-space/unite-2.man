@@ -1,0 +1,20 @@
+{
+    "name": "unite-2",
+    "description": "Web App Runtime Loader",
+    "version": "1.0.0alpha",
+    "private": false,
+    "type": "module",
+    "scripts": {
+    },
+    "browserslist": [
+        "last 1 chrome version",
+        "last 1 firefox version"
+    ],
+    "dependencies": {
+    },
+    "devDependencies": {
+    },
+    "workspaces": [
+        "modules/*"
+    ]
+}
