@@ -15,7 +15,6 @@ git submodule add https://github.com/unite-2-ts/image.ts ./modules/image.ts
 git submodule add https://github.com/unite-2-ts/object.ts ./modules/object.ts
 git submodule add https://github.com/unite-2-ts/uniform.ts ./modules/uniform.ts
 git submodule add https://github.com/unite-2-ts/interact.ts ./modules/interact.ts
-git submodule add https://github.com/unite-2-ts/image.ts ./modules/image.ts
 git submodule add https://github.com/unite-2-ts/dom.ts ./modules/dom.ts
 
 git submodule add https://github.com/unite-2-ts/string.js ./modules/string.js
