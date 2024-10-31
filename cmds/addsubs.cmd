@@ -9,6 +9,7 @@ git submodule add https://github.com/unite-2-ts/rows.wcomp ./modules/rows.wcomp
 git submodule add https://github.com/unite-2-ts/longtext.wcomp ./modules/longtext.wcomp
 git submodule add https://github.com/unite-2-ts/contextmenu.wcomp ./modules/contextmenu.wcomp
 git submodule add https://github.com/unite-2-ts/grid.system ./modules/grid.system
+git submodule add https://github.com/unite-2-ts/dropmenu.wcomp ./modules/dropmenu.wcomp
 
 git submodule add https://github.com/unite-2-ts/dom.ts ./modules/dom.ts
 git submodule add https://github.com/unite-2-ts/image.ts ./modules/image.ts

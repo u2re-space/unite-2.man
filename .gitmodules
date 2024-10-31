@@ -52,3 +52,6 @@
 [submodule "modules/grid.system"]
 	path = modules/grid.system
 	url = https://github.com/unite-2-ts/grid.system
+[submodule "modules/dropmenu.wcomp"]
+	path = modules/dropmenu.wcomp
+	url = https://github.com/unite-2-ts/dropmenu.wcomp
