@@ -25,9 +25,9 @@
 [submodule "modules/dom.ts"]
 	path = modules/dom.ts
 	url = https://github.com/unite-2-ts/dom.ts
-[submodule "modules/image.ts"]
-	path = modules/image.ts
-	url = https://github.com/unite-2-ts/image.ts
+[submodule "modules/image.wcomp"]
+	path = modules/image.wcomp
+	url = https://github.com/unite-2-ts/image.wcomp
 [submodule "modules/object.ts"]
 	path = modules/object.ts
 	url = https://github.com/unite-2-ts/object.ts
@@ -52,6 +52,6 @@
 [submodule "modules/grid.system"]
 	path = modules/grid.system
 	url = https://github.com/unite-2-ts/grid.system
-[submodule "modules/dropmenu.wcomp"]
-	path = modules/dropmenu.wcomp
-	url = https://github.com/unite-2-ts/dropmenu.wcomp
+[submodule "modules/ui.system"]
+	path = modules/ui.system
+	url = https://github.com/unite-2-ts/ui.system
