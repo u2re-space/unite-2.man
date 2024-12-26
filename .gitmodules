@@ -46,9 +46,6 @@
 [submodule "modules/codec.ts"]
 	path = modules/codec.ts
 	url = https://github.com/unite-2-ts/codec.ts
-[submodule "modules/contextmenu.wcomp"]
-	path = modules/contextmenu.wcomp
-	url = https://github.com/unite-2-ts/contextmenu.wcomp
 [submodule "modules/ui.system"]
 	path = modules/ui.system
 	url = https://github.com/unite-2-ts/ui.system
