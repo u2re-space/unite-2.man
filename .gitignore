@@ -146,3 +146,8 @@ pnpm-lock.yaml
 */pnpm-lock.yaml
 /package-lock.json
 /pnpm-lock.yaml
+
+modules/
+apps/
+assets/
+runtime/
