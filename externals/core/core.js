@@ -1,1 +1,0 @@
-../../modules/core/web.core/dist/core.js

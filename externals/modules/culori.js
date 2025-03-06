@@ -1,1 +1,0 @@
-../../modules/core/theme.core/dist/modules/culori.js

@@ -1,1 +1,0 @@
-../../modules/core/design.core/dist/design.js
