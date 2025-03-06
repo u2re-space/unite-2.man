@@ -1,0 +1,1 @@
+../../modules/wcomp/image.wcomp/dist/image.js
