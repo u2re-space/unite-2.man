@@ -31,3 +31,4 @@ ln -sfr ../modules/core/theme.core/dist/modules/*.js ./modules/
 ln -sr ./apps/OS.u2re.space/src ./apps/OS.u2re.space/frontend/src 
 ln -sr ./assets ./apps/OS.u2re.space/assets 
 ln -sr ./assets ./apps/OS.u2re.space/frontend/assets 
+ln -sr ./assets ./runtime/frontend/assets
