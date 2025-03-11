@@ -1,3 +1,5 @@
+#!/bin/bash
+
 screen -dmS install-theme-core bash -c "cd ./modules/core/theme.core && git pull --all --force && npm install -D && npm audit fix --force"
 screen -dmS install-grid-core bash -c "cd ./modules/core/grid.core && git pull --all --force && npm install -D && npm audit fix --force"
 screen -dmS install-existence-core bash -c "cd ./modules/core/existence.core && git pull --all --force && npm install -D && npm audit fix --force"
