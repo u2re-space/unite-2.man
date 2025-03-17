@@ -1,0 +1,61 @@
+{
+    "files": ["./global.d.ts"],
+    "include": [
+        "**/*.ts",
+        "**/*.mjs",
+        "**/*.js",
+        "**/*.d.ts",
+        "**/*.tsx",
+        "**/*.vue",
+        "./global.d.ts"
+    ],
+    "exclude": ["node_modules/**", "externals/**", "frontend/**"],
+    "compilerOptions": {
+        "skipLibCheck": true,
+        "jsx": "preserve",
+        "jsxImportSource": "solid-js",
+        "types": ["./global.d.ts"],
+        "paths": {
+            "/externals/*": ["frontend/externals/*"],
+            "/frontend/*": ["frontend/*"]
+        },
+        "typeRoots": [
+            "types"
+        ],
+        "baseUrl": "./",
+        "composite": false,
+        "lib": ["dom", "esnext", "webworker"],
+        "module": "ESNext",
+        "target": "ESNext",
+        "resolveJsonModule": true,
+        "allowSyntheticDefaultImports": true,
+        "moduleResolution": "Bundler",
+        "allowArbitraryExtensions": true,
+        "allowImportingTsExtensions": true,
+        "esModuleInterop": true,
+        "allowJs": true,
+        "noEmit": true,
+        "sourceMap": true,
+        "removeComments": false,
+        "noImplicitAny": false,
+        "noImplicitOverride": false,
+        "noImplicitReturns": false,
+        "noImplicitUseStrict": false,
+        "strictNullChecks": true,
+        "strictFunctionTypes": true,
+        "strictPropertyInitialization": false,
+        "strictBindCallApply": true,
+        "alwaysStrict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noFallthroughCasesInSwitch": true,
+        "allowUnusedLabels": true,
+        "allowUnreachableCode": true,
+        "forceConsistentCasingInFileNames": true,
+        "strict": true,
+        "experimentalDecorators": true,
+        "isolatedModules": true,
+        "verbatimModuleSyntax": true,
+        "noImplicitThis": true
+    }
+}

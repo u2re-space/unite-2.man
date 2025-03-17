@@ -11,6 +11,7 @@ ln -sr ../modules/core/theme.core/dist/theme.js ./core/theme.js
 ln -sr ../modules/lib/object.ts/dist/object.js ./lib/object.js
 ln -sr ../modules/lib/uniform.ts/dist/uniform.js ./lib/uniform.js
 ln -sr ../modules/lib/dom.ts/dist/dom.js ./lib/dom.js
+ln -sr ../modules/lib/BLU.E/dist/blue.js ./lib/blue.js
 ln -sr ../modules/wcomp/image.wcomp/dist/image.js ./wcomp/image.js
 ln -sr ../modules/wcomp/longtext.wcomp/dist/longtext.js ./wcomp/longtext.js
 ln -sr ../modules/wcomp/scrollbox.wcomp/dist/scrollbox.js ./wcomp/scrollbox.js
@@ -28,7 +29,7 @@ ln -sfr ../modules/wcomp/ui.system/dist/modules/*.js ./modules/
 ln -sfr ../modules/core/theme.core/dist/modules/*.js ./modules/
 
 # in ./
-ln -sr ./apps/OS.u2re.space/src ./apps/OS.u2re.space/frontend/src 
-ln -sr ./assets ./apps/OS.u2re.space/assets 
-ln -sr ./assets ./apps/OS.u2re.space/frontend/assets 
+ln -sr ./apps/OS.u2re.space/src ./apps/OS.u2re.space/frontend/src
+ln -sr ./assets ./apps/OS.u2re.space/assets
+ln -sr ./assets ./apps/OS.u2re.space/frontend/assets
 ln -sr ./assets ./runtime/frontend/assets

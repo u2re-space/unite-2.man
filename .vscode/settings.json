@@ -1,0 +1,13 @@
+{
+  "cssVarHover.watchedFiles": [
+    "apps/OS.u2re.space/src/$vue$/settings/Fields/Appearance.vue"
+  ],
+  "cssVarHover.ignoredFiles": [
+    "apps/OS.u2re.space/src/$blue$/settings/Fields.ts"
+],
+"explorer.confirmPasteNative": false,
+"ipynb.pasteImagesAsAttachments.enabled": false,
+"editor.autoIndent": "none",
+"editor.formatOnSaveMode": "modificationsIfAvailable",
+"editor.acceptSuggestionOnEnter": "off"
+}
