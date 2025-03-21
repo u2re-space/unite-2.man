@@ -9,5 +9,5 @@
 "ipynb.pasteImagesAsAttachments.enabled": false,
 "editor.autoIndent": "none",
 "editor.formatOnSaveMode": "modificationsIfAvailable",
-"editor.acceptSuggestionOnEnter": "off"
+"editor.acceptSuggestionOnEnter": "smart"
 }
