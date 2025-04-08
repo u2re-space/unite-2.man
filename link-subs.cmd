@@ -20,4 +20,6 @@ git submodule add https://github.com/unite-2-ts/OS.u2re.space ./apps/OS.u2re.spa
 git submodule add https://github.com/unite-2-ts/markdown.view ./apps/markdown.view
 git submodule add https://github.com/u2re-dev/my-resume ./apps/resume
 
+git submodule add https://github.com/unite-2-re/webapp.runtime ./runtime
+
 pause
