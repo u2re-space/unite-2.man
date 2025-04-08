@@ -1,0 +1,1 @@
+../../modules/wcomp/ui.system/dist/modules/vanilla-calendar-pro.js

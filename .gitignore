@@ -129,15 +129,6 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-*/webext/*
-./webext/*
-/webext/*
-webext/*
-*/webext/
-./webext/
-/webext/
-webext/
-
 package-lock.json
 pnpm-lock.yaml
 ./package-lock.json
@@ -147,7 +138,5 @@ pnpm-lock.yaml
 /package-lock.json
 /pnpm-lock.yaml
 
-modules/
-apps/
-assets/
-runtime/
+./deploy.sh
+deploy.sh
