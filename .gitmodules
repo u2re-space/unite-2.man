@@ -4,9 +4,6 @@
 [submodule "modules/core/theme.core"]
 	path = modules/core/theme.core
 	url = https://github.com/unite-2-ts/theme.core
-[submodule "modules/core/grid.core"]
-	path = modules/core/grid.core
-	url = https://github.com/unite-2-ts/grid.core
 [submodule "modules/core/existence.core"]
 	path = modules/core/existence.core
 	url = https://github.com/unite-2-ts/existence.core
