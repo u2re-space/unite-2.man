@@ -9,5 +9,6 @@
 "ipynb.pasteImagesAsAttachments.enabled": false,
 "editor.autoIndent": "none",
 "editor.formatOnSaveMode": "modificationsIfAvailable",
-"editor.acceptSuggestionOnEnter": "smart"
+"editor.acceptSuggestionOnEnter": "smart",
+"compile-hero.disable-compile-files-on-did-save-code": false
 }
