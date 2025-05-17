@@ -1,1 +1,0 @@
-../../modules/core/interact.ts/dist/interact.js

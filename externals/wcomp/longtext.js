@@ -1,1 +1,0 @@
-../../modules/wcomp/longtext.wcomp/dist/longtext.js

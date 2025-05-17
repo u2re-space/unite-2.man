@@ -1,44 +1,20 @@
-[submodule "modules/core/design.core"]
-	path = modules/core/design.core
-	url = https://github.com/unite-2-ts/design.core
 [submodule "modules/core/theme.core"]
-	path = modules/core/theme.core
+	path = modules/theme.core
 	url = https://github.com/unite-2-ts/theme.core
-[submodule "modules/core/existence.core"]
-	path = modules/core/existence.core
-	url = https://github.com/unite-2-ts/existence.core
-[submodule "modules/core/web.core"]
-	path = modules/core/web.core
-	url = https://github.com/unite-2-ts/web.core
-[submodule "modules/core/interact.ts"]
-	path = modules/core/interact.ts
-	url = https://github.com/unite-2-ts/interact.ts
-[submodule "modules/core/agate.ux"]
-	path = modules/core/agate.ux
-	url = https://github.com/unite-2-ts/agate.ux
-[submodule "modules/wcomp/image.wcomp"]
-	path = modules/wcomp/image.wcomp
-	url = https://github.com/unite-2-ts/image.wcomp
-[submodule "modules/wcomp/scrollbox.wcomp"]
-	path = modules/wcomp/scrollbox.wcomp
-	url = https://github.com/unite-2-ts/scrollbox.wcomp
-[submodule "modules/wcomp/longtext.wcomp"]
-	path = modules/wcomp/longtext.wcomp
-	url = https://github.com/unite-2-ts/longtext.wcomp
 [submodule "modules/wcomp/ui.system"]
-	path = modules/wcomp/ui.system
+	path = modules/ui.system
 	url = https://github.com/unite-2-ts/ui.system
 [submodule "modules/lib/dom.ts"]
-	path = modules/lib/dom.ts
+	path = modules/dom.ts
 	url = https://github.com/unite-2-ts/dom.ts
 [submodule "modules/lib/object.ts"]
-	path = modules/lib/object.ts
+	path = modules/object.ts
 	url = https://github.com/unite-2-ts/object.ts
 [submodule "modules/lib/uniform.ts"]
-	path = modules/lib/uniform.ts
+	path = modules/uniform.ts
 	url = https://github.com/unite-2-ts/uniform.ts
 [submodule "modules/lib/BLU.E"]
-	path = modules/lib/BLU.E
+	path = modules/BLU.E
 	url = https://github.com/unite-2-ts/BLU.E
 [submodule "apps/OS.u2re.space"]
 	path = apps/OS.u2re.space
