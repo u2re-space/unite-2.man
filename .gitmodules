@@ -1,19 +1,20 @@
-[submodule "modules/core/theme.core"]
+[submodule "modules/theme.core"]
 	path = modules/theme.core
 	url = https://github.com/unite-2-ts/theme.core
-[submodule "modules/wcomp/ui.system"]
+[submodule "modules/ui.system"]
 	path = modules/ui.system
 	url = https://github.com/unite-2-ts/ui.system
-[submodule "modules/lib/dom.ts"]
+    branch = blit-v3
+[submodule "modules/dom.ts"]
 	path = modules/dom.ts
 	url = https://github.com/unite-2-ts/dom.ts
-[submodule "modules/lib/object.ts"]
+[submodule "modules/object.ts"]
 	path = modules/object.ts
 	url = https://github.com/unite-2-ts/object.ts
-[submodule "modules/lib/uniform.ts"]
+[submodule "modules/uniform.ts"]
 	path = modules/uniform.ts
 	url = https://github.com/unite-2-ts/uniform.ts
-[submodule "modules/lib/BLU.E"]
+[submodule "modules/BLU.E"]
 	path = modules/BLU.E
 	url = https://github.com/unite-2-ts/BLU.E
 [submodule "apps/OS.u2re.space"]
