@@ -140,3 +140,7 @@ pnpm-lock.yaml
 
 ./deploy.sh
 deploy.sh
+
+my-resume
+my-resume/
+my-resume/*
