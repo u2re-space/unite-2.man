@@ -85,8 +85,9 @@
 - **[Uniform.TS](https://github.com/unite-2-re/uniform.ts)** - ***unused***, web workers library.
 - **[Object.TS](https://github.com/unite-2-re/object.ts)** - our library for reactivity.
 - **[BLU.E](https://github.com/unite-2-re/BLU.E)** - our UI/DOM framework or library.
-- **[Agate.UX](https://github.com/unite-2-re/agate.ux)** - our layout library or framework.
-- **[UI.sys](https://github.com/unite-2-re/ui.system)** - UI elements system (based on Lit).
+- **[DOM.TS](https://github.com/unite-2-re/dom.ts)** - our DOM and layout library or framework.
+- **[UI.sys](https://github.com/unite-2-re/ui.system)** - UI web components system.
+- **[Theme.core](https://github.com/unite-2-re/theme.core)** - dynamic theme system.
 - ***[Others](https://github.com/orgs/unite-2-re/repositories)*** - all available repositories
 
 </div>
