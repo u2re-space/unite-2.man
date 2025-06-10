@@ -18,7 +18,7 @@ export const initiate = (NAME = "generic", tsconfig = {}, __dirname = resolve(".
             'u2re/': resolve(__dirname, '/externals/modules/'),
             "u2re/cdnImport": resolve(__dirname, '../cdnImport.mjs'),
             "u2re/dom": resolve(__dirname, "../dom.ts/src/index.ts"),
-            "u2re/lure": resolve(__dirname, "../BLU.E/src/index.ts"),
+            "u2re/lure": resolve(__dirname, "../lur.e/src/index.ts"),
             "u2re/object": resolve(__dirname, "../object.ts/src/index.ts"),
             "u2re/uniform": resolve(__dirname, "../uniform.ts/src/index.ts"),
             "u2re/theme": resolve(__dirname, "../theme.core/src/index.ts"),
