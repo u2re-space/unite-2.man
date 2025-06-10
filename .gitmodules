@@ -14,9 +14,9 @@
 [submodule "modules/uniform.ts"]
 	path = modules/uniform.ts
 	url = https://github.com/unite-2-ts/uniform.ts
-[submodule "modules/BLU.E"]
-	path = modules/BLU.E
-	url = https://github.com/unite-2-ts/BLU.E
+[submodule "modules/lur.e"]
+	path = modules/lur.e
+	url = https://github.com/unite-2-ts/lur.e
 [submodule "apps/OS.u2re.space"]
 	path = apps/OS.u2re.space
 	url = https://github.com/unite-2-ts/OS.u2re.space
