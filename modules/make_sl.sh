@@ -1,12 +1,12 @@
 #!/bin/bash
 
 #
-ln -sr ./dom.ts/src ./shared/u2re/dom
-ln -sr ./object.ts/src ./shared/u2re/object
-ln -sr ./lur.e/src ./shared/u2re/lure
-ln -sr ./theme.core/src ./shared/u2re/theme
-ln -sr ./uniform.ts/src ./shared/u2re/uniform
-ln -sr ./ui.system/src ./shared/u2re/ui
+ln -sr ./dom.ts/src ./shared/fest/dom
+ln -sr ./object.ts/src ./shared/fest/object
+ln -sr ./lur.e/src ./shared/fest/lure
+ln -sr ./theme.core/src ./shared/fest/theme
+ln -sr ./uniform.ts/src ./shared/fest/uniform
+ln -sr ./ui.system/src ./shared/fest/ui
 
 #
 ln -sr ./dom.ts/test ./shared/test/dom
