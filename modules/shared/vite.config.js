@@ -1,31 +1,28 @@
-import { resolve  } from "node:path";
-import { readFile } from "node:fs/promises";
+import { resolve } from "node:path";
 import { compression } from 'vite-plugin-compression2';
+
+//
 import optimizer from 'vite-plugin-optimizer';
 import createExternal from "vite-plugin-external";
-import cssnano from "cssnano";
 import deduplicate from "postcss-discard-duplicates";
 import postcssPresetEnv from 'postcss-preset-env';
 import autoprefixer from "autoprefixer";
-import civetVitePlugin from '@danielx/civet/vite'
 import tsconfigPaths from 'vite-tsconfig-paths';
+import cssnano from "cssnano";
+
+//
+const importFromTSConfig = (tsconfig, __dirname)=>{
+    const paths = tsconfig?.compilerOptions?.paths || {};
+    const alias = {};
+    for (const key in paths) {
+        alias[key] = resolve(__dirname, paths?.[key]?.[0]);
+    }
+    return alias;
+}
 
 //
 export const initiate = (NAME = "generic", tsconfig = {}, __dirname = resolve("./", import.meta.dirname))=>{
-    const $resolve = {
-        alias: {
-            'fest-src/': resolve(__dirname, '../'),
-            'fest/': resolve(__dirname, '/externals/modules/'),
-            "fest/cdnImport": resolve(__dirname, '../cdnImport.mjs'),
-            "fest/dom": resolve(__dirname, "../dom.ts/src/index.ts"),
-            "fest/lure": resolve(__dirname, "../lur.e/src/index.ts"),
-            "fest/object": resolve(__dirname, "../object.ts/src/index.ts"),
-            "fest/uniform": resolve(__dirname, "../uniform.ts/src/index.ts"),
-            "fest/theme": resolve(__dirname, "../theme.core/src/index.ts"),
-        },
-    }
-
-    //
+    const $resolve = { alias: importFromTSConfig(tsconfig, __dirname) }
     const terserOptions = {
         ecma: 2020,
         keep_classnames: false,
@@ -98,7 +95,9 @@ export const initiate = (NAME = "generic", tsconfig = {}, __dirname = resolve(".
 
     //
     const plugins = [
-        tsconfigPaths({ baseUrl: __dirname }),
+        tsconfigPaths({
+            projects: [resolve(__dirname, './tsconfig.json')],
+        }),
         optimizer({}),
         compression(),
         createExternal({
