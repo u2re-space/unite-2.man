@@ -7,8 +7,14 @@
 ],
 "explorer.confirmPasteNative": false,
 "ipynb.pasteImagesAsAttachments.enabled": false,
-"editor.autoIndent": "none",
+"editor.autoIndent": "full",
 "editor.formatOnSaveMode": "modificationsIfAvailable",
 "editor.acceptSuggestionOnEnter": "smart",
-"compile-hero.disable-compile-files-on-did-save-code": true
+"compile-hero.disable-compile-files-on-did-save-code": true,
+"files.autoSaveDelay": 1000,
+"markdown.copyFiles.overwriteBehavior": "overwrite",
+"prettier.resolveGlobalModules": true,
+"prettier.withNodeModules": true,
+"javascript.preferences.importModuleSpecifier": "project-relative",
+"typescript.preferences.importModuleSpecifier": "project-relative"
 }
