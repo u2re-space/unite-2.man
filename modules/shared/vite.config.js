@@ -11,14 +11,26 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import cssnano from "cssnano";
 
 //
-const importFromTSConfig = (tsconfig, __dirname)=>{
+function normalizeAliasPattern(pattern) {
+    // Удаляет /*, /**, /**/* с конца строки
+    return pattern.replace(/\/\*+$/, '');
+}
+
+//
+const importFromTSConfig = (tsconfig, __dirname) => {
     const paths = tsconfig?.compilerOptions?.paths || {};
-    const alias = {};
+    const alias = [];
     for (const key in paths) {
-        alias[key] = resolve(__dirname, paths?.[key]?.[0]);
+        const normalizedKey = normalizeAliasPattern(key);
+        const target = paths[key][0];
+        const normalizedTarget = normalizeAliasPattern(target);
+        alias.push({
+            find: normalizedKey,
+            replacement: resolve(__dirname, normalizedTarget),
+        });
     }
     return alias;
-}
+};
 
 //
 export const initiate = (NAME = "generic", tsconfig = {}, __dirname = resolve("./", import.meta.dirname))=>{
