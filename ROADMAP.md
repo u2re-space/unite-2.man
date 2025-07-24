@@ -15,29 +15,29 @@ UIComponents:
     - [x] Scaling Support
     - [x] DPI/PPI Support
 - [ ] Custom Inputs (wrappers)
-    - [ ] Long-Text (code, url, json edit)
+    - [x] Long-Text (code, url, json edit)
+    - [x] Slider (number, range, radio, checkbox)
     - [ ] Clipboard (copy, paste)
     - [ ] FieldEditor (mobile, accessibility, not-imp)
     - [ ] Toggle (checkbox, button, radio)
-    - [ ] Slider (number, range, radio, checkbox)
 - [ ] Input Appearance
     - [ ] Slider (number)
     - [ ] Switch (number, checkbox)
     - [ ] Button (checkbox, button)
 - [ ] Context and Drop Menu
-    - [ ] Has initiator prop
-    - [ ] Depends by context
+    - [x] Has initiator prop
+    - [x] Depends by context (???)
     - [ ] Differs by trigger
-        - Interaction
-        - RightClick
+        - [ ] Interaction
+        - [x] RightClick
     - [ ] Differs by anchor
-        - From Element
-        - From Clicked
-        - From Cursor
+        - [ ] From Element
+        - [x] From Clicked
+        - [ ] From Cursor
     - [ ] Layouts
-        - Grid Row Flow
-    - [ ] Item Layouts
-        - [Icon?|Label|Mark?]
+        - [x] Grid Row Flow
+    - [x] Item Layouts
+        - [x] [Icon?|Label|Mark?]
 - [ ] TaskBar (connected with TaskManagerAPI)
     - [ ] For Mobile
     - [ ] For Desktop
@@ -56,11 +56,11 @@ UIComponents:
     - [ ] Quick Settings
 
 WSGridSystem:
-- [ ] Reactive Layout
+- [x] Reactive Layout
     - [Columns, Rows]
     - Type (Label, Icons)
 - [ ] Reactive Items (with ID)
-    - [ ] Layout Properties [UI]
+    - [x] Layout Properties [UI]
         - Cell[x,y]
     - [ ] Item Properties [Desc]
         - ActionID
@@ -68,15 +68,15 @@ WSGridSystem:
         - IconID
         - Label
 - [ ] Edit item action properties
-- [ ] Iteraction
+- [x] Iteraction
     - [x] Dragging/Move
     - [x] Pointer Events
-    - [ ] Drop-Animation
-    - [ ] Drop-To-Cell
+    - [x] Drop-Animation
+    - [x] Drop-To-Cell
 
 Design:
-- [ ] Color theme system
-    - [ ] Computed Matrix Based
+- [x] Color theme system
+    - [x] Computed Matrix Based
     - [x] Component Based
 - [ ] Inputs design essentials
     - [x] Draggable (WIP)
@@ -88,10 +88,11 @@ Animation:
 - [ ] Enabled properties (usage)
 - [ ] Animated properties
 - [ ] Behaviour configure
-- [ ] Exactly
-    - Opacity
-    - Scale
-    - Colors
+- [ ] Exactly (Under Consideration)
+    - [x] Partially
+    - [ ] Opacity
+    - [ ] Scale
+    - [ ] Colors
 
 TasksAPI:
 - [ ] Render UI (web-comp) depends by "TYPE"
@@ -173,7 +174,23 @@ CoordinateSystemAPI:
 - [ ] Layout
     - [x] Absolute
     - [ ] Grid
-- [ ] Reactive Variable
+- [x] Reactive Variable
+
+InteractionAPI:
+- [x] Dragging
+- [x] Resizing
+- [x] LongPress
+- [x] LongHover
+- [x] ShiftTrigger
+- [ ] ???
+
+DOMLayout:
+- [x] CSS Resets
+- [x] CSS Normalize
+- [x] Optimizations
+- [x] Styles, Fonts
+- [ ] Layers (incomplete)
+- [ ] API (still in working)
 
 ReactiveSystem (COMPLETE):
 - [x] DataTypes
@@ -202,19 +219,3 @@ ReactiveSystem (COMPLETE):
     - [x] Forms
 - [x] Behaviour
     - [x] RAF-Throttled
-
-InteractionAPI:
-- [x] Dragging
-- [x] Resizing
-- [x] LongPress
-- [x] LongHover
-- [x] ShiftTrigger
-- [ ] ???
-
-DOMLayout:
-- [x] CSS Resets
-- [x] CSS Normalize
-- [x] Optimizations
-- [x] Styles, Fonts
-- [ ] Layers (incomplete)
-- [ ] API (still in working)
