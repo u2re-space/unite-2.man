@@ -166,11 +166,13 @@ export const initiate = (NAME = "generic", tsconfig = {}, __dirname = resolve(".
                         discardComments: {
                             removeAll: true
                         }
-                }],
-            }), postcssPresetEnv({
-                features: { 'nesting-rules': false },
-                stage: 0
-            })],
+                    }],
+                }),
+                /*postcssPresetEnv({
+                    features: { 'nesting-rules': false, 'custom-properties': false },
+                    stage: 0
+                })*/
+            ],
         },
     }
 
