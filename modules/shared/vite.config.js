@@ -114,11 +114,12 @@ export const initiate = (NAME = "generic", tsconfig = {}, __dirname = resolve(".
         compression(),
         createExternal({
             interop: 'auto',
-            externals: { "externals": "externals", "dist": "dist", "fest": "fest", "fest-src": "fest-src" },
+            externals: { "externals": "externals", "dist": "dist", "fonts": "fonts", "fest": "fest", "fest-src": "fest-src" },
             externalizeDeps: [
                 "externals", "/externals", "./externals",
                 "dist", "/dist", "./dist",
-                "fest", "../"
+                "fonts", "../fonts", "./fonts",
+                "fest", "../fest", "./fest"
             ]
         }),
     ];
