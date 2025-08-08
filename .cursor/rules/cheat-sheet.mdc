@@ -1,6 +1,23 @@
+---
+description: FEST API Cheat Sheets
+globs: *.ts,*.scss,*.mjs,*.css
+alwaysApply: false
+---
 # U2RE Cheat-Sheet for AI
 
+**Snapshot:** T=1754643256, 08.08.2025
+
 ---
+
+## Project Directory Mapping
+
+By default, use key-name as import root.
+
+|   |   |
+| `fest/lure`   | `modules/lur.e`     |
+| `fest/dom`    | `modules/dom.ts`    |
+| `fest/object` | `modules/object.ts` |
+| `fest/fl-ui`  | `modules/fl.ui`     |
 
 ## LUR.E
 
@@ -9,49 +26,49 @@ ModuleName: `fest/lure`
 ### Core Binding API
 
 - `bindWith(element, propName, valueOrRef, handler, valueSet, ...others)`
-    - `element`    - target HTML DOM Element
-    - `propName`   - target property name
-    - `valueOrRef` - value or ref, which reflects to target by `handler`
-    - `handler`    - handler function `(element, propName, value)`
-    - `valueSet`   - set, which contains value
+  - `element`    - target HTML DOM Element
+  - `propName`   - target property name
+  - `valueOrRef` - value or ref, which reflects to target by `handler`
+  - `handler`    - handler function `(element, propName, value)`
+  - `valueSet`   - set, which contains value
 
 - `bindBeh(element, store, behavior)`
-    - `element` - target HTML DOM Element
-    - `store` - reactive store `[name, object]`
-    - `behavior` - behavior function `(event, context)`
+  - `element` - target HTML DOM Element
+  - `store` - reactive store `[name, object]`
+  - `behavior` - behavior function `(event, context)`
 
 - `bindCtrl(element, ctrlCb)`
-    - `element` - target HTML DOM Element
-    - `ctrlCb` - controller callback function
-    - Returns cancel function
+  - `element` - target HTML DOM Element
+  - `ctrlCb` - controller callback function
+  - Returns cancel function
 
 - `reflectControllers(element, ctrls)`
-    - `element` - target HTML DOM Element
-    - `ctrls` - array of controller functions
+  - `element` - target HTML DOM Element
+  - `ctrls` - array of controller functions
 
 - `bindEvents(element, events)`
-    - `element` - target HTML DOM Element
-    - `events` - object with event handlers
+  - `element` - target HTML DOM Element
+  - `events` - object with event handlers
 
 - `bindForms(fields, wrapper, state)`
-    - `fields` - form fields container (default: `document.documentElement`)
-    - `wrapper` - wrapper selector (default: `.u2-input`)
-    - `state` - state object for form data
+  - `fields` - form fields container (default: `document.documentElement`)
+  - `wrapper` - wrapper selector (default: `.u2-input`)
+  - `state` - state object for form data
 
 ### Element Creation & Querying
 
 - `E(selectorOrSelector, params, children)` - creates element by selector or use exists
-    - `params` structured set
-    - `children` array or mapper of potential nodes
+  - `params` structured set
+  - `children` array or mapper of potential nodes
 
 - `Q(selector, host, direction)` - query based DOM element wrapper
-    - `host`      - defaultly `document.documentElement`, host where from uses selection
-    - `selector`  - string or DOM element
-    - `direction` - default `"children"`, allows `"children"` or `"parent"`
+  - `host`      - defaultly `document.documentElement`, host where from uses selection
+  - `selector`  - string or DOM element
+  - `direction` - default `"children"`, allows `"children"` or `"parent"`
 
 - `Qp(ref, host)` - reactive query wrapper
-    - `ref` - reactive reference to selector
-    - `host` - host element (default: `document.documentElement`)
+  - `ref` - reactive reference to selector
+  - `host` - host element (default: `document.documentElement`)
 
 ### Template & HTML Processing
 
@@ -62,11 +79,11 @@ ModuleName: `fest/lure`
 ### Mapping & Iteration
 
 - `M(array, mapper)`
-    - `mapper(arg, index)` - callback, used for transform arguments
+  - `mapper(arg, index)` - callback, used for transform arguments
 
 - `I(params)` - interactive/reactive iterator
-    - `params.current` - reactive index `{ value: number }`
-    - `params.mapped` - array of mapped elements
+  - `params.current` - reactive index `{ value: number }`
+  - `params.mapped` - array of mapped elements
 
 ### Reactive References
 
@@ -181,15 +198,15 @@ ModuleName: `fest/lure`
 ### Shortcuts
 
 - `E(selectorOrSelector, params, children)` - creates element by selector or use exists
-    - `params` structured set
-    - `children` array or mapper of potential nodes
+  - `params` structured set
+  - `children` array or mapper of potential nodes
 - `H(HTMLCode)` or `H` prefix string literals, second allows creates reactive structures
 - `M(array, mapper)`
-    - `mapper(arg, index)` - callback, used for transform arguments
+  - `mapper(arg, index)` - callback, used for transform arguments
 - `Q(selector, host, direction)` - query based DOM element wrapper
-    - `host`      - defaultly `document.documentElement`, host where from uses selection
-    - `selector`  - string or DOM element
-    - `direction` - default `"children"`, allows `"children"` or `"parent"`
+  - `host`      - defaultly `document.documentElement`, host where from uses selection
+  - `selector`  - string or DOM element
+  - `direction` - default `"children"`, allows `"children"` or `"parent"`
 
 ### Additions
 
@@ -228,8 +245,8 @@ ModuleName: `fest/dom`
 ### Initialization
 
 - `initialize(ROOT = document.body)` - initializes DOM.ts module
-    - Sets up viewport tracking, visibility system, and styles
-    - Returns style element
+  - Sets up viewport tracking, visibility system, and styles
+  - Returns style element
 
 ### Handlers
 
@@ -351,6 +368,7 @@ ModuleName: `fest/dom`
 ### CSS Custom Properties
 
 The module automatically sets these CSS custom properties on `:root`:
+
 - `--screen-width` - screen width
 - `--screen-height` - screen height
 - `--avail-width` - available width
@@ -375,242 +393,242 @@ ModuleName: `fest/object`
 ### Core Reactivity System
 
 - `makeReactive(target, stateName = "")` - transforms target into reactive entity
-    - `target` - target value (object, function, Map, Set, etc.)
-    - `stateName` - optional state name for debugging/logging
-    - Returns reactive version of the passed value
+  - `target` - target value (object, function, Map, Set, etc.)
+  - `stateName` - optional state name for debugging/logging
+  - Returns reactive version of the passed value
 
 - `subscribe(tg, cb, ctx = null)` - subscribes callback to reactive object changes
-    - `tg` - target reactive object or pair [object, key]
-    - `cb` - callback function `(value, prop, old)`
-    - `ctx` - callback context
-    - Returns unsubscribe function with Symbol.dispose and Symbol.asyncDispose support
+  - `tg` - target reactive object or pair [object, key]
+  - `cb` - callback function `(value, prop, old)`
+  - `ctx` - callback context
+  - Returns unsubscribe function with Symbol.dispose and Symbol.asyncDispose support
 
 - `observe(tg, cb, ctx = null)` - legacy subscription method for arrays
-    - `tg` - target reactive object or pair [object, key]
-    - `cb` - callback function `(value, prop, old)`
-    - `ctx` - callback context
-    - Returns unsubscribe function
+  - `tg` - target reactive object or pair [object, key]
+  - `cb` - callback function `(value, prop, old)`
+  - `ctx` - callback context
+  - Returns unsubscribe function
 
 - `unsubscribe(tg, cb, ctx = null)` - unsubscribes from reactive object
-    - `tg` - target reactive object or pair [object, key]
-    - `cb` - callback function to unsubscribe (optional)
-    - `ctx` - callback context
+  - `tg` - target reactive object or pair [object, key]
+  - `cb` - callback function to unsubscribe (optional)
+  - `ctx` - callback context
 
 ### Reactive References (Primitives)
 
 - `ref(initial, behavior)` - creates universal reactive reference
-    - `initial` - initial value or Promise
-    - `behavior` - additional reactive behavior
-    - Returns reactive reference with `.value` property
+  - `initial` - initial value or Promise
+  - `behavior` - additional reactive behavior
+  - Returns reactive reference with `.value` property
 
 - `numberRef(initial, behavior)` - creates numeric reactive reference
-    - `initial` - initial number value or Promise
-    - `behavior` - additional reactive behavior
-    - Returns reactive reference with numeric `.value`
+  - `initial` - initial number value or Promise
+  - `behavior` - additional reactive behavior
+  - Returns reactive reference with numeric `.value`
 
 - `stringRef(initial, behavior)` - creates string reactive reference
-    - `initial` - initial string value or Promise
-    - `behavior` - additional reactive behavior
-    - Returns reactive reference with string `.value`
+  - `initial` - initial string value or Promise
+  - `behavior` - additional reactive behavior
+  - Returns reactive reference with string `.value`
 
 - `booleanRef(initial, behavior)` - creates boolean reactive reference
-    - `initial` - initial boolean value or Promise
-    - `behavior` - additional reactive behavior
-    - Returns reactive reference with boolean `.value`
+  - `initial` - initial boolean value or Promise
+  - `behavior` - additional reactive behavior
+  - Returns reactive reference with boolean `.value`
 
 - `promised(promise, behavior)` - creates reactive reference from Promise
-    - `promise` - Promise to wrap
-    - `behavior` - additional reactive behavior
-    - Returns reactive reference that resolves with Promise
+  - `promise` - Promise to wrap
+  - `behavior` - additional reactive behavior
+  - Returns reactive reference that resolves with Promise
 
 ### Computed & Derived Values
 
 - `computed(src, cb, behavior, prop = "value")` - creates computed reactive value
-    - `src` - source reactive object
-    - `cb` - computation function
-    - `behavior` - additional reactive behavior
-    - `prop` - property name (default: "value")
-    - Returns computed reactive reference
+  - `src` - source reactive object
+  - `cb` - computation function
+  - `behavior` - additional reactive behavior
+  - `prop` - property name (default: "value")
+  - Returns computed reactive reference
 
 - `conditional(cond, ifTrue, ifFalse, behavior)` - creates conditional reactive value
-    - `cond` - reactive reference or value determining condition
-    - `ifTrue` - value returned when condition is true
-    - `ifFalse` - value returned when condition is false
-    - `behavior` - additional reactive behavior
-    - Returns reactive reference switching between values
+  - `cond` - reactive reference or value determining condition
+  - `ifTrue` - value returned when condition is true
+  - `ifFalse` - value returned when condition is false
+  - `behavior` - additional reactive behavior
+  - Returns reactive reference switching between values
 
 - `conditionalIndex(condList = [])` - creates conditional index from list
-    - `condList` - array of condition functions
-    - Returns computed index of first true condition
+  - `condList` - array of condition functions
+  - Returns computed index of first true condition
 
 - `propRef(src, srcProp = "value", behavior, initial)` - creates property reference
-    - `src` - source reactive object
-    - `srcProp` - source property name
-    - `behavior` - additional reactive behavior
-    - `initial` - initial value
-    - Returns reactive reference bound to source property
+  - `src` - source reactive object
+  - `srcProp` - source property name
+  - `behavior` - additional reactive behavior
+  - `initial` - initial value
+  - Returns reactive reference bound to source property
 
 ### Binding & Linking
 
 - `bindBy(target, reactive, watch)` - binds target to reactive object
-    - `target` - target object to bind
-    - `reactive` - reactive source object
-    - `watch` - watch function for specific properties
-    - Returns binding function
+  - `target` - target object to bind
+  - `reactive` - reactive source object
+  - `watch` - watch function for specific properties
+  - Returns binding function
 
 - `bindByKey(target, reactive, key)` - binds target to specific reactive key
-    - `target` - target object to bind
-    - `reactive` - reactive source object
-    - `key` - key function returning property name
-    - Returns binding function
+  - `target` - target object to bind
+  - `reactive` - reactive source object
+  - `key` - key function returning property name
+  - Returns binding function
 
 - `derivate(from, reactFn, watch)` - creates derived reactive object
-    - `from` - source reactive object
-    - `reactFn` - function to create reactive result
-    - `watch` - watch function for specific properties
-    - Returns derived reactive object
+  - `from` - source reactive object
+  - `reactFn` - function to create reactive result
+  - `watch` - watch function for specific properties
+  - Returns derived reactive object
 
 - `assign(a, b, prop = "value")` - assigns reactive values
-    - `a` - target reactive reference
-    - `b` - source reactive reference
-    - `prop` - property name to assign
-    - Returns assignment function
+  - `a` - target reactive reference
+  - `b` - source reactive reference
+  - `prop` - property name to assign
+  - Returns assignment function
 
 - `link(a, b, prop = "value")` - creates two-way link between references
-    - `a` - first reactive reference
-    - `b` - second reactive reference
-    - `prop` - property name to link
-    - Returns linking function
+  - `a` - first reactive reference
+  - `b` - second reactive reference
+  - `prop` - property name to link
+  - Returns linking function
 
 ### Utility Functions
 
 - `safe(target)` - safely unwraps reactive objects
-    - `target` - target to unwrap
-    - Returns plain object without reactive wrappers
+  - `target` - target to unwrap
+  - Returns plain object without reactive wrappers
 
 - `unwrap(arr)` - unwraps reactive array
-    - `arr` - reactive array to unwrap
-    - Returns plain array
+  - `arr` - reactive array to unwrap
+  - Returns plain array
 
 - `deref(target, discountValue)` - dereferences WeakRef or reactive value
-    - `target` - target to dereference
-    - `discountValue` - whether to discount .value property
-    - Returns dereferenced value
+  - `target` - target to dereference
+  - `discountValue` - whether to discount .value property
+  - Returns dereferenced value
 
 - `isValidObj(obj)` - checks if object is valid for reactivity
-    - `obj` - object to check
-    - Returns boolean indicating validity
+  - `obj` - object to check
+  - Returns boolean indicating validity
 
 - `isNotEqual(a, b)` - deep equality check
-    - `a` - first value
-    - `b` - second value
-    - Returns boolean indicating inequality
+  - `a` - first value
+  - `b` - second value
+  - Returns boolean indicating inequality
 
 - `isObjectNotEqual(a, b)` - object equality check
-    - `a` - first object
-    - `b` - second object
-    - Returns boolean indicating inequality
+  - `a` - first object
+  - `b` - second object
+  - Returns boolean indicating inequality
 
 ### Object Assignment & Manipulation
 
 - `objectAssign(target, value, name, removeNotExists, mergeKey)` - assigns objects reactively
-    - `target` - target object
-    - `value` - value to assign
-    - `name` - property name (optional)
-    - `removeNotExists` - whether to remove non-existing properties
-    - `mergeKey` - key for merging objects (default: "id")
-    - Returns assigned object
+  - `target` - target object
+  - `value` - value to assign
+  - `name` - property name (optional)
+  - `removeNotExists` - whether to remove non-existing properties
+  - `mergeKey` - key for merging objects (default: "id")
+  - Returns assigned object
 
 - `removeExtra(target, value, name)` - removes extra properties
-    - `target` - target object
-    - `value` - value to compare against
-    - `name` - property name (optional)
-    - Returns cleaned object
+  - `target` - target object
+  - `value` - value to compare against
+  - `name` - property name (optional)
+  - Returns cleaned object
 
 - `makeObjectAssignable(obj)` - makes object assignable with Proxy
-    - `obj` - object to make assignable
-    - Returns proxied object
+  - `obj` - object to make assignable
+  - Returns proxied object
 
 ### Promise & Async Support
 
 - `withPromise(target, cb)` - handles Promise or plain values
-    - `target` - Promise or plain value
-    - `cb` - callback function
-    - Returns Promise or immediate result
+  - `target` - Promise or plain value
+  - `cb` - callback function
+  - Returns Promise or immediate result
 
 - `Promised(promise)` - wraps Promise with reactive proxy
-    - `promise` - Promise to wrap
-    - Returns reactive Promise proxy
+  - `promise` - Promise to wrap
+  - Returns reactive Promise proxy
 
 - `fixFx(obj)` - fixes function for Promise handling
-    - `obj` - object to fix
-    - Returns fixed function
+  - `obj` - object to fix
+  - Returns fixed function
 
 ### Weak Reference Support
 
 - `WRef(target)` - creates WeakRef proxy
-    - `target` - target object or WeakRef
-    - Returns WeakRef proxy with reactive behavior
+  - `target` - target object or WeakRef
+  - Returns WeakRef proxy with reactive behavior
 
 ### Delayed Operations
 
 - `delayedSubscribe(ref, cb, delay = 100)` - subscribes with delay
-    - `ref` - reactive reference
-    - `cb` - callback function
-    - `delay` - delay in milliseconds
-    - Returns delayed subscription
+  - `ref` - reactive reference
+  - `cb` - callback function
+  - `delay` - delay in milliseconds
+  - Returns delayed subscription
 
 - `triggerWithDelay(ref, cb, delay = 100)` - triggers callback with delay
-    - `ref` - reactive reference
-    - `cb` - callback function
-    - `delay` - delay in milliseconds
-    - Returns timeout ID
+  - `ref` - reactive reference
+  - `cb` - callback function
+  - `delay` - delay in milliseconds
+  - Returns timeout ID
 
 - `delayedBehavior(delay = 100)` - creates delayed behavior
-    - `delay` - delay in milliseconds
-    - Returns delayed behavior function
+  - `delay` - delay in milliseconds
+  - Returns delayed behavior function
 
 - `delayedOrInstantBehavior(delay = 100)` - creates instant or delayed behavior
-    - `delay` - delay in milliseconds
-    - Returns behavior function
+  - `delay` - delay in milliseconds
+  - Returns behavior function
 
 ### Mapping & Transformation
 
 - `remap(sub, cb, dest)` - remaps reactive subscription
-    - `sub` - subscription to remap
-    - `cb` - transformation callback
-    - `dest` - destination object
-    - Returns remapped subscription
+  - `sub` - subscription to remap
+  - `cb` - transformation callback
+  - `dest` - destination object
+  - Returns remapped subscription
 
 - `unified(...subs)` - unifies multiple subscriptions
-    - `subs` - array of subscriptions
-    - Returns unified subscription
+  - `subs` - array of subscriptions
+  - Returns unified subscription
 
 ### Observable Collections
 
 - `makeReactiveArray(arr)` - makes array reactive
-    - `arr` - array to make reactive
-    - Returns reactive array
+  - `arr` - array to make reactive
+  - Returns reactive array
 
 - `makeReactiveMap(map)` - makes Map reactive
-    - `map` - Map to make reactive
-    - Returns reactive Map
+  - `map` - Map to make reactive
+  - Returns reactive Map
 
 - `makeReactiveSet(set)` - makes Set reactive
-    - `set` - Set to make reactive
-    - Returns reactive Set
+  - `set` - Set to make reactive
+  - Returns reactive Set
 
 - `makeReactiveObject(obj)` - makes object reactive
-    - `obj` - object to make reactive
-    - Returns reactive object
+  - `obj` - object to make reactive
+  - Returns reactive object
 
 - `observableBySet(set)` - creates observable from Set
-    - `set` - Set to observe
-    - Returns observable object
+  - `set` - Set to observe
+  - Returns observable object
 
 - `observableByMap(map)` - creates observable from Map
-    - `map` - Map to observe
-    - Returns observable object
+  - `map` - Map to observe
+  - Returns observable object
 
 ### Utility Functions
 
@@ -627,6 +645,7 @@ ModuleName: `fest/object`
 ### Symbol Support
 
 The module supports these symbols for reactive behavior:
+
 - `Symbol.observable` - Observable protocol support
 - `Symbol.subscribe` - Subscription protocol
 - `Symbol.iterator` - Iterator protocol
@@ -660,113 +679,113 @@ ModuleName: `fest/fl-ui`
 ### Core UI Elements
 
 - `UIElement` - Base UI element class extending GLitElement
-    - `theme` - Theme property (default: "default")
-    - `onInitialize()` - Initialization callback
-    - `onRender()` - Render callback
-    - `render()` - Render method returning slot content
+  - `theme` - Theme property (default: "default")
+  - `onInitialize()` - Initialization callback
+  - `onRender()` - Render callback
+  - `render()` - Render method returning slot content
 
 ### Grid Layout Components
 
 - `UIGridBox` - Grid layout container
-    - `size` - Reactive size property [width, height]
-    - `classList` - Automatically adds "ui-gridlayout" class
-    - ResizeObserver integration for size tracking
+  - `size` - Reactive size property [width, height]
+  - `classList` - Automatically adds "ui-gridlayout" class
+  - ResizeObserver integration for size tracking
 
 - `UIOrientBox` - Orientation-aware container
-    - `zoom` - Zoom level property (default: 1)
-    - `orient` - Orientation property (default: 0)
-    - `size` - Reactive size property [width, height]
-    - CSS custom properties: `--orient`, `--zoom`
+  - `zoom` - Zoom level property (default: 1)
+  - `orient` - Orientation property (default: 0)
+  - `size` - Reactive size property [width, height]
+  - CSS custom properties: `--orient`, `--zoom`
 
 ### Input Components
 
 - `SliderInput` - Universal slider input element
-    - `input` - Underlying HTML input element
-    - `thumb` - Slider thumb element
-    - `handle` - Slider handle element
-    - `name` - Input name property
-    - `value` - Input value property
-    - `valueAsNumber` - Numeric value getter
-    - Form-associated element with ARIA support
-    - Supports: radio, range, checkbox, number inputs
+  - `input` - Underlying HTML input element
+  - `thumb` - Slider thumb element
+  - `handle` - Slider handle element
+  - `name` - Input name property
+  - `value` - Input value property
+  - `valueAsNumber` - Numeric value getter
+  - Form-associated element with ARIA support
+  - Supports: radio, range, checkbox, number inputs
 
 - `LongTextInput` - Enhanced text input element
-    - `input` - Underlying HTML input element
-    - `box` - Container box element
-    - `name` - Input name property
-    - `value` - Input value property
-    - Horizontal scrolling with wheel support
-    - Auto-creates input element if missing
-    - Form-associated element with ARIA support
+  - `input` - Underlying HTML input element
+  - `box` - Container box element
+  - `name` - Input name property
+  - `value` - Input value property
+  - Horizontal scrolling with wheel support
+  - Auto-creates input element if missing
+  - Form-associated element with ARIA support
 
 ### Window & Frame Components
 
 - `WindowFrame` - Window frame with titlebar
-    - `name` - Window name attribute
-    - `icon` - Window icon (default: "app-window")
-    - `title` - Window title (default: "WINDOW_FRAME_TITLE")
-    - `subtitle` - Window subtitle (default: "WINDOW_FRAME_SUBTITLE")
-    - `content` - Content attribute
-    - `titlebar` - Titlebar attribute
-    - `titlebar-handle` - Titlebar handle attribute
-    - `titlebar-app-icon` - App icon attribute
-    - `close-icon` - Close button icon (default: "x")
-    - `minimize-icon` - Minimize button icon (default: "minus")
-    - `maximize-icon` - Maximize button icon (default: "corners-out")
-    - Draggable titlebar with resize handle
-    - Auto-centering functionality
-    - Custom events: "close", "minimize", "maximize"
+  - `name` - Window name attribute
+  - `icon` - Window icon (default: "app-window")
+  - `title` - Window title (default: "WINDOW_FRAME_TITLE")
+  - `subtitle` - Window subtitle (default: "WINDOW_FRAME_SUBTITLE")
+  - `content` - Content attribute
+  - `titlebar` - Titlebar attribute
+  - `titlebar-handle` - Titlebar handle attribute
+  - `titlebar-app-icon` - App icon attribute
+  - `close-icon` - Close button icon (default: "x")
+  - `minimize-icon` - Minimize button icon (default: "minus")
+  - `maximize-icon` - Maximize button icon (default: "corners-out")
+  - Draggable titlebar with resize handle
+  - Auto-centering functionality
+  - Custom events: "close", "minimize", "maximize"
 
 ### Scroll Components
 
 - `ScrollBoxed` - Scrollable container with custom scrollbars
-    - `anchor` - Anchor attribute (default: "_")
-    - `bindWith(content)` - Binds scrollbars to content element
-    - Custom scrollbar styling and behavior
+  - `anchor` - Anchor attribute (default: "_")
+  - `bindWith(content)` - Binds scrollbars to content element
+  - Custom scrollbar styling and behavior
 
 - `OverlayScrollbarMixin` - Mixin for overlay scrollbars
-    - Automatically creates scrollframe wrapper
-    - Hides native scrollbars
-    - Maintains scroll functionality
+  - Automatically creates scrollframe wrapper
+  - Hides native scrollbars
+  - Maintains scroll functionality
 
 - `ScrollBar` - Custom scrollbar implementation
-    - `scrollbar` - Scrollbar element
-    - `content` - Content element
-    - `holder` - Holder element
-    - `status` - Scroll status object
-    - Interactive dragging support
-    - Timeline-based animations
-    - Visibility control based on scroll position
+  - `scrollbar` - Scrollbar element
+  - `content` - Content element
+  - `holder` - Holder element
+  - `status` - Scroll status object
+  - Interactive dragging support
+  - Timeline-based animations
+  - Visibility control based on scroll position
 
 ### Icon Components
 
 - `UIPhosphorIcon` - Icon component with Lucide support
-    - `icon` - Icon name attribute
-    - `iconStyle` - Icon style (default: "duotone")
-    - `width` - Icon width property
-    - `iconElement` - SVG element property
-    - Automatic icon loading from SVG files
-    - Support for different icon styles
-    - Mask-based rendering
+  - `icon` - Icon name attribute
+  - `iconStyle` - Icon style (default: "duotone")
+  - `width` - Icon width property
+  - `iconElement` - SVG element property
+  - Automatic icon loading from SVG files
+  - Support for different icon styles
+  - Mask-based rendering
 
 ### Controller Classes
 
 - `DragHandler` - Drag functionality controller
-    - `constructor(holder, options)` - Initialize with holder element
-    - `draggable(options)` - Enable dragging with options
-    - `handler` - Drag handle element (optional)
-    - CSS custom properties: `--drag-x`, `--drag-y`
+  - `constructor(holder, options)` - Initialize with holder element
+  - `draggable(options)` - Enable dragging with options
+  - `handler` - Drag handle element (optional)
+  - CSS custom properties: `--drag-x`, `--drag-y`
 
 - `ResizeHandler` - Resize functionality controller
-    - `constructor(holder, options)` - Initialize with holder element
-    - `resizable(options)` - Enable resizing with options
-    - `limitResize(real, virtual, holder, container)` - Limit resize bounds
-    - `handler` - Resize handle element (optional)
-    - CSS custom properties: `--resize-x`, `--resize-y`
+  - `constructor(holder, options)` - Initialize with holder element
+  - `resizable(options)` - Enable resizing with options
+  - `limitResize(real, virtual, holder, container)` - Limit resize bounds
+  - `handler` - Resize handle element (optional)
+  - CSS custom properties: `--resize-x`, `--resize-y`
 
 - `Trigger` - Event trigger controller
-    - `makeShiftTrigger(callback, element)` - Create shift-based trigger
-    - `doObserve(element, parent)` - Observe element changes
+  - `makeShiftTrigger(callback, element)` - Create shift-based trigger
+  - `doObserve(element, parent)` - Observe element changes
 
 - `LongPress` - Long press detection controller
 - `LongHover` - Long hover detection controller
@@ -883,6 +902,7 @@ ModuleName: `fest/dom`
 ### CSS Architecture Overview
 
 The DOM.ts CSS system is built on a modular SCSS architecture with the following structure:
+
 - **Properties** - CSS custom properties and @property declarations
 - **Layout** - Core layout and positioning systems
 - **GridLayout** - Advanced grid-based layout system
@@ -894,6 +914,7 @@ The DOM.ts CSS system is built on a modular SCSS architecture with the following
 ### CSS Custom Properties (@property)
 
 #### Core Properties
+
 - `--ppx` - Pixel unit property (syntax: "<length-percentage>", initial: 1px)
 - `--zpx` - Zoom pixel unit (syntax: "<length-percentage>", initial: 1px)
 - `--scaling` - Scaling factor (syntax: "<number>", initial: 1)
@@ -901,6 +922,7 @@ The DOM.ts CSS system is built on a modular SCSS architecture with the following
 - `--secondary` - Secondary orientation flag (syntax: "<integer>", initial: 0)
 
 #### Orientation Properties
+
 - `--ox-orient` - Outer X orientation (syntax: "<number>", initial: 0)
 - `--os-orient` - Outer Y orientation (syntax: "<number>", initial: 0)
 - `--in-orient` - Inner orientation (syntax: "<number>", initial: 0)
@@ -908,6 +930,7 @@ The DOM.ts CSS system is built on a modular SCSS architecture with the following
 - `--zoom` - Zoom level (syntax: "<number>", initial: 1)
 
 #### Transform Properties
+
 - `--translate-x` - X translation (syntax: "<length-percentage>", initial: 0px)
 - `--translate-y` - Y translation (syntax: "<length-percentage>", initial: 0px)
 - `--opacity` - Opacity value (syntax: "<number>", initial: 1)
@@ -917,12 +940,14 @@ The DOM.ts CSS system is built on a modular SCSS architecture with the following
 - `--i-rot` - Inner rotation (syntax: "<angle>", initial: 0deg)
 
 #### Drag & Resize Properties
+
 - `--resize-x` - X resize offset (syntax: "<number>", initial: 0)
 - `--resize-y` - Y resize offset (syntax: "<number>", initial: 0)
 - `--drag-x` - X drag offset (syntax: "<number>", initial: 0)
 - `--drag-y` - Y drag offset (syntax: "<number>", initial: 0)
 
 #### Screen & Viewport Properties
+
 - `--screen-width` - Screen width (syntax: "<length-percentage>", initial: 100dvi)
 - `--screen-height` - Screen height (syntax: "<length-percentage>", initial: 100dvb)
 - `--avail-width` - Available width (syntax: "<length-percentage>", initial: 100dvi)
@@ -930,10 +955,12 @@ The DOM.ts CSS system is built on a modular SCSS architecture with the following
 - `--view-height` - Viewport height (syntax: "<length-percentage>", initial: 100dvb)
 
 #### Container Query Properties
+
 - `--cqi` - Container query inline size (syntax: "<length-percentage>", initial: 100cqi)
 - `--cqb` - Container query block size (syntax: "<length-percentage>", initial: 100cqb)
 
 #### Coordinate System Properties
+
 - `--cs-size-x`, `--cs-size-y` - Client space size
 - `--os-size-x`, `--os-size-y` - Orientation space size
 - `--cs-self-size-x`, `--cs-self-size-y` - Client space self size
@@ -943,22 +970,26 @@ The DOM.ts CSS system is built on a modular SCSS architecture with the following
 - `--in-inset-x`, `--in-inset-y` - Inner inset
 
 #### Border & Padding Properties
+
 - `--border-width` - Border width (syntax: "<length-percentage>", initial: 100%)
 - `--border-height` - Border height (syntax: "<length-percentage>", initial: 100%)
 - `--avi` - Available inline size (syntax: "<length-percentage>", initial: 0px)
 - `--avb` - Available block size (syntax: "<length-percentage>", initial: 0px)
 
 #### Viewport Properties
+
 - `--vp-i-size` - Viewport inline size (syntax: "<length-percentage>", initial: 0px)
 - `--vp-b-size` - Viewport block size (syntax: "<length-percentage>", initial: 0px)
 
 #### Keyboard Properties
+
 - `--keyboard-inset-bottom` - Keyboard inset bottom (syntax: "<length-percentage>", initial: 0px)
 - `--keyboard-inset-height` - Keyboard inset height (syntax: "<length-percentage>", initial: 0px)
 
 ### Layout System
 
 #### Root & Body Layout
+
 ```scss
 :root, :where(html) {
     position: fixed;
@@ -976,6 +1007,7 @@ The DOM.ts CSS system is built on a modular SCSS architecture with the following
 ```
 
 #### Body Layout
+
 ```scss
 :where(body) {
     position: relative;
@@ -994,6 +1026,7 @@ The DOM.ts CSS system is built on a modular SCSS architecture with the following
 ### Grid Layout System
 
 #### Core Grid Layout
+
 - `.ui-gridlayout` - Main grid layout container
 - Grid template: `repeat(var(--cs-layout-c, 4), minmax(0px, 1fr))` columns
 - Grid template: `repeat(var(--cs-layout-r, 8), minmax(0px, 1fr))` rows
@@ -1001,6 +1034,7 @@ The DOM.ts CSS system is built on a modular SCSS architecture with the following
 - Container type: `normal`
 
 #### Grid Item Properties
+
 - `--layout-c` - Number of columns (default: 4)
 - `--layout-r` - Number of rows (default: 8)
 - `--ox-c-span` - Column span
@@ -1009,22 +1043,26 @@ The DOM.ts CSS system is built on a modular SCSS architecture with the following
 - `--cs-grid-r` - Client space grid row
 
 #### Grid Gaps
+
 - `--c-gap` - Column gap (responsive calculation)
 - `--r-gap` - Row gap (responsive calculation)
 
 ### Mixins System
 
 #### Orientation Mixins
+
 - `@mixin oriented($property, $portrait, $landscape)` - Orientation-aware properties
 - `@mixin compute_os_conditions` - Compute orientation conditions
 - `@mixin compute_os_size_to_cs` - Convert orientation space to client space
 - `@mixin compute_cs_size_to_os` - Convert client space to orientation space
 
 #### Grid Layout Mixins
+
 - `@mixin compute_orient_grid_layout` - Compute oriented grid layout
 - `@mixin compute_grid_item_cell` - Compute grid item cell positioning
 
 #### Layout Mixins
+
 - `@mixin center` - Center content and items
 - `@mixin stretch` - Stretch to full size
 - `@mixin flex($dir: row)` - Flexbox layout
@@ -1033,6 +1071,7 @@ The DOM.ts CSS system is built on a modular SCSS architecture with the following
 - `@mixin column-subgrid($row: 1, $rows: 1)` - Column subgrid
 
 #### Utility Mixins
+
 - `@mixin no-wrap` - Prevent text wrapping
 - `@mixin contents` - Transparent wrapper
 - `@mixin flex-break` - Flex line break
@@ -1045,12 +1084,14 @@ The DOM.ts CSS system is built on a modular SCSS architecture with the following
 ### Logic Functions
 
 #### Mathematical Functions
+
 - `abs($a)` - Absolute value
 - `sign($a)` - Sign function
 - `mix($a, $b, $i)` - Linear interpolation
 - `inv-mul($a, $b)` - Inverse multiplication
 
 #### Comparison Functions
+
 - `gt($a, $b)` - Greater than
 - `lt($a, $b)` - Less than
 - `ge($a, $b)` - Greater than or equal
@@ -1059,12 +1100,14 @@ The DOM.ts CSS system is built on a modular SCSS architecture with the following
 - `ne($a, $b)` - Not equal
 
 #### Logical Functions
+
 - `land($a, $b)` - Logical AND
 - `lor($a, $b)` - Logical OR
 
 ### State System
 
 #### Hidden State
+
 ```scss
 *[data-hidden]:not([data-hidden="false"], .u2-while-animation) {
     display: none !important;
@@ -1075,6 +1118,7 @@ The DOM.ts CSS system is built on a modular SCSS architecture with the following
 ```
 
 #### Dragging State
+
 ```scss
 [data-dragging] {
     will-change: transform;
@@ -1085,6 +1129,7 @@ The DOM.ts CSS system is built on a modular SCSS architecture with the following
 ```
 
 #### Canvas State
+
 ```scss
 :where(canvas):is([is="ui-canvas"]) {
     position: fixed !important;
@@ -1100,6 +1145,7 @@ The DOM.ts CSS system is built on a modular SCSS architecture with the following
 ### Normalization System
 
 #### Base Normalization
+
 - Zero margins and padding on root elements
 - Border-box sizing for all elements
 - Transparent backgrounds by default
@@ -1107,12 +1153,14 @@ The DOM.ts CSS system is built on a modular SCSS architecture with the following
 - Disabled touch actions by default
 
 #### Performance Optimizations
+
 - `content-visibility: auto` for media elements
 - `content-visibility: hidden` for empty elements
 - `will-change: transform` for interactive elements
 - Reduced motion support for accessibility
 
 #### Accessibility Features
+
 - Respects `prefers-reduced-motion` media query
 - Proper ARIA support
 - Keyboard navigation support
@@ -1121,6 +1169,7 @@ The DOM.ts CSS system is built on a modular SCSS architecture with the following
 ### CSS Layers
 
 #### Layer Structure
+
 - `@layer ux-agate` - Core layout and positioning
 - `@layer ux-grid-layout` - Grid layout system
 - `@layer u2-normalize` - CSS normalization
@@ -1130,17 +1179,20 @@ The DOM.ts CSS system is built on a modular SCSS architecture with the following
 ### Responsive Design
 
 #### Container Queries
+
 - Uses modern container query units (`cqi`, `cqb`)
 - Responsive grid gaps based on container size
 - Adaptive layouts based on available space
 
 #### Orientation Support
+
 - Automatic orientation detection
 - Coordinate system transformation
 - Size swapping for different orientations
 - Touch-friendly interactions
 
 #### Mobile Optimization
+
 - Touch action management
 - Viewport height handling
 - Keyboard inset support
@@ -1149,12 +1201,14 @@ The DOM.ts CSS system is built on a modular SCSS architecture with the following
 ### Animation System
 
 #### Transform Animations
+
 - Hardware-accelerated transforms
 - Smooth coordinate transitions
 - Scale and rotation support
 - Pixel-perfect positioning
 
 #### Performance Features
+
 - RequestAnimationFrame integration
 - GPU acceleration for transforms
 - Efficient repaint management
@@ -1163,12 +1217,14 @@ The DOM.ts CSS system is built on a modular SCSS architecture with the following
 ### Utility Classes
 
 #### Layout Utilities
+
 - `.ui-gridlayout` - Grid layout container
 - `.u2-while-animation` - Animation state class
 - `[data-hidden]` - Hidden state attribute
 - `[data-dragging]` - Dragging state attribute
 
 #### Responsive Utilities
+
 - Container query responsive design
 - Orientation-aware layouts
 - Touch-friendly interactions
@@ -1177,6 +1233,7 @@ The DOM.ts CSS system is built on a modular SCSS architecture with the following
 ### Browser Support
 
 #### Modern Features
+
 - CSS Container Queries
 - CSS @property declarations
 - CSS Grid Layout
@@ -1184,6 +1241,7 @@ The DOM.ts CSS system is built on a modular SCSS architecture with the following
 - CSS Container Units
 
 #### Fallbacks
+
 - Progressive enhancement approach
 - Graceful degradation for older browsers
 - Polyfill support where needed
@@ -1192,6 +1250,7 @@ The DOM.ts CSS system is built on a modular SCSS architecture with the following
 ### Performance Considerations
 
 #### Optimization Strategies
+
 - Efficient CSS custom properties usage
 - Minimal repaints and reflows
 - Hardware acceleration for animations
@@ -1199,6 +1258,7 @@ The DOM.ts CSS system is built on a modular SCSS architecture with the following
 - Efficient layout calculations
 
 #### Memory Management
+
 - WeakRef usage for DOM references
 - Efficient event delegation
 - Optimized observation patterns
@@ -1207,6 +1267,7 @@ The DOM.ts CSS system is built on a modular SCSS architecture with the following
 ### Development Workflow
 
 #### SCSS Structure
+
 - Modular SCSS architecture
 - Clear separation of concerns
 - Reusable mixins and functions
@@ -1214,9 +1275,9 @@ The DOM.ts CSS system is built on a modular SCSS architecture with the following
 - Comprehensive documentation
 
 #### Build Process
+
 - SCSS compilation to CSS
 - CSS optimization and minification
 - Source map generation
 - Development and production builds
 - Hot reload support
-

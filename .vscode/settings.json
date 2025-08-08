@@ -18,5 +18,16 @@
 "javascript.preferences.importModuleSpecifier": "project-relative",
 "typescript.preferences.importModuleSpecifier": "project-relative",
 "cursor.cpp.enablePartialAccepts": true,
-"editor.acceptSuggestionOnCommitCharacter": false
+"editor.acceptSuggestionOnCommitCharacter": false,
+"editor.inlineSuggest.suppressSuggestions": true,
+"editor.inlineSuggest.edits.showCollapsed": false,
+"editor.inlineSuggest.showToolbar": "never",
+"versionlens.suggestions.showPrereleasesOnStartup": true,
+"versionlens.suggestions.showOnStartup": true,
+"editor.suggest.selectionMode": "never",
+"editor.snippetSuggestions": "inline",
+"editor.suggest.snippetsPreventQuickSuggestions": false,
+"editor.suggest.showSnippets": true,
+"editor.suggestOnTriggerCharacters": false,
+"editor.quickSuggestionsDelay": 120
 }
