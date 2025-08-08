@@ -1,0 +1,18 @@
+---
+description: Coding Recommendation Rules
+globs: *.ts,*.scss,*.css,*.mjs,*.js
+alwaysApply: false
+---
+# Coding Recommendations for Project
+
+Write code in a specified programming language (or detect it automatically) following certain criteria and tasks. Comments in the code are allowed as well, but preferably in English. Sometimes a fallback implementation may be acceptable if a new feature is too recent and is likely not supported even in Chrome Dev versions.
+
+The primary build system is Vite. Take into account the latest versions of browsers (Chrome 137 and above) and standards (WICG, WHATWG, ECMA, W3C, TC39, CSSWG), as much as possible...
+
+In CSS, feel free to use calc or any math functions (such as min, max, sign, abs, clamp, etc.) extensively. It is also preferable to use @property where appropriate, applicable, and possible. Prefers to use logical properties and values. Also use (S)CSS nesting (include for  selectors) where is possible, and newest selectors, such as `:is`, `:has`, `:where`, etc.
+
+It is also desirable not to output excessive amounts of code and lines; whenever possible, keep things simple and concise. For follow-up requests, output only the potential edits. Also, de-dublicate redundant or unnecessary code, where is possible.
+
+CSS can also be wrapped in SCSS for additional simplification and/or better readability or clarity.
+
+Write and output ONLY code, without any introduction, intermission or footer or post-scriptum.

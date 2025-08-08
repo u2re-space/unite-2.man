@@ -29,5 +29,11 @@
 "editor.suggest.snippetsPreventQuickSuggestions": false,
 "editor.suggest.showSnippets": true,
 "editor.suggestOnTriggerCharacters": false,
-"editor.quickSuggestionsDelay": 120
+"editor.quickSuggestionsDelay": 120,
+"editor.guides.highlightActiveIndentation": "always",
+"editor.occurrencesHighlight": "multiFile",
+"workbench.editor.highlightModifiedTabs": true,
+"markdown.occurrencesHighlight.enabled": true,
+"somesass.scss.highlights.enabled": true,
+"somesass.css.highlights.enabled": true
 }
