@@ -9,6 +9,14 @@ alwaysApply: false
 
 ---
 
+## Project and Modules repositories
+
+- <https://github.com/fest-live/dom.ts>
+- <https://github.com/fest-live/lur.e>
+- <https://github.com/fest-live/object.ts>
+- <https://github.com/fest-live/fl.ui>
+- <https://github.com/u2re-space/unite-2.man>
+
 ## Project Directory Mapping
 
 By default, use key-name as import root.
@@ -18,6 +26,8 @@ By default, use key-name as import root.
 | `fest/dom`    | `modules/dom.ts`    |
 | `fest/object` | `modules/object.ts` |
 | `fest/fl-ui`  | `modules/fl.ui`     |
+
+---
 
 ## LUR.E
 
