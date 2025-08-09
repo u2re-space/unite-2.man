@@ -1,0 +1,111 @@
+---
+description: Styling Recommendations
+globs: *.scss,*.css
+alwaysApply: false
+---
+# Styling Recommendations
+
+And please, be more creative for making style (CSS, SCSS) ideas by code context! Suggest really suitable styles if you can...
+
+Sometimes a fallback implementation may be acceptable if a new feature is too recent and is likely not supported even in Chrome Dev versions.
+
+In CSS, feel free to use `calc` or any math functions (such as min, max, sign, abs, clamp, etc.) extensively. It is also preferable to use `@property` where appropriate, applicable, and possible. Prefers to use logical properties and values. Also use (S)CSS nesting (include for selectors) where is possible, and newest selectors, such as `:is`, `:has`, `:where`, etc.
+
+CSS can also be wrapped in SCSS for additional simplification and/or better readability or clarity.
+
+## Some additional properties and values
+
+### CSS Color System Functions
+
+- `--c2-surface(--tone <number>, --base <color>)` - Surface color generation
+- `--c2-contrast(--tone <number>, --base <color>)` - Contrast color generation
+- `--c2-on-surface(--tone <number>, --base <color>)` - On-surface color generation
+- `--c2-on-contrast(--tone <number>, --base <color>)` - On-contrast color generation
+
+## CSS Custom Properties (and variables)
+
+### Numbers
+
+- `--orient` - Orientation value
+- `--zoom` - Zoom level
+- `--drag-x`, `--drag-y` - Drag offset
+- `--resize-x`, `--resize-y` - Resize offset
+- `--shift-x`, `--shift-y` - Position shift
+- `--scroll-left`, `--scroll-top` - Scroll position
+- `--percent-x`, `--percent-y` - Scroll percentage
+- `--scroll-size`, `--content-size` - Scroll dimensions
+
+### Lengths
+
+#### Core Properties
+
+- `--ppx` - Pixel unit property (syntax: "<length-percentage>", initial: 1px)
+- `--zpx` - Zoom pixel unit (syntax: "<length-percentage>", initial: 1px)
+- `--scaling` - Scaling factor (syntax: "<number>", initial: 1)
+- `--pixel-ratio` - Device pixel ratio (syntax: "<number>", initial: 1)
+- `--secondary` - Secondary orientation flag (syntax: "<integer>", initial: 0)
+
+#### Orientation Properties
+
+- `--ox-orient` - Outer X orientation (syntax: "<number>", initial: 0)
+- `--os-orient` - Outer Y orientation (syntax: "<number>", initial: 0)
+- `--in-orient` - Inner orientation (syntax: "<number>", initial: 0)
+- `--orient` - Current orientation (syntax: "<number>", initial: 0)
+- `--zoom` - Zoom level (syntax: "<number>", initial: 1)
+
+#### Transform Properties
+
+- `--translate-x` - X translation (syntax: "<length-percentage>", initial: 0px)
+- `--translate-y` - Y translation (syntax: "<length-percentage>", initial: 0px)
+- `--opacity` - Opacity value (syntax: "<number>", initial: 1)
+- `--scale` - Scale factor (syntax: "<number>", initial: 1)
+- `--corrector` - Correction factor (syntax: "<number>", initial: 1)
+- `--rot` - Rotation angle (syntax: "<angle>", initial: 0deg)
+- `--i-rot` - Inner rotation (syntax: "<angle>", initial: 0deg)
+
+#### Drag & Resize Properties
+
+- `--resize-x` - X resize offset (syntax: "<number>", initial: 0)
+- `--resize-y` - Y resize offset (syntax: "<number>", initial: 0)
+- `--drag-x` - X drag offset (syntax: "<number>", initial: 0)
+- `--drag-y` - Y drag offset (syntax: "<number>", initial: 0)
+
+#### Screen & Viewport Properties
+
+- `--screen-width` - Screen width (syntax: "<length-percentage>", initial: 100dvi)
+- `--screen-height` - Screen height (syntax: "<length-percentage>", initial: 100dvb)
+- `--avail-width` - Available width (syntax: "<length-percentage>", initial: 100dvi)
+- `--avail-height` - Available height (syntax: "<length-percentage>", initial: 100dvb)
+- `--view-height` - Viewport height (syntax: "<length-percentage>", initial: 100dvb)
+
+#### Container Query Properties
+
+- `--cqi` - Container query inline size (syntax: "<length-percentage>", initial: 100cqi)
+- `--cqb` - Container query block size (syntax: "<length-percentage>", initial: 100cqb)
+
+#### Coordinate System Properties
+
+- `--cs-size-x`, `--cs-size-y` - Client space size
+- `--os-size-x`, `--os-size-y` - Orientation space size
+- `--cs-self-size-x`, `--cs-self-size-y` - Client space self size
+- `--os-self-size-x`, `--os-self-size-y` - Orientation space self size
+- `--cs-inset-x`, `--cs-inset-y` - Client space inset
+- `--os-inset-x`, `--os-inset-y` - Orientation space inset
+- `--in-inset-x`, `--in-inset-y` - Inner inset
+
+#### Border & Padding Properties
+
+- `--border-width` - Border width (syntax: "<length-percentage>", initial: 100%)
+- `--border-height` - Border height (syntax: "<length-percentage>", initial: 100%)
+- `--avi` - Available inline size (syntax: "<length-percentage>", initial: 0px)
+- `--avb` - Available block size (syntax: "<length-percentage>", initial: 0px)
+
+#### Viewport Properties
+
+- `--vp-i-size` - Viewport inline size (syntax: "<length-percentage>", initial: 0px)
+- `--vp-b-size` - Viewport block size (syntax: "<length-percentage>", initial: 0px)
+
+#### Keyboard Properties
+
+- `--keyboard-inset-bottom` - Keyboard inset bottom (syntax: "<length-percentage>", initial: 0px)
+- `--keyboard-inset-height` - Keyboard inset height (syntax: "<length-percentage>", initial: 0px)

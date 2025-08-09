@@ -1,0 +1,72 @@
+---
+description: Coding Recommendation Rules
+globs: *.ts,*.scss,*.css,*.mjs,*.js
+alwaysApply: false
+---
+# Project Navigation and Orientation Tips
+
+## Common Imports
+
+- `fest/dom`
+- `fest/lure`
+- `fest/object`
+- `fest/fl-ui`
+
+Imports of project modules isn't should internally import by-self name.
+
+---
+
+## Project and Modules repositories
+
+- <https://github.com/fest-live/dom.ts>
+- <https://github.com/fest-live/lur.e>
+- <https://github.com/fest-live/object.ts>
+- <https://github.com/fest-live/fl.ui>
+- <https://github.com/u2re-space/unite-2.man>
+
+## Project Directory Mapping
+
+By default, use key-name as import root.
+
+|   |   |
+| `fest/lure`   | `modules/lur.e`     |
+| `fest/dom`    | `modules/dom.ts`    |
+| `fest/object` | `modules/object.ts` |
+| `fest/fl-ui`  | `modules/fl.ui`     |
+
+---
+
+## Specifications
+
+- <https://chromestatus.com/>
+- <https://developer.chrome.com/>
+- <https://html.spec.whatwg.org/>
+- <https://drafts.csswg.org/>
+- <https://www.w3.org/TR/css/>
+- <https://tc39.es/ecma262/>
+- <https://github.com/w3c/csswg-drafts>
+- <https://github.com/tc39/>
+- <https://github.com/tc39/ecma262>
+- <https://github.com/WICG/html-in-canvas>
+
+## Our projects (for following)
+
+- <https://github.com/fest-live>
+
+## Exact draft specifications
+
+- <https://www.w3.org/TR/css-mixins-1/>
+- <https://www.w3.org/TR/css-values-5/>
+- <https://www.w3.org/TR/css-color-5/>
+- <https://www.w3.org/TR/css-properties-values-api-1/>
+- <https://drafts.csswg.org/css-color-6/>
+- <https://drafts.css-houdini.org/css-properties-values-api/>
+
+## About SCSS
+
+- <https://sass-lang.com/documentation/>
+
+## About Vite
+
+- <https://vite.dev/guide/>
+- <https://vite.dev/config/>

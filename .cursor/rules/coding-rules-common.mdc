@@ -1,0 +1,16 @@
+---
+description: General Coding Recommendations
+globs: *.ts,*.scss,*.css,*.mjs,*.js
+alwaysApply: false
+---
+# General Coding Recommendations
+
+Write code in a specified programming language (or detect it automatically) following certain criteria and tasks. Comments in the code are allowed as well, but preferably in English.
+
+The primary build system is Vite. Take into account the latest versions of browsers (Chrome 137 and above) and standards (WICG, WHATWG, ECMA, W3C, TC39, CSSWG), as much as possible...
+
+Try to fix possible validation issues, if found in/by IDE/Editor, and fix very weird or non-perfect indentations (using by spaces).
+
+It is also desirable not to output excessive amounts of code and lines; whenever possible, keep things simple and concise. For follow-up requests, output only the potential edits. Also, de-dublicate redundant or unnecessary code, where is possible.
+
+Write and output ONLY code, without any introduction, intermission or footer or post-scriptum.

@@ -1,6 +1,5 @@
 ---
 description: FEST API Cheat Sheets
-globs: *.ts,*.scss,*.mjs,*.css
 alwaysApply: false
 ---
 # U2RE Cheat-Sheet for AI
