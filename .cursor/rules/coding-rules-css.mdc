@@ -1,5 +1,4 @@
 ---
-description: Styling Recommendations
 globs: *.scss,*.css
 alwaysApply: false
 ---

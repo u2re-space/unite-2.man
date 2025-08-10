@@ -1,5 +1,4 @@
 ---
-description: Coding Recommendations for JS/TS
 globs: *.ts,*.mjs,*.js
 alwaysApply: false
 ---
