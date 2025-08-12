@@ -1,13 +1,13 @@
 import { resolve } from "node:path";
-import { compression } from 'vite-plugin-compression2';
+//import { compression } from 'vite-plugin-compression2';
 
 //
 import optimizer from 'vite-plugin-optimizer';
 import createExternal from "vite-plugin-external";
 import deduplicate from "postcss-discard-duplicates";
-import postcssPresetEnv from 'postcss-preset-env';
+//import postcssPresetEnv from 'postcss-preset-env';
 import autoprefixer from "autoprefixer";
-import tsconfigPaths from 'vite-tsconfig-paths';
+//import tsconfigPaths from 'vite-tsconfig-paths';
 import cssnano from "cssnano";
 
 //
@@ -107,11 +107,11 @@ export const initiate = (NAME = "generic", tsconfig = {}, __dirname = resolve(".
 
     //
     const plugins = [
-        tsconfigPaths({
+        /*tsconfigPaths({
             projects: [resolve(__dirname, './tsconfig.json')],
-        }),
+        }),*/
         optimizer({}),
-        compression(),
+        //compression(),
         createExternal({
             interop: 'auto',
             externals: { "externals": "externals", "dist": "dist", "fonts": "fonts", "fest": "fest", "fest-src": "fest-src" },
@@ -214,6 +214,15 @@ export const initiate = (NAME = "generic", tsconfig = {}, __dirname = resolve(".
         emptyOutDir: true,
         sourcemap: 'hidden',
         target: "esnext",
+        modulePreload: {
+            polyfill: true,
+            include: [
+                "fest/dom",
+                "fest/lure",
+                "fest/object",
+                "fest/uniform",
+            ]
+        },
         rollupOptions,
         terserOptions,
         name: NAME,

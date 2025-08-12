@@ -26,14 +26,17 @@
 "versionlens.suggestions.showOnStartup": true,
 "editor.suggest.selectionMode": "never",
 "editor.snippetSuggestions": "inline",
-"editor.suggest.snippetsPreventQuickSuggestions": false,
+"editor.suggest.snippetsPreventQuickSuggestions": true,
 "editor.suggest.showSnippets": true,
 "editor.suggestOnTriggerCharacters": false,
-"editor.quickSuggestionsDelay": 120,
+"editor.quickSuggestionsDelay": 10,
 "editor.guides.highlightActiveIndentation": "always",
 "editor.occurrencesHighlight": "multiFile",
 "workbench.editor.highlightModifiedTabs": true,
 "markdown.occurrencesHighlight.enabled": true,
 "somesass.scss.highlights.enabled": true,
-"somesass.css.highlights.enabled": true
+"somesass.css.highlights.enabled": true,
+"emmet.showSuggestionsAsSnippets": true,
+"editor.tabCompletion": "on",
+"errorLens.delayMode": "debounce"
 }
