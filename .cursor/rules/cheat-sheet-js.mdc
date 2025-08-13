@@ -846,3 +846,15 @@ interface PropStore {
     dispose?: any;
 }
 ```
+
+---
+
+## Specifications
+
+- <https://chromestatus.com/>
+- <https://developer.chrome.com/>
+- <https://github.com/tc39/>
+- <https://github.com/tc39/ecma262>
+- <https://github.com/WICG/html-in-canvas>
+- <https://html.spec.whatwg.org/>
+- <https://tc39.es/ecma262/>

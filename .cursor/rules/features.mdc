@@ -124,6 +124,14 @@ By default, use key-name as import root.
 - Polyfill support where needed
 - Feature detection for advanced CSS
 
+### Supported Features
+
+Currently, only Chromium-based browsers most suitable.
+
+- <https://chromestatus.com/>
+- <https://developer.chrome.com/>
+- <https://caniuse.com/>
+
 ---
 
 ## Performance Considerations

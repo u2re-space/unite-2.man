@@ -38,5 +38,6 @@
 "somesass.css.highlights.enabled": true,
 "emmet.showSuggestionsAsSnippets": true,
 "editor.tabCompletion": "on",
-"errorLens.delayMode": "debounce"
+"errorLens.delayMode": "debounce",
+"js/ts.implicitProjectConfig.target": "ESNext"
 }

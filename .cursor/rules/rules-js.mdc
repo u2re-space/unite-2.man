@@ -10,11 +10,8 @@ Before taking any actions, lookup all (if available) used or related (possible) 
 
 - <https://chromestatus.com/>
 - <https://developer.chrome.com/>
-- <https://html.spec.whatwg.org/>
-- <https://drafts.csswg.org/>
-- <https://www.w3.org/TR/css/>
-- <https://tc39.es/ecma262/>
-- <https://github.com/w3c/csswg-drafts>
 - <https://github.com/tc39/>
 - <https://github.com/tc39/ecma262>
 - <https://github.com/WICG/html-in-canvas>
+- <https://html.spec.whatwg.org/>
+- <https://tc39.es/ecma262/>
