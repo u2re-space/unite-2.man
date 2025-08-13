@@ -13,3 +13,34 @@ Try to fix possible validation issues, if found in/by IDE/Editor, and fix very w
 It is also desirable not to output excessive amounts of code and lines; whenever possible, keep things simple and concise. For follow-up requests, output only the potential edits. Also, de-dublicate redundant or unnecessary code, where is possible.
 
 Write and output ONLY code, without any introduction, intermission or footer or post-scriptum.
+
+---
+
+## Common Imports
+
+- `fest/dom`
+- `fest/lure`
+- `fest/object`
+- `fest/fl-ui`
+
+Imports of project modules isn't should internally import by-self name.
+
+## Project Directory Mapping
+
+By default, use key-name as import root.
+
+| Library | Path |
+|---|---|
+| `fest/lure`   | `modules/lur.e`     |
+| `fest/dom`    | `modules/dom.ts`    |
+| `fest/object` | `modules/object.ts` |
+| `fest/fl-ui`  | `modules/fl.ui`     |
+
+## Our projects (for following)
+
+- <https://github.com/fest-live>
+
+## About Vite
+
+- <https://vite.dev/guide/>
+- <https://vite.dev/config/>
