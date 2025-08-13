@@ -39,5 +39,6 @@
 "emmet.showSuggestionsAsSnippets": true,
 "editor.tabCompletion": "on",
 "errorLens.delayMode": "debounce",
-"js/ts.implicitProjectConfig.target": "ESNext"
+"js/ts.implicitProjectConfig.target": "ESNext",
+"js/ts.implicitProjectConfig.experimentalDecorators": true
 }
