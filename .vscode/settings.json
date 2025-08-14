@@ -40,5 +40,7 @@
 "editor.tabCompletion": "on",
 "errorLens.delayMode": "debounce",
 "js/ts.implicitProjectConfig.target": "ESNext",
-"js/ts.implicitProjectConfig.experimentalDecorators": true
+"js/ts.implicitProjectConfig.experimentalDecorators": true,
+"eslint.useESLintClass": true,
+"typescript.tsdk": "node_modules/typescript/lib"
 }

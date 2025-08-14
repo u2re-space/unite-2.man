@@ -1,30 +1,16 @@
 {
-    "files": ["./global.d.ts"],
     "include": [
-        "**/*.ts",
         "**/*.mjs",
         "**/*.js",
-        "**/*.d.ts",
-        "**/*.tsx",
-        "**/*.vue",
-        "./global.d.ts"
+        "**/*.ts",
+        "**/*.d.ts"
     ],
-    "exclude": ["node_modules/**", "externals/**", "frontend/**"],
+    "exclude": ["node_modules/**"],
     "compilerOptions": {
         "skipLibCheck": true,
-        "jsx": "preserve",
-        "jsxImportSource": "solid-js",
-        "types": ["./global.d.ts"],
-        "paths": {
-            "/externals/*": ["frontend/externals/*"],
-            "/frontend/*": ["frontend/*"]
-        },
-        "typeRoots": [
-            "types"
-        ],
         "baseUrl": "./",
         "composite": false,
-        "lib": ["dom", "esnext", "webworker"],
+        "lib": ["ESNext", "DOM", "WebWorker"],
         "module": "ESNext",
         "target": "ESNext",
         "resolveJsonModule": true,
