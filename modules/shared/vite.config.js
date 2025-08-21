@@ -9,6 +9,8 @@ import deduplicate from "postcss-discard-duplicates";
 import autoprefixer from "autoprefixer";
 //import tsconfigPaths from 'vite-tsconfig-paths';
 import cssnano from "cssnano";
+import https from "./https/certificate.mjs";
+
 
 //
 function normalizeAliasPattern(pattern) {
@@ -198,9 +200,10 @@ export const initiate = (NAME = "generic", tsconfig = {}, __dirname = resolve(".
 
     //
     const server = {
-        port: 5173,
+        port: 443,
         open: false,
-        origin: "http://localhost:5173",
+        origin: "https://localhost/",
+        https,
         fs: {
             allow: ['..', resolve(__dirname, '../') ]
         },
