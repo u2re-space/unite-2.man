@@ -148,10 +148,9 @@ my-resume/*
 
 #
 modules/ui.system
-
-# temporary forbidden
-apps/RAS-klad
-apps/RAS-klad/*
+modules/theme.core
+modules/ui.system/*
+modules/theme.core/*
 
 # don't include https or any private
 private/
