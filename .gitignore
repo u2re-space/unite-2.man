@@ -141,8 +141,20 @@ pnpm-lock.yaml
 ./deploy.sh
 deploy.sh
 
+# don't include these projects
 my-resume
 my-resume/
 my-resume/*
 
+#
 modules/ui.system
+
+# temporary forbidden
+apps/RAS-klad
+apps/RAS-klad/*
+
+# don't include https or any private
+private/
+private/*
+https/
+https/*

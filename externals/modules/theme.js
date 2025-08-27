@@ -1,1 +1,0 @@
-../../modules/theme.core/dist/theme.js
