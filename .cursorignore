@@ -82,3 +82,25 @@ externals
 ./build
 ./build/
 ./build/*
+
+# Legacy
+./deprecated
+./deprecated/
+./deprecated/*
+./outdated
+./outdated/
+./outdated/*
+./legacy
+./legacy/
+./legacy/*
+
+# Legacy
+deprecated
+deprecated/
+deprecated/*
+outdated
+outdated/
+outdated/*
+legacy
+legacy/
+legacy/*
