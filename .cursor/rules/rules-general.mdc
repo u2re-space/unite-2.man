@@ -16,14 +16,59 @@ Write and output ONLY code, without any introduction, intermission or footer or 
 
 ---
 
+## 🌳 Project Hierarchy
+
+### ⛰️ Level 0 (project root)
+
+- `./` - Project root directory
+- `modules/` - Modules directory
+- `modules/unite-2.man` - Project manifest
+- `modules/shared/` - Shared modules, utilities, etc.
+- `runtime/` - Application running backend runtimes
+- `externals/` - External dependencies, built-in libraries, production libraries, etc.
+- `assets/` - Project assets, images, fonts, etc. (planned for future usage)
+
+### 🚧 Level 1 (core libraries)
+
+- `modules/dom.ts` - DOM utils and helpers library
+- `modules/object.ts` - Core reactivity library
+
+### 🧱 Level 2 (derived libraries)
+
+- `modules/lur.e` - reactive DOM framework
+
+### 🏗️ Level 3 (UI libraries)
+
+- `modules/fl.ui` - UI system and components library
+
+### 🏬 Level 4 (applications)
+
+- `apps/*` - Applications projects
+
+---
+
+## 🧩 Import rules
+
+- ✅ Allowed imports from lower level to higher level only.
+- ⚠️ Normally, imports between in same level or not approved.
+- ⛔ Imports in lower level from next level is not allowed.
+
+### 🧪 Examples
+
+- ✅ `fest/lure` can import `fest/object` or `fest/dom`, but not vice versa.
+- ⚠️ `fest/object` and `fest/dom`, or something in same level, isn't allowed to import vice versa...
+- ⛔ `fest/object`, `fest/dom` isn't allowed to import `fest/lure` or `fest/fl-ui`.
+
+---
+
 ## Common Imports
 
-- `fest/dom`
-- `fest/lure`
-- `fest/object`
-- `fest/fl-ui`
+- `fest/dom` - DOM utils and helpers library
+- `fest/lure` - reactive DOM framework
+- `fest/object` - Core reactivity library
+- `fest/fl-ui` - UI system and components library
 
-Imports of project modules isn't should internally import by-self name.
+---
 
 ## Project Directory Mapping
 

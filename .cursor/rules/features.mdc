@@ -3,51 +3,6 @@ alwaysApply: false
 ---
 # 👀 Project Features 👀
 
-## 🌳 Project Hierarchy
-
-### ⛰️ Level 0 (project root)
-
-- `./` - Project root directory
-- `modules/` - Modules directory
-- `modules/unite-2.man` - Project manifest
-- `modules/shared/` - Shared modules, utilities, etc.
-- `runtime/` - Application running backend runtimes
-- `externals/` - External dependencies, built-in libraries, production libraries, etc.
-- `assets/` - Project assets, images, fonts, etc. (planned for future usage)
-
-### 🚧 Level 1 (core libraries)
-
-- `modules/dom.ts` - DOM utils and helpers library
-- `modules/object.ts` - Core reactivity library
-
-### 🧱 Level 2 (derived libraries)
-
-- `modules/lur.e` - reactive DOM framework
-
-### 🏗️ Level 3 (UI libraries)
-
-- `modules/fl.ui` - UI system and components library
-
-### 🏬 Level 4 (applications)
-
-- `apps/*` - Applications projects
-
----
-
-## 🧩 Import rules
-
-- ✅ Allowed imports from lower level to higher level only.
-- ⚠️ Normally, imports between in same level or not approved.
-- ⛔ Imports in lower level from next level is not allowed.
-
-### 🧪 Examples
-
-- ✅ `modules/lur.e` can import `modules/object.ts` or `modules/dom.ts`, but not vice versa.
-- ⚠️ `modules/object.ts` and `modules/dom.ts`, or something in same level, isn't allowed to import vice versa...
-- ⛔ `modules/object.ts`, `modules/dom.ts` isn't allowed to import `modules/lur.e` or `modules/fl.ui`.
-
----
-
 ## 🤔 Trivia
 
 The primary build system is Vite. Take into account the latest versions of browsers (Chrome 137 and above) and standards (WICG, WHATWG, ECMA, W3C, TC39, CSSWG), as much as possible...
