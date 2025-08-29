@@ -12,11 +12,18 @@ In CSS, feel free to use `calc` or any math functions (such as min, max, sign, a
 
 CSS can also be wrapped in SCSS for additional simplification and/or better readability or clarity.
 
+---
+
 ## CSS specifications
 
 - <https://drafts.csswg.org/>
 - <https://www.w3.org/TR/css/>
 - <https://github.com/w3c/csswg-drafts>
+
+## CSS variables
+
+- <https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties>
+- <https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_variables>
 
 ## Exact draft specifications
 

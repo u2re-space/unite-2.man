@@ -1,5 +1,5 @@
 ---
-globs: *.ts,*.scss,*.css,*.mjs,*.js
+globs: *.ts,*.mjs,*.js,*.scss,*.css
 alwaysApply: false
 ---
 # General Coding Recommendations
@@ -35,6 +35,8 @@ By default, use key-name as import root.
 | `fest/dom`    | `modules/dom.ts`    |
 | `fest/object` | `modules/object.ts` |
 | `fest/fl-ui`  | `modules/fl.ui`     |
+
+---
 
 ## Our projects (for following)
 

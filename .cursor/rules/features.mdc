@@ -1,17 +1,60 @@
 ---
 alwaysApply: false
 ---
-# Other descriptions
+# 👀 Project Features 👀
+
+## 🌳 Project Hierarchy
+
+### ⛰️ Level 0 (project root)
+
+- `./` - Project root directory
+- `modules/` - Modules directory
+- `modules/unite-2.man` - Project manifest
+- `modules/shared/` - Shared modules, utilities, etc.
+- `runtime/` - Application running backend runtimes
+- `externals/` - External dependencies, built-in libraries, production libraries, etc.
+- `assets/` - Project assets, images, fonts, etc. (planned for future usage)
+
+### 🚧 Level 1 (core libraries)
+
+- `modules/dom.ts` - DOM utils and helpers library
+- `modules/object.ts` - Core reactivity library
+
+### 🧱 Level 2 (derived libraries)
+
+- `modules/lur.e` - reactive DOM framework
+
+### 🏗️ Level 3 (UI libraries)
+
+- `modules/fl.ui` - UI system and components library
+
+### 🏬 Level 4 (applications)
+
+- `apps/*` - Applications projects
 
 ---
 
-## Trivia
+## 🧩 Import rules
+
+- ✅ Allowed imports from lower level to higher level only.
+- ⚠️ Normally, imports between in same level or not approved.
+- ⛔ Imports in lower level from next level is not allowed.
+
+### 🧪 Examples
+
+- ✅ `modules/lur.e` can import `modules/object.ts` or `modules/dom.ts`, but not vice versa.
+- ⚠️ `modules/object.ts` and `modules/dom.ts`, or something in same level, isn't allowed to import vice versa...
+- ⛔ `modules/object.ts`, `modules/dom.ts` isn't allowed to import `modules/lur.e` or `modules/fl.ui`.
+
+---
+
+## 🤔 Trivia
 
 The primary build system is Vite. Take into account the latest versions of browsers (Chrome 137 and above) and standards (WICG, WHATWG, ECMA, W3C, TC39, CSSWG), as much as possible...
 
 ---
 
-## Project and Modules repositories
+## 📦 Project and Modules repositories
 
 - <https://github.com/fest-live/dom.ts>
 - <https://github.com/fest-live/lur.e>
@@ -19,7 +62,7 @@ The primary build system is Vite. Take into account the latest versions of brows
 - <https://github.com/fest-live/fl.ui>
 - <https://github.com/u2re-space/unite-2.man>
 
-## Project Directory Mapping
+## 📂 Project Directory Mapping
 
 By default, use key-name as import root.
 
@@ -32,7 +75,7 @@ By default, use key-name as import root.
 
 ---
 
-## Accessibility Features
+## 🎯 Accessibility Features
 
 - ARIA role assignments for form elements
 - ARIA value properties for sliders
@@ -82,7 +125,7 @@ By default, use key-name as import root.
 
 ---
 
-## Performance Features
+## 🚀 Performance Features
 
 - WeakRef usage for memory management
 - ResizeObserver for efficient size tracking
@@ -107,7 +150,7 @@ By default, use key-name as import root.
 
 ---
 
-## Browser Support
+## 🌐 Browser Support
 
 ### Modern Features
 
@@ -134,7 +177,7 @@ Currently, only Chromium-based browsers most suitable.
 
 ---
 
-## Performance Considerations
+## 📊 Performance Considerations
 
 ### Optimization Strategies
 
@@ -157,7 +200,7 @@ Currently, only Chromium-based browsers most suitable.
 
 ---
 
-## Development Workflow
+## 🛠️ Development Workflow
 
 ### SCSS Structure
 
@@ -177,7 +220,7 @@ Currently, only Chromium-based browsers most suitable.
 
 ---
 
-## Styling Overview
+## 🎨 Styling Overview
 
 ### CSS Architecture Overview
 
@@ -200,15 +243,3 @@ The DOM.ts CSS system is built on a modular SCSS architecture with the following
 - Transparent backgrounds by default
 - Disabled user selection by default
 - Disabled touch actions by default
-
----
-
-## CSS Layers
-
-### Layer Structure
-
-- `@layer ux-agate` - Core layout and positioning
-- `@layer ux-grid-layout` - Grid layout system
-- `@layer u2-normalize` - CSS normalization
-- `@layer u2-existence` - State-based styling
-- `@layer u2-canvas` - Canvas element styling

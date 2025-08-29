@@ -6,6 +6,8 @@ alwaysApply: false
 
 Before taking any actions, lookup all (if available) used or related (possible) imports, or cheat-sheets registry (`cheat-sheet-js.mdc`)! Also read or learn `tsconfig.ts` aliases.
 
+---
+
 ## Specifications
 
 - <https://chromestatus.com/>

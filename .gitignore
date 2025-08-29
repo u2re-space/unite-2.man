@@ -157,3 +157,19 @@ private/
 private/*
 https/
 https/*
+
+# Build
+./dist
+./dist/
+./dist/*
+./build
+./build/
+./build/*
+
+# Builds
+dist
+dist/
+dist/*
+build
+build/
+build/*
