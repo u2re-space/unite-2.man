@@ -104,3 +104,17 @@ outdated/*
 legacy
 legacy/
 legacy/*
+
+# don't include outdated scripts
+./scripts/*
+./scripts/
+./scripts
+scripts/*
+scripts/
+scripts
+
+# don't include deprecated modules
+modules/theme.core/*
+modules/ui.system/*
+modules/theme.core
+modules/ui.system
