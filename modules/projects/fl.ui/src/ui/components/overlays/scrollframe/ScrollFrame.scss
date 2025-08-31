@@ -1,0 +1,43 @@
+@use "../scrollbar/ScrollBar.scss" as sb;
+
+//
+@property --max-size { syntax: "<length-percentage>"; initial-value: 0px; inherits: true; };
+@property --scroll-coef { syntax: "<number>"; initial-value: 1; inherits: true; };
+@property --determinant { syntax: "<number>"; initial-value: 1; inherits: true; };
+@property --scroll-size { syntax: "<length-percentage>"; initial-value: 0px; inherits: true; };
+@property --content-size { syntax: "<length-percentage>"; initial-value: 0px; inherits: true; };
+@property --thumb-size { syntax: "<length-percentage>"; initial-value: 0px; inherits: true; };
+@property --clamped-size { syntax: "<length-percentage>"; initial-value: 0px; inherits: true; };
+@property --max-offset { syntax: "<length-percentage>"; initial-value: 0px; inherits: true; };
+
+//
+@layer ui-scrollbox {
+
+    //
+    :host {
+        & { --scrollbar-color: oklch(from --c2-on-surface(var(--scrollbar-tone-shift, 0.0), var(--current, #111)) l c h / 0.8); };
+        & { display: block; }
+        &, & * {
+            interpolate-size: allow-keywords;
+            transition-behavior: allow-discrete;
+        }
+
+        //
+        //:where(.ui-scrollbar),
+        .ui-scrollbar[axis="x"] .ui-thumb { @include sb.with-timeline("ux-scrollbox-x"); };
+        .ui-scrollbar[axis="y"] .ui-thumb { @include sb.with-timeline("ux-scrollbox-y"); };
+
+        //
+        .ui-scrollbar {
+            .ui-thumb {
+                border-radius: 0.25rem;
+            }
+        }
+
+        //
+        @include sb.scrollbox();
+        @include sb.scroll-tm-2-axis();
+        @include sb.axis-scrollbar(".ui-scrollbar", "inline", ".ui-thumb", "ux-scrollbox");
+        @include sb.axis-scrollbar(".ui-scrollbar", "block" , ".ui-thumb", "ux-scrollbox");
+    }
+}

@@ -10,18 +10,18 @@
 [submodule "runtime"]
 	path = runtime
 	url = https://github.com/unite-2-re/webapp.runtime
-[submodule "modules/dom.ts"]
-	path = modules/dom.ts
+[submodule "modules/projects/dom.ts"]
+	path = modules/projects/dom.ts
 	url = https://github.com/fest-live/dom.ts
-[submodule "modules/object.ts"]
-	path = modules/object.ts
+[submodule "modules/projects/object.ts"]
+	path = modules/projects/object.ts
 	url = https://github.com/fest-live/object.ts
-[submodule "modules/uniform.ts"]
-	path = modules/uniform.ts
+[submodule "modules/projects/uniform.ts"]
+	path = modules/projects/uniform.ts
 	url = https://github.com/fest-live/uniform.ts
-[submodule "modules/lur.e"]
-	path = modules/lur.e
+[submodule "modules/projects/lur.e"]
+	path = modules/projects/lur.e
 	url = https://github.com/fest-live/lur.e
-[submodule "modules/fl.ui"]
-	path = modules/fl.ui
+[submodule "modules/projects/fl.ui"]
+	path = modules/projects/fl.ui
 	url = https://github.com/fest-live/fl.ui

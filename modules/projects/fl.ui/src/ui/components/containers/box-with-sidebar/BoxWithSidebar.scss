@@ -1,0 +1,129 @@
+@layer box-with-sidebar {
+    :host {
+        & {
+            display: grid;
+            grid-template-columns: [sidebar-col] minmax(0px, max-content) [content-col] minmax(0px, 1fr);
+            grid-template-rows: [bar-row] minmax(3rem, max-content) [content-row] minmax(0px, 1fr);
+            inline-size: stretch;
+            block-size: stretch;
+            position: relative;
+            background-color: transparent;
+        }
+
+        // bar
+        .bar {
+            display: flex;
+            flex-direction: row;
+            gap: 0.125rem;
+            inline-size: stretch;
+            block-size: 3rem;
+            max-block-size: stretch;
+            grid-column: 1 / -1; // span with contents, overlays by sidebar
+            grid-row: bar-row;
+            z-index: 3;
+            background-color: transparent;
+            color: --c2-on-surface(0.0, var(--current, currentColor));
+            overflow: hidden;
+            place-content: center;
+            place-items: center;
+
+            ::slotted([slot="bar"]) {
+                inline-size: stretch;
+                block-size: stretch;
+                place-content: center;
+                place-items: center;
+                flex-grow: 1;
+            }
+
+            button {
+                aspect-ratio: 1 / 1;
+                block-size: stretch;
+                inline-size: max-content;
+                color: --c2-on-surface(0.0, var(--current, currentColor));
+            }
+
+            ui-icon {
+                color: --c2-on-surface(0.0, var(--current, currentColor));
+                --icon-color: --c2-on-surface(0.0, var(--current, currentColor));
+            }
+        }
+
+        .content-box {
+            display: grid;
+            inline-size: stretch;
+            block-size: stretch;
+            grid-template-columns: subgrid;
+            grid-template-rows: minmax(0px, 1fr);
+            grid-column: 1 / -1; // span with contents, overlays by sidebar, bar, etc.
+            grid-row: content-row;
+            z-index: 1;
+            border-radius: 0.25rem;
+            overflow: hidden;
+            margin-inline: 0.25rem;
+            margin-block-end: 0.25rem;
+            background-color: transparent;
+        }
+
+        // sidebar
+        .sidebar {
+            & {
+                display: flex;
+                flex-direction: column;
+                gap: 0.125rem;
+                inline-size: max-content;
+                min-inline-size: 4rem;
+                block-size: stretch;
+                grid-column: sidebar-col;
+                grid-row: 1 / -1;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease-in-out;
+                z-index: 2;
+                overflow: hidden;
+                border-radius: 0.25rem;
+                padding: 0px;
+            }
+
+            @starting-style {
+                transform: translateX(-100%);
+            }
+
+            ::slotted([slot="sidebar"]) {
+                inline-size: stretch;
+                block-size: stretch;
+                flex-grow: 1;
+                place-content: center;
+                place-items: center;
+                line-height: normal;
+                align-content: start;
+                padding: 0.25rem;
+            }
+
+            &[data-visible] {
+                transform: translateX(0px);
+            }
+        }
+
+        // content box
+        .content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.125rem;
+            inline-size: stretch;
+            block-size: stretch;
+            grid-column: 1 / -1; // span with contents, overlays by sidebar, bar, etc.
+            grid-row: 1 / -1;
+            z-index: 1;
+            overflow: hidden;
+            background-color: transparent;
+
+            //
+            ::slotted(*) {
+                inline-size: stretch;
+                block-size: stretch;
+                flex-grow: 1;
+                place-content: center;
+                place-items: center;
+            }
+        }
+    }
+}
