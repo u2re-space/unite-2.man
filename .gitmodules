@@ -22,6 +22,6 @@
 [submodule "modules/projects/lur.e"]
 	path = modules/projects/lur.e
 	url = https://github.com/fest-live/lur.e
-[submodule "modules/projects/fl-ui"]
-	path = modules/projects/fl-ui
+[submodule "modules/projects/fl.ui"]
+	path = modules/projects/fl.ui
 	url = https://github.com/fest-live/fl.ui
