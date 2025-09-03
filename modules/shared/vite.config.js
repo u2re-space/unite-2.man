@@ -10,7 +10,7 @@ import autoprefixer from "autoprefixer";
 //import tsconfigPaths from 'vite-tsconfig-paths';
 import cssnano from "cssnano";
 import https from "./https/certificate.mjs";
-
+import { searchForWorkspaceRoot } from "vite";
 
 //
 function normalizeAliasPattern(pattern) {
@@ -202,10 +202,12 @@ export const initiate = (NAME = "generic", tsconfig = {}, __dirname = resolve(".
     const server = {
         port: 443,
         open: false,
+        host: "0.0.0.0",
         origin: "https://localhost/",
         https,
         fs: {
-            allow: ['..', resolve(__dirname, '../') ]
+            strict: false,
+            allow: [searchForWorkspaceRoot(process.cwd()), '../**/*', '../*', '..', resolve(__dirname, './**/*'), resolve(__dirname, './*'), __dirname ]
         },
     };
 
