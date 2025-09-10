@@ -1,10 +1,16 @@
 {
     "extends": ["stylelint-config-standard-scss", "stylelint-config-recommended"],
+    "plugins": ["stylelint-plugin-logical-css"],
     "rules": {
         "at-rule-no-unknown": [true,
-            { "ignoreAtRules": ["extends"] }
+            { "severity": "warning" }
         ],
         "block-no-empty": null,
-        "unit-allowed-list": ["em", "rem", "s", "px", "dvi", "dvb", "cqi", "cqb"]
+        "unit-allowed-list": ["em", "rem", "s", "px", "dvi", "dvb", "cqi", "cqb"],
+        "plugin/use-logical-properties-and-values": [true,
+            { "severity": "warning" }
+        ],
+        "plugin/use-logical-units": [true, { "severity": "warning" }],
+        "plugin/no-unsupported-browser-features": [true, { "severity": "warning" }]
     }
 }
