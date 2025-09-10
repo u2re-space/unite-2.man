@@ -4,13 +4,16 @@
     "version": "1.0.0alpha",
     "private": false,
     "type": "module",
-    "scripts": {},
+    "scripts": {
+        "test": "npm -ws run test --if-present --silent"
+    },
     "browserslist": [
         "last 1 chrome version",
         "last 1 firefox version"
     ],
     "workspaces": [
-        "modules/*"
+        "modules/*",
+        "apps/*"
     ],
     "devDependencies": {
         "@ai-sdk/openai": "^2.0.22",

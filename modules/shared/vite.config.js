@@ -2,7 +2,7 @@ import { resolve } from "node:path";
 //import { compression } from 'vite-plugin-compression2';
 
 //
-import optimizer from 'vite-plugin-optimizer';
+//import optimizer from 'vite-plugin-optimizer';
 import createExternal from "vite-plugin-external";
 import deduplicate from "postcss-discard-duplicates";
 //import postcssPresetEnv from 'postcss-preset-env';
@@ -112,7 +112,7 @@ export const initiate = (NAME = "generic", tsconfig = {}, __dirname = resolve(".
         /*tsconfigPaths({
             projects: [resolve(__dirname, './tsconfig.json')],
         }),*/
-        optimizer({}),
+        //optimizer({}),
         //compression(),
         createExternal({
             interop: 'auto',
