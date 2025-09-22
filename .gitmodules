@@ -1,9 +1,9 @@
 [submodule "apps/OS.u2re.space"]
 	path = apps/OS.u2re.space
 	url = https://github.com/u2re-space/OS.u2re.space
-[submodule "apps/RAS-klad"]
-	path = apps/RAS-klad
-	url = https://github.com/u2re-space/RAS-klad
+[submodule "apps/CrossWord"]
+	path = apps/CrossWord
+	url = https://github.com/u2re-space/crossword
 [submodule "apps/markdown.view"]
 	path = apps/markdown.view
 	url = https://github.com/u2re-space/markdown.view
