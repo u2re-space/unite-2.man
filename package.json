@@ -1,7 +1,7 @@
 {
     "name": "unite-2",
     "description": "Web App Runtime Loader",
-    "version": "1.0.0alpha",
+    "version": "1.0.0",
     "private": false,
     "type": "module",
     "scripts": {
@@ -9,11 +9,13 @@
     },
     "browserslist": [
         "last 1 chrome version",
-        "last 1 firefox version"
+        "last 1 edge version"
     ],
     "workspaces": [
-        "modules/*",
-        "apps/*"
+        "./",
+        "modules/projects/*",
+        "apps/*",
+        "runtime/*"
     ],
     "devDependencies": {
         "@ai-sdk/openai": "^2.0.22",
