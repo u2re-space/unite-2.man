@@ -5,9 +5,26 @@
     "semi": false,
     "singleQuote": true,
     "printWidth": 120,
-    "arrowParens": "avoid",
+    "arrowParens": "always",
     "endOfLine": "lf",
     "bracketSpacing": true,
     "bracketSameLine": true,
-    "singleAttributePerLine": false
+    "singleAttributePerLine": false,
+    "embeddedLanguageFormatting": "auto",
+    "proseWrap": "preserve",
+    "htmlWhitespaceSensitivity": "css",
+    "overrides": [
+        {
+            "files": ["*.ts", "*.tsx", "*.js", "*.mjs", "*.cjs"],
+            "options": {
+                "parser": "typescript"
+            }
+        },
+        {
+            "files": ["*.scss", "*.css"],
+            "options": {
+                "parser": "scss"
+            }
+        }
+    ]
 }

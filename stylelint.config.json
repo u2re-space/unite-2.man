@@ -2,15 +2,21 @@
     "extends": ["stylelint-config-standard-scss"],
     "plugins": ["stylelint-plugin-logical-css"],
     "rules": {
-        "at-rule-no-unknown": [true,
-            { "severity": "warning" }
-        ],
+        "at-rule-no-unknown": [true, {"severity": "warning"}],
         "block-no-empty": null,
-        "unit-allowed-list": ["em", "rem", "s", "px", "dvi", "dvb", "cqi", "cqb"],
-        "plugin/use-logical-properties-and-values": [true,
-            { "severity": "warning" }
+        "no-descending-specificity": null,
+        "selector-class-pattern": null,
+        "color-function-notation": ["modern", {"severity": "warning"}],
+        "alpha-value-notation": ["percentage", {"severity": "warning"}],
+        "custom-property-empty-line-before": null,
+        "declaration-empty-line-before": null,
+        "unit-allowed-list": [
+            "em", "rem", "s", "ms", "px", "%",
+            "dvi", "dvb", "dvh", "dvw", "svh", "svw",
+            "lvh", "lvw", "cqi", "cqb", "cqw", "cqh"
         ],
-        "plugin/use-logical-units": [true, { "severity": "warning" }],
-        "plugin/no-unsupported-browser-features": [true, { "severity": "warning" }]
+        "plugin/use-logical-properties-and-values": [true, {"severity": "warning"}],
+        "plugin/use-logical-units": [true, {"severity": "warning"}],
+        "plugin/no-unsupported-browser-features": [true, {"severity": "warning"}]
     }
 }
