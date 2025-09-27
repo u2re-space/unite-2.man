@@ -26,5 +26,18 @@
             {"blankLine": "always", "prev": ["if", "do", "while", "for", "switch"], "next": "*"},
             {"blankLine": "any", "prev": "if", "next": "if"}
         ]
-    }
+    },
+    "overrides": [
+        {
+            "files": ["**/*.json", "**/*.jsonc", "**/*.json5"],
+            "plugins": ["jsonc"],
+            "parser": "jsonc-eslint-parser",
+            "rules": {
+                "jsonc/array-bracket-newline": ["error", "never"],
+                "jsonc/array-element-newline": ["error", "never"],
+                "jsonc/comma-dangle": ["error", "never"],
+                "jsonc/sort-keys": "off"
+            }
+        }
+    ]
 }
