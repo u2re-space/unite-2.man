@@ -1,5 +1,5 @@
 packages:
-  - 'modules/projects/**/node_modules/*
+  - 'modules/projects/**/node_modules/*'
   - 'modules/projects/*/node_modules/*'
   - 'apps/**/node_modules/*'
   - 'apps/*/node_modules/*'
