@@ -12,10 +12,8 @@
         "last 1 edge version"
     ],
     "workspaces": [
-        "./",
         "modules/projects/*",
-        "apps/*",
-        "runtime/*"
+        "apps/*"
     ],
     "devDependencies": {
         "@ai-sdk/openai": "^2.0.22",
