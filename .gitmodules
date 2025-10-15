@@ -25,3 +25,6 @@
 [submodule "modules/projects/fl.ui"]
 	path = modules/projects/fl.ui
 	url = https://github.com/fest-live/fl.ui
+[submodule "modules/projects/veela.css"]
+	path = modules/projects/veela.css
+	url = https://github.com/fest-live/veela.css
