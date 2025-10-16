@@ -4,7 +4,7 @@
         "**/*.js",
         "**/*.ts",
         "**/*.d.ts"
-    ],
+, "modules/projects/lur.e/test/test.tsx"    ],
     "exclude": ["node_modules/**"],
     "compilerOptions": {
         "skipLibCheck": true,

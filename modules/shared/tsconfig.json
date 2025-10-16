@@ -14,6 +14,31 @@
             "fest/uniform": ["./fest/uniform/index.ts"],
             "fest/theme": ["./fest/theme/index.ts"],
             "fest/polyfill/*": ["./fest/polyfill/*"],
+
+            "fest/veela": ["./veela/index.ts"],
+            "fest/veela/*": ["./veela/scss/*"],
+
+            "fest/veela-runtime": ["./veela/scss/runtime/index.scss"],
+            "fest/veela-runtime/*": ["./veela/scss/runtime/*"],
+
+            "fest/veela-lib": ["./veela/scss/lib/index.scss"],
+            "fest/veela-lib/*": ["./veela/scss/lib/*"],
+
+            "fest/veela-mixins": ["./veela/scss/lib/mixins/index.scss"],
+            "fest/veela-mixins/*": ["./veela/scss/lib/mixins/*"],
+
+            "veela": ["./veela/index.ts"],
+            "veela/*": ["./veela/scss/*"],
+
+            "veela-runtime": ["./veela/scss/runtime/index.scss"],
+            "veela-runtime/*": ["./veela/scss/runtime/*"],
+
+            "veela-lib": ["./veela/scss/lib/index.scss"],
+            "veela-lib/*": ["./veela/scss/lib/*"],
+
+            "veela-mixins": ["./veela/scss/lib/mixins/index.scss"],
+            "veela-mixins/*": ["./veela/scss/lib/mixins/*"],
+
             "polyfill/*": ["./fest/polyfill/*"],
             "@design/*": ["./fest/fl-ui/design/*"],
             "@ui/*": ["./fest/fl-ui/ui/*"]
