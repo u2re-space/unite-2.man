@@ -28,3 +28,6 @@
 [submodule "modules/projects/veela.css"]
 	path = modules/projects/veela.css
 	url = https://github.com/fest-live/veela.css
+[submodule "modules/projects/core.ts"]
+	path = modules/projects/core.ts
+	url = https://github.com/fest-live/core.ts.git
