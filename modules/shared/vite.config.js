@@ -37,77 +37,6 @@ const importFromTSConfig = (tsconfig, __dirname) => {
 //
 export const initiate = (NAME = "generic", tsconfig = {}, __dirname = resolve("./", import.meta.dirname))=>{
     const $resolve = { alias: importFromTSConfig(tsconfig, __dirname) }
-    const terserOptions = {
-        ecma: 2020,
-        keep_classnames: false,
-        keep_fnames: false,
-        module: true,
-        toplevel: true,
-        mangle: {
-            eval: true,
-            keep_classnames: false,
-            keep_fnames: false,
-            module: true,
-            toplevel: true,
-            properties: {
-                builtins: true,
-                keep_quoted: "strict",
-                undeclared: true,
-                only_annotated: true,
-                reserved: ["register", "resolve", "reject", "undefined"]
-            }
-        },
-        compress: {
-            ecma: 2020,
-            keep_classnames: false,
-            keep_fnames: false,
-            keep_infinity: false,
-            reduce_vars: true,
-            reduce_funcs: true,
-            pure_funcs: [],
-            arguments: true,
-            expression: true,
-            inline: 3,
-            module: true,
-            passes: 3,
-            side_effects: true,
-            pure_getters: true,
-            typeofs: true,
-            toplevel: true,
-            unsafe: true,
-            unsafe_Function: true,
-            unsafe_comps: true,
-            unsafe_arrows: true,
-            unsafe_math: true,
-            unsafe_symbols: true,
-            unsafe_undefined: true,
-            unsafe_methods: true,
-            unsafe_regexp: true,
-            unsafe_proto: true,
-            warnings: true,
-            unused: true,
-            booleans_as_integers: true,
-            hoist_funs: true,
-            hoist_vars: true,
-            properties: true,
-            // don't use in debug mode
-            //drop_console: true
-        },
-        format: {
-            braces: false,
-            comments: false,
-            ecma: 2020,
-            //indent_level: 0,
-            semicolons: true,
-            shebang: true,
-            inline_script: true,
-            quote_style: 0,
-            wrap_iife: true,
-            ascii_only: true,
-        }
-    };
-
-    //
     const projectMap = new Map([
         ["fest/core", "core.ts"],
         ["fest/fl-ui", "fl.ui"],
@@ -119,8 +48,6 @@ export const initiate = (NAME = "generic", tsconfig = {}, __dirname = resolve(".
         ["fest/lure", "lur.e"],
     ]);
 
-    console.log(Array.from(projectMap?.keys()).filter((n)=>!n?.endsWith(NAME)));
-
     //
     const plugins = [
         /*tsconfigPaths({
@@ -130,32 +57,35 @@ export const initiate = (NAME = "generic", tsconfig = {}, __dirname = resolve(".
         //compression(),
         externalPlugin({
             include: Array.from(projectMap?.keys()).filter((n)=>!n?.endsWith(NAME)), // Explicitly externalize specific packages
-            exclude: [resolve(__dirname, "./src/index.ts")]
+            exclude: [resolve(__dirname, "./src/index.ts"), "./src/index.ts", resolve(__dirname, "./dist/"+NAME+".js"), "./dist/"+NAME+".js"]
         })
     ];
 
     //
     const rollupOptions = {
-        plugins,
-        treeshake: 'smallest',
+        shimMissingExports: true,
+        treeshake: {
+            annotations: false,
+            moduleSideEffects: true,
+            tryCatchDeoptimization: false,
+            unknownGlobalSideEffects: true,
+            correctVarValueBeforeDeclaration: true,
+            propertyReadSideEffects: true
+        },
         input: "./src/index.ts",
         external: (source) => {
+            if (source?.includes?.("dist/")) return true;
             if (source?.includes?.("fest/"+NAME) || source?.includes?.("./src/index.ts") || source?.includes?.(projectMap.get("fest/"+NAME))) return false;
             if (Array.from(projectMap.keys()).some((name)=>source.includes(name))) return true;
-            //if (Array.from(projectMap.values()).some((name)=>source.includes(name))) return true;
             return false;
         },
-
         output: {
             compact: true,
-            globals: {},
-            format: 'es',
             name: NAME,
             dir: './dist',
             exports: "auto",
-            minifyInternalExports: true,
-            experimentalMinChunkSize: 500_500,
-            inlineDynamicImports: true,
+            //minifyInternalExports: true,
+            //inlineDynamicImports: true,
         }
     };
 
@@ -208,7 +138,7 @@ export const initiate = (NAME = "generic", tsconfig = {}, __dirname = resolve(".
         port: 443,
         open: false,
         host: "0.0.0.0",
-        origin: "https://localhost/",
+        origin: "https://localhost",
         allowedHosts: ['localhost', '127.0.0.1', '0.0.0.0', '192.168.0.200', '95.188.82.223'],
         appType: 'spa',
         https,
@@ -222,13 +152,13 @@ export const initiate = (NAME = "generic", tsconfig = {}, __dirname = resolve(".
     const build = {
         chunkSizeWarningLimit: 1600,
         assetsInlineLimit: 1024 * 1024,
-        minify: false,///"terser",
+        minify: "esbuild",
         emptyOutDir: true,
-        sourcemap: 'hidden',
-        target: "esnext",
+        target: 'esnext',
         modulePreload: {
             polyfill: true,
             include: [
+                "fest/core",
                 "fest/dom",
                 "fest/lure",
                 "fest/object",
@@ -236,7 +166,6 @@ export const initiate = (NAME = "generic", tsconfig = {}, __dirname = resolve(".
             ]
         },
         rollupOptions,
-        terserOptions,
         name: NAME,
         lib: {
             formats: ["es"],
@@ -246,8 +175,16 @@ export const initiate = (NAME = "generic", tsconfig = {}, __dirname = resolve(".
         },
     }
 
+    const esbuild = {
+        legalComments: 'none',
+        minify: true,
+        minifySyntax: true,
+        minifyIdentifiers: true,
+        minifyWhitespace: true
+    }
+
     //
-    return {rollupOptions, plugins, resolve: $resolve, build, css, optimizeDeps, server};
+    return {esbuild, rollupOptions, plugins, resolve: $resolve, build, css, optimizeDeps, server};
 }
 
 //
