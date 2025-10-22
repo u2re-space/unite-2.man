@@ -74,8 +74,8 @@ export const initiate = (NAME = "generic", tsconfig = {}, __dirname = resolve(".
         },
         input: "./src/index.ts",
         external: (source) => {
-            if (source?.includes?.("dist/")) return true;
-            if (source?.includes?.("fest/"+NAME) || source?.includes?.("./src/index.ts") || source?.includes?.(projectMap.get("fest/"+NAME))) return false;
+            if (source?.includes?.("node_modules/")) return false;
+            if (source?.includes?.("fest/"+NAME) || source?.includes?.("./src/index.ts") || source?.includes?.(projectMap.get("fest/"+NAME)) || source?.includes?.("dist/")) return false;
             if (Array.from(projectMap.keys()).some((name)=>source.includes(name))) return true;
             return false;
         },
