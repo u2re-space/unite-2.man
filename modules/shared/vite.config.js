@@ -3,7 +3,7 @@ import { resolve } from "node:path";
 
 //
 //import optimizer from 'vite-plugin-optimizer';
-import createExternal from "vite-plugin-external";
+import { externalPlugin } from "@praha/vite-plugin-external";
 import deduplicate from "postcss-discard-duplicates";
 //import postcssPresetEnv from 'postcss-preset-env';
 import autoprefixer from "autoprefixer";
@@ -108,22 +108,30 @@ export const initiate = (NAME = "generic", tsconfig = {}, __dirname = resolve(".
     };
 
     //
+    const projectMap = new Map([
+        ["fest/core", "core.ts"],
+        ["fest/fl-ui", "fl.ui"],
+        ["fest/object", "object.ts"],
+        ["fest/uniform", "uniform.ts"],
+        ["fest/dom", "dom.ts"],
+        ["fest/veela", "veela.css"],
+        ["fest/veela-runtime", "veela.css"],
+        ["fest/lure", "lur.e"],
+    ]);
+
+    console.log(Array.from(projectMap?.keys()).filter((n)=>!n?.endsWith(NAME)));
+
+    //
     const plugins = [
         /*tsconfigPaths({
             projects: [resolve(__dirname, './tsconfig.json')],
         }),*/
         //optimizer({}),
         //compression(),
-        createExternal({
-            interop: 'auto',
-            externals: { "externals": "externals", "dist": "dist", "fonts": "fonts", "fest": "fest", "fest-src": "fest-src" },
-            externalizeDeps: [
-                "externals", "/externals", "./externals",
-                "dist", "/dist", "./dist",
-                "fonts", "../fonts", "./fonts",
-                "fest", "../fest", "./fest"
-            ]
-        }),
+        externalPlugin({
+            include: Array.from(projectMap?.keys()).filter((n)=>!n?.endsWith(NAME)), // Explicitly externalize specific packages
+            exclude: [resolve(__dirname, "./src/index.ts")]
+        })
     ];
 
     //
@@ -132,14 +140,11 @@ export const initiate = (NAME = "generic", tsconfig = {}, __dirname = resolve(".
         treeshake: 'smallest',
         input: "./src/index.ts",
         external: (source) => {
-            if (source.startsWith("/externals") || source.startsWith("fest")) return true;
+            if (source?.includes?.("fest/"+NAME) || source?.includes?.("./src/index.ts") || source?.includes?.(projectMap.get("fest/"+NAME))) return false;
+            if (Array.from(projectMap.keys()).some((name)=>source.includes(name))) return true;
+            //if (Array.from(projectMap.values()).some((name)=>source.includes(name))) return true;
             return false;
-        },/*
-        external: [
-            "externals", "/externals", "./externals",
-            "dist", "/dist", "./dist",
-            "fest", "../"
-        ],*/
+        },
 
         output: {
             compact: true,
