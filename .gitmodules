@@ -31,3 +31,6 @@
 [submodule "modules/projects/core.ts"]
 	path = modules/projects/core.ts
 	url = https://github.com/fest-live/core.ts.git
+[submodule "modules/projects/icon.ts"]
+	path = modules/projects/icon.ts
+	url = https://github.com/fest-live/icon.ts.git

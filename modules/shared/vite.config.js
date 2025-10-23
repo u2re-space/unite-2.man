@@ -39,6 +39,7 @@ export const initiate = (NAME = "generic", tsconfig = {}, __dirname = resolve(".
     const $resolve = { alias: importFromTSConfig(tsconfig, __dirname) }
     const projectMap = new Map([
         ["fest/core", "core.ts"],
+        ["fest/icon", "icon.ts"],
         ["fest/fl-ui", "fl.ui"],
         ["fest/object", "object.ts"],
         ["fest/uniform", "uniform.ts"],
