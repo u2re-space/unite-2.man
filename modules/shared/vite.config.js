@@ -85,8 +85,8 @@ export const initiate = (NAME = "generic", tsconfig = {}, __dirname = resolve(".
             name: NAME,
             dir: './dist',
             exports: "auto",
-            //minifyInternalExports: true,
-            //inlineDynamicImports: true,
+            minifyInternalExports: true,
+            inlineDynamicImports: true,
         }
     };
 
