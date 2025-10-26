@@ -34,3 +34,6 @@
 [submodule "modules/projects/icon.ts"]
 	path = modules/projects/icon.ts
 	url = https://github.com/fest-live/icon.ts.git
+[submodule "apps/CS29"]
+	path = apps/CS29
+	url = https://github.com/u2re-space/CS29
