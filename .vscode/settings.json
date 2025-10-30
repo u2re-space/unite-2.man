@@ -52,5 +52,11 @@
 },
 "cSpell.words": [
   "veela"
-]
+],
+"cursor.composer.shouldAllowCustomModes": true,
+"cursor.composer.usageSummaryDisplay": "always",
+"cursor.diffs.useCharacterLevelDiffs": true,
+"cursor.general.enableShadowWorkspace": true,
+"cursor.semanticSearch.includeCommitsWithFiles": true,
+"cursor.windowSwitcher.sidebarHoverCollapsed": true
 }
