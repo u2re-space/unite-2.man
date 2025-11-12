@@ -1,11 +1,12 @@
-{
-    "customSyntax": "postcss-scss",
-    "extends": ["stylelint-config-standard-scss"],
-    "plugins": [
+/** @type {import('stylelint').Config} */
+export default {
+    extends: ["stylelint-config-standard-scss"],
+    plugins: [
         "stylelint-plugin-logical-css",
         "stylelint-scss"
     ],
-    "rules": {
+    customSyntax: "postcss-scss",
+    rules: {
         "at-rule-no-unknown": null,
         "scss/at-rule-no-unknown": [true, {
             "ignoreAtRules": [
@@ -58,6 +59,9 @@
         "scss/dollar-variable-empty-line-before": null,
         "plugin/use-logical-properties-and-values": [true, {"severity": "warning"}],
         "plugin/use-logical-units": [true, {"severity": "warning"}],
-        "plugin/no-unsupported-browser-features": [true, {"severity": "warning"}]
+        "plugin/no-unsupported-browser-features": [true, {"severity": "warning"}],
+        "max-nesting-depth": 3,
+        "selector-max-compound-selectors": 4,
+        "declaration-block-no-duplicate-properties": true
     }
 }

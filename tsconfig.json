@@ -3,53 +3,35 @@
         "**/*.mjs",
         "**/*.js",
         "**/*.ts",
-        "**/*.d.ts"
-, "modules/projects/lur.e/test/test.tsx"    ],
-    "exclude": ["node_modules/**"],
+        "**/*.d.ts",
+        "**/*.tsx",
+        "**/*.vue"
+    ],
+    "exclude": [
+        "node_modules/**",
+        "externals/**",
+        "frontend/**",
+        "frontend/externals/**"
+    ],
     "compilerOptions": {
-        "skipLibCheck": true,
         "baseUrl": "./",
-        "composite": false,
-        "lib": [
-            "ESNext",
-            "DOM",
-            "DOM.Iterable",
-            "WebWorker"
-        ],
-        "module": "ESNext",
-        "moduleDetection": "force",
-        "moduleResolution": "Bundler",
-        "target": "ESNext",
+        "skipLibCheck": true,
         "jsx": "preserve",
+        "paths": {
+            "/apps/*": ["./frontend/apps/*"],
+            "/externals/*": ["./frontend/externals/*"],
+            "/assets/*": ["./frontend/assets/*"],
+            "/frontend/*": ["./frontend/*"]
+        },
+        "module": "ESNext",
+        "target": "ESNext",
+        "moduleResolution": "bundler",
         "resolveJsonModule": true,
         "allowSyntheticDefaultImports": true,
         "allowArbitraryExtensions": true,
-        "allowImportingTsExtensions": true,
-        "customConditions": [
-            "edge",
-            "experimental",
-            "next",
-            "preview",
-            "worker"
-        ],
-        "types": [
-            "node"
-        ],
         "esModuleInterop": true,
         "allowJs": true,
         "noEmit": true,
-        "sourceMap": true,
-        "removeComments": false,
-        "strict": false,
-        "strictNullChecks": false,
-        "strictFunctionTypes": false,
-        "strictBindCallApply": false,
-        "noImplicitThis": false,
-        "alwaysStrict": false,
-        "noUncheckedIndexedAccess": false,
-        "noUnusedLocals": false,
-        "noUnusedParameters": false,
-        "noFallthroughCasesInSwitch": true,
         "allowUnusedLabels": true,
         "allowUnreachableCode": true,
         "forceConsistentCasingInFileNames": true,
