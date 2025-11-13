@@ -50,7 +50,7 @@
 ### Links
 
 - **Demo:** <https://os.u2re.space/>
-- **Github:** [OS.u2re.space](https://github.com/unite-2-re/OS.u2re.space)
+- **Github:** [OS.u2re.space](https://github.com/fest-live/OS.u2re.space)
 
 ### Contributors
 
@@ -82,13 +82,13 @@
 
 ### Our
 
-- **[Uniform.TS](https://github.com/unite-2-re/uniform.ts)** - ***unused***, web workers library.
-- **[Object.TS](https://github.com/unite-2-re/object.ts)** - our library for reactivity.
-- **[BLU.E](https://github.com/unite-2-re/BLU.E)** - our UI/DOM framework or library.
-- **[DOM.TS](https://github.com/unite-2-re/dom.ts)** - our DOM and layout library or framework.
-- **[UI.sys](https://github.com/unite-2-re/ui.system)** - UI web components system.
-- **[Theme.core](https://github.com/unite-2-re/theme.core)** - dynamic theme system.
-- ***[Others](https://github.com/orgs/unite-2-re/repositories)*** - all available repositories
+- **[Uniform.TS](https://github.com/fest-live/uniform.ts)** - ***unused***, web workers library.
+- **[Object.TS](https://github.com/fest-live/object.ts)** - our library for reactivity.
+- **[BLU.E](https://github.com/fest-live/BLU.E)** - our UI/DOM framework or library.
+- **[DOM.TS](https://github.com/fest-live/dom.ts)** - our DOM and layout library or framework.
+- **[UI.sys](https://github.com/fest-live/ui.system)** - UI web components system.
+- **[Theme.core](https://github.com/fest-live/theme.core)** - dynamic theme system.
+- ***[Others](https://github.com/orgs/fest-live/repositories)*** - all available repositories
 
 </div>
 <div style="font-size: 0.9em; flex-grow: 1; flex-basis: max-content; inline-size: auto !important; min-inline-size: max-content; max-inline-size: 100% !important;">
