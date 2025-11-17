@@ -23,10 +23,13 @@ By default, use key-name as import root.
 
 | Library | Path |
 |---|---|
-| `fest/lure`   | `modules/lur.e`     |
-| `fest/dom`    | `modules/dom.ts`    |
-| `fest/object` | `modules/object.ts` |
-| `fest/fl-ui`  | `modules/fl.ui`     |
+| `fest/lure`   | `modules/projects/lur.e`      |
+| `fest/dom`    | `modules/projects/dom.ts`     |
+| `fest/object` | `modules/projects/object.ts`  |
+| `fest/fl-ui`  | `modules/projects/fl.ui`      |
+| `fest/veela`  | `modules/projects/veela.css`  |
+| `fest/core`   | `modules/projects/core.ts`    |
+| `fest/icon`   | `modules/projects/icon.ts`    |
 
 ---
 

@@ -28,14 +28,20 @@ Write and output ONLY code, without any introduction, intermission or footer or 
 - `externals/` - Dist external and our libraries.
 - `assets/` - Project assets, images, fonts, etc.
 
+### 🚧 Level 0.5 (root core libraries)
+
+- `modules/projects/core.ts` - JS/TS utils and helpers library
+
 ### 🚧 Level 1 (core libraries)
 
 - `modules/projects/dom.ts` - DOM utils and helpers library
 - `modules/projects/object.ts` - Core reactivity library
+- `modules/projects/veela.css` - CSS framework
 
 ### 🧱 Level 2 (derived libraries)
 
-- `modules/projects/lur.e` - reactive DOM framework
+- `modules/projects/lur.e` - Reactive DOM framework
+- `modules/projects/icon.ts` - Icon library (web component)
 
 ### 🏗️ Level 3 (UI libraries)
 
@@ -68,6 +74,8 @@ Write and output ONLY code, without any introduction, intermission or footer or 
 - `fest/lure` - reactive DOM framework
 - `fest/object` - Core reactivity library
 - `fest/fl-ui` - UI system and components library
+- `fest/veela` - CSS framework
+- `fest/icon` - Icon library (web component)
 
 ---
 
@@ -82,7 +90,8 @@ By default, use key-name as import root.
 | `fest/dom`    | `modules/projects/dom.ts`     |
 | `fest/object` | `modules/projects/object.ts`  |
 | `fest/fl-ui`  | `modules/projects/fl.ui`      |
-| `fest/veela`  | `modules/projects/veela.scss` |
+| `fest/veela`  | `modules/projects/veela.css`  |
+| `fest/icon`   | `modules/projects/icon.ts`    |
 
 ---
 
