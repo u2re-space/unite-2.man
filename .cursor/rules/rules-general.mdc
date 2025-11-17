@@ -22,24 +22,24 @@ Write and output ONLY code, without any introduction, intermission or footer or 
 
 - `./` - Project root directory
 - `modules/` - Modules directory
-- `modules/unite-2.man` - Project manifest
+- `modules/projects` - Submodules and our libraries
 - `modules/shared/` - Shared modules, utilities, etc.
 - `runtime/` - Application running backend runtimes
-- `externals/` - External dependencies, built-in libraries, production libraries, etc.
-- `assets/` - Project assets, images, fonts, etc. (planned for future usage)
+- `externals/` - Dist external and our libraries.
+- `assets/` - Project assets, images, fonts, etc.
 
 ### 🚧 Level 1 (core libraries)
 
-- `modules/dom.ts` - DOM utils and helpers library
-- `modules/object.ts` - Core reactivity library
+- `modules/projects/dom.ts` - DOM utils and helpers library
+- `modules/projects/object.ts` - Core reactivity library
 
 ### 🧱 Level 2 (derived libraries)
 
-- `modules/lur.e` - reactive DOM framework
+- `modules/projects/lur.e` - reactive DOM framework
 
 ### 🏗️ Level 3 (UI libraries)
 
-- `modules/fl.ui` - UI system and components library
+- `modules/projects/fl.ui` - UI system and components library
 
 ### 🏬 Level 4 (applications)
 
@@ -63,6 +63,7 @@ Write and output ONLY code, without any introduction, intermission or footer or 
 
 ## Common Imports
 
+- `fest/core` - Core TS/JS utilities and helpers library
 - `fest/dom` - DOM utils and helpers library
 - `fest/lure` - reactive DOM framework
 - `fest/object` - Core reactivity library
@@ -76,10 +77,12 @@ By default, use key-name as import root.
 
 | Library | Path |
 |---|---|
-| `fest/lure`   | `modules/lur.e`     |
-| `fest/dom`    | `modules/dom.ts`    |
-| `fest/object` | `modules/object.ts` |
-| `fest/fl-ui`  | `modules/fl.ui`     |
+| `fest/core`   | `modules/projects/core.ts`    |
+| `fest/lure`   | `modules/projects/lur.e`      |
+| `fest/dom`    | `modules/projects/dom.ts`     |
+| `fest/object` | `modules/projects/object.ts`  |
+| `fest/fl-ui`  | `modules/projects/fl.ui`      |
+| `fest/veela`  | `modules/projects/veela.scss` |
 
 ---
 
