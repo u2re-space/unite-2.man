@@ -1,0 +1,7 @@
+# Deprecated Projects (optimize AI indexing)
+OS.u2re.space
+OS.u2re.space/*
+OS.u2re.space/**/*
+./OS.u2re.space
+./OS.u2re.space/*
+./OS.u2re.space/**/*

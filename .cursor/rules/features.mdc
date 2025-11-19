@@ -1,6 +1,7 @@
 ---
 alwaysApply: false
 ---
+
 # 👀 Project Features 👀
 
 ## 🤔 Trivia
@@ -16,6 +17,16 @@ The primary build system is Vite. Take into account the latest versions of brows
 - <https://github.com/fest-live/object.ts>
 - <https://github.com/fest-live/fl.ui>
 - <https://github.com/u2re-space/unite-2.man>
+
+### Supported Features
+
+Currently, only Chromium-based browsers most suitable.
+
+- <https://chromestatus.com/>
+- <https://developer.chrome.com/>
+- <https://caniuse.com/>
+
+---
 
 ## 📂 Project Directory Mapping
 
@@ -124,14 +135,6 @@ By default, use key-name as import root.
 - Graceful degradation for older browsers
 - Polyfill support where needed
 - Feature detection for advanced CSS
-
-### Supported Features
-
-Currently, only Chromium-based browsers most suitable.
-
-- <https://chromestatus.com/>
-- <https://developer.chrome.com/>
-- <https://caniuse.com/>
 
 ---
 
