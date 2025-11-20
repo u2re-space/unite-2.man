@@ -142,11 +142,6 @@ shared/**/*.ts
 shared/**/*.scss
 
 #
-runtime/
-runtime/*
-runtime
-
-#
 assets/
 assets/*
 assets
