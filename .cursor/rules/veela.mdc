@@ -28,6 +28,16 @@ alwaysApply: false
 
 ---
 
+## Design concepts
+
+**Inspired by:**
+
+- <https://phosphoricons.com/>
+- <https://m3.material.io/>
+- <https://fonts.google.com/icons> (in future use)
+
+---
+
 ## 🎨 Custom CSS Properties
 
 | Oriented-Space | Client-Space | Implementation-Dependent |
