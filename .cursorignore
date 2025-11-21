@@ -145,3 +145,23 @@ shared/**/*.scss
 assets/
 assets/*
 assets
+
+# but include design files
+!./design
+!./design/*
+!./design/*.png
+!./design/*.jpg
+!./design/*.pdf
+!./design/**/*
+!./design/**/*.png
+!./design/**/*.jpg
+!./design/**/*.pdf
+!design
+!design/*
+!design/*.png
+!design/*.jpg
+!design/*.pdf
+!design/**/*
+!design/**/*.png
+!design/**/*.jpg
+!design/**/*.pdf
