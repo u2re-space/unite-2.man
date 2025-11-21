@@ -1,66 +1,147 @@
 {
-  "cssVarHover.watchedFiles": [
-    "apps/OS.u2re.space/src/$vue$/settings/Fields/Appearance.vue"
-  ],
-  "cssVarHover.ignoredFiles": [
-    "apps/OS.u2re.space/src/$blue$/settings/Fields.ts"
-],
-"explorer.confirmPasteNative": false,
-"ipynb.pasteImagesAsAttachments.enabled": false,
-"editor.autoIndent": "full",
-"editor.formatOnSaveMode": "modificationsIfAvailable",
-"editor.acceptSuggestionOnEnter": "smart",
-"compile-hero.disable-compile-files-on-did-save-code": true,
-"files.autoSaveDelay": 1000,
-"markdown.copyFiles.overwriteBehavior": "overwrite",
-"prettier.resolveGlobalModules": true,
-"prettier.withNodeModules": true,
-"javascript.preferences.importModuleSpecifier": "shortest",
-"typescript.preferences.importModuleSpecifier": "shortest",
-"cursor.cpp.enablePartialAccepts": true,
-"editor.acceptSuggestionOnCommitCharacter": false,
-"editor.inlineSuggest.suppressSuggestions": true,
-"editor.inlineSuggest.edits.showCollapsed": false,
-"editor.inlineSuggest.showToolbar": "never",
-"versionlens.suggestions.showPrereleasesOnStartup": true,
-"versionlens.suggestions.showOnStartup": true,
-"editor.suggest.selectionMode": "never",
-"editor.snippetSuggestions": "inline",
-"editor.suggest.snippetsPreventQuickSuggestions": true,
-"editor.suggest.showSnippets": true,
-"editor.suggestOnTriggerCharacters": false,
-"editor.quickSuggestionsDelay": 10,
-"editor.guides.highlightActiveIndentation": "always",
-"editor.occurrencesHighlight": "multiFile",
-"workbench.editor.highlightModifiedTabs": true,
-"markdown.occurrencesHighlight.enabled": true,
-"somesass.scss.highlights.enabled": true,
-"somesass.css.highlights.enabled": true,
-"emmet.showSuggestionsAsSnippets": true,
-"editor.tabCompletion": "on",
-"errorLens.delayMode": "debounce",
-"js/ts.implicitProjectConfig.target": "ESNext",
-"js/ts.implicitProjectConfig.experimentalDecorators": true,
-"eslint.useESLintClass": true,
-"typescript.tsdk": "node_modules/typescript/lib",
-"eslint.validate": ["json", "jsonc"],
-"[json]": {
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
-},
-"[jsonc]": {
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
-},
-"cSpell.words": [
-  "veela"
-],
-"cursor.composer.shouldAllowCustomModes": true,
-"cursor.composer.usageSummaryDisplay": "always",
-"cursor.diffs.useCharacterLevelDiffs": true,
-"cursor.general.enableShadowWorkspace": true,
-"cursor.semanticSearch.includeCommitsWithFiles": true,
-"cursor.windowSwitcher.sidebarHoverCollapsed": true,
-"terminal.integrated.windowsUseConptyDll": true,
-"files.autoSave": "onFocusChange",
-"editor.codeActions.triggerOnFocusChange": true,
-"workbench.experimental.share.enabled": true
+    // CSS Var Hover
+    "cssVarHover.watchedFiles": [
+        "apps/OS.u2re.space/src/$vue$/settings/Fields/Appearance.vue"
+    ],
+    "cssVarHover.ignoredFiles": [
+        "apps/OS.u2re.space/src/$blue$/settings/Fields.ts"
+    ],
+
+    // Explorer & IO
+    "explorer.confirmPasteNative": false,
+    "ipynb.pasteImagesAsAttachments.enabled": false,
+    "files.autoSaveDelay": 1000,
+    "files.autoSave": "onFocusChange",
+    "markdown.copyFiles.overwriteBehavior": "overwrite",
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true
+    },
+    "files.associations": {
+        "*.css": "scss"
+    },
+
+    // Editor General
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false,
+    "editor.wordWrap": "on",
+    "editor.wordWrapColumn": 480,
+    "editor.autoIndent": "full",
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "modificationsIfAvailable",
+    "editor.acceptSuggestionOnEnter": "smart",
+    "editor.acceptSuggestionOnCommitCharacter": false,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit"
+    },
+    "editor.guides.highlightActiveIndentation": "always",
+    "editor.occurrencesHighlight": "multiFile",
+    "editor.tabCompletion": "on",
+    "editor.snippetSuggestions": "inline",
+    "editor.quickSuggestionsDelay": 10,
+    "editor.suggestOnTriggerCharacters": false,
+    "editor.suggest.selectionMode": "never",
+    "editor.suggest.snippetsPreventQuickSuggestions": true,
+    "editor.suggest.showSnippets": true,
+    "editor.inlineSuggest.suppressSuggestions": true,
+    "editor.inlineSuggest.edits.showCollapsed": false,
+    "editor.inlineSuggest.showToolbar": "never",
+    "editor.bracketPairColorization.enabled": true,
+    "editor.linkedEditing": true,
+
+    // Workbench
+    "workbench.editor.highlightModifiedTabs": true,
+    "workbench.experimental.share.enabled": true,
+    "workbench.list.smoothScrolling": true,
+
+    // Prettier Integration
+    "prettier.resolveGlobalModules": true,
+    "prettier.withNodeModules": true,
+    "prettier.requireConfig": true,
+    "prettier.printWidth": 480,
+    "prettier.tabWidth": 4,
+    "prettier.useTabs": false,
+    "prettier.semi": true,
+    "prettier.singleQuote": false,
+    "prettier.trailingComma": "none",
+
+    // ESLint Integration
+    "eslint.useESLintClass": true,
+    "eslint.validate": [
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+        "html",
+        "vue",
+        "json",
+        "jsonc"
+    ],
+
+    // Language Specific
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[css]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[scss]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+
+    // TypeScript / JavaScript Config
+    "javascript.preferences.importModuleSpecifier": "shortest",
+    "typescript.preferences.importModuleSpecifier": "shortest",
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "js/ts.implicitProjectConfig.target": "ESNext",
+    "js/ts.implicitProjectConfig.experimentalDecorators": true,
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "javascript.updateImportsOnFileMove.enabled": "always",
+
+    // Cursor & AI
+    "cursor.cpp.enablePartialAccepts": true,
+    "cursor.composer.shouldAllowCustomModes": true,
+    "cursor.composer.usageSummaryDisplay": "always",
+    "cursor.diffs.useCharacterLevelDiffs": true,
+    "cursor.general.enableShadowWorkspace": true,
+    "cursor.semanticSearch.includeCommitsWithFiles": true,
+    "cursor.windowSwitcher.sidebarHoverCollapsed": true,
+
+    // Extensions
+    "compile-hero.disable-compile-files-on-did-save-code": true,
+    "versionlens.suggestions.showPrereleasesOnStartup": true,
+    "versionlens.suggestions.showOnStartup": true,
+    "markdown.occurrencesHighlight.enabled": true,
+    "somesass.scss.highlights.enabled": true,
+    "somesass.css.highlights.enabled": true,
+    "emmet.showSuggestionsAsSnippets": true,
+    "errorLens.delayMode": "debounce",
+    "terminal.integrated.windowsUseConptyDll": true,
+    "cSpell.words": [
+        "veela"
+    ]
 }
