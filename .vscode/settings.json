@@ -29,14 +29,14 @@
     "editor.tabSize": 4,
     "editor.insertSpaces": true,
     "editor.detectIndentation": false,
-    "editor.wordWrap": "on",
+    "editor.wordWrap": "wordWrapColumn",
     "editor.wordWrapColumn": 480,
     "editor.autoIndent": "full",
     "editor.formatOnSave": true,
     "editor.formatOnSaveMode": "modificationsIfAvailable",
     "editor.acceptSuggestionOnEnter": "smart",
     "editor.acceptSuggestionOnCommitCharacter": false,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "anysphere.cursor-deeplink",
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": "explicit"
     },
@@ -143,5 +143,7 @@
     "terminal.integrated.windowsUseConptyDll": true,
     "cSpell.words": [
         "veela"
-    ]
+    ],
+    "editor.formatOnPaste": true,
+    "editor.formatOnType": true
 }
