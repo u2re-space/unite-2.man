@@ -131,11 +131,6 @@ scripts
 ./assets
 
 #
-./runtime/
-./runtime/*
-./runtime
-
-#
 shared/*.ts
 shared/*.scss
 shared/**/*.ts
