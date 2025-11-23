@@ -111,14 +111,6 @@ legacy
 legacy/
 legacy/*
 
-# don't include outdated scripts
-./scripts/*
-./scripts/
-./scripts
-scripts/*
-scripts/
-scripts
-
 #
 ./shared/*.ts
 ./shared/*.scss
