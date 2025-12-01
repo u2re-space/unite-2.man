@@ -4,6 +4,9 @@
 [submodule "apps/CrossWord"]
 	path = apps/CrossWord
 	url = https://github.com/u2re-space/crossword
+[submodule "apps/CrossHelp"]
+	path = apps/CrossHelp
+	url = https://github.com/u2re-space/crosshelp
 [submodule "apps/markdown.view"]
 	path = apps/markdown.view
 	url = https://github.com/u2re-space/markdown.view
