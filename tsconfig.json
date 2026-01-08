@@ -23,6 +23,8 @@
             "/assets/*": ["./frontend/assets/*"],
             "/frontend/*": ["./frontend/*"]
         },
+        "lib": ["ESNext", "DOM", "WebWorker", "ESNext.Promise"],
+        "types": ["chrome", "chrome-extension"],
         "module": "ESNext",
         "target": "ESNext",
         "moduleResolution": "bundler",
