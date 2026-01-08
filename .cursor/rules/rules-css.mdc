@@ -92,7 +92,19 @@ alwaysApply: false
   - Logical properties and values (`inline-size`, `block-size`, `margin-inline`, `padding-block`, `inset`, etc.) instead of physical ones (`left`, `right`, `top`, `bottom`, `width`, `height`) where appropriate.
   - Relative units (`rem`, `em`, `vh`, `vw`, `svh`, `lvh`, `dvh`, `ch`, `ex`, `lh`, `rlh`) and modern patterns for responsive typography and layout.
 - Prefer using:
-  - `@property` for registering custom properties in animations or complex theming, when support is acceptable; otherwise suggest a robust fallback.
+  - `@property` (typed custom properties) for safer animations and theming, when support is acceptable; otherwise suggest a robust fallback:
+    - Prefer registering only the variables that benefit from typing (animated/interpolated values, frequently-updated theme tokens).
+    - Always specify:
+      - `syntax` (e.g. `<number>`, `<length>`, `<percentage>`, `<color>`, `<angle>`, `'*'` as last resort)
+      - `inherits` (usually `false` for component-scoped tokens; `true` only when inheritance is intentional)
+      - `initial-value` (a safe default to prevent “unregistered → invalid at computed-value time” surprises)
+    - Use for:
+      - smooth animations/transitions of custom properties (avoids discrete/invalid interpolation)
+      - guarded theming tokens that should have predictable computed types
+    - Fallback strategy:
+      - Provide a non-animated baseline (static values) that works without `@property`.
+      - If animation is critical, consider animating a supported native property (`transform`, `opacity`) or use keyframes on supported properties.
+    - Prefer semantic names and consistent prefixing for registered properties (e.g. `--rs-*`), and avoid registering too many globals.
   - Modern selectors and features:
     - `:is()`, `:where()`, `:has()` when they reduce selector bloat and improve maintainability.
     - `:not()` for exclusions; `:empty` for “no content” states; `:focus-visible`, `:focus-within`, `:user-invalid` for accessibility/UX.
