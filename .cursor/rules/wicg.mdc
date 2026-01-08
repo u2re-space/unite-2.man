@@ -63,6 +63,8 @@ edge‑case handling, especially for:
 **Main library:** `fest/veela`
 - <https://github.com/fest-live/veela.css>
 
+**Without:** contrast borders/outlines.
+
 ---
 
 ## References / Specs
