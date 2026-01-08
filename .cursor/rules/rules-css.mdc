@@ -214,6 +214,14 @@ alwaysApply: false
 
 - For theming:
   - Use CSS Custom Properties (`var(--...)`) for colors, typography tokens, radii, shadows, and other reusable visual values.
+  - Prefer declaring `color-scheme` to align built-in UI (form controls, scrollbars) with the intended theme:
+    - Use `color-scheme: light dark;` when both modes are supported and the browser should pick the appropriate rendering.
+    - Use `color-scheme: light;` or `color-scheme: dark;` when the UI is intentionally fixed (rare).
+    - Prefer setting it on `:root` (or the app root container) so it applies consistently.
+  - Prefer `light-dark()` for simple dual-value tokens when supported:
+    - Example mental model: `color: light-dark(var(--text-light), var(--text-dark))`
+    - Use it primarily for colors (and color-like values) to reduce duplicated `@media (prefers-color-scheme)` blocks.
+    - Provide a fallback when support is uncertain: define light defaults, then override via `@media (prefers-color-scheme: dark)` (or via a theme attribute/class).
   - Support dark mode via `@media (prefers-color-scheme: dark)` or via a root class/attribute (e.g. `.theme-dark` or `data-theme="dark"`), following the project’s existing pattern.
   - Consider `prefers-contrast` (e.g. `@media (prefers-contrast: more)`) to provide higher-contrast variants when appropriate.
 - Keep theme tokens **semantic** (e.g. `--color-bg-surface`, `--color-text-muted`) rather than hard-coded color names.
