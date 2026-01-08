@@ -22,25 +22,71 @@ Write or update code in the relevant programming language (or detect it automati
 
 ---
 
-## TypeScript / JavaScript
+## Quality Gates (Required Checks)
 
-- Prefer TypeScript where the project already uses it.
-- Follow the strictness level defined in `tsconfig.json`; do not relax compiler options unless explicitly requested.
-- Use `const` by default, `let` when reassignment is required, and avoid `var`.
-- Prefer explicit types on public APIs (functions, exported values, React/Vue components’ props, etc.).
-- Keep functions small and focused; extract helpers when logic becomes complex or repeatedly reused.
-- Prefer native Web APIs and language features over large utility libraries if functionality overlaps.
-- When adding or updating imports, respect existing path aliases and module structure defined in Vite and `tsconfig.json`.
+- Prefer small, safe diffs:
+    - Avoid breaking or distorting behavior unless explicitly requested.
+    - Preserve public APIs, routing, and module contracts; refactor behind stable boundaries.
+    - If behavior must change, make it intentional, localized, and easy to review.
+- Before making changes:
+    - Confirm the “source of truth” files to edit (avoid duplicating logic in a second place).
+    - Identify the affected entrypoints and contracts (exports, routes, config keys, CSS selectors, DOM structure).
+    - Prefer improving the existing implementation over creating parallel alternatives.
+- After substantive edits, verify the project state using the appropriate script:
+    - Build main app/project: `npm run build`
+    - Build Chrome extension: `npm run build:crx`
+    - Dev/debug (where errors may appear): `npm run dev`
+- If build/dev reveals errors:
+    - Fix root causes (types, imports, missing assets, config drift) rather than patching symptoms.
+    - Prefer reducing complexity over adding new abstractions to work around an issue.
+- Additional code health gates (when applicable):
+    - Ensure editor/IDE diagnostics are clean for touched files (types, imports, unused vars).
+    - Ensure imports are aligned and consistent (paths/aliases), and remove unused/redundant imports where safe.
+    - Avoid leaving dead code, unused exports, unused styles, or orphaned files after refactors.
+    - Prefer deterministic, minimal formatting changes; avoid reformatting unrelated code.
+    - If a change is risky or cross-cutting, add a short `.md` note capturing intent, constraints, and known edge cases.
 
 ---
 
-## Styling (CSS / SCSS)
+## Architecture & Cohesion (Avoid Fragmentation, Avoid Bloat)
 
-- Follow existing naming conventions (BEM, utility-first, CSS Modules, etc.) already present in the project.
-- Prefer modern layout techniques (Flexbox, Grid) and avoid outdated patterns (e.g., table layouts) unless required.
-- Remove unused styles when it is safe to confirm they are not referenced.
-- Keep selectors as small and specific as necessary; avoid over-nesting in SCSS.
-- Use variables, mixins, or design tokens already defined in the project instead of duplicating values.
+- Prefer a unified, consolidated architecture:
+    - Keep concepts cohesive: related logic should live together (by feature/module), not scattered across many tiny files.
+    - Avoid one-off “drive-by” utilities; extract only when reused or when it clarifies a real boundary.
+- Split code by sub-modules when files become too bloated:
+    - Split by domain concept/feature, not by vague buckets like `utils1`, `helpers2`, `misc`.
+    - Keep boundaries explicit (clear public exports, minimal surface area, good names).
+    - Avoid circular dependencies; move shared primitives downward in the hierarchy when needed.
+- DRY without over-abstracting:
+    - Remove duplicates when it improves clarity and maintainability.
+    - Avoid premature generalization that adds indirection without real reuse.
+- Prefer structured mappings over repetitive conditionals when appropriate:
+    - Use `Map` / object maps / `switch` when it reduces duplication and improves readability.
+
+---
+
+## Formatting & Imports
+
+- Indentation:
+    - Prefer **4 spaces** (spaces only) unless a specific file/subproject already enforces a different style.
+    - Do not introduce mixed indentation; align surrounding file style when editing.
+- Imports and paths:
+    - Always try to fix/align import paths (TS/JS, CSS/SCSS) to match aliases and project conventions.
+    - Remove unused/redundant imports when safe; avoid leaving dead imports after refactors.
+    - Keep imports stable and deterministic; avoid unnecessary churn in ordering.
+
+---
+
+## Documentation & Context Logging (Resume-Friendly)
+
+- When the user provides ideas/proposals, or a change introduces a new concept:
+    - Prefer adding/updating a `.md` document near the feature/module (or in an appropriate docs location) that captures:
+        - Intent (“why”), constraints, key decisions
+        - Public API / usage examples
+        - Known tradeoffs and follow-ups
+- Keep a lightweight context log for ongoing work:
+    - Summarize key decisions/constraints so work can be resumed without re-discovery.
+    - Prefer short, structured notes over long narratives.
 
 ---
 
@@ -52,27 +98,15 @@ Write or update code in the relevant programming language (or detect it automati
 
 ---
 
-## References (for internal guidance only)
+## Browser & Runtime Support
 
-- Vite:
-  - <https://vite.dev/guide/>
-  - <https://vite.dev/config/>
-- Platform & standards:
-  - <https://developer.chrome.com/>
-  - <https://developer.mozilla.org/>
-  - <https://www.ecma-international.org/>
-- Styling:
-  - <https://sass-lang.com/documentation/>
-  - <https://css-tricks.com/>
-  - <https://phosphoricons.com/>
-  - <https://m3.material.io/>
-  - <https://fonts.google.com/icons> (in future use)
-  - <https://github.com/fest-live/icon.ts> (`fest/icon`)
+When using newer APIs or syntax, verify compatibility with the project’s target
+environments.
 
----
-
-## Browser Support
-
-- Check support when using new or experimental platform features:
-  - <https://chromestatus.com/>
+- General feature support:
   - <https://caniuse.com/>
+  - <https://chromestatus.com/>
+
+- Cross‑check:
+  - Project `browserslist` config (if present).
+  - Build target options in bundler / TS config.

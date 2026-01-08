@@ -5,6 +5,16 @@ alwaysApply: false
 
 # Styling / CSS / SCSS Guidelines for Cursor
 
+## Styling (CSS / SCSS)
+
+- Follow existing naming conventions (BEM, utility-first, CSS Modules, etc.) already present in the project.
+- Prefer modern layout techniques (Flexbox, Grid) and avoid outdated patterns (e.g., table layouts) unless required.
+- Remove unused styles when it is safe to confirm they are not referenced.
+- Keep selectors as small and specific as necessary; avoid over-nesting in SCSS.
+- Use variables, mixins, or design tokens already defined in the project instead of duplicating values.
+
+---
+
 ## General Behavior
 
 - Infer styling from **actual code context** (HTML/JSX structure, components, framework, design system) and propose **realistic, context-aware** styles, not generic examples.
@@ -14,6 +24,64 @@ alwaysApply: false
 - Prefer **modern CSS** where it is supported, but:
   - If a feature is very new or has limited support, provide **fallbacks** or safer alternatives.
   - Clearly label experimental/low-support features and, when relevant, reference specs or support info (MDN, caniuse, chromestatus).
+
+---
+
+## Quality Gates (CSS / SCSS)
+
+- After substantive changes, verify project health using:
+  - Build main app/project: `npm run build`
+  - Build Chrome extension: `npm run build:crx`
+  - Dev/debug (where UI/layout issues may appear): `npm run dev`
+- Prefer safe, reviewable diffs:
+  - Avoid “style distortion” (unexpected layout shifts, new overflow, broken alignment) unless explicitly intended.
+  - Keep selectors and rules localized to the component/module where possible; avoid new global leakage.
+  - If a change impacts many screens, add a short note (comment or `.md`) describing intent and risk areas.
+
+---
+
+## Modules, Imports & File Structure (Avoid Fragmentation, Avoid Bloat)
+
+- Prefer cohesive, feature-oriented style modules:
+  - Keep styles for a component/feature together rather than scattering across many tiny files.
+  - Split when a file becomes too bloated, but split by sub-module/domain concept (not vague `misc/*` sprawl).
+- Always try to fix/align imports (paths) of CSS/SCSS modules:
+  - Match existing aliasing and folder conventions.
+  - Remove unused imports when safe; avoid leaving dead modules after refactors.
+- Indentation:
+  - Prefer **4 spaces** (spaces only) unless an existing file/subproject enforces a different style.
+
+---
+
+## SCSS Module System (`@use` / `@forward`)
+
+- Prefer the modern SCSS module system:
+  - Use `@use` for importing modules; avoid `@import` in new/edited code.
+  - Use `@forward` to define public style APIs for a module (tokens, mixins, functions).
+- Avoid name pollution:
+  - Prefer explicit namespaces (e.g. `@use "tokens" as t;`) unless the codebase already uses `as *`.
+  - Keep module public surfaces small and semantically named.
+- Use mixins/functions to prevent bloat:
+  - Use `@mixin` (with parameters) for repeated patterns (layout primitives, focus rings, states).
+  - Use `@function` only when it genuinely simplifies computed values (sizes/colors) and improves readability.
+
+---
+
+## Cascade Layers (`@layer`) (Preferred / Default)
+
+- Prefer using `@layer` consistently in CSS:
+  - Always use `@layer` at the top level of a module where it implements style rules.
+  - Keep a predictable layer strategy (tokens/base/components/utilities/overrides) if the project has one.
+  - Avoid fighting specificity; use layers + low-specificity selectors as the default approach.
+
+---
+
+## Container Queries (`@container`) vs Media Queries (`@media`)
+
+- Prefer `@container` queries over `@media` when component layout should adapt to its container.
+- Use `@media` for viewport-, input-, or user-preference-driven concerns:
+  - `prefers-reduced-motion`, `prefers-color-scheme`, `prefers-contrast`, pointer/hover capabilities, etc.
+- When using `@container`, ensure a container is established where needed (`container-type`, `container-name`) and provide a robust baseline layout first.
 
 ---
 
@@ -136,54 +204,3 @@ alwaysApply: false
   - `vite.config.*` (or other bundler configs): follow existing aliases, CSS/SCSS options, global style imports, PostCSS plugins, etc.
 - When external styling systems are in use:
   - E.g. PostCSS plugins, CSS-in-JS, design systems, or UI libraries — follow their conventions and constraints (naming, tokens, layers, etc.) instead of inventing conflicting patterns.
-
----
-
-## Design concepts
-
-**Inspired by:**
-- <https://phosphoricons.com/>
-- <https://m3.material.io/>
-- <https://fonts.google.com/icons> (in future use)
-
-**Main library:** `fest/veela`
-- <https://github.com/fest-live/veela.css>
-
----
-
-## References / Specs
-
-### CSS General
-
-- <https://drafts.csswg.org/>
-- <https://www.w3.org/TR/css/>
-- <https://github.com/w3c/csswg-drafts>
-
-### CSS Custom Properties (Variables)
-
-- <https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties>
-- <https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_variables>
-
-### Selected Draft Specifications
-
-- <https://drafts.csswg.org/web-animations/>
-- <https://drafts.csswg.org/css-mixins/>
-- <https://drafts.csswg.org/css-values-5/>
-- <https://drafts.csswg.org/css-color-5/>
-- <https://drafts.csswg.org/css-color-6/>
-- <https://drafts.css-houdini.org/css-properties-values-api/>
-- <https://drafts.csswg.org/css-2025/>
-- <https://www.w3.org/TR/css-2025/>
-
-### SCSS & General CSS Resources
-
-- <https://sass-lang.com/documentation/>
-- <https://css-tricks.com/>
-- <https://phosphoricons.com/>
-- <https://m3.material.io/>
-- <https://fonts.google.com/icons> (in future use)
-
-### Browser Support & Status
-
-- <https://chromestatus.com/>
-- <https://caniuse.com/>

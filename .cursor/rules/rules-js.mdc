@@ -10,6 +10,55 @@ existing codebase.
 
 ---
 
+## TypeScript / JavaScript
+
+- Prefer TypeScript where the project already uses it.
+- Follow the strictness level defined in `tsconfig.json`; do not relax compiler options unless explicitly requested.
+- Use `const` by default, `let` when reassignment is required, and avoid `var`.
+- Prefer explicit types on public APIs (functions, exported values, React/Vue components’ props, etc.).
+- Keep functions small and focused; extract helpers when logic becomes complex or repeatedly reused.
+- Prefer native Web APIs and language features over large utility libraries if functionality overlaps.
+- When adding or updating imports, respect existing path aliases and module structure defined in Vite and `tsconfig.json`.
+
+---
+
+## Quality Gates (TS/JS)
+
+- After substantive edits, verify the project state:
+    - Build main app/project: `npm run build`
+    - Build Chrome extension: `npm run build:crx`
+    - Dev/debug (where errors may appear): `npm run dev`
+- Prefer fixing root causes:
+    - Resolve type errors by improving types and narrowing, not by weakening compiler settings.
+    - Resolve runtime issues by simplifying logic and aligning module boundaries, not by adding fragile workarounds.
+
+---
+
+## Architecture & Cohesion (Avoid Fragmentation, Avoid Distortion)
+
+- Keep code cohesive by feature/module:
+    - Prefer a small number of well-named modules over many tiny files that scatter one concept.
+    - Split when a file becomes too bloated, but split by sub-module/domain concept (not vague `utils/*` sprawl).
+- Protect boundaries:
+    - Preserve public APIs and module contracts; refactor behind stable exports.
+    - Avoid circular dependencies; move shared primitives down the hierarchy when needed.
+- DRY with discipline:
+    - Remove duplicates when it improves clarity and maintainability.
+    - Avoid premature abstraction that adds indirection without real reuse.
+- Prefer structured mapping where it reduces repetition:
+    - Use object/`Map` tables or `switch` when it improves readability and reduces duplicated branching.
+
+---
+
+## Imports (Hygiene & Alignment)
+
+- Always try to fix/align imports to match project aliases and conventions.
+- Trim unused/redundant imports after refactors.
+- Keep side-effect imports only when required.
+    - Exception: do not remove required web-component registration/definition side-effects (e.g. `fest/icon` or similar define modules) unless you verify they are unused and safe to remove.
+
+---
+
 ## Before You Start Editing
 
 1. **Inspect the file context**
@@ -80,54 +129,6 @@ existing codebase.
    - Add comments when behavior is non‑obvious or constrained by specs.
    - Prefer **why** over **what** in comments.
    - Add/extend JSDoc or TSDoc for exported functions and types.
-
----
-
-## Web Platform & Language Specifications
-
-Use the official specs and proposals for *behavioral correctness* and
-edge‑case handling, especially for:
-
-- DOM, Events, HTML parsing, Canvas
-- JavaScript language semantics
-- TypeScript type system
-
-**Recommended references:**
-
-- Web platform & browser:
-  - <https://developer.chrome.com/>
-  - <https://html.spec.whatwg.org/>
-  - <https://drafts.csswg.org/web-animations/>
-  - <https://github.com/WICG/html-in-canvas>
-
-- JavaScript / ECMAScript:
-  - <https://github.com/tc39/>
-  - <https://github.com/tc39/ecma262>
-  - <https://tc39.es/ecma262/>
-
-- TypeScript:
-  - <https://www.typescriptlang.org/docs/>
-
-- Design Misc:
-  - <https://phosphoricons.com/>
-  - <https://m3.material.io/>
-  - <https://fonts.google.com/icons> (in future use)
-  - <https://github.com/fest-live/icon.ts> (`fest/icon`)
-
----
-
-## Browser & Runtime Support
-
-When using newer APIs or syntax, verify compatibility with the project’s target
-environments.
-
-- General feature support:
-  - <https://caniuse.com/>
-  - <https://chromestatus.com/>
-
-- Cross‑check:
-  - Project `browserslist` config (if present).
-  - Build target options in bundler / TS config.
 
 ---
 
