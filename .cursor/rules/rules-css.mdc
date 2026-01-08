@@ -93,7 +93,19 @@ alwaysApply: false
   - Relative units (`rem`, `em`, `vh`, `vw`, `svh`, `lvh`, `dvh`, `ch`, `ex`, `lh`, `rlh`) and modern patterns for responsive typography and layout.
 - Prefer using:
   - `@property` for registering custom properties in animations or complex theming, when support is acceptable; otherwise suggest a robust fallback.
-  - Modern selectors and features: `:is()`, `:where()`, `:has()`, `:focus-visible`, `:focus-within`, `:user-invalid`, and media features like `prefers-reduced-motion`, `prefers-color-scheme`, `prefers-contrast`, etc.
+  - Modern selectors and features:
+    - `:is()`, `:where()`, `:has()` when they reduce selector bloat and improve maintainability.
+    - `:not()` for exclusions; `:empty` for “no content” states; `:focus-visible`, `:focus-within`, `:user-invalid` for accessibility/UX.
+    - Keep selector specificity low (prefer `:where()` for zero-specificity scoping when appropriate).
+  - Advanced visual techniques (use when they materially improve UX and keep fallbacks):
+    - `clip-path` for shape masking/cropping (prefer simple shapes for performance).
+    - `mask-image` / `mask` / `-webkit-mask` for image masking (provide fallback when unsupported).
+    - `background-clip: text` (and `-webkit-background-clip: text` + `color: transparent`) for text gradients, with a plain-color fallback.
+  - Newer platform features (label support status + provide fallback/avoid if too experimental):
+    - `::picker-icon` for customizing select dropdown icons (Chromium-specific / limited support—fallback to background images / custom select UI).
+    - `corner-shape` (very new / experimental—fallback to `border-radius` and avoid relying on it for core layout).
+    - `font-variant-emoji` (newer typography control—fallback to default font rendering and avoid requiring it for correctness).
+  - Media features like `prefers-reduced-motion`, `prefers-color-scheme`, `prefers-contrast`, pointer/hover capabilities, etc.
 - SCSS usage:
   - Feel free to wrap CSS in SCSS for simplification and clarity (variables, mixins, functions, nesting, `@use`, `@forward`, `@mixin`, `@include`, etc.).
   - Use nesting where it improves readability, but avoid overly deep chains (generally no more than 3 levels without a strong reason).
