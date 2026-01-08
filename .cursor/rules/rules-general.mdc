@@ -39,6 +39,20 @@ Write or update code in the relevant programming language (or detect it automati
 - If build/dev reveals errors:
     - Fix root causes (types, imports, missing assets, config drift) rather than patching symptoms.
     - Prefer reducing complexity over adding new abstractions to work around an issue.
+- If the user provides error logs (console/devtools/build output):
+    - Treat them as actionable requirements and prioritize resolving them end-to-end.
+    - Use the log to locate the true source:
+        - Jump to referenced file:line:col and inspect surrounding code and recent changes.
+        - Identify whether it is a build-time, runtime, or UI/behavioral issue, and reproduce locally when possible.
+        - Fix the cause (invalid state, bad import, missing guard, incorrect env/config) instead of silencing symptoms.
+    - Add the smallest robust prevention:
+        - Add a guard/assertion with a helpful error message when invariants can be violated.
+        - Prefer making invalid states unrepresentable (types, narrowing, early returns).
+        - Avoid “catch and ignore” patterns unless explicitly desired; surface failures intentionally.
+    - After fixing one instance, do a preventive sweep for similar issues:
+        - Search for the same error string, stack trace function names, API usage, or code pattern across the repo.
+        - Fix other matches when they are clearly the same root cause; otherwise add a TODO note near the risky site.
+        - Prefer centralizing the fix into a shared helper if the same mistake repeats in multiple places.
 - Additional code health gates (when applicable):
     - Ensure editor/IDE diagnostics are clean for touched files (types, imports, unused vars).
     - Ensure imports are aligned and consistent (paths/aliases), and remove unused/redundant imports where safe.

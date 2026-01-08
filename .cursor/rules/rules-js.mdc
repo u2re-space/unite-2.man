@@ -31,6 +31,14 @@ existing codebase.
 - Prefer fixing root causes:
     - Resolve type errors by improving types and narrowing, not by weakening compiler settings.
     - Resolve runtime issues by simplifying logic and aligning module boundaries, not by adding fragile workarounds.
+ - When the user includes runtime/devtools logs (stack traces, console errors, network errors):
+    - Locate the failure site (file:line:col) and fix the underlying cause (nullish access, race, stale state, wrong import, wrong DOM assumption).
+    - Do not “fix” by swallowing errors (blanket try/catch, empty `.catch`, ignoring rejected promises) unless explicitly requested.
+    - After fixing one instance, proactively search for the same pattern across the repo:
+        - Same API usage (e.g. unsafe `as` casts, unchecked `querySelector`, unchecked JSON parse, missing await).
+        - Same error message/function name.
+        - Same boundary violation (especially imports that break the project’s module hierarchy rules).
+    - Apply the same fix where appropriate, or introduce a shared helper/guard to prevent recurrence.
 
 ---
 
