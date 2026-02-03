@@ -3,6 +3,9 @@ globs: *.scss,*.css
 alwaysApply: false
 ---
 
+> NOTE: This file mirrors the repo root rules in `.cursor/rules/rules-css.mdc`.
+> Prefer editing the root copy and then syncing here if needed.
+
 # Styling / CSS / SCSS Guidelines for Cursor
 
 ## Styling (CSS / SCSS)

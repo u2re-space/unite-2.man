@@ -2,6 +2,10 @@
 
 ⚠️ May have third-party assets with their licenses. ⚠️
 
+## Documentation
+
+- CSS/SCSS refactor docs: `docs/css-scss/README.md`
+
 ## What present?
 
 - Some missing assets

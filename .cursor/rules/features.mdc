@@ -2,6 +2,9 @@
 alwaysApply: false
 ---
 
+> NOTE: This file mirrors the repo root rules in `.cursor/rules/features.mdc`.
+> Prefer editing the root copy and then syncing here if needed.
+
 # 👀 Project Features 👀
 
 ## 🤔 Trivia

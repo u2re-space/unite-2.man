@@ -3,6 +3,9 @@ globs: *.ts,*.tsx,*.mjs,*.js
 alwaysApply: false
 ---
 
+> NOTE: This file mirrors the repo root rules in `.cursor/rules/rules-js.mdc`.
+> Prefer editing the root copy and then syncing here if needed.
+
 # JS/TS Coding & Project Navigation Guidelines
 
 Use these as *recommendations*, not strict rules. Prefer consistency with the

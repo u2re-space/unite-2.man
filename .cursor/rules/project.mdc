@@ -2,6 +2,9 @@
 alwaysApply: true
 ---
 
+> NOTE: This file mirrors the repo root rules in `.cursor/rules/project.mdc`.
+> Prefer editing the root copy and then syncing here if needed.
+
 # Our projects (for following)
 
 - <https://github.com/u2re-space/crossword>

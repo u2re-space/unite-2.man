@@ -3,6 +3,9 @@ globs: *.ts,*.tsx,*.mjs,*.js,*.scss,*.css
 alwaysApply: false
 ---
 
+> NOTE: This file mirrors the repo root rules in `.cursor/rules/wicg.mdc`.
+> Prefer editing the root copy and then syncing here if needed.
+
 # WICG Coding Recommendations
 
 Use these as *recommendations*, not strict rules. Prefer consistency with the

@@ -3,6 +3,9 @@ globs: *.ts,*.tsx,*.mjs,*.js,*.scss,*.css
 alwaysApply: false
 ---
 
+> NOTE: This file mirrors the repo root rules in `.cursor/rules/rules-general.mdc`.
+> Prefer editing the root copy and then syncing here if needed.
+
 # General Coding Recommendations
 
 Write or update code in the relevant programming language (or detect it automatically) according to the current task. Comments are allowed, but preferably in English.
