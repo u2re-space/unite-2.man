@@ -4,7 +4,7 @@
         {
             "type": "msedge",
             "request": "attach",
-            "name": "Attach to Edge",
+            "name": "Attach to Edge (UB)",
             "port": 9222,
             "webRoot": "${workspaceFolder}"
         }
