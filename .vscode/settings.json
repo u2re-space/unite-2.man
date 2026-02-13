@@ -36,7 +36,7 @@
     "editor.formatOnSaveMode": "modificationsIfAvailable",
     "editor.acceptSuggestionOnEnter": "smart",
     "editor.acceptSuggestionOnCommitCharacter": false,
-    "editor.defaultFormatter": "anysphere.cursor-deeplink",
+    "editor.defaultFormatter": "vscode.markdown-language-features",
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": "explicit"
     },
@@ -110,7 +110,7 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[jsonc]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.defaultFormatter": "vscode.json-language-features"
     },
 
     // TypeScript / JavaScript Config
@@ -145,5 +145,11 @@
         "veela"
     ],
     "editor.formatOnPaste": false,
-    "editor.formatOnType": true
+    "editor.formatOnType": true,
+    "javascript.preferences.importModuleSpecifierEnding": "minimal",
+    "javascript.updateImportsOnPaste.enabled": true,
+    "typescript.preferences.importModuleSpecifierEnding": "minimal",
+    "typescript.preferences.includePackageJsonAutoImports": "on",
+    "typescript.updateImportsOnPaste.enabled": true,
+    "notebook.defaultFormatter": "vscode.markdown-language-features"
 }
