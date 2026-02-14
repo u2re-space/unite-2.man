@@ -1,5 +1,4 @@
 ---
-globs: *.ts,*.mjs,*.js
 alwaysApply: false
 ---
 
@@ -95,6 +94,14 @@ document.body.append(el as Node);
 - `$observeInput(element, ref?, prop = "value")`: Sync input property to ref.
 - `$observeAttribute(el, ref?, prop)`: Sync attribute to ref.
 
+### Data asset normalization (Base64Data)
+
+Use the shared conversion path from `extension/core/Base64Data` when dealing with file-like content:
+
+- `normalizeDataAsset(input, options)` for `File | Blob | base64 | data URL | URL | URI`.
+- `parseDataUrl(input)` and `isBase64Like(input)` for detection/parsing.
+- Prefer hash-based naming and compact metadata over ad-hoc per-module conversions.
+
 ### Refs
 
 Create reactive references, often linked to DOM state:
@@ -155,6 +162,7 @@ rxItems.push("D"); // DOM updates
 - Tagged template → interpolates values into content/attributes/events/props.
 
 Attribute/prop/event/ref prefixes inside tagged templates:
+
 - `attr:*` → HTML attribute
 - `prop:*` → DOM property
 - `on:*` or `@*` → event listener
@@ -213,6 +221,7 @@ bindDraggable(target, () => console.log("drag end"));
 ### Handling refs and DOM elements
 
 **Flexible handling of refs and DOM elements:**
+
 - Referenced content is also a DOM element (`Text` node)
 - HTML DOM elements also can be placed as content of other DOM elements
 - `ref(...)` are reactive and will be updated when the referenced content changes
@@ -277,7 +286,7 @@ Feel free to check [issues page](https://github.com/fest-live/lur.e/issues).
 
 ---
 
-## About naming conflicts...
+## About naming conflicts
 
 - Originally, project was named as **BLU.E**.
   - However, I won't have 'B' as first letter.

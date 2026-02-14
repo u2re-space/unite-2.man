@@ -70,7 +70,8 @@ When you find 2+ implementations of the same concept:
    - extract shared helpers only when there’s real reuse (≥2–3 call sites or repeated patterns)
    - sweep the repo for the same pattern and apply the same fix where appropriate
 
-**Hard constraints**
+**Hard constraints:**
+
 - No new dependencies.
 - Avoid changing call sites unless necessary; if necessary, keep it mechanical and easy to migrate.
 
@@ -141,6 +142,7 @@ When you find 2+ implementations of the same concept:
   - Dev/debug (where errors may appear): `npm run dev`
 
 When logs/errors are provided:
+
 - Locate the failure site (file:line:col) and fix the underlying cause.
 - After fixing one instance, proactively search for the same pattern across the repo:
   - unsafe casts, unchecked DOM access, unchecked parses, missing `await`, brittle assumptions

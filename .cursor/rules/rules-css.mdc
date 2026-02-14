@@ -147,6 +147,7 @@ alwaysApply: false
 ## Grouping and decompose
 
 **I propose to decompose by mixin/group types:**
+
 - meta-level (`@mixin`'s, `@keyframes`, `@property`'ies, `@function`'s)
 - properties (`--var-name`'s, `var(--var-name)`'s)
 - box/layout (such as padding, margin, border, display, grid, flex, etc.)
@@ -160,12 +161,14 @@ alwaysApply: false
 - specifics (such as specific for components, pages, etc.)
 
 **And text render group types:**
+
 - wrap-able
 - semi-wrap-able
 - not-wrap-able
 - heading-specific
 
 **And colorization group types:**
+
 - solid (surface, contrast)
 - blurred (glossy, backdrop)
 - tinted (transparent, overlay)

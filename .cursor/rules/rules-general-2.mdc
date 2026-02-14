@@ -131,6 +131,7 @@ Write or update code in the relevant programming language (or detect it automati
 When multiple models/agents/LLMs are available (or when asked to “parallelize” work), use a structured collaboration protocol.
 
 ### Roles (suggested)
+
 - **Coordinator (primary agent):**
   - owns the final plan, integration, and conflict resolution
   - keeps the canonical decisions and avoids drift
@@ -146,6 +147,7 @@ When multiple models/agents/LLMs are available (or when asked to “parallelize�
 (One model can play multiple roles; keep outputs structured.)
 
 ### Coordination protocol (required)
+
 1. **Task decomposition**
    - Split work into independent slices (e.g., “inventory duplicates”, “propose canonical API”, “apply refactor”, “update imports”, “verify build”).
 2. **Shared contract**
@@ -170,6 +172,7 @@ When multiple models/agents/LLMs are available (or when asked to “parallelize�
    - If issues appear, assign a focused fix pass and do a preventive sweep for recurrence.
 
 ### Communication format between agents
+
 - Prefer short, structured handoffs:
   - `Findings:` (paths + summary)
   - `Proposed canonical contract:` (exports + semantics)

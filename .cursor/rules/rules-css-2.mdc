@@ -46,6 +46,7 @@ alwaysApply: false
   5. Use `%placeholders` + `@extend` only when it won’t cause selector bloat or ordering surprises.
 
 **Hard constraints:**
+
 - Do NOT change HTML markup/class names/DOM structure.
 - Avoid `!important`.
 - Avoid increasing selector specificity; prefer layers + low-specificity selectors.
@@ -128,6 +129,7 @@ When touching a file, prefer grouping in this order (keep changes minimal and lo
 9. Overrides / legacy patches
 
 Within a selector/rule block, group declarations roughly by:
+
 - properties/tokens → box/layout → rendering → decorations → interaction → colorization → typography → container/media → animations → specifics
 
 (Use this as a consistent mental model, not a rigid formatter.)
@@ -146,6 +148,7 @@ Within a selector/rule block, group declarations roughly by:
   - Keep color tokens semantic (`--color-bg-surface`, `--color-text-muted`), not raw (`--blue-500`), unless the project already uses a palette approach.
 
 ### `@property` (typed custom properties)
+
 - Use when it improves animations/theming safety and support is acceptable.
 - Register only variables that benefit from typing (animated/interpolated or high-value theme tokens).
 - Always provide:

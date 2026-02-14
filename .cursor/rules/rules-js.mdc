@@ -28,36 +28,36 @@ existing codebase.
 ## Quality Gates (TS/JS)
 
 - After substantive edits, verify the project state:
-    - Build main app/project: `npm run build`
-    - Build Chrome extension: `npm run build:crx`
-    - Dev/debug (where errors may appear): `npm run dev`
+  - Build main app/project: `npm run build`
+  - Build Chrome extension: `npm run build:crx`
+  - Dev/debug (where errors may appear): `npm run dev`
 - Prefer fixing root causes:
-    - Resolve type errors by improving types and narrowing, not by weakening compiler settings.
-    - Resolve runtime issues by simplifying logic and aligning module boundaries, not by adding fragile workarounds.
- - When the user includes runtime/devtools logs (stack traces, console errors, network errors):
-    - Locate the failure site (file:line:col) and fix the underlying cause (nullish access, race, stale state, wrong import, wrong DOM assumption).
-    - Do not “fix” by swallowing errors (blanket try/catch, empty `.catch`, ignoring rejected promises) unless explicitly requested.
-    - After fixing one instance, proactively search for the same pattern across the repo:
-        - Same API usage (e.g. unsafe `as` casts, unchecked `querySelector`, unchecked JSON parse, missing await).
-        - Same error message/function name.
-        - Same boundary violation (especially imports that break the project’s module hierarchy rules).
-    - Apply the same fix where appropriate, or introduce a shared helper/guard to prevent recurrence.
+  - Resolve type errors by improving types and narrowing, not by weakening compiler settings.
+  - Resolve runtime issues by simplifying logic and aligning module boundaries, not by adding fragile workarounds.
+- When the user includes runtime/devtools logs (stack traces, console errors, network errors):
+  - Locate the failure site (file:line:col) and fix the underlying cause (nullish access, race, stale state, wrong import, wrong DOM assumption).
+  - Do not “fix” by swallowing errors (blanket try/catch, empty `.catch`, ignoring rejected promises) unless explicitly requested.
+  - After fixing one instance, proactively search for the same pattern across the repo:
+    - Same API usage (e.g. unsafe `as` casts, unchecked `querySelector`, unchecked JSON parse, missing await).
+    - Same error message/function name.
+    - Same boundary violation (especially imports that break the project’s module hierarchy rules).
+  - Apply the same fix where appropriate, or introduce a shared helper/guard to prevent recurrence.
 
 ---
 
 ## Architecture & Cohesion (Avoid Fragmentation, Avoid Distortion)
 
 - Keep code cohesive by feature/module:
-    - Prefer a small number of well-named modules over many tiny files that scatter one concept.
-    - Split when a file becomes too bloated, but split by sub-module/domain concept (not vague `utils/*` sprawl).
+  - Prefer a small number of well-named modules over many tiny files that scatter one concept.
+  - Split when a file becomes too bloated, but split by sub-module/domain concept (not vague `utils/*` sprawl).
 - Protect boundaries:
-    - Preserve public APIs and module contracts; refactor behind stable exports.
-    - Avoid circular dependencies; move shared primitives down the hierarchy when needed.
+  - Preserve public APIs and module contracts; refactor behind stable exports.
+  - Avoid circular dependencies; move shared primitives down the hierarchy when needed.
 - DRY with discipline:
-    - Remove duplicates when it improves clarity and maintainability.
-    - Avoid premature abstraction that adds indirection without real reuse.
+  - Remove duplicates when it improves clarity and maintainability.
+  - Avoid premature abstraction that adds indirection without real reuse.
 - Prefer structured mapping where it reduces repetition:
-    - Use object/`Map` tables or `switch` when it improves readability and reduces duplicated branching.
+  - Use object/`Map` tables or `switch` when it improves readability and reduces duplicated branching.
 
 ---
 
@@ -66,7 +66,7 @@ existing codebase.
 - Always try to fix/align imports to match project aliases and conventions.
 - Trim unused/redundant imports after refactors.
 - Keep side-effect imports only when required.
-    - Exception: do not remove required web-component registration/definition side-effects (e.g. `fest/icon` or similar define modules) unless you verify they are unused and safe to remove.
+  - Exception: do not remove required web-component registration/definition side-effects (e.g. `fest/icon` or similar define modules) unless you verify they are unused and safe to remove.
 
 ---
 

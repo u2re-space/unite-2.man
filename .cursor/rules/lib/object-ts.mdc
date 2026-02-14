@@ -1,5 +1,4 @@
 ---
-globs: *.ts,*.mjs,*.js
 alwaysApply: false
 ---
 
@@ -202,7 +201,8 @@ JSON.stringify(safe(complex));
 - Subscriptions fire only on actual changes.
 - `observe` adapts `Set`/`Map` to emit iteration changes.
 - To stop listening, keep the disposer returned by `subscribe`/`observe` and call it.
-***
+
+---
 
 ## Modules
 

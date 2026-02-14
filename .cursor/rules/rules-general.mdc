@@ -28,82 +28,82 @@ Write or update code in the relevant programming language (or detect it automati
 ## Quality Gates (Required Checks)
 
 - Prefer small, safe diffs:
-    - Avoid breaking or distorting behavior unless explicitly requested.
-    - Preserve public APIs, routing, and module contracts; refactor behind stable boundaries.
-    - If behavior must change, make it intentional, localized, and easy to review.
+  - Avoid breaking or distorting behavior unless explicitly requested.
+  - Preserve public APIs, routing, and module contracts; refactor behind stable boundaries.
+  - If behavior must change, make it intentional, localized, and easy to review.
 - Before making changes:
-    - Confirm the “source of truth” files to edit (avoid duplicating logic in a second place).
-    - Identify the affected entrypoints and contracts (exports, routes, config keys, CSS selectors, DOM structure).
-    - Prefer improving the existing implementation over creating parallel alternatives.
+  - Confirm the “source of truth” files to edit (avoid duplicating logic in a second place).
+  - Identify the affected entrypoints and contracts (exports, routes, config keys, CSS selectors, DOM structure).
+  - Prefer improving the existing implementation over creating parallel alternatives.
 - After substantive edits, verify the project state using the appropriate script:
-    - Build main app/project: `npm run build`
-    - Build Chrome extension: `npm run build:crx`
-    - Dev/debug (where errors may appear): `npm run dev`
+  - Build main app/project: `npm run build`
+  - Build Chrome extension: `npm run build:crx`
+  - Dev/debug (where errors may appear): `npm run dev`
 - If build/dev reveals errors:
-    - Fix root causes (types, imports, missing assets, config drift) rather than patching symptoms.
-    - Prefer reducing complexity over adding new abstractions to work around an issue.
+  - Fix root causes (types, imports, missing assets, config drift) rather than patching symptoms.
+  - Prefer reducing complexity over adding new abstractions to work around an issue.
 - If the user provides error logs (console/devtools/build output):
-    - Treat them as actionable requirements and prioritize resolving them end-to-end.
-    - Use the log to locate the true source:
-        - Jump to referenced file:line:col and inspect surrounding code and recent changes.
-        - Identify whether it is a build-time, runtime, or UI/behavioral issue, and reproduce locally when possible.
-        - Fix the cause (invalid state, bad import, missing guard, incorrect env/config) instead of silencing symptoms.
-    - Add the smallest robust prevention:
-        - Add a guard/assertion with a helpful error message when invariants can be violated.
-        - Prefer making invalid states unrepresentable (types, narrowing, early returns).
-        - Avoid “catch and ignore” patterns unless explicitly desired; surface failures intentionally.
-    - After fixing one instance, do a preventive sweep for similar issues:
-        - Search for the same error string, stack trace function names, API usage, or code pattern across the repo.
-        - Fix other matches when they are clearly the same root cause; otherwise add a TODO note near the risky site.
-        - Prefer centralizing the fix into a shared helper if the same mistake repeats in multiple places.
+  - Treat them as actionable requirements and prioritize resolving them end-to-end.
+  - Use the log to locate the true source:
+    - Jump to referenced file:line:col and inspect surrounding code and recent changes.
+    - Identify whether it is a build-time, runtime, or UI/behavioral issue, and reproduce locally when possible.
+    - Fix the cause (invalid state, bad import, missing guard, incorrect env/config) instead of silencing symptoms.
+  - Add the smallest robust prevention:
+    - Add a guard/assertion with a helpful error message when invariants can be violated.
+    - Prefer making invalid states unrepresentable (types, narrowing, early returns).
+    - Avoid “catch and ignore” patterns unless explicitly desired; surface failures intentionally.
+  - After fixing one instance, do a preventive sweep for similar issues:
+    - Search for the same error string, stack trace function names, API usage, or code pattern across the repo.
+    - Fix other matches when they are clearly the same root cause; otherwise add a TODO note near the risky site.
+    - Prefer centralizing the fix into a shared helper if the same mistake repeats in multiple places.
 - Additional code health gates (when applicable):
-    - Ensure editor/IDE diagnostics are clean for touched files (types, imports, unused vars).
-    - Ensure imports are aligned and consistent (paths/aliases), and remove unused/redundant imports where safe.
-    - Avoid leaving dead code, unused exports, unused styles, or orphaned files after refactors.
-    - Prefer deterministic, minimal formatting changes; avoid reformatting unrelated code.
-    - If a change is risky or cross-cutting, add a short `.md` note capturing intent, constraints, and known edge cases.
+  - Ensure editor/IDE diagnostics are clean for touched files (types, imports, unused vars).
+  - Ensure imports are aligned and consistent (paths/aliases), and remove unused/redundant imports where safe.
+  - Avoid leaving dead code, unused exports, unused styles, or orphaned files after refactors.
+  - Prefer deterministic, minimal formatting changes; avoid reformatting unrelated code.
+  - If a change is risky or cross-cutting, add a short `.md` note capturing intent, constraints, and known edge cases.
 
 ---
 
 ## Architecture & Cohesion (Avoid Fragmentation, Avoid Bloat)
 
 - Prefer a unified, consolidated architecture:
-    - Keep concepts cohesive: related logic should live together (by feature/module), not scattered across many tiny files.
-    - Avoid one-off “drive-by” utilities; extract only when reused or when it clarifies a real boundary.
+  - Keep concepts cohesive: related logic should live together (by feature/module), not scattered across many tiny files.
+  - Avoid one-off “drive-by” utilities; extract only when reused or when it clarifies a real boundary.
 - Split code by sub-modules when files become too bloated:
-    - Split by domain concept/feature, not by vague buckets like `utils1`, `helpers2`, `misc`.
-    - Keep boundaries explicit (clear public exports, minimal surface area, good names).
-    - Avoid circular dependencies; move shared primitives downward in the hierarchy when needed.
+  - Split by domain concept/feature, not by vague buckets like `utils1`, `helpers2`, `misc`.
+  - Keep boundaries explicit (clear public exports, minimal surface area, good names).
+  - Avoid circular dependencies; move shared primitives downward in the hierarchy when needed.
 - DRY without over-abstracting:
-    - Remove duplicates when it improves clarity and maintainability.
-    - Avoid premature generalization that adds indirection without real reuse.
+  - Remove duplicates when it improves clarity and maintainability.
+  - Avoid premature generalization that adds indirection without real reuse.
 - Prefer structured mappings over repetitive conditionals when appropriate:
-    - Use `Map` / object maps / `switch` when it reduces duplication and improves readability.
+  - Use `Map` / object maps / `switch` when it reduces duplication and improves readability.
 
 ---
 
 ## Formatting & Imports
 
 - Indentation:
-    - Prefer **4 spaces** (spaces only) unless a specific file/subproject already enforces a different style.
-    - Do not introduce mixed indentation; align surrounding file style when editing.
+  - Prefer **4 spaces** (spaces only) unless a specific file/subproject already enforces a different style.
+  - Do not introduce mixed indentation; align surrounding file style when editing.
 - Imports and paths:
-    - Always try to fix/align import paths (TS/JS, CSS/SCSS) to match aliases and project conventions.
-    - Remove unused/redundant imports when safe; avoid leaving dead imports after refactors.
-    - Keep imports stable and deterministic; avoid unnecessary churn in ordering.
+  - Always try to fix/align import paths (TS/JS, CSS/SCSS) to match aliases and project conventions.
+  - Remove unused/redundant imports when safe; avoid leaving dead imports after refactors.
+  - Keep imports stable and deterministic; avoid unnecessary churn in ordering.
 
 ---
 
 ## Documentation & Context Logging (Resume-Friendly)
 
 - When the user provides ideas/proposals, or a change introduces a new concept:
-    - Prefer adding/updating a `.md` document near the feature/module (or in an appropriate docs location) that captures:
-        - Intent (“why”), constraints, key decisions
-        - Public API / usage examples
-        - Known tradeoffs and follow-ups
+  - Prefer adding/updating a `.md` document near the feature/module (or in an appropriate docs location) that captures:
+    - Intent (“why”), constraints, key decisions
+    - Public API / usage examples
+    - Known tradeoffs and follow-ups
 - Keep a lightweight context log for ongoing work:
-    - Summarize key decisions/constraints so work can be resumed without re-discovery.
-    - Prefer short, structured notes over long narratives.
+  - Summarize key decisions/constraints so work can be resumed without re-discovery.
+  - Prefer short, structured notes over long narratives.
 
 ---
 

@@ -1,5 +1,4 @@
 ---
-globs: *.scss,*.css
 alwaysApply: false
 ---
 
@@ -58,10 +57,10 @@ alwaysApply: false
 Special versions of `getBoundingClientRect`, `clientX`, and `clientY` with virtual scaling support.
 
 **Scaling methods:**
+
 - CSS `zoom` (recommended)
 - CSS `scale` (legacy)
 - `rem`/`em` units
-
 
 ---
 
@@ -194,15 +193,15 @@ Currently we used native CSS custom functions (and own implementations for veela
 - `shade` - the shade of the color, default is 0.0
 - `tint` - the tint of the color, default is 0.0
 - `scheme-id` - the scheme id, default is 2
-    - 0 - light
-    - 1 - dark
-    - 2 - default
+  - 0 - light
+  - 1 - dark
+  - 2 - default
 - `role` - the role of the color, default is null
-    - MD3 specific, such as `primary`, `secondary`, `tertiary`, `error`, `surface`, `on-surface`, etc.
-    - null - no role, default to current color
+  - MD3 specific, such as `primary`, `secondary`, `tertiary`, `error`, `surface`, `on-surface`, etc.
+  - null - no role, default to current color
 - `scope` - propagation mode, default is `"component"`
-    - `"component"` - applies the palette to the selector, supporting descendant form controls and global helpers (previous `solid-colorize` behaviour)
-    - `"selector"` - limits the palette to the selector itself without propagating to descendants (previous `solid-colorize-selector-only` behaviour)
+  - `"component"` - applies the palette to the selector, supporting descendant form controls and global helpers (previous `solid-colorize` behaviour)
+  - `"selector"` - limits the palette to the selector itself without propagating to descendants (previous `solid-colorize-selector-only` behaviour)
 - `propagate` - optional boolean override for descendant propagation (defaults to the value implied by `scope`)
 - `forms-background` - controls whether interactive descendants receive the blended background colour (defaults to the value of `propagate`)
 - `global-targets` - toggles the additional global helpers (`::picker`, `ui-icon`, inline text tags) (defaults to the value of `propagate`)
@@ -467,6 +466,7 @@ Currently we used native CSS custom functions (and own implementations for veela
 ### Examples of classes usage
 
 Grid with padding, margin, gap and `display: grid;`
+
 ```html
 <div class="p-md m-md gap-md d-grid">
     <div class="p-md m-md gap-md d-grid">
