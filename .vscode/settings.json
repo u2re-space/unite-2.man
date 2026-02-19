@@ -257,5 +257,10 @@
         {"rule": "max-nesting-depth", "severity": "warn"},
         {"rule": "selector-max-compound-selectors", "severity": "warn"},
         {"rule": "declaration-block-no-duplicate-properties", "severity": "warn"}
-    ]
+    ],
+    "editor.fontFamily": "'Monaspace Neon Var', 'Google Sans Code', 'Consolas', monospace",
+    "terminal.integrated.fontFamily": "'Monaspace Neon Var', 'Google Sans Code', 'Consolas', monospace",
+    "terminal.integrated.fontLigatures.enabled": true,
+    "terminal.integrated.fontSize": 12,
+    "terminal.integrated.lineHeight": 1.6
 }
