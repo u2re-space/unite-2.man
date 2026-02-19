@@ -15,24 +15,24 @@
         "modules/projects/*",
         "apps/*"
     ],
+    "overrides": {
+        "@rollup/rollup-linux-x64-gnu": "npm:@rollup/wasm-node@latest",
+        "rollup": "npm:@rollup/wasm-node@latest",
+        "@vitejs/devtools": ">=0.0.0-alpha.32",
+        "vite-plugin-pwa": ">=1.2.0"
+    },
+    "optionalDependencies": {
+        "@rollup/rollup-linux-x64-gnu": "npm:@rollup/wasm-node@latest",
+        "@rollup/wasm-node": ">=4.57.1"
+    },
+    "resolutions": {
+        "@rollup/rollup-linux-x64-gnu": "npm:@rollup/wasm-node@latest",
+        "rollup": "npm:@rollup/wasm-node@latest"
+    },
     "devDependencies": {
-        "@ai-sdk/openai": "^2.0.22",
-        "@antfu/eslint-config": "^5.3.0",
-        "@types/chrome": "^0.1.32",
-        "ai": "^5.0.26",
-        "eslint": "^9.35.0",
-        "jsonc-eslint-parser": "^2.4.1",
-        "marked": "^16.3.0",
-        "marked-katex-extension": "^5.1.5",
-        "openai": "^5.16.0",
-        "stylelint": "^16.24.0",
-        "stylelint-config-recommended": "^17.0.0",
-        "stylelint-config-recommended-scss": "^16.0.0",
-        "stylelint-config-standard": "^39.0.0",
-        "stylelint-config-standard-scss": "^15.0.1",
-        "stylelint-no-unsupported-browser-features": "^8.0.4",
-        "stylelint-plugin-logical-css": "^1.2.3",
-        "stylelint-scss": "^6.12.1",
-        "typescript": "^5.9.2"
+        "@rollup/rollup-linux-x64-gnu": "npm:@rollup/wasm-node@latest",
+        "@rollup/wasm-node": ">=4.57.1",
+        "typescript": ">=6.0.0-beta",
+        "rollup": "npm:@rollup/wasm-node@latest"
     }
 }
