@@ -23,8 +23,9 @@
         "vite-plugin-pwa": ">=1.2.0"
     },
     "optionalDependencies": {
-        "@rollup/rollup-win32-x64-msvc": "npm:@rollup/wasm-node@latest",
+        "rollup": "npm:@rollup/wasm-node@latest",
         "@rollup/rollup-linux-x64-gnu": "npm:@rollup/wasm-node@latest",
+        "@rollup/rollup-win32-x64-msvc": "npm:@rollup/wasm-node@latest",
         "@rollup/wasm-node": ">=4.57.1"
     },
     "resolutions": {
@@ -34,7 +35,15 @@
     },
     "devDependencies": {
         "@rollup/wasm-node": ">=4.57.1",
+        "rollup": "npm:@rollup/wasm-node@latest",
         "typescript": ">=6.0.0-beta",
-        "rollup": "npm:@rollup/wasm-node@latest"
+        "eslint": "^10.0.0",
+        "postcss-preset-env": "^11.1.3",
+        "postcss-scss": "^4.0.9",
+        "prettier": "^3.8.1",
+        "stylelint": "^17.3.0",
+        "stylelint-config-standard-scss": "^17.0.0",
+        "stylelint-plugin-logical-css": "^2.0.2",
+        "stylelint-scss": "^7.0.0"
     }
 }
