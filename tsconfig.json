@@ -4,44 +4,70 @@
         "**/*.js",
         "**/*.ts",
         "**/*.d.ts",
-        "**/*.tsx",
-        "**/*.vue"
+        "**/*.tsx"
     ],
     "exclude": [
         "node_modules/**",
-        "externals/**",
-        "frontend/**",
-        "frontend/externals/**"
+        "dist/**",
+        "build/**",
+        "coverage/**",
+        "logs/**",
+        "cache/**",
+        "temp/**",
+        "tmp/**",
+        "temp/**",
+        "tmp/**",
+        "runtime/**"
     ],
     "compilerOptions": {
         "outDir": "./dist/",
-        "baseUrl": "./",
         "skipLibCheck": true,
         "jsx": "preserve",
         "paths": {
-            "/apps/*": ["./frontend/apps/*"],
-            "/externals/*": ["./frontend/externals/*"],
-            "/assets/*": ["./frontend/assets/*"],
-            "/frontend/*": ["./frontend/*"]
+            "/apps/*": [
+                "./frontend/apps/*"
+            ],
+            "/externals/*": [
+                "./frontend/externals/*"
+            ],
+            "/assets/*": [
+                "./frontend/assets/*"
+            ],
+            "/frontend/*": [
+                "./frontend/*"
+            ]
         },
-        "lib": ["ESNext", "DOM", "WebWorker", "ESNext.Promise"],
-        "types": ["chrome"],
+        "lib": [
+            "ESNext",
+            "DOM",
+            "WebWorker",
+            "ESNext.Promise"
+        ],
+        "types": [
+            "chrome"
+        ],
         "module": "ESNext",
         "target": "ESNext",
+        "moduleDetection": "auto",
         "moduleResolution": "bundler",
-        "resolveJsonModule": true,
+        "pretty": true,
+        "emitDeclarationOnly": true,
+        "composite": true,
         "allowSyntheticDefaultImports": true,
         "allowArbitraryExtensions": true,
+        "allowImportingTsExtensions": true,
         "esModuleInterop": true,
+        "verbatimModuleSyntax": true,
+        "resolveJsonModule": true,
         "allowJs": true,
         "noEmit": true,
+        "rewriteRelativeImportExtensions": true,
         "allowUnusedLabels": true,
         "allowUnreachableCode": true,
         "forceConsistentCasingInFileNames": true,
         "experimentalDecorators": true,
         "useDefineForClassFields": false,
         "isolatedModules": true,
-        "verbatimModuleSyntax": true,
         "emitDecoratorMetadata": false
     }
 }

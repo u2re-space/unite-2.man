@@ -1,0 +1,29 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "sass:watch",
+            "type": "shell",
+            "command": "npx",
+            "args": [
+                "sass",
+                "--watch",
+                "src:dist",
+                "--verbose"
+            ],
+            "isBackground": true,
+            "problemMatcher": [
+                {
+                    "owner": "sass",
+                    "severity": "warning",
+                    "pattern": [
+                        {
+                            "regexp": "^(WARNING|DEPRECATION WARNING):\\s*(.*)$",
+                            "message": 2
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
