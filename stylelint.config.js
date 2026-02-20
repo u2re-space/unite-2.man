@@ -14,7 +14,7 @@ export default {
         }],
         "function-no-unknown": null,
         "scss/function-no-unknown": [true, {
-            ignoreFunctions: ["color-mix", "oklch", "oklab", "style", "emoji-to-icon", "md3-color", "md3-color-scheme"],
+            ignoreFunctions: ["color-mix", "oklch", "oklab", "style", "emoji-to-icon", "md3-color", "md3-color-scheme", "config"],
             severity: "warning"
         }],
         "keyframes-name-pattern": null,
@@ -51,6 +51,10 @@ export default {
         "scss/dollar-variable-colon-space-before": null,
         "scss/dollar-variable-colon-space-after": null,
         "lightness-notation": null,
-        "hue-degree-notation": null
+        "hue-degree-notation": null,
+        "color-hex-length": ["short", { "severity": "warning" }],
+        "color-function-notation": ["modern", { "severity": "warning" }],
+        "alpha-value-notation": ["percentage", { "severity": "warning" }],
+        "declaration-block-no-duplicate-properties": [true, { "severity": "warning" }]
     }
 };
