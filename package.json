@@ -5,7 +5,8 @@
     "private": false,
     "type": "module",
     "scripts": {
-        "test": "npm -ws run test --if-present --silent"
+        "test": "npm -ws run test --if-present --silent",
+        "postinstall": "node scripts/patch-rollup-wasm.mjs"
     },
     "browserslist": [
         "last 1 chrome version",
