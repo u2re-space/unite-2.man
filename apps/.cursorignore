@@ -5,3 +5,11 @@ OS.u2re.space/**/*
 ./OS.u2re.space
 ./OS.u2re.space/*
 ./OS.u2re.space/**/*
+
+# ── Compiled TS artifacts in source trees ─────────────────────────────────────
+src/**/*.js
+src/**/*.jsx
+src/**/*.js.map
+**/src/**/*.js
+**/src/**/*.jsx
+**/src/**/*.js.map

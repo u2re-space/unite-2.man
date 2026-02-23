@@ -19,7 +19,10 @@
         "**/.hg": true,
         "**/CVS": true,
         "**/.DS_Store": true,
-        "**/Thumbs.db": true
+        "**/Thumbs.db": true,
+        "**/src/**/*.js": true,
+        "**/src/**/*.jsx": true,
+        "**/src/**/*.js.map": true
     },
     "files.associations": {
         "*.css": "scss"
@@ -113,7 +116,9 @@
         "editor.defaultFormatter": "vscode.json-language-features"
     },
 
-    // TypeScript / JavaScript Config
+    // TypeScript / JavaScript Config — NO JS emission from TS sources
+    "typescript.compileOnSave": false,
+    "javascript.compileOnSave": false,
     "javascript.preferences.importModuleSpecifier": "shortest",
     "typescript.preferences.importModuleSpecifier": "shortest",
     "js/ts.implicitProjectConfig.target": "ESNext",
