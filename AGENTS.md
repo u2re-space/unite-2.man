@@ -17,6 +17,7 @@ npm workspaces. Root `npm install` hoists all workspace deps. No lockfile is com
 ### Git submodules
 
 All library code and apps live in git submodules. They must be initialized before anything works:
+
 ```
 git submodule update --init --recursive
 ```
@@ -26,6 +27,7 @@ git submodule update --init --recursive
 The CrossWord app at `apps/CrossWord` runs via Vite (`npx vite dev`). Key setup caveats:
 
 1. **HTTPS certificate**: The shared vite config imports `../private/https/certificate.mjs`. This file is not tracked in git. Create it by generating a self-signed cert:
+
    ```
    mkdir -p apps/CrossWord/private/https
    openssl req -x509 -newkey rsa:2048 -nodes \
@@ -33,7 +35,9 @@ The CrossWord app at `apps/CrossWord` runs via Vite (`npx vite dev`). Key setup 
      -out apps/CrossWord/private/https/cert.pem \
      -days 365 -subj '/CN=localhost'
    ```
+
    Then create `apps/CrossWord/private/https/certificate.mjs`:
+
    ```js
    import { readFileSync } from "node:fs";
    import { resolve, dirname } from "node:path";
@@ -46,6 +50,7 @@ The CrossWord app at `apps/CrossWord` runs via Vite (`npx vite dev`). Key setup 
    ```
 
 2. **Fest library symlinks**: `apps/CrossWord/shared/fest/` needs symlinks pointing to `modules/projects/*/src`. Create them:
+
    ```
    mkdir -p apps/CrossWord/shared/fest
    cd apps/CrossWord/shared/fest
@@ -58,6 +63,7 @@ The CrossWord app at `apps/CrossWord` runs via Vite (`npx vite dev`). Key setup 
    ln -sf ../../../../modules/projects/uniform.ts/src uniform
    ln -sf ../../../../modules/projects/veela.css/src veela
    ```
+
    Also copy polyfill files: `cp -r modules/shared/fest/polyfill apps/CrossWord/shared/fest/polyfill`
 
 3. **Font registry stub**: `modules/projects/veela.css/src/ts/font-registry.ts` may not exist. If missing, create a stub exporting an empty object to prevent import errors.
