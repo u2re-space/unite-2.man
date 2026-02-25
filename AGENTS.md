@@ -2,81 +2,38 @@
 
 ## Cursor Cloud specific instructions
 
-### Project overview
+### Overview
 
-Unite-2 is a frontend-only monorepo containing shared `fest/*` libraries and multiple web apps (`apps/*`). The primary application scoped for development is **CrossWord** (`apps/CrossWord`), a PWA/Chrome extension markdown viewer/editor.
+CrossWord i1 is an AI-powered markdown/document processing PWA with a Fastify backend. It is a git submodule of the [unite-2.man](https://github.com/u2re-space/unite-2.man) monorepo and expects to sit at `apps/CrossWord/` within that monorepo. The `shared/fest/` framework libraries are symlinks into `../../modules/projects/` (the monorepo's fest-live submodules).
 
-### Node version
+### Monorepo layout
 
-This project requires **Node.js >= 24**. Use `nvm use 24` before any command. The default nvm alias is already set to 24.
+Since `/workspace` is the crossword repo, `../../` resolves to `/`. The update script clones the monorepo's `modules/` and `assets/` to `/modules/` and `/assets/` so that relative symlinks like `../../modules/shared/test` resolve correctly. It also creates `/node_modules` as a symlink to `/workspace/node_modules` for the `assets/icons` symlink.
 
-### Package manager
+### Services
 
-npm workspaces. Root `npm install` hoists all workspace deps. No lockfile is committed; the first install generates one. A `postinstall` script patches Rollup WASM bindings automatically.
+| Service | Command | Port | Notes |
+|---------|---------|------|-------|
+| Vite dev server (frontend) | `npm run dev` or `npx vite dev --port 5173` | 443 (default) or custom | Use `--port 5173` to avoid needing root privileges |
+| Fastify endpoint (backend) | `cd src/endpoint && npm run start` | 8443 (HTTPS) + 8080 (HTTP) | |
 
-### Git submodules
+### Key caveats
 
-All library code and apps live in git submodules. They must be initialized before anything works:
+- **Node.js >= 24 required.** Use `nvm install 24 && nvm alias default 24`.
+- **HTTPS certificates:** Both Vite and the endpoint server require TLS certs. Self-signed certs are generated in `private/https/` (frontend) and `src/endpoint/https/` (backend). These dirs are gitignored and created by the update script.
+- **Port 443** needs `sudo setcap cap_net_bind_service=+ep $(which node)` or use `--port 5173`.
+- **`cssnano-preset-advanced`** and **`cbor-x`** are runtime-required but not in `package.json`; the update script installs them.
+- **`shared/fest/`** symlinks: Must point to real fest-live library sources from the monorepo (`/modules/projects/*/src`). The update script sets these up.
+- **`font-registry.ts`** stub: The veela.css module's `font-loader.ts` dynamically imports `./font-registry` which is a generated file. The update script creates an empty stub at `/modules/projects/veela.css/src/ts/font-registry.ts`.
+- **Python tests** (`src/endpoint/tests/`) all depend on `windows-use` (Windows-only). They cannot run on Linux.
+- **Production build** may fail with a `font-registry` resolution error in the PWA service worker build step; the dev server works fine.
+- **Endpoint `clipboardy`** is listed as optional but imported unconditionally; must be installed for the backend to start.
 
-```
-git submodule update --init --recursive
-```
+### Lint / Test / Build
 
-### CrossWord dev server
-
-The CrossWord app at `apps/CrossWord` runs via Vite (`npx vite dev`). Key setup caveats:
-
-1. **HTTPS certificate**: The shared vite config imports `../private/https/certificate.mjs`. This file is not tracked in git. Create it by generating a self-signed cert:
-
-   ```
-   mkdir -p apps/CrossWord/private/https
-   openssl req -x509 -newkey rsa:2048 -nodes \
-     -keyout apps/CrossWord/private/https/key.pem \
-     -out apps/CrossWord/private/https/cert.pem \
-     -days 365 -subj '/CN=localhost'
-   ```
-
-   Then create `apps/CrossWord/private/https/certificate.mjs`:
-
-   ```js
-   import { readFileSync } from "node:fs";
-   import { resolve, dirname } from "node:path";
-   import { fileURLToPath } from "node:url";
-   const __dirname = dirname(fileURLToPath(import.meta.url));
-   export default {
-       key: readFileSync(resolve(__dirname, "key.pem")),
-       cert: readFileSync(resolve(__dirname, "cert.pem")),
-   };
-   ```
-
-2. **Fest library symlinks**: `apps/CrossWord/shared/fest/` needs symlinks pointing to `modules/projects/*/src`. Create them:
-
-   ```
-   mkdir -p apps/CrossWord/shared/fest
-   cd apps/CrossWord/shared/fest
-   ln -sf ../../../../modules/projects/core.ts/src core
-   ln -sf ../../../../modules/projects/dom.ts/src dom
-   ln -sf ../../../../modules/projects/fl.ui/src fl-ui
-   ln -sf ../../../../modules/projects/icon.ts/src icon
-   ln -sf ../../../../modules/projects/lur.e/src lure
-   ln -sf ../../../../modules/projects/object.ts/src object
-   ln -sf ../../../../modules/projects/uniform.ts/src uniform
-   ln -sf ../../../../modules/projects/veela.css/src veela
-   ```
-
-   Also copy polyfill files: `cp -r modules/shared/fest/polyfill apps/CrossWord/shared/fest/polyfill`
-
-3. **Font registry stub**: `modules/projects/veela.css/src/ts/font-registry.ts` may not exist. If missing, create a stub exporting an empty object to prevent import errors.
-
-4. **Port binding**: The Vite config defaults to port 443. Either use `--port 5173` or grant Node low-port capability via `sudo setcap 'cap_net_bind_service=+ep' $(which node)`.
-
-### Lint & type checks
-
-- **Stylelint**: `npx stylelint "src/**/*.scss" "src/**/*.css" --allow-empty-input` (from `apps/CrossWord`)
-- **TypeScript**: `npx tsc --noEmit --project tsconfig.json` (from `apps/CrossWord`)
-- **ESLint**: The root `eslint.config.js` has pre-existing rule-name issues in flat-config format (e.g. `braceStyle` not found). ESLint will error on these until they are fixed upstream.
-
-### Build
-
-- PWA build: `npm run build:pwa` (from `apps/CrossWord`)
-- CRX build: `npm run build:crx` (from `apps/CrossWord`)
+- **Lint (formatting):** `npx prettier --check "src/**/*.ts"` (root)
+- **Build (frontend):** `npm run build` (root) — may fail on font-registry; dev server is the primary workflow
+- **Tests (frontend):** `npm run test:test` (root) — echoes "No tests configured"
+- **Tests (endpoint):** `cd src/endpoint && python3 -m pytest tests/unit/ -v` — requires `windows-use` (Windows-only)
+- **Typecheck (endpoint):** `cd src/endpoint && npx tsc -p tsconfig.json --noEmit` — 2 pre-existing errors
+- **Dev server:** `npx vite dev --port 5173 --no-open` (root) — the primary development workflow
