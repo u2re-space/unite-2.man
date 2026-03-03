@@ -44,3 +44,21 @@ Thumbs.db
 .cursor/analysis/
 .cursor/plans/
 .cursor/snapshots/
+
+# Token optimization - ignore large unneeded files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+bun.lockb
+*.min.js
+*.min.css
+*.map
+*.svg
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.ico
+.pantry/
+~/.pantry/
