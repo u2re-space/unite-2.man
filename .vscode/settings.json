@@ -171,7 +171,7 @@
     "editor.fontFamily": "'Monaspace Neon Var', 'Google Sans Code', 'Consolas', monospace",
     "terminal.integrated.fontFamily": "'Monaspace Neon Var', 'Google Sans Code', 'Consolas', monospace",
     "terminal.integrated.fontLigatures.enabled": true,
-    "terminal.integrated.fontSize": 10,
+    "terminal.integrated.fontSize": 9,
     "terminal.integrated.lineHeight": 1.6,
     "css.validate": false,
     "less.validate": false,
