@@ -7,27 +7,15 @@ alwaysApply: true
 - Git: Conventional Commits (feat/fix/refactor/docs/test/chore)
 - Logging: structured logging, zerolog
 - Used tools: `pm2`, `vite`, `npm`, `tsx`, `npx`, `nvm`, `pwsh`, `bash`
-- SSH by `U2RE@192.168.0.110` (Windows)
-- SSH by `u2re-dev@192.168.0.200` (Linux)
-- Address of main project (`192.168.0.200`):
-  - `/home/u2re-dev/U2RE.space`
-  - `/home/u2re-dev/copy-to-vds.sh`
-- Location in Windows host (`192.168.0.110`):
-  - `C:\Users\U2RE\`
-  - `C:\Users\U2RE\endpoint-portable\`
-  - `C:\Users\U2RE\.pm2\`
+- Deployment SSH hosts and machine-specific absolute paths are documented outside the repository.
 
 ## How to test `endpoint`
 
 - Directory: `apps/CrossWord/src/endpoint`
-  - Full path: `/home/u2re-dev/U2RE.space/apps/CrossWord/src/endpoint`
-  - In Windows: `C:\Users\U2RE\endpoint-portable\`
 - View logs: `pm2 logs`
-  - Clear logs: `rm -rf /home/u2re-dev/.pm2/logs/*` or `rm -rf ~/.pm2/logs/*`
+  - Clear logs: `rm -rf ~/.pm2/logs/*`
 - Restart: `pm2 restart ecosystem.config.cjs --only cws --env production --update-env`
-- SSH of Linux host: `u2re-dev@192.168.0.200`
-- SSH of Windows host: `U2RE@192.168.0.110`
-- Rebuild and load to Windows: `npm run build`
+- Rebuild and load to the target host: `npm run build`
 - Configs (in `apps/CrossWord/src/endpoint`):
   - `scripts/*`
   - `portable.config.json`

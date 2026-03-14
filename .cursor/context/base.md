@@ -13,15 +13,7 @@
 - Git: Conventional Commits (feat/fix/refactor/docs/test/chore)
 - Логирование: structured logging, zerolog
 - Используемые инструменты: pm2, vite, npm, tsx, npx, nvm, pwsh, bash
-- SSH по `U2RE@192.168.0.110` (Windows)
-- SSH по `u2re-dev@192.168.0.200` (Linux)
-- Расположение основного проекта (`192.168.0.200`):
-  - `/home/u2re-dev/U2RE.space`
-  - `/home/u2re-dev/copy-to-vds.sh`
-- Расположение данных в Windows (`192.168.0.110`):
-  - `C:\Users\U2RE\`
-  - `C:\Users\U2RE\endpoint-portable\`
-  - `C:\Users\U2RE\.pm2\`
+- SSH-хосты и машинно-специфичные абсолютные пути документируются вне репозитория.
 
 ## Архитектура
 
