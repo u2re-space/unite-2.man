@@ -1,0 +1,30 @@
+---
+alwaysApply: true
+---
+
+# About project in general
+
+- Git: Conventional Commits (feat/fix/refactor/docs/test/chore)
+- Logging: structured logging, zerolog
+- Used tools: `pm2`, `vite`, `npm`, `tsx`, `npx`, `nvm`, `pwsh`, `bash`
+- Deployment SSH hosts and machine-specific absolute paths are documented outside the repository.
+
+## How to test `endpoint`
+
+- Directory: `apps/CrossWord/src/endpoint`
+- View logs: `pm2 logs`
+  - Clear logs: `rm -rf ~/.pm2/logs/*`
+- Restart: `pm2 restart ecosystem.config.cjs --only cws --env production --update-env`
+- Rebuild and load to the target host: `npm run build`
+- Configs (in `apps/CrossWord/src/endpoint`):
+  - `scripts/*`
+  - `portable.config.json`
+  - `config/*.json`
+  - `ecosystem.config.cjs`
+  - `package.json`
+- AirPad:
+  - `apps/CrossWord/src/frontend/views/airpad/`
+- Test with npm (do these actions)
+  1. `pm2 stop cws`
+  2. `npm run dev`
+- Source code: `apps/CrossWord/src/endpoint/server`
