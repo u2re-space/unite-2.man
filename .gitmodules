@@ -1,12 +1,6 @@
-[submodule "apps/OS.u2re.space"]
-	path = apps/OS.u2re.space
-	url = https://github.com/u2re-space/OS.u2re.space
 [submodule "apps/CrossWord"]
 	path = apps/CrossWord
 	url = https://github.com/u2re-space/crossword
-[submodule "apps/CrossHelp"]
-	path = apps/CrossHelp
-	url = https://github.com/u2re-space/crosshelp
 [submodule "apps/markdown.view"]
 	path = apps/markdown.view
 	url = https://github.com/u2re-space/markdown.view
@@ -37,6 +31,3 @@
 [submodule "modules/projects/icon.ts"]
 	path = modules/projects/icon.ts
 	url = https://github.com/fest-live/icon.ts.git
-[submodule "apps/CS29"]
-	path = apps/CS29
-	url = https://github.com/u2re-space/CS29
