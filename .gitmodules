@@ -1,6 +1,3 @@
-[submodule "apps/CWSAndroid"]
-	path = apps/CWSAndroid
-	url = https://github.com/u2re-space/CWSAndroid
 [submodule "apps/CrossWord"]
 	path = apps/CrossWord
 	url = https://github.com/u2re-space/crossword

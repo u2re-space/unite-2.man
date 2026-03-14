@@ -42,6 +42,7 @@ git commit -m "[значение поля Commit из задачи]"
 
 ### Шаг 7: Закрой задачу
 ```bash
+mkdir -p .cursor/plans/done
 mv .cursor/plans/tasks/task-003.md .cursor/plans/done/task-003.md
 ```
 (используй реальный номер)
