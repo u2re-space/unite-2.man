@@ -11,6 +11,7 @@ import autoprefixer from "autoprefixer";
 import cssnano from "cssnano";
 import https from "./https/certificate.mjs";
 import { searchForWorkspaceRoot } from "vite";
+import { npmFestImportRewritePlugin } from "./vite-npm-imports.mjs";
 
 //
 function normalizeAliasPattern(pattern) {
@@ -59,7 +60,8 @@ export const initiate = (NAME = "generic", tsconfig = {}, __dirname = resolve(".
         externalPlugin({
             include: Array.from(projectMap?.keys()).filter((n)=>!n?.endsWith(NAME)), // Explicitly externalize specific packages
             exclude: [resolve(__dirname, "./src/index.ts"), "./src/index.ts", resolve(__dirname, "./dist/"+NAME+".js"), "./dist/"+NAME+".js"]
-        })
+        }),
+        ...(process.env.FEST_NPM_IMPORTS === "1" ? [npmFestImportRewritePlugin()] : []),
     ];
 
     //
