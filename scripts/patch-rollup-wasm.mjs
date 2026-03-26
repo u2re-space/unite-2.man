@@ -1,60 +1,181 @@
 /**
- * Patches the @rollup/rollup-linux-x64-gnu (and win32) packages so their
- * `main` entry points to `dist/native.js` instead of `dist/rollup.js`.
+ * Ensures Rollup can resolve the platform `@rollup/rollup-*` package and that its
+ * entry is the **native binding** (`dist/native.js`), not the full Rollup API bundle.
  *
- * Background: npm/pnpm overrides redirect @rollup/rollup-<platform> to
- * @rollup/wasm-node, but @rollup/wasm-node's default main entry is the full
- * rollup bundle (exports VERSION, defineConfig, watch…) rather than the
- * native binding (exports parse, parseAsync, xxhash*).
+ * 1) **Missing optional install** — npm sometimes skips `@rollup/rollup-linux-x64-gnu`
+ *    (see npm/cli#4828). If `@rollup/wasm-node` is present but the platform package
+ *    folder is missing, we write a tiny shim `package.json` whose `main` points at
+ *    `../wasm-node/dist/native.js`.
  *
- * rollup/dist/native.js does require('@rollup/rollup-<platform>') and
- * destructures { parse, parseAsync, xxhash* } from it.  When the main entry
- * is the full bundle those are undefined, causing "parse is not a function"
- * and "parseAsync is not a function" at both dev and build time.
- *
- * This script redirects main → dist/native.js so the destructuring works.
+ * 2) **Overrides to wasm-node** — when the platform package is an alias of
+ *    `@rollup/wasm-node`, default `main` may be `dist/rollup.js`. Rollup's
+ *    `dist/native.js` does `require('@rollup/rollup-<platform>')` and expects
+ *    `parse` / `parseAsync` / `xxhash*` from `dist/native.js`. We patch `main`
+ *    (and `exports["."]`) to `dist/native.js` when that file exists under the
+ *    platform package directory.
  */
 
-import { readFileSync, writeFileSync, existsSync } from 'node:fs';
-import { resolve, dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
+import { resolve, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+import { execSync } from "node:child_process";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const root = resolve(__dirname, '..');
+const root = resolve(__dirname, "..");
+
+const ROLLUP_SCOPE = resolve(root, "node_modules", "@rollup");
+const WASM_NODE = resolve(ROLLUP_SCOPE, "wasm-node");
+const WASM_NATIVE_JS = resolve(WASM_NODE, "dist", "native.js");
 
 const PLATFORM_PKGS = [
-    '@rollup/rollup-linux-x64-gnu',
-    '@rollup/rollup-linux-x64-musl',
-    '@rollup/rollup-win32-x64-msvc',
-    '@rollup/rollup-darwin-x64',
-    '@rollup/rollup-darwin-arm64',
-    '@rollup/rollup-linux-arm64-gnu',
-    '@rollup/rollup-linux-arm64-musl',
+    "@rollup/rollup-linux-x64-gnu",
+    "@rollup/rollup-linux-x64-musl",
+    "@rollup/rollup-win32-x64-msvc",
+    "@rollup/rollup-darwin-x64",
+    "@rollup/rollup-darwin-arm64",
+    "@rollup/rollup-linux-arm64-gnu",
+    "@rollup/rollup-linux-arm64-musl",
 ];
+
+/** @returns {string[]} */
+function platformPackagesForThisMachine() {
+    const p = process.platform;
+    const a = process.arch;
+    const out = [];
+    if (p === "linux" && a === "x64") {
+        try {
+            const ldd = execSync("ldd /bin/sh 2>/dev/null || true", { encoding: "utf8" });
+            if (ldd.includes("musl")) {
+                out.push("@rollup/rollup-linux-x64-musl");
+            } else {
+                out.push("@rollup/rollup-linux-x64-gnu");
+            }
+        } catch {
+            out.push("@rollup/rollup-linux-x64-gnu");
+        }
+    } else if (p === "linux" && a === "arm64") {
+        try {
+            const ldd = execSync("ldd /bin/sh 2>/dev/null || true", { encoding: "utf8" });
+            if (ldd.includes("musl")) {
+                out.push("@rollup/rollup-linux-arm64-musl");
+            } else {
+                out.push("@rollup/rollup-linux-arm64-gnu");
+            }
+        } catch {
+            out.push("@rollup/rollup-linux-arm64-gnu");
+        }
+    } else if (p === "win32" && a === "x64") {
+        out.push("@rollup/rollup-win32-x64-msvc");
+    } else if (p === "darwin" && a === "arm64") {
+        out.push("@rollup/rollup-darwin-arm64");
+    } else if (p === "darwin" && a === "x64") {
+        out.push("@rollup/rollup-darwin-x64");
+    }
+    return out;
+}
+
+function readWasmNodePackageJson() {
+    const wasmPkgJson = resolve(WASM_NODE, "package.json");
+    if (!existsSync(wasmPkgJson)) {
+        return null;
+    }
+    try {
+        return JSON.parse(readFileSync(wasmPkgJson, "utf8"));
+    } catch {
+        return null;
+    }
+}
+
+/**
+ * When npm did not create a usable `@rollup/rollup-<platform>` tree, point the package
+ * at wasm-node's binding via a local `./rollup-wasm-native-bridge.cjs` (Node disallows
+ * `exports` / `main` targets like `../wasm-node/...` that do not start with `./`).
+ */
+function ensurePlatformBindingShim(pkg) {
+    if (!existsSync(WASM_NATIVE_JS)) {
+        return false;
+    }
+
+    const pkgDir = resolve(root, "node_modules", pkg);
+    const innerNative = resolve(pkgDir, "dist", "native.js");
+    if (existsSync(innerNative)) {
+        return false;
+    }
+
+    mkdirSync(pkgDir, { recursive: true });
+
+    const wasmMeta = readWasmNodePackageJson();
+    const bridgeName = "rollup-wasm-native-bridge.cjs";
+    const bridgePath = resolve(pkgDir, bridgeName);
+    writeFileSync(
+        bridgePath,
+        '"use strict";\n' +
+            "// Generated by scripts/patch-rollup-wasm.mjs — re-export wasm Rollup binding.\n" +
+            "module.exports = require(\"../wasm-node/dist/native.js\");\n",
+    );
+
+    const shim = {
+        name: pkg,
+        version: wasmMeta?.version ?? "0.0.0-shim",
+        private: true,
+        description: "Shim: npm optional @rollup platform package missing; forwards to @rollup/wasm-node native binding",
+        main: `./${bridgeName}`,
+    };
+    if (wasmMeta?.type) {
+        shim.type = wasmMeta.type;
+    }
+
+    const pkgJsonPath = resolve(pkgDir, "package.json");
+    const existed = existsSync(pkgJsonPath);
+    writeFileSync(pkgJsonPath, JSON.stringify(shim, null, 2) + "\n");
+    console.log(
+        `[patch-rollup-wasm] ${existed ? "Repaired" : "Created"} shim ${pkg} → @rollup/wasm-node/dist/native.js (via ${bridgeName})`,
+    );
+    return true;
+}
+
+// Ensure binding shims for this OS (the package Rollup's native.js requires at runtime).
+for (const pkg of platformPackagesForThisMachine()) {
+    ensurePlatformBindingShim(pkg);
+}
 
 let patched = 0;
 for (const pkg of PLATFORM_PKGS) {
-    const pkgJson = resolve(root, 'node_modules', pkg, 'package.json');
-    if (!existsSync(pkgJson)) continue;
+    const pkgJsonPath = resolve(root, "node_modules", pkg, "package.json");
+    if (!existsSync(pkgJsonPath)) {
+        continue;
+    }
 
-    const data = JSON.parse(readFileSync(pkgJson, 'utf8'));
+    const data = JSON.parse(readFileSync(pkgJsonPath, "utf8"));
 
     // Only patch packages that were redirected to @rollup/wasm-node
     // (identified by having dist/native.js available alongside dist/rollup.js)
-    const nativeJs = resolve(root, 'node_modules', pkg, 'dist/native.js');
-    if (!existsSync(nativeJs)) continue;
-
-    if (data.main === 'dist/native.js') continue; // already patched
-
-    data.main = 'dist/native.js';
-    if (data.exports?.['.']) {
-        data.exports['.'] = { default: './dist/native.js' };
+    const nativeJs = resolve(root, "node_modules", pkg, "dist", "native.js");
+    if (!existsSync(nativeJs)) {
+        continue;
     }
-    writeFileSync(pkgJson, JSON.stringify(data, null, 2) + '\n');
+
+    if (data.main === "dist/native.js") {
+        continue;
+    }
+
+    data.main = "dist/native.js";
+    if (data.exports?.["."]) {
+        data.exports["."] = { default: "./dist/native.js" };
+    }
+    writeFileSync(pkgJsonPath, JSON.stringify(data, null, 2) + "\n");
     console.log(`[patch-rollup-wasm] Patched ${pkg} → dist/native.js`);
     patched++;
 }
 
-if (patched === 0) {
-    console.log('[patch-rollup-wasm] Nothing to patch (already correct or not installed).');
+if (patched === 0 && !platformPackagesForThisMachine().some((p) => existsSync(resolve(root, "node_modules", p, "package.json")))) {
+    if (existsSync(WASM_NATIVE_JS)) {
+        console.warn(
+            "[patch-rollup-wasm] No platform package found for this OS and shim was not created; check platform detection.",
+        );
+    } else {
+        console.log("[patch-rollup-wasm] Nothing to patch (@rollup/wasm-node not installed or no dist/native.js).");
+    }
+} else if (patched === 0) {
+    console.log("[patch-rollup-wasm] Nothing to patch (already correct or shim only).");
 }
