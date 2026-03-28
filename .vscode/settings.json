@@ -39,9 +39,8 @@
     "editor.formatOnSaveMode": "modificationsIfAvailable",
     "editor.acceptSuggestionOnEnter": "smart",
     "editor.acceptSuggestionOnCommitCharacter": false,
-    "editor.defaultFormatter": "vscode.markdown-language-features",
+    "editor.defaultFormatter": null,
     "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": "explicit"
     },
     "editor.guides.highlightActiveIndentation": "always",
     "editor.occurrencesHighlight": "multiFile",
@@ -155,7 +154,7 @@
     "typescript.preferences.importModuleSpecifierEnding": "minimal",
     "typescript.preferences.includePackageJsonAutoImports": "on",
     "typescript.updateImportsOnPaste.enabled": true,
-    "notebook.defaultFormatter": "vscode.markdown-language-features",
+    "notebook.defaultFormatter": null,
     "typescript.tsdk": "node_modules/typescript/lib",
     "typescript.enablePromptUseWorkspaceTsdk": true,
     "stylelint.validate": [
@@ -181,5 +180,13 @@
         "typescript",
         "javascript"
     ],
-    "workbench.editor.wrapTabs": true
+    "workbench.editor.wrapTabs": true,
+    "files.autoSaveWhenNoErrors": true,
+    "files.autoGuessEncoding": true,
+    "files.participants.timeout": 0,
+    "bookmarks.useWorkaroundForFormatters": true,
+    "cursor.terminal.enableAiChecks": false,
+    "accessibility.verbosity.terminal": false,
+    "terminal.integrated.allowChords": false,
+    "terminal.integrated.allowMnemonics": true
 }
