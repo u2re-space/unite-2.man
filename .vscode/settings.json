@@ -188,5 +188,6 @@
     "cursor.terminal.enableAiChecks": false,
     "accessibility.verbosity.terminal": false,
     "terminal.integrated.allowChords": false,
-    "terminal.integrated.allowMnemonics": true
+    "terminal.integrated.allowMnemonics": true,
+    "simpleBrowser.focusLockIndicator.enabled": false
 }
