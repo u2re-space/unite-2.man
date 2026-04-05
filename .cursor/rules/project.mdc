@@ -99,3 +99,9 @@ By default, use key-name as import root.
 | `fest/fl-ui`  | `modules/projects/fl.ui`      |
 | `fest/veela`  | `modules/projects/veela.css`  |
 | `fest/icon`   | `modules/projects/icon.ts`    |
+
+---
+
+## Symbolic links
+
+Now practically everywhere will be used symbolic links to simplify contexts.

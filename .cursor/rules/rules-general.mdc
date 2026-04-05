@@ -22,6 +22,7 @@ alwaysApply: false
 - Remove dead code and duplicate logic when safe.
 - Align imports/paths with project aliases and conventions.
 - If behavior is ambiguous, ask targeted questions instead of guessing.
+- Make import or modules paths symbolic links (and/or relative) friendly/compatible, and if needed, edit/change `tsconfig.json` or any other import maps.
 
 ## Quality gates
 

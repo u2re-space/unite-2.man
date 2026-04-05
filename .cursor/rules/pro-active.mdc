@@ -20,3 +20,4 @@ This file defines always-on behavior only. Detailed language/style guidance live
 - Preserve runtime/visual behavior unless the task explicitly asks to change it.
 - Align imports and remove dead code when safe.
 - If consolidation is ambiguous, ask targeted questions before merging behavior.
+- Make import or modules paths symbolic links (and/or relative) friendly/compatible, and if needed, edit/change `tsconfig.json` or any other import maps.
