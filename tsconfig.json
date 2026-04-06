@@ -35,6 +35,48 @@
             ],
             "/frontend/*": [
                 "./frontend/*"
+            ],
+            "fest/*": [
+                "./modules/shared/fest/*"
+            ],
+            "fest/lure": [
+                "./modules/projects/lur.e/src/index.ts"
+            ],
+            "fest/object": [
+                "./modules/projects/object.ts/src/index.ts"
+            ],
+            "fest/dom": [
+                "./modules/projects/dom.ts/src/index.ts"
+            ],
+            "fest/core": [
+                "./modules/projects/core.ts/src/index.ts"
+            ],
+            "fest/icon": [
+                "./modules/projects/icon.ts/src/index.ts"
+            ],
+            "fest/uniform": [
+                "./modules/projects/uniform.ts/src/index.ts"
+            ],
+            "fest/fl-ui": [
+                "./modules/projects/fl.ui/src/index.ts"
+            ],
+            "fest/ui": [
+                "./modules/projects/fl.ui/src/index.ts"
+            ],
+            "@fl-ui/*": [
+                "./modules/projects/fl.ui/src/ui/*"
+            ],
+            "@rs-com/*": [
+                "./apps/CrossWord/src/com/*"
+            ],
+            "@rs-core/*": [
+                "./apps/CrossWord/src/core/*"
+            ],
+            "@rs-frontend/*": [
+                "./apps/CrossWord/src/frontend/*"
+            ],
+            "@rs-shared/*": [
+                "./apps/CrossWord/shared/*"
             ]
         },
         "lib": [

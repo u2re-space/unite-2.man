@@ -20,14 +20,19 @@
         "@rollup/rollup-win32-x64-msvc": "npm:@rollup/wasm-node@latest",
         "@rollup/rollup-linux-x64-gnu": "npm:@rollup/wasm-node@latest",
         "rollup": "npm:@rollup/wasm-node@latest",
-        "@vitejs/devtools": ">=0.0.0-alpha.32",
-        "vite-plugin-pwa": ">=1.2.0"
+        "@vitejs/devtools": ">=0.0.0-alpha.32"
     },
     "optionalDependencies": {
         "@rollup/rollup-linux-x64-gnu": "npm:@rollup/wasm-node@latest",
         "@rollup/rollup-win32-x64-msvc": "npm:@rollup/wasm-node@latest",
         "@rollup/wasm-node": ">=4.57.1",
-        "rollup": "npm:@rollup/wasm-node@latest"
+        "rollup": "npm:@rollup/wasm-node@latest",
+        "@rolldown/binding-linux-arm64-gnu": "1.0.0-rc.12",
+        "@rolldown/binding-linux-x64-gnu": "1.0.0-rc.12",
+        "@rolldown/binding-linux-x64-musl": "1.0.0-rc.12",
+        "@rolldown/binding-darwin-arm64": "1.0.0-rc.12",
+        "@rolldown/binding-darwin-x64": "1.0.0-rc.12",
+        "@rolldown/binding-win32-x64-msvc": "1.0.0-rc.12"
     },
     "resolutions": {
         "@rollup/rollup-win32-x64-msvc": "npm:@rollup/wasm-node@latest",
