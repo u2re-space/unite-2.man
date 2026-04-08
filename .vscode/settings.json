@@ -4,5 +4,6 @@
         "*": false,
         "plaintext": false,
         "markdown": false
-    }
+    },
+    "java.configuration.updateBuildConfiguration": "automatic"
 }
