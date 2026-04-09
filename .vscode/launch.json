@@ -1,12 +1,17 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "type": "msedge",
-            "request": "attach",
-            "name": "Attach to Edge (UB)",
-            "port": 9222,
-            "webRoot": "${workspaceFolder}"
-        }
-    ]
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "CWSP Android WebView (attach :9222)",
+      "type": "chrome",
+      "request": "attach",
+      "port": 9222,
+      "webRoot": "${workspaceFolder}/apps/CrossWord",
+      "sourceMaps": true,
+      "sourceMapPathOverrides": {
+        "webpack:///./*": "${webRoot}/*",
+        "webpack:///./~/*": "${webRoot}/node_modules/*"
+      }
+    }
+  ]
 }

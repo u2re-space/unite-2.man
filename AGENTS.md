@@ -12,7 +12,7 @@ This project requires **Node.js >= 24**. Use `nvm use 24` before any command. Th
 
 ### Package manager
 
-npm workspaces. Root `npm install` hoists all workspace deps. No lockfile is committed; the first install generates one. A `postinstall` script patches Rollup WASM bindings automatically.
+npm workspaces. Root `npm install` hoists all workspace deps. No lockfile is committed; the first install generates one.
 
 ### Git submodules
 
