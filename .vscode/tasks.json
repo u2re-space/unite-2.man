@@ -2,13 +2,137 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "cwsp: adb forward WebView devtools (9222)",
+      "label": "CWSP Capacitor: adb forward WebView devtools (9222)",
       "type": "shell",
       "command": "${workspaceFolder}/runtime/cwsp/scripts/adb-forward-webview-debug.sh",
       "problemMatcher": [],
       "presentation": {
         "reveal": "always",
         "panel": "shared"
+      }
+    },
+    {
+      "label": "CWSP Capacitor: Attach or launch debug (auto device)",
+      "type": "shell",
+      "command": "./gradlew",
+      "args": [":app:attachDebug"],
+      "windows": {
+        "command": "gradlew.bat"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/runtime/cwsp/android"
+      },
+      "group": "build",
+      "detail": "Assembles and installs Capacitor cwsp debug APK, then launches on first connected ADB device; falls back to 192.168.0.196:5555 (see app/build.gradle attachDebug)."
+    },
+    {
+      "label": "CWSP Capacitor: Connect 192.168.0.196:5555",
+      "type": "shell",
+      "command": "adb",
+      "args": ["connect", "192.168.0.196:5555"],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "CWSP Capacitor: Connect 192.168.0.208:5555",
+      "type": "shell",
+      "command": "adb",
+      "args": ["connect", "192.168.0.208:5555"],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "CWSP Capacitor: Attach or launch debug (192.168.0.196:5555)",
+      "type": "shell",
+      "command": "./gradlew",
+      "args": [":app:attachDebug", "-PadbSerial=192.168.0.196:5555"],
+      "windows": {
+        "command": "gradlew.bat"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/runtime/cwsp/android"
+      },
+      "group": "build",
+      "detail": "Build, install and launch Capacitor cwsp debug APK on 192.168.0.196:5555."
+    },
+    {
+      "label": "CWSP Capacitor: Attach or launch debug (192.168.0.208:5555)",
+      "type": "shell",
+      "command": "./gradlew",
+      "args": [":app:attachDebug", "-PadbSerial=192.168.0.208:5555"],
+      "windows": {
+        "command": "gradlew.bat"
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/runtime/cwsp/android"
+      },
+      "group": "build",
+      "detail": "Build, install and launch Capacitor cwsp debug APK on 192.168.0.208:5555."
+    },
+    {
+      "label": "CWSP Capacitor: Attach or launch debug (forced target)",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "-lc",
+        "adb connect \"${input:androidTargetSerial}\" >/dev/null 2>&1 || true; ./gradlew :app:attachDebug -PadbSerial=\"${input:androidTargetSerial}\""
+      ],
+      "windows": {
+        "command": "powershell",
+        "args": [
+          "-NoProfile",
+          "-Command",
+          "Set-Location -LiteralPath '${workspaceFolder}/runtime/cwsp/android'; adb connect \"${input:androidTargetSerial}\" | Out-Null; .\\gradlew.bat :app:attachDebug \"-PadbSerial=${input:androidTargetSerial}\""
+        ]
+      },
+      "options": {
+        "cwd": "${workspaceFolder}/runtime/cwsp/android"
+      },
+      "group": "build",
+      "detail": "Connects ADB if needed, then builds, installs and launches Capacitor cwsp on the given serial/IP:port."
+    },
+    {
+      "label": "CWSP Capacitor: Logcat (192.168.0.196:5555)",
+      "type": "shell",
+      "command": "adb",
+      "args": ["-s", "192.168.0.196:5555", "logcat"],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "CWSP Capacitor: Logcat (192.168.0.208:5555)",
+      "type": "shell",
+      "command": "adb",
+      "args": ["-s", "192.168.0.208:5555", "logcat"],
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "CWSP Capacitor: Connected devices (ADB)",
+      "type": "shell",
+      "command": "adb",
+      "args": ["devices", "-l"],
+      "group": "build",
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "androidTargetSerial",
+      "type": "command",
+      "command": "extension.commandvariable.remember",
+      "args": {
+        "key": "androidTargetSerial",
+        "default": "${promptStringRemember:androidTargetSerialPrompt}",
+        "transform": {
+          "promptStringRemember": {
+            "androidTargetSerialPrompt": {
+              "key": "androidTargetSerial",
+              "description": "ADB serial/IP:port (Capacitor cwsp)",
+              "default": "192.168.0.196:5555"
+            }
+          }
+        }
       }
     }
   ]
