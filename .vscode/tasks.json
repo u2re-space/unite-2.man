@@ -12,7 +12,7 @@
       }
     },
     {
-      "label": "CWSP Capacitor: Attach or launch debug (auto device)",
+      "label": "CWSAndroid (hybrid cwsp): Attach or launch debug (auto device)",
       "type": "shell",
       "command": "./gradlew",
       "args": [":app:attachDebug"],
@@ -20,13 +20,13 @@
         "command": "gradlew.bat"
       },
       "options": {
-        "cwd": "${workspaceFolder}/runtime/cwsp/android"
+        "cwd": "${workspaceFolder}/apps/CWSAndroid"
       },
       "group": "build",
-      "detail": "Assembles and installs Capacitor cwsp debug APK, then launches on first connected ADB device; falls back to 192.168.0.196:5555 (see app/build.gradle attachDebug)."
+      "detail": "installCwspDebug + launch space.u2re.cwsp (default -PcwsAdbFlavor=cwsp). Requires runtime/cwsp dist/capacitor for embedded WebView."
     },
     {
-      "label": "CWSP Capacitor: Connect 192.168.0.196:5555",
+      "label": "CWSAndroid (hybrid cwsp): Connect 192.168.0.196:5555",
       "type": "shell",
       "command": "adb",
       "args": ["connect", "192.168.0.196:5555"],
@@ -34,7 +34,7 @@
       "problemMatcher": []
     },
     {
-      "label": "CWSP Capacitor: Connect 192.168.0.208:5555",
+      "label": "CWSAndroid (hybrid cwsp): Connect 192.168.0.208:5555",
       "type": "shell",
       "command": "adb",
       "args": ["connect", "192.168.0.208:5555"],
@@ -42,7 +42,7 @@
       "problemMatcher": []
     },
     {
-      "label": "CWSP Capacitor: Attach or launch debug (192.168.0.196:5555)",
+      "label": "CWSAndroid (hybrid cwsp): Attach or launch debug (192.168.0.196:5555)",
       "type": "shell",
       "command": "./gradlew",
       "args": [":app:attachDebug", "-PadbSerial=192.168.0.196:5555"],
@@ -50,13 +50,13 @@
         "command": "gradlew.bat"
       },
       "options": {
-        "cwd": "${workspaceFolder}/runtime/cwsp/android"
+        "cwd": "${workspaceFolder}/apps/CWSAndroid"
       },
       "group": "build",
-      "detail": "Build, install and launch Capacitor cwsp debug APK on 192.168.0.196:5555."
+      "detail": "Build, install and launch cwsp hybrid on 192.168.0.196:5555."
     },
     {
-      "label": "CWSP Capacitor: Attach or launch debug (192.168.0.208:5555)",
+      "label": "CWSAndroid (hybrid cwsp): Attach or launch debug (192.168.0.208:5555)",
       "type": "shell",
       "command": "./gradlew",
       "args": [":app:attachDebug", "-PadbSerial=192.168.0.208:5555"],
@@ -64,13 +64,13 @@
         "command": "gradlew.bat"
       },
       "options": {
-        "cwd": "${workspaceFolder}/runtime/cwsp/android"
+        "cwd": "${workspaceFolder}/apps/CWSAndroid"
       },
       "group": "build",
-      "detail": "Build, install and launch Capacitor cwsp debug APK on 192.168.0.208:5555."
+      "detail": "Build, install and launch cwsp hybrid on 192.168.0.208:5555."
     },
     {
-      "label": "CWSP Capacitor: Attach or launch debug (forced target)",
+      "label": "CWSAndroid (hybrid cwsp): Attach or launch debug (forced target)",
       "type": "shell",
       "command": "bash",
       "args": [
@@ -82,17 +82,17 @@
         "args": [
           "-NoProfile",
           "-Command",
-          "Set-Location -LiteralPath '${workspaceFolder}/runtime/cwsp/android'; adb connect \"${input:androidTargetSerial}\" | Out-Null; .\\gradlew.bat :app:attachDebug \"-PadbSerial=${input:androidTargetSerial}\""
+          "Set-Location -LiteralPath '${workspaceFolder}/apps/CWSAndroid'; adb connect \"${input:androidTargetSerial}\" | Out-Null; .\\gradlew.bat :app:attachDebug \"-PadbSerial=${input:androidTargetSerial}\""
         ]
       },
       "options": {
-        "cwd": "${workspaceFolder}/runtime/cwsp/android"
+        "cwd": "${workspaceFolder}/apps/CWSAndroid"
       },
       "group": "build",
-      "detail": "Connects ADB if needed, then builds, installs and launches Capacitor cwsp on the given serial/IP:port."
+      "detail": "Connects ADB if needed, then installs/launches cwsp hybrid (space.u2re.cwsp)."
     },
     {
-      "label": "CWSP Capacitor: Logcat (192.168.0.196:5555)",
+      "label": "CWSAndroid (hybrid cwsp): Logcat (192.168.0.196:5555)",
       "type": "shell",
       "command": "adb",
       "args": ["-s", "192.168.0.196:5555", "logcat"],
@@ -100,7 +100,7 @@
       "problemMatcher": []
     },
     {
-      "label": "CWSP Capacitor: Logcat (192.168.0.208:5555)",
+      "label": "CWSAndroid (hybrid cwsp): Logcat (192.168.0.208:5555)",
       "type": "shell",
       "command": "adb",
       "args": ["-s", "192.168.0.208:5555", "logcat"],
@@ -108,7 +108,7 @@
       "problemMatcher": []
     },
     {
-      "label": "CWSP Capacitor: Connected devices (ADB)",
+      "label": "CWSAndroid (hybrid cwsp): Connected devices (ADB)",
       "type": "shell",
       "command": "adb",
       "args": ["devices", "-l"],
@@ -128,7 +128,7 @@
           "promptStringRemember": {
             "androidTargetSerialPrompt": {
               "key": "androidTargetSerial",
-              "description": "ADB serial/IP:port (Capacitor cwsp)",
+              "description": "ADB serial/IP:port (CWSAndroid cwsp hybrid)",
               "default": "192.168.0.196:5555"
             }
           }
