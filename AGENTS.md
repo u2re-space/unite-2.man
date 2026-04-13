@@ -74,3 +74,20 @@ The CrossWord app at `apps/CrossWord` runs via Vite (`npx vite dev`). Key setup 
 
 - PWA build: `npm run build:pwa` (from `apps/CrossWord`)
 - CRX build: `npm run build:crx` (from `apps/CrossWord`)
+
+---
+
+## Some specifications
+
+Search and read in:
+- `/home/u2re-dev/U2RE.space/modules/projects/uniform.ts/src/newer/` (internal)
+- `/home/u2re-dev/U2RE.space/runtime/cwsp/endpoint/` (network)
+
+---
+
+## Выбор модели (Model Selection)
+
+- **Анализ архитектуры**: Claude 4.6 (Sonnet / Opus) / GPT-5.4 + max thinking
+- **Баги, тесты, доработки**: Claude 4.5 Haiku / Gemini 3 Flash / GPT-5.3-codex-spark (для экономии токенов и времени на простых задачах)
+- **Архитектура, план**: Claude 4.6 (Sonnet / Opus) / Gemini 3.1 Pro / GPT-5.4
+- **Документации или спецификации**: Claude 4.6 (Sonnet / Opus) / Gemini 3.1 Pro / GPT-5.4 (low или medium thinking)
