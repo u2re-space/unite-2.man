@@ -1,6 +1,6 @@
 ---
 description: Unify file/blob/base64/url/uri into hash-named DataAsset with minimal metadata.
-globs: *.ts,*.tsx,*.js,*.mjs
+globs: "*.ts,*.tsx,*.js,*.mjs"
 alwaysApply: true
 ---
 
@@ -27,3 +27,9 @@ When working with binary/text payloads, treat data sources as one concept:
 
 - Prefer compact envelope types (e.g. `DataAssetEnvelope`) for cross-context transfers.
 - Keep payload shape stable; avoid ad-hoc per-feature data contracts for the same file/blob/base64/url concept.
+
+## Some specifications
+
+Search and read in:
+- `/home/u2re-dev/U2RE.space/modules/projects/uniform.ts/src/newer/` (internal)
+- `/home/u2re-dev/U2RE.space/runtime/cwsp/endpoint/` (network)

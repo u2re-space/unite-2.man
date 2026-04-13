@@ -40,3 +40,11 @@ alwaysApply: false
 - Prefer cohesive feature modules over fragmented micro-files.
 - Avoid circular dependencies and unnecessary abstractions.
 - Preserve API boundaries; refactor behind stable exports.
+
+---
+
+## Some specifications
+
+Search and read in:
+- `/home/u2re-dev/U2RE.space/modules/projects/uniform.ts/src/newer/` (internal)
+- `/home/u2re-dev/U2RE.space/runtime/cwsp/endpoint/` (network)
