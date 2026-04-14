@@ -1,6 +1,6 @@
 ---
 description: Unify file/blob/base64/url/uri into hash-named DataAsset with minimal metadata.
-globs: "*.ts,*.tsx,*.js,*.mjs"
+globs: *.ts,*.tsx,*.js,*.mjs
 alwaysApply: true
 ---
 

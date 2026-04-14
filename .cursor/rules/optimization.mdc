@@ -1,6 +1,6 @@
 ---
 description: Token optimization, concise output, and low-noise workflow
-globs: "*"
+globs: *
 alwaysApply: true
 ---
 

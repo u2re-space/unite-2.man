@@ -1,5 +1,5 @@
 ---
-globs: "*.ts,*.tsx,*.mjs,*.js,*.scss,*.css"
+globs: *.ts,*.tsx,*.mjs,*.js,*.scss,*.css
 alwaysApply: false
 ---
 

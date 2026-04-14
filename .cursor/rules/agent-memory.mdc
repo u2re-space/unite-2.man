@@ -1,6 +1,6 @@
 ---
 description: Memory persistence and context retention using Pantry
-globs: "*"
+globs: *
 ---
 # Долгосрочная память агента (Pantry)
 
