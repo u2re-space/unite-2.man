@@ -1,101 +1,212 @@
 # AGENTS.md
 
-## Cursor Cloud specific instructions
+## Pantry — persistent project notes
 
-### Project overview
+This project uses persistent notes via the `pantry` MCP tools.
 
-Unite-2 is a frontend-only monorepo containing shared `fest/*` libraries and multiple web apps (`apps/*`). The primary application scoped for development is **CrossWord** (`apps/CrossWord`), a PWA/Chrome extension markdown viewer/editor.
+### Required at session start
 
-### Node version
+Before doing any substantive work, load existing context from previous sessions:
 
-This project requires **Node.js >= 24**. Use `nvm use 24` before any command. The default nvm alias is already set to 24.
+1. Call `pantry_context` to retrieve recent project notes.
+2. If the task is about a specific feature, bug, subsystem, file, or topic, also call `pantry_search` with relevant keywords.
 
-### Package manager
+Do not skip this step. Important context may exist only in Pantry and may not be visible in the repository.
 
-npm workspaces. Root `npm install` hoists all workspace deps. No lockfile is committed; the first install generates one.
+### Required at session end
 
-### Git submodules
+If the session produced any durable outcome, store it in Pantry before finishing. This includes:
 
-All library code and apps live in git submodules. They must be initialized before anything works:
-```
-git submodule update --init --recursive
-```
+- code changes
+- architectural or implementation decisions
+- bug investigations or root causes
+- useful discoveries
+- non-obvious project context that would help a future agent
 
-### CrossWord dev server
+Use `pantry_store` with:
 
-The CrossWord app at `apps/CrossWord` runs via Vite (`npx vite dev`). Key setup caveats:
+- `title`: short descriptive title
+- `what`: what happened or what was decided
+- `why`: the reasoning behind it
+- `impact`: what changed or what is affected
+- `category`: one of `decision`, `pattern`, `bug`, `context`, `learning`
+- `details`: enough detail for a future agent with no prior context
 
-1. **HTTPS certificate**: The shared vite config imports `../private/https/certificate.mjs`. This file is not tracked in git. Create it by generating a self-signed cert:
-   ```
-   mkdir -p apps/CrossWord/private/https
-   openssl req -x509 -newkey rsa:2048 -nodes \
-     -keyout apps/CrossWord/private/https/key.pem \
-     -out apps/CrossWord/private/https/cert.pem \
-     -days 365 -subj '/CN=localhost'
-   ```
-   Then create `apps/CrossWord/private/https/certificate.mjs`:
-   ```js
-   import { readFileSync } from "node:fs";
-   import { resolve, dirname } from "node:path";
-   import { fileURLToPath } from "node:url";
-   const __dirname = dirname(fileURLToPath(import.meta.url));
-   export default {
-       key: readFileSync(resolve(__dirname, "key.pem")),
-       cert: readFileSync(resolve(__dirname, "cert.pem")),
-   };
-   ```
-
-2. **Fest library symlinks**: `apps/CrossWord/shared/fest/` needs symlinks pointing to `modules/projects/*/src`. Create them:
-   ```
-   mkdir -p apps/CrossWord/shared/fest
-   cd apps/CrossWord/shared/fest
-   ln -sf ../../../../modules/projects/core.ts/src core
-   ln -sf ../../../../modules/projects/dom.ts/src dom
-   ln -sf ../../../../modules/projects/fl.ui/src fl-ui
-   ln -sf ../../../../modules/projects/icon.ts/src icon
-   ln -sf ../../../../modules/projects/lur.e/src lure
-   ln -sf ../../../../modules/projects/object.ts/src object
-   ln -sf ../../../../modules/projects/uniform.ts/src uniform
-   ln -sf ../../../../modules/projects/veela.css/src veela
-   ```
-   Also copy polyfill files: `cp -r modules/shared/fest/polyfill apps/CrossWord/shared/fest/polyfill`
-
-3. **Font registry stub**: `modules/projects/veela.css/src/ts/font-registry.ts` may not exist. If missing, create a stub exporting an empty object to prevent import errors.
-
-4. **Port binding**: The Vite config defaults to port 443. Either use `--port 5173` or grant Node low-port capability via `sudo setcap 'cap_net_bind_service=+ep' $(which node)`.
-
-### Lint & type checks
-
-- **Stylelint**: `npx stylelint "src/**/*.scss" "src/**/*.css" --allow-empty-input` (from `apps/CrossWord`)
-- **TypeScript**: `npx tsc --noEmit --project tsconfig.json` (from `apps/CrossWord`)
-- **ESLint**: The root `eslint.config.js` has pre-existing rule-name issues in flat-config format (e.g. `braceStyle` not found). ESLint will error on these until they are fixed upstream.
-
-### Build
-
-- PWA build: `npm run build:pwa` (from `apps/CrossWord`)
-- CRX build: `npm run build:crx` (from `apps/CrossWord`)
+Do not skip this step for tasks that involved changes, decisions, bugs, or learnings. Pantry is the project’s long-term memory across sessions.
 
 ---
 
-## Some specifications
+## Token usage optimization
 
-Search and read in:
-- `/home/u2re-dev/U2RE.space/modules/projects/uniform.ts/src/newer/` (internal)
-- `/home/u2re-dev/U2RE.space/runtime/cwsp/endpoint/` (network)
+Keep context usage efficient:
 
----
-
-## Выбор модели (Model Selection)
-
-- **Анализ архитектуры**: Claude 4.6 (Sonnet / Opus) / GPT-5.4 + max thinking
-- **Баги, тесты, доработки**: Claude 4.5 Haiku / Gemini 3 Flash / GPT-5.3-codex-spark (для экономии токенов и времени на простых задачах)
-- **Архитектура, план**: Claude 4.6 (Sonnet / Opus) / Gemini 3.1 Pro / GPT-5.4
-- **Документации или спецификации**: Claude 4.6 (Sonnet / Opus) / Gemini 3.1 Pro / GPT-5.4 (low или medium thinking)
+- Prefer **Grep / ripgrep** when locating functions, classes, variables, or symbols instead of opening large files.
+- Read only the relevant file ranges when a file is large.
+- Do not proactively load generated or vendor output into context, such as:
+  - `build/`
+  - `.gradle/`
+  - minified bundles
+  - other generated artifacts
+- Be concise in both internal reasoning and user-facing responses.
 
 ---
 
-## Доступы SSH
+## Cursor Cloud instructions
 
-- (`U2RE@192.168.0.110` или `U2RE@192.168.0.111`) и/или 
-- (`u2re-dev@192.168.0.200` или `u2re-dev@192.168.0.201`)
-- Для внешки (`u2re-dev@45.147.121.152`) с VDS например
+### Project summary
+
+This repository is **CWS (CrossWord Sync)**, a Kotlin / Jetpack Compose Android application.
+
+Key facts:
+
+- The **Kotlin package / manifest namespace** must remain `space.u2re.cws`.
+- The **`applicationId`** depends on the selected product flavor (see below).
+- The app supports multi-device synchronization, clipboard sharing, encrypted communication, and command forwarding.
+
+### Environment prerequisites
+
+The Cloud VM expects the following setup:
+
+- **JDK 21** at `/usr/lib/jvm/java-21-openjdk-amd64`
+  - `JAVA_HOME` must be set
+- **Android SDK** at `/opt/android-sdk`
+  - Required components:
+    - `platforms;android-36`
+    - `build-tools;36.0.0`
+    - `platform-tools`
+- A `local.properties` file must exist in the project root with:
+
+  `sdk.dir=/opt/android-sdk`
+
+This file is gitignored.
+
+### Common commands (Android)
+
+| Task | Command |
+|---|---|
+| Assemble debug (**default hybrid** `space.u2re.cwsp` — CWSP + embedded WebView) | `./gradlew :app:assembleCwspDebug` or `npm run build` |
+| Assemble debug (standalone `space.u2re.cws` — Kotlin-only) | `./gradlew :app:assembleCwsDebug` or `npm run assemble:cws` |
+| Lint (`cws` debug) | `./gradlew :app:lintCwsDebug` |
+| Unit tests | `./gradlew :app:testCwsDebugUnitTest` or `./gradlew :app:testCwspDebugUnitTest` |
+| Full build (compile + test + lint) | `./gradlew build` |
+
+All Gradle commands require both `JAVA_HOME` and `ANDROID_HOME` to be set.
+
+### npm command defaults
+
+These commands default to the **`cwsp` hybrid flavor** (`space.u2re.cwsp`):
+
+- `npm run dev`
+- `npm run assemble`
+- `npm run build`
+
+Use these commands for the Kotlin-only standalone flavor **`cws`** (`space.u2re.cws`):
+
+- `npm run dev:cws`
+- `npm run assemble:cws`
+
+### Product flavors
+
+| Flavor | `applicationId` | Purpose |
+|---|---|---|
+| `cwsp` | `space.u2re.cwsp` | **Default hybrid flavor**: embedded CWSP WebView + Kotlin. Matches `runtime/cwsp/capacitor.config.ts`. See Settings → Open web shell. |
+| `cws` | `space.u2re.cws` | Kotlin / Compose-first standalone flavor. Use with `-PcwsAdbFlavor=cws` for `attachDebug`, or use `npm run dev:cws`. |
+
+`attachDebug` uses **`cwsp`** by default.  
+To target the Kotlin-only package, pass:
+
+`-PcwsAdbFlavor=cws`
+
+---
+
+## CWSP Capacitor integration
+
+The app includes **Capacitor** (`@capacitor/android` from the monorepo at `runtime/cwsp`) as a second UI shell alongside Compose.
+
+### How it is wired
+
+- **Gradle module inclusion**
+  - Gradle includes `:capacitor-android` from the nearest ancestor directory containing:
+    `runtime/cwsp/node_modules/@capacitor/android/capacitor`
+  - You can override this path with `CWS_CAPACITOR_ANDROID_DIR`.
+
+- **Repositories**
+  - `dependencyResolutionManagement` uses `PREFER_SETTINGS`.
+  - This avoids build failures caused by the Capacitor library declaring its own `repositories {}` block, which would otherwise conflict with `FAIL_ON_PROJECT_REPOS`.
+
+- **Shared Gradle properties**
+  - Root-level `extra` properties in `build.gradle.kts` mirror `runtime/cwsp/android/variables.gradle`.
+  - This ensures the Capacitor library sees the same SDK and AndroidX versions as the standalone Capacitor Android project.
+
+- **Web asset sync**
+  - `preBuild` runs `syncCwspCapacitorWeb`.
+  - This copies:
+
+    `runtime/cwsp/dist/capacitor` → `app/src/main/assets/public`
+
+    when that source directory exists.
+
+  - To generate those assets, run one of:
+    - `npm run build:capacitor:web`
+    - `npm run build:capacitor`
+    - `node scripts/build-cws-android.mjs --with-capacitor-web` from the CWSP side
+
+- **UI entry point**
+  - In the app UI: **Settings → General → Open web shell**
+  - This launches `CapacitorWebActivity` (`BridgeActivity`)
+
+---
+
+## Known gotchas
+
+- **No physical device or emulator is available in the Cloud VM.**
+  - You can build, lint, and inspect outputs.
+  - You cannot install or run the app on-device in this environment.
+
+- The `endpoint` and `airpad` symlinks in the repo root are **broken**.
+  - They point to a sibling repo: `../U2RE.space/`
+  - That repo is not present in this workspace.
+  - These symlinks are **not required for building**.
+
+- The unit test task may report `NO-SOURCE`.
+  - This is expected because the project currently has no unit test files.
+
+- Gradle may auto-download missing SDK components during the first build
+  (for example `build-tools;35`).
+  - This is normal.
+
+- The `audioswitch-stub` module is a stub replacement for a Twilio dependency.
+  - It contains no Kotlin sources.
+
+---
+
+## Additional code locations
+
+When the task is relevant, also inspect these paths:
+
+- `/home/u2re-dev/U2RE.space/modules/projects/uniform.ts/src/newer/` — internal
+- `/home/u2re-dev/U2RE.space/runtime/cwsp/endpoint/` — network-related
+
+---
+
+## Model selection
+
+- **Analysis / architecture / planning:** Claude Opus 4.6, GPT 5.4 (`high` or `xhigh`), Gemini 3.1 Pro
+- **Coding / implementation / refactoring:** GPT-5.4 (`low` or `medium`), Claude 4.6 Sonnet, Gemini 3.1 Pro
+- **Edits / fixes / refinements:** GPT-5.3-codex-spark, GPT-5.4 (`instant`, `none`, or `minimal` reasoning), Claude 4.5 Haiku, Gemini 3 Flash
+- **Documentation / specs:** GPT-5.4 (`low` or `medium`), Claude 4.6 Sonnet, Gemini 3.1 Pro
+- **Recognition / scanning / images:** GPT-5.4 (`low`, `instant`, `none`, or `minimal`), Claude 4.6 Sonnet, Gemini 3.1 Pro, or Gemini 3 Flash
+
+---
+
+## SSH access
+
+Available SSH targets include:
+
+- `ssh U2RE@192.168.0.110`
+- `ssh U2RE@192.168.0.111`
+- `ssh u2re-dev@192.168.0.200`
+- `ssh u2re-dev@192.168.0.201`
+- External access / VDS example:
+  - `ssh u2re-dev@45.147.121.152`
+  - `ssh root@45.150.9.153 -p 22 -i ~/.ssh/id_ecdsa`
