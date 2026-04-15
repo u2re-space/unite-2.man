@@ -51,6 +51,37 @@ Keep context usage efficient:
 
 ---
 
+## Commenting and special comments
+
+When editing `*.ts` / `*.tsx` / `*.js` / `*.mjs` files:
+
+- Add comments for intent, invariants, side effects, protocol/data-shape expectations, lifecycle, trust boundaries, and non-obvious tradeoffs.
+- Prefer module-level block comments for non-trivial files and JSDoc for exported functions, classes, and methods when behavior is not obvious from the signature.
+- Do not add narration comments that merely restate syntax or variable assignments.
+- Keep comments close to the code they describe, and update or delete stale comments in the same edit.
+- Extend an existing good overview comment instead of stacking duplicate comment blocks.
+
+Use these special markers consistently when they help:
+
+- `NOTE:` general local context for future humans or AI.
+- `WHY:` rationale that is not obvious from the implementation.
+- `INVARIANT:` a property that must remain true across edits.
+- `TODO(owner/date-or-issue):` a concrete follow-up with enough context to act.
+- `FIXME:` known wrong behavior that should be corrected soon.
+- `HACK:` temporary workaround; include the intended removal condition.
+- `COMPAT:` compatibility behavior for browser/protocol/migration quirks.
+- `SECURITY:` validation or secret-handling boundaries.
+- `PERF:` hot-path or latency-sensitive behavior.
+- `AI-READ:` rare handoff note for hidden contracts or repo-specific traps.
+
+Comment hygiene rules:
+
+- Do not introduce marker spam; one precise comment is better than many weak ones.
+- Do not leave bare `TODO` / `FIXME` comments without actionable context.
+- Preserve valid special comments during refactors, but remove them once they stop being true.
+
+---
+
 ## Cursor Cloud instructions
 
 ### Project summary

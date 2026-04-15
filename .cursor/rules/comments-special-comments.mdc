@@ -1,0 +1,33 @@
+---
+description: TS/JS comment and special comment conventions
+globs: **/*.{ts,tsx,js,mjs}
+alwaysApply: false
+---
+
+# Comments And Special Markers
+
+- Add comments to explain intent, invariants, lifecycle, protocol shape, trust boundaries, or non-obvious side effects.
+- Prefer module-level block comments for non-trivial files and JSDoc for exported functions, classes, and methods whose behavior is not obvious from the signature.
+- Do not narrate syntax or restate the code line-by-line.
+- Keep comments adjacent to the code they describe and remove or update stale comments during edits.
+- If a file already has a clear module doc, extend it instead of adding duplicate overview comments.
+
+## Canonical special comment markers
+
+- `NOTE:` general local context that helps humans and AI read the code faster.
+- `WHY:` rationale for a choice that is not obvious from the implementation.
+- `INVARIANT:` behavior or state that must remain true across edits.
+- `TODO(name/date-or-issue):` planned follow-up with an owner, date, or tracking reference when possible.
+- `FIXME:` known incorrect behavior that should be corrected soon.
+- `HACK:` intentional workaround; include the removal condition.
+- `COMPAT:` browser, protocol, migration, or backward-compatibility behavior.
+- `SECURITY:` trust boundary, validation requirement, or secret-handling constraint.
+- `PERF:` hot path, cache expectation, batching rule, or latency-sensitive behavior.
+- `AI-READ:` rare handoff note for code with hidden contracts or repo-specific traps that are easy to break.
+
+## Editing rules
+
+- Preserve valid special comments when refactoring the behavior they describe.
+- Delete special comments that no longer match the code.
+- Do not introduce marker spam; one precise comment beats many weak ones.
+- Do not add bare `TODO`/`FIXME` comments without enough context to act on them later.
