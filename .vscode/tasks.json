@@ -20,7 +20,7 @@
         "command": "gradlew.bat"
       },
       "options": {
-        "cwd": "${workspaceFolder}/apps/CWSAndroid"
+        "cwd": "${workspaceFolder}/runtime/CWSAndroid"
       },
       "group": "build",
       "detail": "installCwspDebug + launch space.u2re.cwsp (default -PcwsAdbFlavor=cwsp). Requires runtime/cwsp dist/capacitor for embedded WebView."
@@ -50,7 +50,7 @@
         "command": "gradlew.bat"
       },
       "options": {
-        "cwd": "${workspaceFolder}/apps/CWSAndroid"
+        "cwd": "${workspaceFolder}/runtime/CWSAndroid"
       },
       "group": "build",
       "detail": "Build, install and launch cwsp hybrid on 192.168.0.196:5555."
@@ -64,7 +64,7 @@
         "command": "gradlew.bat"
       },
       "options": {
-        "cwd": "${workspaceFolder}/apps/CWSAndroid"
+        "cwd": "${workspaceFolder}/runtime/CWSAndroid"
       },
       "group": "build",
       "detail": "Build, install and launch cwsp hybrid on 192.168.0.208:5555."
@@ -82,11 +82,11 @@
         "args": [
           "-NoProfile",
           "-Command",
-          "Set-Location -LiteralPath '${workspaceFolder}/apps/CWSAndroid'; adb connect \"${input:androidTargetSerial}\" | Out-Null; .\\gradlew.bat :app:attachDebug \"-PadbSerial=${input:androidTargetSerial}\""
+          "Set-Location -LiteralPath '${workspaceFolder}/runtime/CWSAndroid'; adb connect \"${input:androidTargetSerial}\" | Out-Null; .\\gradlew.bat :app:attachDebug \"-PadbSerial=${input:androidTargetSerial}\""
         ]
       },
       "options": {
-        "cwd": "${workspaceFolder}/apps/CWSAndroid"
+        "cwd": "${workspaceFolder}/runtime/CWSAndroid"
       },
       "group": "build",
       "detail": "Connects ADB if needed, then installs/launches cwsp hybrid (space.u2re.cwsp)."

@@ -17,8 +17,8 @@
       "name": "CWSAndroid (hybrid cwsp): Attach or Launch Debug (auto device)",
       "type": "android",
       "request": "attach",
-      "appSrcRoot": "${workspaceFolder}/apps/CWSAndroid/app/src/main",
-      "apkFile": "${workspaceFolder}/apps/CWSAndroid/app/build/outputs/apk/cwsp/debug/app-cwsp-debug.apk",
+      "appSrcRoot": "${workspaceFolder}/runtime/CWSAndroid/app/src/main",
+      "apkFile": "${workspaceFolder}/runtime/CWSAndroid/app/build/outputs/apk/cwsp/debug/app-cwsp-debug.apk",
       "targetDevice": "${input:androidTargetSerial}",
       "preLaunchTask": "CWSAndroid (hybrid cwsp): Attach or launch debug (auto device)",
       "android": {
@@ -29,8 +29,8 @@
       "name": "CWSAndroid (hybrid cwsp): Attach or Launch Debug (192.168.0.196:5555)",
       "type": "android",
       "request": "attach",
-      "appSrcRoot": "${workspaceFolder}/apps/CWSAndroid/app/src/main",
-      "apkFile": "${workspaceFolder}/apps/CWSAndroid/app/build/outputs/apk/cwsp/debug/app-cwsp-debug.apk",
+      "appSrcRoot": "${workspaceFolder}/runtime/CWSAndroid/app/src/main",
+      "apkFile": "${workspaceFolder}/runtime/CWSAndroid/app/build/outputs/apk/cwsp/debug/app-cwsp-debug.apk",
       "targetDevice": "192.168.0.196:5555",
       "preLaunchTask": "CWSAndroid (hybrid cwsp): Attach or launch debug (192.168.0.196:5555)",
       "android": {
@@ -41,8 +41,8 @@
       "name": "CWSAndroid (hybrid cwsp): Attach or Launch Debug (192.168.0.208:5555)",
       "type": "android",
       "request": "attach",
-      "appSrcRoot": "${workspaceFolder}/apps/CWSAndroid/app/src/main",
-      "apkFile": "${workspaceFolder}/apps/CWSAndroid/app/build/outputs/apk/cwsp/debug/app-cwsp-debug.apk",
+      "appSrcRoot": "${workspaceFolder}/runtime/CWSAndroid/app/src/main",
+      "apkFile": "${workspaceFolder}/runtime/CWSAndroid/app/build/outputs/apk/cwsp/debug/app-cwsp-debug.apk",
       "targetDevice": "192.168.0.208:5555",
       "preLaunchTask": "CWSAndroid (hybrid cwsp): Attach or launch debug (192.168.0.208:5555)",
       "android": {
@@ -53,8 +53,8 @@
       "name": "CWSAndroid (hybrid cwsp): Attach or Launch Debug (forced target)",
       "type": "android",
       "request": "attach",
-      "appSrcRoot": "${workspaceFolder}/apps/CWSAndroid/app/src/main",
-      "apkFile": "${workspaceFolder}/apps/CWSAndroid/app/build/outputs/apk/cwsp/debug/app-cwsp-debug.apk",
+      "appSrcRoot": "${workspaceFolder}/runtime/CWSAndroid/app/src/main",
+      "apkFile": "${workspaceFolder}/runtime/CWSAndroid/app/build/outputs/apk/cwsp/debug/app-cwsp-debug.apk",
       "targetDevice": "${input:androidTargetSerial}",
       "preLaunchTask": "CWSAndroid (hybrid cwsp): Attach or launch debug (forced target)",
       "android": {
