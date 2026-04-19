@@ -199,6 +199,8 @@ How &ould works our network.
 - CWSP/`endpoint` Clipboard (and/or other data) from `L-192.168.0.110` to through `https://192.168.0.200:8443/`  to `L-192.168.0.196` (local network, directly)
 - CWSP/`endpoint` Clipboard (and/or other data) from `L-192.168.0.110` to through `https://45.147.121.152:8443/` to `L-192.168.0.196` (any network of device)
 
+---
+
 ### `L-192.168.0.196` may/can be:
 
 - Simulator/debug client from `45.150.9.153` (VDS), with client token `n3v3rm1nd` instead of IP
