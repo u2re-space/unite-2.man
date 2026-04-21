@@ -1,6 +1,7 @@
 {
     "recommendations": [
-        "stylelint.vscode-stylelint"
+        "stylelint.vscode-stylelint",
+        "nativescript.nativescript"
     ],
     "unwantedRecommendations": []
 }

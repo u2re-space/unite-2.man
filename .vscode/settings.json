@@ -1,4 +1,9 @@
 {
+    "nativescript.tnsPath": "tools/ns-vscode.sh",
+    "terminal.integrated.env.linux": {
+        "ANDROID_HOME": "${env:HOME}/Android/Sdk",
+        "PATH": "${env:HOME}/Android/Sdk/platform-tools:${env:HOME}/Android/Sdk/emulator:${env:PATH}"
+    },
     "github.copilot.editor.enableAutoCompletions": false,
     "github.copilot.enable": {
         "*": false,

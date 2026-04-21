@@ -14,52 +14,55 @@
       }
     },
     {
-      "name": "CWSAndroid (hybrid cwsp): Attach or Launch Debug (auto device)",
-      "type": "android",
-      "request": "attach",
-      "appSrcRoot": "${workspaceFolder}/runtime/CWSAndroid/app/src/main",
-      "apkFile": "${workspaceFolder}/runtime/CWSAndroid/app/build/outputs/apk/cwsp/debug/app-cwsp-debug.apk",
-      "targetDevice": "${input:androidTargetSerial}",
-      "preLaunchTask": "CWSAndroid (hybrid cwsp): Attach or launch debug (auto device)",
-      "android": {
-        "projectType": "apk"
-      }
+      "name": "NativeScript (CWSAndroid): Debug Android (192.168.0.196:5555)",
+      "type": "nativescript",
+      "request": "launch",
+      "platform": "android",
+      "appRoot": "${workspaceFolder}/apps/CWSAndroid",
+      "sourceMaps": true,
+      "watch": true,
+      "emulator": false,
+      "tnsArgs": "--device 192.168.0.196:5555",
+      "preLaunchTask": "NS (CWSAndroid): adb connect 192.168.0.196:5555"
     },
     {
-      "name": "CWSAndroid (hybrid cwsp): Attach or Launch Debug (192.168.0.196:5555)",
-      "type": "android",
-      "request": "attach",
-      "appSrcRoot": "${workspaceFolder}/runtime/CWSAndroid/app/src/main",
-      "apkFile": "${workspaceFolder}/runtime/CWSAndroid/app/build/outputs/apk/cwsp/debug/app-cwsp-debug.apk",
-      "targetDevice": "192.168.0.196:5555",
-      "preLaunchTask": "CWSAndroid (hybrid cwsp): Attach or launch debug (192.168.0.196:5555)",
-      "android": {
-        "projectType": "apk"
-      }
+      "name": "NativeScript (CWSAndroid): Launch Android (any device)",
+      "type": "nativescript",
+      "request": "launch",
+      "platform": "android",
+      "appRoot": "${workspaceFolder}/apps/CWSAndroid",
+      "sourceMaps": true,
+      "watch": true
     },
     {
-      "name": "CWSAndroid (hybrid cwsp): Attach or Launch Debug (192.168.0.208:5555)",
-      "type": "android",
+      "name": "NativeScript (CWSAndroid): Attach Android (192.168.0.196:5555)",
+      "type": "nativescript",
       "request": "attach",
-      "appSrcRoot": "${workspaceFolder}/runtime/CWSAndroid/app/src/main",
-      "apkFile": "${workspaceFolder}/runtime/CWSAndroid/app/build/outputs/apk/cwsp/debug/app-cwsp-debug.apk",
-      "targetDevice": "192.168.0.208:5555",
-      "preLaunchTask": "CWSAndroid (hybrid cwsp): Attach or launch debug (192.168.0.208:5555)",
-      "android": {
-        "projectType": "apk"
-      }
+      "platform": "android",
+      "appRoot": "${workspaceFolder}/apps/CWSAndroid",
+      "sourceMaps": true,
+      "tnsArgs": "--device 192.168.0.196:5555",
+      "preLaunchTask": "NS (CWSAndroid): adb connect 192.168.0.196:5555"
     },
     {
-      "name": "CWSAndroid (hybrid cwsp): Attach or Launch Debug (forced target)",
-      "type": "android",
+      "name": "NativeScript (CWSAndroid): Debug Android (forced device)",
+      "type": "nativescript",
+      "request": "launch",
+      "platform": "android",
+      "appRoot": "${workspaceFolder}/apps/CWSAndroid",
+      "sourceMaps": true,
+      "watch": true,
+      "emulator": false,
+      "tnsArgs": "--device ${input:androidTargetSerial}",
+      "preLaunchTask": "NS (CWSAndroid): adb connect (forced target)"
+    },
+    {
+      "name": "NativeScript (CWSAndroid): Attach Android",
+      "type": "nativescript",
       "request": "attach",
-      "appSrcRoot": "${workspaceFolder}/runtime/CWSAndroid/app/src/main",
-      "apkFile": "${workspaceFolder}/runtime/CWSAndroid/app/build/outputs/apk/cwsp/debug/app-cwsp-debug.apk",
-      "targetDevice": "${input:androidTargetSerial}",
-      "preLaunchTask": "CWSAndroid (hybrid cwsp): Attach or launch debug (forced target)",
-      "android": {
-        "projectType": "apk"
-      }
+      "platform": "android",
+      "appRoot": "${workspaceFolder}/apps/CWSAndroid",
+      "sourceMaps": true
     }
   ],
   "inputs": [
@@ -74,7 +77,7 @@
           "promptStringRemember": {
             "androidTargetSerialPrompt": {
               "key": "androidTargetSerial",
-              "description": "ADB serial/IP:port (CWSAndroid cwsp hybrid)",
+              "description": "ADB serial/IP:port (NativeScript CWSAndroid)",
               "default": "192.168.0.196:5555"
             }
           }

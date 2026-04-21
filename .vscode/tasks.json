@@ -12,106 +12,143 @@
       }
     },
     {
-      "label": "CWSAndroid (hybrid cwsp): Attach or launch debug (auto device)",
-      "type": "shell",
-      "command": "./gradlew",
-      "args": [":app:attachDebug"],
-      "windows": {
-        "command": "gradlew.bat"
-      },
-      "options": {
-        "cwd": "${workspaceFolder}/runtime/CWSAndroid"
-      },
-      "group": "build",
-      "detail": "installCwspDebug + launch space.u2re.cwsp (default -PcwsAdbFlavor=cwsp). Requires runtime/cwsp dist/capacitor for embedded WebView."
-    },
-    {
-      "label": "CWSAndroid (hybrid cwsp): Connect 192.168.0.196:5555",
-      "type": "shell",
-      "command": "adb",
-      "args": ["connect", "192.168.0.196:5555"],
-      "group": "build",
-      "problemMatcher": []
-    },
-    {
-      "label": "CWSAndroid (hybrid cwsp): Connect 192.168.0.208:5555",
-      "type": "shell",
-      "command": "adb",
-      "args": ["connect", "192.168.0.208:5555"],
-      "group": "build",
-      "problemMatcher": []
-    },
-    {
-      "label": "CWSAndroid (hybrid cwsp): Attach or launch debug (192.168.0.196:5555)",
-      "type": "shell",
-      "command": "./gradlew",
-      "args": [":app:attachDebug", "-PadbSerial=192.168.0.196:5555"],
-      "windows": {
-        "command": "gradlew.bat"
-      },
-      "options": {
-        "cwd": "${workspaceFolder}/runtime/CWSAndroid"
-      },
-      "group": "build",
-      "detail": "Build, install and launch cwsp hybrid on 192.168.0.196:5555."
-    },
-    {
-      "label": "CWSAndroid (hybrid cwsp): Attach or launch debug (192.168.0.208:5555)",
-      "type": "shell",
-      "command": "./gradlew",
-      "args": [":app:attachDebug", "-PadbSerial=192.168.0.208:5555"],
-      "windows": {
-        "command": "gradlew.bat"
-      },
-      "options": {
-        "cwd": "${workspaceFolder}/runtime/CWSAndroid"
-      },
-      "group": "build",
-      "detail": "Build, install and launch cwsp hybrid on 192.168.0.208:5555."
-    },
-    {
-      "label": "CWSAndroid (hybrid cwsp): Attach or launch debug (forced target)",
+      "label": "NS (CWSAndroid): adb connect 192.168.0.196:5555",
       "type": "shell",
       "command": "bash",
       "args": [
-        "-lc",
-        "adb connect \"${input:androidTargetSerial}\" >/dev/null 2>&1 || true; ./gradlew :app:attachDebug -PadbSerial=\"${input:androidTargetSerial}\""
+        "${workspaceFolder}/apps/CWSAndroid/tools/with-android-env.sh",
+        "adb",
+        "connect",
+        "192.168.0.196:5555"
       ],
-      "windows": {
-        "command": "powershell",
-        "args": [
-          "-NoProfile",
-          "-Command",
-          "Set-Location -LiteralPath '${workspaceFolder}/runtime/CWSAndroid'; adb connect \"${input:androidTargetSerial}\" | Out-Null; .\\gradlew.bat :app:attachDebug \"-PadbSerial=${input:androidTargetSerial}\""
-        ]
-      },
-      "options": {
-        "cwd": "${workspaceFolder}/runtime/CWSAndroid"
-      },
+      "options": { "cwd": "${workspaceFolder}/apps/CWSAndroid" },
       "group": "build",
-      "detail": "Connects ADB if needed, then installs/launches cwsp hybrid (space.u2re.cwsp)."
+      "problemMatcher": [],
+      "detail": "Wireless ADB; use before NativeScript Run and Debug when workspace root is U2RE.space."
     },
     {
-      "label": "CWSAndroid (hybrid cwsp): Logcat (192.168.0.196:5555)",
+      "label": "NS (CWSAndroid): adb connect 192.168.0.208:5555",
       "type": "shell",
-      "command": "adb",
-      "args": ["-s", "192.168.0.196:5555", "logcat"],
+      "command": "bash",
+      "args": [
+        "${workspaceFolder}/apps/CWSAndroid/tools/with-android-env.sh",
+        "adb",
+        "connect",
+        "192.168.0.208:5555"
+      ],
+      "options": { "cwd": "${workspaceFolder}/apps/CWSAndroid" },
       "group": "build",
       "problemMatcher": []
     },
     {
-      "label": "CWSAndroid (hybrid cwsp): Logcat (192.168.0.208:5555)",
+      "label": "NS (CWSAndroid): adb connect (forced target)",
       "type": "shell",
-      "command": "adb",
-      "args": ["-s", "192.168.0.208:5555", "logcat"],
+      "command": "bash",
+      "args": [
+        "${workspaceFolder}/apps/CWSAndroid/tools/with-android-env.sh",
+        "adb",
+        "connect",
+        "${input:androidTargetSerial}"
+      ],
+      "options": { "cwd": "${workspaceFolder}/apps/CWSAndroid" },
       "group": "build",
       "problemMatcher": []
     },
     {
-      "label": "CWSAndroid (hybrid cwsp): Connected devices (ADB)",
+      "label": "NS (CWSAndroid): adb devices",
       "type": "shell",
-      "command": "adb",
-      "args": ["devices", "-l"],
+      "command": "bash",
+      "args": [
+        "${workspaceFolder}/apps/CWSAndroid/tools/with-android-env.sh",
+        "adb",
+        "devices",
+        "-l"
+      ],
+      "options": { "cwd": "${workspaceFolder}/apps/CWSAndroid" },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "NS (CWSAndroid): debug android (192.168.0.196:5555) — CLI + DevTools URL",
+      "type": "shell",
+      "dependsOrder": "sequence",
+      "dependsOn": ["NS (CWSAndroid): adb connect 192.168.0.196:5555"],
+      "command": "bash",
+      "args": [
+        "${workspaceFolder}/apps/CWSAndroid/tools/with-android-env.sh",
+        "ns",
+        "debug",
+        "android",
+        "--device",
+        "192.168.0.196:5555"
+      ],
+      "options": { "cwd": "${workspaceFolder}/apps/CWSAndroid" },
+      "group": "build",
+      "problemMatcher": [],
+      "detail": "NativeScript JS debugger opens Chrome; for VS Code breakpoints use NativeScript launch configs."
+    },
+    {
+      "label": "NS (CWSAndroid): debug android (forced target) — CLI",
+      "type": "shell",
+      "dependsOrder": "sequence",
+      "dependsOn": ["NS (CWSAndroid): adb connect (forced target)"],
+      "command": "bash",
+      "args": [
+        "${workspaceFolder}/apps/CWSAndroid/tools/with-android-env.sh",
+        "ns",
+        "debug",
+        "android",
+        "--device",
+        "${input:androidTargetSerial}"
+      ],
+      "options": { "cwd": "${workspaceFolder}/apps/CWSAndroid" },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "NS (CWSAndroid): gradlew installDebug (192.168.0.196:5555)",
+      "type": "shell",
+      "dependsOrder": "sequence",
+      "dependsOn": ["NS (CWSAndroid): adb connect 192.168.0.196:5555"],
+      "command": "bash",
+      "args": [
+        "${workspaceFolder}/apps/CWSAndroid/tools/with-android-env.sh",
+        "bash",
+        "-lc",
+        "cd \"${workspaceFolder}/apps/CWSAndroid/platforms/android\" && export ANDROID_SERIAL=192.168.0.196:5555 && ./gradlew :app:installDebug"
+      ],
+      "options": { "cwd": "${workspaceFolder}/apps/CWSAndroid" },
+      "group": "build",
+      "problemMatcher": [],
+      "detail": "Installs NS debug APK (use Android Studio for Java). NativeScript has no :attachDebug Gradle task."
+    },
+    {
+      "label": "NS (CWSAndroid): logcat (192.168.0.196:5555)",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "${workspaceFolder}/apps/CWSAndroid/tools/with-android-env.sh",
+        "adb",
+        "-s",
+        "192.168.0.196:5555",
+        "logcat"
+      ],
+      "options": { "cwd": "${workspaceFolder}/apps/CWSAndroid" },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "NS (CWSAndroid): logcat (192.168.0.208:5555)",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "${workspaceFolder}/apps/CWSAndroid/tools/with-android-env.sh",
+        "adb",
+        "-s",
+        "192.168.0.208:5555",
+        "logcat"
+      ],
+      "options": { "cwd": "${workspaceFolder}/apps/CWSAndroid" },
       "group": "build",
       "problemMatcher": []
     }
@@ -128,7 +165,7 @@
           "promptStringRemember": {
             "androidTargetSerialPrompt": {
               "key": "androidTargetSerial",
-              "description": "ADB serial/IP:port (CWSAndroid cwsp hybrid)",
+              "description": "ADB serial/IP:port (NativeScript CWSAndroid)",
               "default": "192.168.0.196:5555"
             }
           }
