@@ -2,16 +2,20 @@
   "mcpServers": {
     "chrome-devtools": {
       "command": "npx",
-      "args": ["-y", "chrome-devtools-mcp@latest"]
+      "args": [
+        "-y",
+        "chrome-devtools-mcp@latest"
+      ]
     },
     "vite": {
-      "command": "npx",
-      "args": ["-y", "vite"],
-      "url": "https://45.147.121.152:443/__mcp/sse"
+      "url": "https://0.0.0.0:443/__mcp/sse"
     },
     "puppeteer": {
       "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-puppeteer"]
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-puppeteer"
+      ]
     }
   }
 }
