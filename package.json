@@ -48,6 +48,7 @@
         "@rolldown/binding-win32-x64-msvc": "1.0.0-rc.13"
     },
     "devDependencies": {
+        "@vitejs/plugin-basic-ssl": "^2.1.0",
         "@crxjs/vite-plugin": "^2.4.0",
         "eslint": "^10.0.0",
         "postcss-preset-env": "^11.1.3",
