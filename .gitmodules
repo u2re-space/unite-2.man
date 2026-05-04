@@ -31,3 +31,33 @@
 [submodule "modules/projects/icon.ts"]
 	path = modules/projects/icon.ts
 	url = https://github.com/fest-live/icon.ts.git
+[submodule "modules/views/--recursive"]
+	path = modules/views/--recursive
+	url = https://github.com/u2re-space/markdown-view
+[submodule "modules/views/markdown-view"]
+	path = modules/views/markdown-view
+	url = https://github.com/u2re-space/markdown-view
+[submodule "modules/views/explorer-view"]
+	path = modules/views/explorer-view
+	url = https://github.com/u2re-space/explorer-view
+[submodule "modules/views/airpad-view"]
+	path = modules/views/airpad-view
+	url = https://github.com/u2re-space/airpad-view
+[submodule "modules/views/home-view"]
+	path = modules/views/home-view
+	url = https://github.com/u2re-space/home-view.git
+[submodule "modules/views/workcenter-view"]
+	path = modules/views/workcenter-view
+	url = https://github.com/u2re-space/workcenter-view.git
+[submodule "modules/views/settings-view"]
+	path = modules/views/settings-view
+	url = https://github.com/u2re-space/settings-view
+[submodule "modules/views/history-view"]
+	path = modules/views/history-view
+	url = https://github.com/u2re-space/history-view
+[submodule "modules/views/editor-view"]
+	path = modules/views/editor-view
+	url = https://github.com/u2re-space/editor-view
+[submodule "modules/projects/image.ts"]
+	path = modules/projects/image.ts
+	url = https://github.com/fest-live/image.ts.git
