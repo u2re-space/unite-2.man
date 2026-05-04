@@ -64,7 +64,7 @@ Do not create files like:
 
 ### Investigate only what is relevant
 - Do not scan all contexts, logs, or external locations by default.
-- Check Pantry, logs, specs, or external paths only when they are relevant to the user’s task.
+- Check logs, specs, or external paths only when they are relevant to the user’s task.
 
 ### Logs-first, when debugging runtime issues
 If the task involves crashes, failed services, runtime regressions, or deployment/debugging:
@@ -112,11 +112,6 @@ Consult these only when the task touches them:
 
 - `/home/u2re-dev/U2RE.space/modules/projects/uniform.ts/src/newer/`
 - `/home/u2re-dev/U2RE.space/runtime/cwsp/endpoint/`
-
----
-
-## Pantry
-If the task results in durable changes, decisions, bug findings, or reusable context, record a concise summary in Pantry according to the project’s main agent instructions.
 
 ---
 

@@ -38,104 +38,134 @@
 
 ```text
 U2RE.space/
-├── .cursor/
-├── .vscode/
-├── apps/
-│   └── CrossWord/
-│       ├── fastify/
-│       ├── src/
-│       │   ├── endpoint/
-│       │   ├── frontend/
-│       │   ├── pwa/
-│       │   ├── crx/
-│       │   ├── core/
-│       │   ├── com/
-│       │   └── index.ts
-│       ├── shared/
-│       │   ├── tsconfig.json
-│       │   ├── vite.config.js
-│       │   └── package.json
-│       ├── tsconfig.json
-│       ├── vite.config.js
-│       └── package.json
-├── modules/
-│   ├── shared/
-│   └── projects/
-│       ├── shared/
-│       ├── core.ts/
-│       │   ├── docs/
-│       │   ├── src/
-│       │   ├── test/
-│       │   ├── tsconfig.json
-│       │   ├── vite.config.js
-│       │   └── package.json
-│       ├── dom.ts/
-│       │   ├── docs/
-│       │   ├── src/
-│       │   ├── test/
-│       │   ├── tsconfig.json
-│       │   ├── vite.config.js
-│       │   └── package.json
-│       ├── fl.ui/
-│       │   ├── docs/
-│       │   ├── src/
-│       │   ├── test/
-│       │   ├── tsconfig.json
-│       │   ├── vite.config.js
-│       │   └── package.json
-│       ├── icon.ts/
-│       │   ├── docs/
-│       │   ├── src/
-│       │   ├── test/
-│       │   ├── tsconfig.json
-│       │   ├── vite.config.js
-│       │   └── package.json
-│       ├── lur.e/
-│       │   ├── docs/
-│       │   ├── src/
-│       │   ├── test/
-│       │   ├── tsconfig.json
-│       │   ├── vite.config.js
-│       │   └── package.json
-│       ├── object.ts/
-│       │   ├── docs/
-│       │   ├── src/
-│       │   ├── test/
-│       │   ├── tsconfig.json
-│       │   ├── vite.config.js
-│       │   └── package.json
-│       ├── uniform.ts/
-│       │   ├── docs/
-│       │   ├── src/
-│       │   ├── test/
-│       │   ├── tsconfig.json
-│       │   ├── vite.config.js
-│       │   └── package.json
-│       └── veela.css/
-│           ├── docs/
-│           ├── src/
-│           ├── test/
-│           ├── tsconfig.json
-│           ├── vite.config.js
-│           └── package.json
-├── runtime/
-│   ├── https/
-│   ├── fastify/
-│   │   ├── scripts/
-│   │   ├── tsconfig.json
-│   │   └── package.json
-│   ├── frontend/
-│   │   ├── apps/
-│   │   ├── init.mjs
-│   │   ├── load.mjs
-│   │   ├── vital.mjs
-│   │   └── index.html
-│   ├── tsconfig.json
-│   ├── vite.config.js
-│   └── package.json
-├── tsconfig.json
-├── vite.config.js
-└── package.json
+|-- .cursor/
+|-- .vscode/
+|-- apps/
+|   `-- CrossWord/
+|       |-- fastify/
+|       |-- src/
+|       |   |-- frontend/
+|       |   |-- pwa/
+|       |   |-- crx/
+|       |   |-- subsystem/
+|       |   `-- index.ts
+|       |-- shared/
+|       |   |-- tsconfig.json
+|       |   |-- vite.config.js
+|       |   `-- package.json
+|       |-- tsconfig.json
+|       |-- vite.config.js
+|       `-- package.json
+|-- modules/
+|   |-- shared/
+|   |-- views/
+|   |   |-- airpad-view
+|   |   |-- viewer-view    # symlink of markdown-view
+|   |   |-- markdown-view
+|   |   |-- settings-view
+|   |   |-- history-view
+|   |   |-- home-view
+|   |   |-- workcenter-view
+|   |   |-- editor-view
+|   `-- projects/
+|       |-- shared/
+|       |-- core.ts/
+|       |   |-- docs/
+|       |   |-- src/
+|       |   |-- test/
+|       |   |-- demo/
+|       |   |-- tsconfig.json
+|       |   |-- vite.config.js
+|       |   |-- index.html
+|       |   |-- demo.html
+|       |   `-- package.json
+|       |-- dom.ts/
+|       |   |-- docs/
+|       |   |-- src/
+|       |   |-- test/
+|       |   |-- demo/
+|       |   |-- index.html
+|       |   |-- tsconfig.json
+|       |   |-- vite.config.js
+|       |   `-- package.json
+|       |-- fl.ui/
+|       |   |-- docs/
+|       |   |-- src/
+|       |   |-- test/
+|       |   |-- demo/
+|       |   |-- index.html
+|       |   |-- demo.html
+|       |   |-- tsconfig.json
+|       |   |-- vite.config.js
+|       |   `-- package.json
+|       |-- icon.ts/
+|       |   |-- docs/
+|       |   |-- src/
+|       |   |-- test/
+|       |   |-- demo/
+|       |   |-- index.html
+|       |   |-- demo.html
+|       |   |-- tsconfig.json
+|       |   |-- vite.config.js
+|       |   `-- package.json
+|       |-- lur.e/
+|       |   |-- docs/
+|       |   |-- src/
+|       |   |-- test/
+|       |   |-- demo/
+|       |   |-- index.html
+|       |   |-- demo.html
+|       |   |-- tsconfig.json
+|       |   |-- vite.config.js
+|       |   `-- package.json
+|       |-- object.ts/
+|       |   |-- docs/
+|       |   |-- src/
+|       |   |-- test/
+|       |   |-- demo/
+|       |   |-- index.html
+|       |   |-- demo.html
+|       |   |-- tsconfig.json
+|       |   |-- vite.config.js
+|       |   `-- package.json
+|       |-- uniform.ts/
+|       |   |-- docs/
+|       |   |-- src/
+|       |   |-- test/
+|       |   |-- demo/
+|       |   |-- index.html
+|       |   |-- demo.html
+|       |   |-- tsconfig.json
+|       |   |-- vite.config.js
+|       |   `-- package.json
+|       `-- veela.css/
+|           |-- docs/
+|           |-- src/
+|           |-- test/
+|           |-- demo/
+|           |-- index.html
+|           |-- demo.html
+|           |-- tsconfig.json
+|           |-- vite.config.js
+|           `-- package.json
+|-- runtime/
+|   |-- https/
+|   |-- fastify/
+|   |   |-- scripts/
+|   |   |-- tsconfig.json
+|   |   `-- package.json
+|   |-- frontend/
+|   |   |-- apps/
+|   |   |-- init.mjs
+|   |   |-- load.mjs
+|   |   |-- vital.mjs
+|   |   `-- index.html
+|   |-- tsconfig.json
+|   |-- vite.config.js
+|   `-- package.json
+|-- tsconfig.json
+|-- vite.config.js
+`-- package.json
 ```
 
 ---
