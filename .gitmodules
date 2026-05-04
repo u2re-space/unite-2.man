@@ -61,3 +61,21 @@
 [submodule "modules/projects/image.ts"]
 	path = modules/projects/image.ts
 	url = https://github.com/fest-live/image.ts.git
+[submodule "modules/shells/minimal-shell"]
+	path = modules/shells/minimal-shell
+	url = https://github.com/u2re-space/minimal-shell
+[submodule "modules/service-subsystem"]
+	path = modules/service-subsystem
+	url = https://github.com/u2re-space/service-subsystem.git
+[submodule "modules/shells/content-shell"]
+	path = modules/shells/content-shell
+	url = https://github.com/u2re-space/content-shell.git
+[submodule "modules/shells/environment-shell"]
+	path = modules/shells/environment-shell
+	url = https://github.com/u2re-space/environment-shell.git
+[submodule "modules/shells/immersive-shell"]
+	path = modules/shells/immersive-shell
+	url = https://github.com/u2re-space/immersive-shell
+[submodule "modules/projects/subsystem"]
+	path = modules/projects/subsystem
+	url = https://github.com/u2re-space/subsystem.ts
