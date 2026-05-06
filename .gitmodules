@@ -79,3 +79,6 @@
 [submodule "modules/projects/subsystem"]
 	path = modules/projects/subsystem
 	url = https://github.com/u2re-space/subsystem.ts
+[submodule "modules/shells/window-frame"]
+	path = modules/shells/window-frame
+	url = https://github.com/u2re-space/window-frame
