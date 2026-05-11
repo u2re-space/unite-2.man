@@ -17,6 +17,26 @@ const subsystemRoot = resolve(workspaceRoot, "modules/projects/subsystem/src");
 const VITE_BASE = resolve(subsystemPkgRoot, "tsconfig.vite-base.json");
 
 /**
+ * Absolute alias targets for imports that must resolve from every shell / view root.
+ * WHY: `tsconfig` path merges occasionally omit or shadow `cwsp-shared/*` / `@cwsp/shared/*` rows
+ * when the dev server root is a shell (not `airpad-view` itself).
+ */
+const CWSP_AIRPAD_CLIENT_PARITY = resolve(
+    workspaceRoot,
+    "modules/projects/subsystem/runtime/airpad-cwsp-client-parity.ts"
+);
+
+const cwspAirpadParityFinds = new Set([
+    "cwsp-shared/airpad-cwsp-client-parity",
+    "@cwsp/shared/airpad-cwsp-client-parity"
+]);
+
+const cwspAirpadParityAliases = [
+    { find: "cwsp-shared/airpad-cwsp-client-parity", replacement: CWSP_AIRPAD_CLIENT_PARITY },
+    { find: "@cwsp/shared/airpad-cwsp-client-parity", replacement: CWSP_AIRPAD_CLIENT_PARITY }
+];
+
+/**
  * @param {Array<{ find: string, replacement: string }>} baseList
  * @param {Array<{ find: string, replacement: string }>} localList
  */
@@ -53,7 +73,10 @@ export function getViewResolveAliases(projectRoot, prepend = []) {
     const localPaths = local.compilerOptions?.paths || {};
     const baseAliases = importFromTSConfig({ compilerOptions: { paths: basePaths } }, subsystemPkgRoot);
     const localAliases = importFromTSConfig({ compilerOptions: { paths: localPaths } }, root);
-    return [...prepend, ...mergeAliasLists(baseAliases, localAliases)];
+    const merged = mergeAliasLists(baseAliases, localAliases).filter(
+        (a) => !cwspAirpadParityFinds.has(String(a.find))
+    );
+    return [...prepend, ...cwspAirpadParityAliases, ...merged];
 }
 
 export { workspaceRoot, viewsRoot, sharedRoot, subsystemRoot };
