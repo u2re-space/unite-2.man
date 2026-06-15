@@ -263,6 +263,38 @@ Clipboard text may arrive in any of these locations:
 
 Receivers should treat the first usable textual value as the clipboard body.
 
+### Universal clipboard (text + images + files)
+
+Clipboard packets may also carry a binary/file payload as a compact
+`DataAssetEnvelope` (canonical: `normalizeDataAsset()` from `fest/lure`), under
+`payload.asset` (also accepted: `payload.dataAsset` / `payload.file` /
+`payload.image`, and the same under `data`/`result`):
+
+```json
+{
+  "op": "act",
+  "what": "clipboard:update",
+  "payload": {
+    "asset": {
+      "hash": "<content-hash>",
+      "name": "<prefix>-<hash>.<ext>",
+      "mimeType": "image/png",
+      "size": 12345,
+      "source": "data-url | base64 | url | file | blob | text",
+      "data": "data:image/png;base64,…  (or bare base64, or a URL/URI)"
+    }
+  }
+}
+```
+
+Behavior:
+
+- The endpoint relays asset clipboard packets like any other (routing/relay/broadcast unchanged); it never blocks on binary.
+- The endpoint does not write binary to the OS clipboard (text transport `clipboardy` is text-only). With `CWS_CLIPBOARD_ASSET_DIR` set, inline asset bytes are persisted as `<hash>.<ext>` for desktop retrieval.
+- Duplicate suppression keys on text content, or on `asset.hash` when there is no text.
+- Clients (web/Capacitor/native) own the real File/Blob/base64/data-url normalization via `normalizeDataAsset` and apply images via `navigator.clipboard` `ClipboardItem` or offer file save.
+- A text-only packet stays exactly as before (full backward compatibility).
+
 ### Clipboard routing behavior
 
 Clipboard is special:
@@ -546,6 +578,36 @@ The following action names should be treated as stable contract names unless the
 - `network:dispatch`
 - `notification:speak`
 - `sms:send`
+- `debug:log`
+- `debug:event`
+- `debug:subscribe`
+- `debug:tail`
+- `debug:isReady`
+
+## Debug-Log Relay
+
+A dedicated logical channel (multiplexed over the same `/ws` transport, `purpose: "debug"`) carries app console output and CWSP traces without an inspector attach.
+
+- `debug:log` (act): `payload = { peer, entries: [{ level, scope, msg, ts, data }] }`. Apps (NativeScript/Capacitor) capture `console.*` + uncaught errors, batch, and send to the configured debug destination (often `*` so every transit + target endpoint records it).
+- Every endpoint that receives a `debug:log` records it into a process-local ring buffer + JSONL file (`logs/cwsp-debug.log`, override `CWS_DEBUG_LOG_DIR`) and fans it out to SSE clients.
+- IDE-host sink HTTP routes (admin app): `GET /debug/stream` (SSE, `?backlog=N`), `GET /debug/tail?limit=N&afterSeq=S`, `GET /debug/stats`.
+
+## Module Enablement (modularity)
+
+The CWSP core is the canonical WS coordinator (`/ws` gateway + routing) and always runs. Every other subsystem is individually switchable and non-critical: if one is disabled or fails to load, the core stays up.
+
+Flags (defaults in parentheses), resolved from config (`modules` / `core.modules` / `ops.modules`) then env `CWS_MODULE_<NAME>`:
+
+- `admin` (on): admin Fastify app + system/control/debug routes; also a `/ws` host.
+- `publicWeb` (on): public Fastify app + static frontend. Legacy `CWS_EMBEDDED_WEBVIEW=1` disables it.
+- `httpApi` (on): HTTP compatibility transport routes.
+- `clipboard` (on): clipboardy access + clipboard polling.
+- `input` (on): local input drivers (robot / AutoHotKey) for mouse/keyboard.
+- `voice` (on): voice forwarding to the assistant bridge.
+- `socketio` (off): Socket.IO compatibility (legacy `CWS_COMPAT_SOCKETIO`).
+- `debug` (on): debug-log relay handler.
+
+If both `admin` and `publicWeb` are disabled, a minimal core-only HTTP(S) host is created so `/ws` still serves.
 
 ## Compatibility Notes
 
