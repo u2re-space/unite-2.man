@@ -41,6 +41,20 @@
       "problemMatcher": []
     },
     {
+      "label": "NS (CWSAndroid): adb connect 192.168.0.210:5555",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "${workspaceFolder}/apps/CWSAndroid/tools/with-android-env.sh",
+        "adb",
+        "connect",
+        "192.168.0.210:5555"
+      ],
+      "options": { "cwd": "${workspaceFolder}/apps/CWSAndroid" },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
       "label": "NS (CWSAndroid): adb connect (forced target)",
       "type": "shell",
       "command": "bash",
@@ -138,14 +152,14 @@
       "problemMatcher": []
     },
     {
-      "label": "NS (CWSAndroid): logcat (192.168.0.208:5555)",
+      "label": "NS (CWSAndroid): logcat (192.168.0.210:5555)",
       "type": "shell",
       "command": "bash",
       "args": [
         "${workspaceFolder}/apps/CWSAndroid/tools/with-android-env.sh",
         "adb",
         "-s",
-        "192.168.0.208:5555",
+        "192.168.0.210:5555",
         "logcat"
       ],
       "options": { "cwd": "${workspaceFolder}/apps/CWSAndroid" },

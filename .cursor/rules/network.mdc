@@ -175,6 +175,7 @@ Routing is performed primarily by normalized node ids such as:
 - `L-192.168.0.110`
 - `L-192.168.0.196`
 - `L-192.168.0.208`
+- `L-192.168.0.210`
 - `L-wan-client`
 
 ### Accepted identity hints

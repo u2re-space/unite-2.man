@@ -58,7 +58,7 @@ These commands default to the **`cwsp` hybrid flavor** (`space.u2re.cwsp`):
 
 | Flavor | `applicationId` | Purpose |
 |---|---|---|
-| `cws` | `space.u2re.cws` | NativeScript App |
+| `cws` | `space.u2re.cws` | Legacy NativeScript flavor (removed; use `cwsp` / CWSAndroid Java) |
 
 ---
 
@@ -113,8 +113,8 @@ How &ould works our network.
           ↑                         ↑                         ↑
           ┷                         ↑                         ↑ 
           |                         ↓                         ↓ 
-          ┗------------------{[ [L-192.168.0.196] |- - -| [L-192.168.0.208] ]}   # Phone device groups (cws-androids, PWA-airpad)
-                                [Android Phone 1]         [Android Phone 2]
+          ┗------------------{[ [L-192.168.0.196] |- - -| [L-192.168.0.208] |- - -| [L-192.168.0.210] ]}   # Phone device groups (cws-androids, PWA-airpad)
+                                [Android Phone 1]         [Android Phone 2]         [Android Phone 3]
 ```
 
 ### Topology
@@ -128,6 +128,14 @@ How &ould works our network.
 - tunneling through 192.168.0.200:8443 / 45.147.121.152:8443 if in LTE/NAT mode, using identification client token
 
 **L-192.168.0.110 <---> L-192.168.0.208**
+- clipboard (via android application, and cwsp endpoint server)
+- `airpad` signals (PWA/WebView application)
+  - mouse
+  - keyboard
+  - clipboard
+- tunneling through 192.168.0.200:8443 / 45.147.121.152:8443 if in LTE/NAT mode, using identification client token
+
+**L-192.168.0.110 <---> L-192.168.0.210**
 - clipboard (via android application, and cwsp endpoint server)
 - `airpad` signals (PWA/WebView application)
   - mouse
@@ -170,3 +178,8 @@ How &ould works our network.
 - Simulator/debug client from `45.150.9.153` (VDS), with client token `n3v3rm1nd` instead of IP
 - PWA or Native application from NAT (unknown IP, but with client token `n3v3rm1nd` instead of IP)
 - PWA or Native application from private/local network with IP `192.168.0.196`.
+
+### `L-192.168.0.210` may/can be:
+
+- PWA or Native application from private/local network with IP `192.168.0.210`.
+- NAT/LTE client with token `n3v3rm1nd` when LAN IP is unknown.

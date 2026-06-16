@@ -100,6 +100,13 @@ Required association:
 ### `L-192.168.0.208`
 Additional Android client that may participate in synchronization scenarios.
 
+### `L-192.168.0.210`
+Additional Android client (new smartphone on LAN `192.168.0.210`).
+
+Required association (same token model as other phones):
+- `clientId = L-192.168.0.210`
+- `token = n3v3rm1nd` (or env/config override)
+
 ---
 
 ## Security and configuration discipline
@@ -155,6 +162,7 @@ Keep the design extendable for:
 - Android
 - PWA
 - `L-192.168.0.208`
+- `L-192.168.0.210`
 
 ### Cursor movement / input
 Cursor movement and related input events originating from `L-192.168.0.196` must reach `L-192.168.0.110`.
@@ -237,5 +245,5 @@ In the final report, always include:
 ## Android debugging
 
 - ADB usage (`adb` and/or `adb shell`)
-- Connect to `192.168.0.196:5555` (defaultly)
+- Connect to `192.168.0.196:5555` (default), `192.168.0.208:5555`, or `192.168.0.210:5555`
 - Reading logcat

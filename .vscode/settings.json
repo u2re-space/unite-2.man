@@ -10,8 +10,41 @@
         "plaintext": false,
         "markdown": false
     },
-    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.configuration.updateBuildConfiguration": "disabled",
     "java.project.sourcePaths": [
         "runtime/cwsp/capacitor"
-    ]
+    ],
+    "files.watcherExclude": {
+        "**/node_modules/**": true,
+        "**/.git/**": true,
+        "**/.git/modules/**": true,
+        "**/dist/**": true,
+        "**/dist-crx/**": true,
+        "**/build/**": true,
+        "**/runtime/cwsp/**": true,
+        "**/runtime/node_modules/**": true,
+        "**/runtime/legacy/**": true,
+        "**/runtime/dist/**": true,
+        "**/coverage/**": true,
+        "**/.gradle/**": true,
+        "**/.android/**": true,
+        "**/target/**": true
+    },
+    "search.exclude": {
+        "**/node_modules": true,
+        "**/.git": true,
+        "**/dist": true,
+        "**/dist-crx": true,
+        "**/build": true,
+        "**/runtime/cwsp": true,
+        "**/runtime/node_modules": true,
+        "**/runtime/legacy": true,
+        "**/coverage": true
+    },
+    "git.autoFetch": false,
+    "git.fetchOnPull": false,
+    "git.detectSubmodules": false,
+    "git.detectSubmodulesLimit": 0,
+    "extensions.autoCheckUpdates": false,
+    "typescript.tsserver.maxTsServerMemory": 4096
 }
