@@ -62,9 +62,9 @@ module.exports = {
         CWS_PORTABLE_CONFIG_PATH: './portable.config.json',
         CWS_PORTABLE_DATA_PATH: './.data',
 
-        CWS_ASSOCIATED_TOKEN: 'n3v3rm1nd',
+        CWS_ASSOCIATED_TOKEN: process.env.CWS_ASSOCIATED_TOKEN || '<set CWS_ASSOCIATED_TOKEN>',
         CWS_BRIDGE_USER_ID: 'L-192.168.0.200',
-        CWS_BRIDGE_USER_KEY: 'n3v3rm1nd',
+        CWS_BRIDGE_USER_KEY: process.env.CWS_BRIDGE_USER_KEY || '<set CWS_BRIDGE_USER_KEY>',
         CWS_BRIDGE_DEVICE_ID: 'L-192.168.0.200',
 
         CWS_AIRPAD_NATIVE_ACTIONS: 'true',
