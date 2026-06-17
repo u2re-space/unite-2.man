@@ -44,13 +44,13 @@ module.exports = {
         CWS_BRIDGE_ENABLED: 'true',
         CWS_BRIDGE_MODE: 'active',
         CWS_BRIDGE_CONNECTION_TYPE: 'exchanger-initiator',
-        CWS_BRIDGE_ENDPOINT_URL: 'https://45.147.121.152:8443/',
+        CWS_BRIDGE_ENDPOINT_URL: 'https://45.147.121.152:8434/',
 
         // Если приложение умеет читать массивы только как JSON-строки:
         CWS_BRIDGE_ENDPOINTS: JSON.stringify([
-          'https://45.147.121.152:8443/',
-          'https://100.76.202.88:8443/',
-          'https://192.168.0.200:8443/'
+          'https://45.147.121.152:8434/',
+          'https://100.76.202.88:8434/',
+          'https://192.168.0.200:8434/'
         ]),
 
         CWS_BRIDGE_PRECONNECT_TARGETS: JSON.stringify([

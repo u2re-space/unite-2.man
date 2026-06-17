@@ -69,11 +69,11 @@ The system must support both of these models:
 
 ### 1. Direct connect
 Example:
-- `https://192.168.0.110:8443`
+- `https://192.168.0.110:8434`
 
 ### 2. Endpoint-routed connect
 Example:
-- `https://192.168.0.200:8443/` with routing toward `L-192.168.0.110`
+- `https://192.168.0.200:8434/` with routing toward `L-192.168.0.110`
 
 If an Endpoint URL is configured, it may act as a routing/proxy endpoint rather than the final AirPad device URL.
 
@@ -141,7 +141,7 @@ Any changes must preserve or restore:
   - `wss`
 
 ### TLS / HTTPS
-Endpoint behavior on `:8443` must be correct and testable:
+Endpoint behavior on `:8434` must be correct and testable:
 - certificate loading
 - certificate chain behavior
 - browser/PWA/Android compatibility
