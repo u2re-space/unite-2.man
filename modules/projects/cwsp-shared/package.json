@@ -1,0 +1,12 @@
+{
+    "name": "fest/cwsp-shared",
+    "description": "Isomorphic CWSP wire helpers — shared by Node endpoint, AirPad, settings, and browser clients",
+    "version": "0.1.0",
+    "license": "MIT",
+    "type": "module",
+    "sideEffects": false,
+    "exports": {
+        ".": "./src/index.ts",
+        "./*": "./src/*.ts"
+    }
+}

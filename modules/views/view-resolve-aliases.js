@@ -23,7 +23,17 @@ const VITE_BASE = resolve(subsystemPkgRoot, "tsconfig.vite-base.json");
  */
 const CWSP_AIRPAD_CLIENT_PARITY = resolve(
     workspaceRoot,
-    "modules/projects/subsystem/runtime/airpad-cwsp-client-parity.ts"
+    "modules/projects/cwsp-shared/src/airpad-cwsp-client-parity.ts"
+);
+const NETWORK_VIEW_ENTRY = resolve(workspaceRoot, "modules/views/network-view/src/index.ts");
+const SETTINGS_CONTRIBUTIONS = resolve(
+    workspaceRoot,
+    "modules/projects/subsystem/src/other/config/SettingsContributions.ts"
+);
+const SETTINGS_CONFIG = resolve(workspaceRoot, "modules/projects/subsystem/src/other/config/Settings.ts");
+const CAPACITOR_SHARE_INTENT = resolve(
+    workspaceRoot,
+    "modules/projects/subsystem/src/boot/capacitor-share-intent.ts"
 );
 
 const cwspAirpadParityFinds = new Set([
@@ -34,6 +44,13 @@ const cwspAirpadParityFinds = new Set([
 const cwspAirpadParityAliases = [
     { find: "cwsp-shared/airpad-cwsp-client-parity", replacement: CWSP_AIRPAD_CLIENT_PARITY },
     { find: "@cwsp/shared/airpad-cwsp-client-parity", replacement: CWSP_AIRPAD_CLIENT_PARITY }
+];
+
+const viewSharedAliases = [
+    { find: "views/network", replacement: NETWORK_VIEW_ENTRY },
+    { find: "com/config/Settings", replacement: SETTINGS_CONFIG },
+    { find: "com/config/SettingsContributions", replacement: SETTINGS_CONTRIBUTIONS },
+    { find: "boot/capacitor-share-intent", replacement: CAPACITOR_SHARE_INTENT }
 ];
 
 /**
@@ -76,7 +93,7 @@ export function getViewResolveAliases(projectRoot, prepend = []) {
     const merged = mergeAliasLists(baseAliases, localAliases).filter(
         (a) => !cwspAirpadParityFinds.has(String(a.find))
     );
-    return [...prepend, ...cwspAirpadParityAliases, ...merged];
+    return [...prepend, ...viewSharedAliases, ...cwspAirpadParityAliases, ...merged];
 }
 
 export { workspaceRoot, viewsRoot, sharedRoot, subsystemRoot };
