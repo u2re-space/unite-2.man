@@ -1,4 +1,5 @@
 /** @fest/cwsp-shared — isomorphic CWSP wire contract (Node endpoint + AirPad + browser). */
+export * from "./multi-value-list.ts";
 export * from "./wire-target-id.ts";
 export * from "./wire-time64.ts";
 export * from "./input-command-timing.ts";

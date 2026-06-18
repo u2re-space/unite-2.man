@@ -1,3 +1,5 @@
+import { splitMultiValueList } from "./multi-value-list.ts";
+
 /**
  * CWSP endpoint host parsing + port discovery.
  *
@@ -123,12 +125,8 @@ export const CWSP_FLEET_GATEWAY_HTTPS_FALLBACKS = [
     "https://45.147.121.152:8434/"
 ] as const;
 
-/** Split multi-host settings (`endpointUrl`, bridge lists) on comma/semicolon. */
-export const splitConnectHostList = (value: string): string[] =>
-    trim(value)
-        .split(/[;,]/)
-        .map((item) => item.trim())
-        .filter(Boolean);
+/** Split multi-host settings (`endpointUrl`, bridge lists) on comma, semicolon, or whitespace. */
+export const splitConnectHostList = (value: string): string[] => splitMultiValueList(trim(value));
 
 /** Canonical CWSP HTTPS origin for probes (`https://host:8434`, no path). */
 export const normalizeProbeHttpsOrigin = (raw: string): string => {

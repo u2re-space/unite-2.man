@@ -1,3 +1,5 @@
+import { splitMultiValueList } from "./multi-value-list.ts";
+
 /**
  * Parse CWSP wire list entries as `NodeId` or `NodeId::AccessToken` (split on the **last** `::`
  * so node ids may contain single colons, e.g. IPv6).
@@ -20,7 +22,7 @@ export function parseWireTargetEntry(raw: string): WireTargetEntry {
     return { nodeId, accessToken: accessToken || undefined };
 }
 
-/** Split comma/semicolon list or legacy array into parsed entries (dedupe by nodeId + token). */
+/** Split comma / semicolon / whitespace list or legacy array into parsed entries (dedupe by nodeId + token). */
 export function parseWireTargetList(value: unknown): WireTargetEntry[] {
     if (Array.isArray(value)) {
         const out: WireTargetEntry[] = [];
@@ -40,10 +42,7 @@ export function parseWireTargetList(value: unknown): WireTargetEntry[] {
         return out;
     }
     if (typeof value !== "string") return [];
-    const parts = value
-        .split(/[;,]/)
-        .map((s) => s.trim())
-        .filter(Boolean);
+    const parts = splitMultiValueList(value);
     const out: WireTargetEntry[] = [];
     const seen = new Set<string>();
     for (const p of parts) {

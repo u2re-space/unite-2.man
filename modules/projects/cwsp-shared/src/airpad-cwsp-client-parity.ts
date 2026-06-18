@@ -9,6 +9,7 @@
  */
 
 import { looksLikeConnectHost } from "./cwsp-endpoint-resolve.ts";
+import { splitMultiValueList } from "./multi-value-list.ts";
 
 /** AirPad popup / view persisted remote block (`airpad-view` / embedding shells). */
 export const AIRPAD_REMOTE_CONFIG_STORAGE_KEY = "airpad.remote.connection.v1";
@@ -54,7 +55,7 @@ export const inferDirectHttpsOriginFromConnectInput = (value: unknown, defaultPo
 const parseRouteTargetHintLocal = (value: unknown): string => {
     const raw = String(value || "").trim();
     if (!raw) return "";
-    const parts = raw.split(/[,;\s]+/).map((p) => p.trim()).filter(Boolean);
+    const parts = splitMultiValueList(raw);
     for (const part of parts.length ? parts : [raw]) {
         if (part && part !== "*" && part.toLowerCase() !== "all" && part.toLowerCase() !== "broadcast") {
             return part;
