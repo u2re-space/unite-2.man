@@ -36,6 +36,81 @@ export const FLEET_HOME_LAN_PREFIX = "192.168.0.";
 
 export const DEFAULT_DESK_WIRE_NODE_ID = "L-192.168.0.110";
 
+/** Home fleet desk peers controllable via AirPad (`.110` ultrabook, `.111` laptop Ethernet). */
+export const FLEET_DESK_WIRE_NODE_IDS = ["L-192.168.0.110", "L-192.168.0.111"] as const;
+
+export const isFleetDeskWireNodeId = (nodeId: unknown): boolean => {
+    const normalized = normalizeWireNodeIdForWire(nodeId).toLowerCase();
+    if (!normalized) return false;
+    return FLEET_DESK_WIRE_NODE_IDS.some((entry) => entry.toLowerCase() === normalized);
+};
+
+/** Infer {@code L-192.168.0.x} from a home-fleet page/shell host. */
+export const resolveDeskWireNodeIdFromPageHost = (pageHost?: unknown): string => {
+    const host = String(pageHost ?? "").trim();
+    if (!isHomeFleetLanHost(host)) return "";
+    return `L-${host}`;
+};
+
+/** Routed desk control through fleet ingress ({@code .200} / {@code 45.147.121.152}). */
+export const shouldConnectViaFleetGateway = (
+    endpointUrl?: unknown,
+    routeTarget?: unknown
+): boolean => {
+    if (!isGatewayHttpsOrigin(endpointUrl)) return false;
+    return isFleetDeskWireNodeId(routeTarget);
+};
+
+/**
+ * Home LAN + WAN: try direct desk ({@code .110}) then fleet gateways when WiFi is off but Ethernet stays up.
+ * Applies when route target is a fleet desk id or connect URL points at {@code 192.168.0.110}.
+ */
+export const shouldFleetDeskGatewayProbeFallbacks = (
+    routeTarget?: unknown,
+    endpointUrl?: unknown,
+    directUrl?: unknown
+): boolean => {
+    const normalized = normalizeWireNodeIdForWire(routeTarget);
+    if (isFleetDeskWireNodeId(normalized)) return true;
+    if (isGatewayHttpsOrigin(endpointUrl)) return true;
+    const deskLanHost = wireNodeIdToLanHost(DEFAULT_DESK_WIRE_NODE_ID);
+    if (!deskLanHost) return false;
+    for (const raw of [String(endpointUrl ?? ""), String(directUrl ?? "")]) {
+        if (raw.includes(deskLanHost)) return true;
+    }
+    return false;
+};
+
+/** Resolve desk wire id for gateway probe chain (defaults to ultrabook {@code L-110}). */
+export const resolveFleetDeskProbeWireNodeId = (
+    routeTarget?: unknown,
+    endpointUrl?: unknown,
+    directUrl?: unknown
+): string => {
+    const normalized = normalizeWireNodeIdForWire(routeTarget);
+    if (isFleetDeskWireNodeId(normalized)) return normalized;
+    if (shouldFleetDeskGatewayProbeFallbacks(normalized, endpointUrl, directUrl)) {
+        return DEFAULT_DESK_WIRE_NODE_ID;
+    }
+    return normalized;
+};
+
+/** LAN + WAN gateway origins for probe/connect (order: LAN first on home fleet page). */
+export const resolveFleetGatewayConnectOrigins = (pageHost?: unknown): string[] => {
+    const lan = "https://192.168.0.200:8434/";
+    const wan =
+        CWSP_FLEET_GATEWAY_HTTPS_FALLBACKS.find((entry) => entry.includes("45.147.121.152")) ??
+        "https://45.147.121.152:8434/";
+    if (isOnHomeFleetLanPageHost(pageHost)) return [lan, wan];
+    return [wan, lan];
+};
+
+export const resolveDeskDirectOriginFromWireNodeId = (nodeId: unknown, port = 8434): string => {
+    const host = wireNodeIdToLanHost(nodeId);
+    if (!host) return "";
+    return `https://${host}:${port}/`;
+};
+
 export const wireNodeIdToLanHost = (nodeId: unknown): string => {
     const normalized = normalizeWireNodeIdForWire(nodeId);
     if (!normalized.toLowerCase().startsWith("l-")) return "";
