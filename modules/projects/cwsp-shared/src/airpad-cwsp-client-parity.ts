@@ -8,7 +8,7 @@
  * Import in Vite apps via `cwsp-shared/airpad-cwsp-client-parity` (see `tsconfig.vite-base.json`).
  */
 
-import { looksLikeConnectHost } from "./cwsp-endpoint-resolve.ts";
+import { looksLikeConnectHost, CWSP_FLEET_GATEWAY_HTTPS_FALLBACKS } from "./cwsp-endpoint-resolve.ts";
 import { splitMultiValueList } from "./multi-value-list.ts";
 
 /** AirPad popup / view persisted remote block (`airpad-view` / embedding shells). */
@@ -29,6 +29,112 @@ export const normalizeWireNodeIdForWire = (value: unknown): string => {
     if (/^L-/i.test(trimmed)) return `L-${trimmed.slice(2)}`;
     if (/^\d{1,3}(?:\.\d{1,3}){3}(?::\d+)?$/.test(trimmed)) return `L-${trimmed.split(":")[0]}`;
     return trimmed;
+};
+
+/** Home fleet LAN only ({@code 192.168.0.x}) — guest {@code 192.168.165.x} must not become Client-ID. */
+export const FLEET_HOME_LAN_PREFIX = "192.168.0.";
+
+export const DEFAULT_DESK_WIRE_NODE_ID = "L-192.168.0.110";
+
+export const wireNodeIdToLanHost = (nodeId: unknown): string => {
+    const normalized = normalizeWireNodeIdForWire(nodeId);
+    if (!normalized.toLowerCase().startsWith("l-")) return "";
+    const host = normalized.slice(2).trim();
+    return /^\d{1,3}(?:\.\d{1,3}){3}$/.test(host) ? host : "";
+};
+
+export const isHomeFleetLanHost = (host: unknown): boolean => {
+    const t = String(host ?? "").trim();
+    return t.startsWith(FLEET_HOME_LAN_PREFIX);
+};
+
+/** True for canonical home fleet node ids ({@code L-192.168.0.x}). */
+export const isAssociableFleetWireNodeId = (nodeId: unknown): boolean => {
+    const host = wireNodeIdToLanHost(nodeId);
+    return host ? isHomeFleetLanHost(host) : false;
+};
+
+export const isGatewayHttpsOrigin = (value: unknown): boolean => {
+    const lower = String(value ?? "").trim().toLowerCase();
+    if (!lower) return false;
+    return lower.includes("192.168.0.200") || lower.includes("45.147.121.152") || lower.includes("gateway");
+};
+
+/** Accept only home-fleet Client-ID; drop guest LAN ids ({@code L-192.168.165.x}). */
+export const sanitizeFleetSelfWireNodeId = (value: unknown): string => {
+    const normalized = normalizeWireNodeIdForWire(value);
+    return isAssociableFleetWireNodeId(normalized) ? normalized : "";
+};
+
+/**
+ * Route target for routed WAN/LAN gateway sessions — desk {@code L-110} when value is guest LAN.
+ */
+export const sanitizeFleetRouteTarget = (
+    value: unknown,
+    endpointUrl?: unknown
+): string => {
+    const normalized = normalizeWireNodeIdForWire(value);
+    if (isAssociableFleetWireNodeId(normalized)) return normalized;
+    if (isGatewayHttpsOrigin(endpointUrl)) return DEFAULT_DESK_WIRE_NODE_ID;
+    return "";
+};
+
+/** Guest/corporate private IPv4 (not home {@code 192.168.0.x}) — skip for WS probe order on AirPad. */
+export const isGuestPrivateLanIpv4 = (host: unknown): boolean => {
+    const t = String(host ?? "").trim();
+    if (!/^\d{1,3}(?:\.\d{1,3}){3}$/.test(t)) return false;
+    if (t.startsWith("10.")) return true;
+    if (t.startsWith("192.168.") && !t.startsWith(FLEET_HOME_LAN_PREFIX)) return true;
+    if (/^172\.(1[6-9]|2\d|3[01])\./.test(t)) return true;
+    if (/^100\.(6[4-9]|[7-9]\d|1[01]\d|12[0-7])\./.test(t)) return true;
+    return false;
+};
+
+export const isLoopbackPageHost = (host: unknown): boolean => {
+    const t = String(host ?? "").trim().toLowerCase();
+    return !t || t === "localhost" || t === "127.0.0.1" || t === "[::1]";
+};
+
+/** Browser / shell tab is on home fleet LAN ({@code 192.168.0.x}). */
+export const isOnHomeFleetLanPageHost = (host: unknown): boolean => {
+    const t = String(host ?? "").trim();
+    return isHomeFleetLanHost(t);
+};
+
+/**
+ * Not on home {@code 192.168.0.x} — guest WiFi, public IP, LTE, localhost shell (Windows laptop off-LAN).
+ */
+export const isOffHomeFleetNetwork = (pageHost?: unknown): boolean => {
+    const h = String(
+        pageHost ??
+            (typeof globalThis !== "undefined" && globalThis.location
+                ? globalThis.location.hostname
+                : "")
+    ).trim();
+    if (isLoopbackPageHost(h)) return true;
+    if (isOnHomeFleetLanPageHost(h)) return false;
+    return true;
+};
+
+/** WAN gateway connect when off home LAN and Server tab endpoint is a fleet gateway URL. */
+export const shouldPreferWanGatewayForAirpad = (
+    endpointUrl?: unknown,
+    pageHost?: unknown
+): boolean => {
+    const endpoint = String(endpointUrl ?? "").trim();
+    if (!isGatewayHttpsOrigin(endpoint)) return false;
+    return isOffHomeFleetNetwork(pageHost);
+};
+
+/** Canonical WAN ingress ({@code 45.147.121.152}) when settings omit explicit gateway URL. */
+export const resolveWanGatewayConnectOrigin = (endpointUrl?: unknown): string => {
+    const t = String(endpointUrl ?? "").trim();
+    if (isGatewayHttpsOrigin(t)) {
+        const normalized = t.replace(/\/+$/, "");
+        return `${normalized}/`;
+    }
+    const wan = CWSP_FLEET_GATEWAY_HTTPS_FALLBACKS.find((u) => u.includes("45.147.121.152"));
+    return wan ?? CWSP_FLEET_GATEWAY_HTTPS_FALLBACKS[CWSP_FLEET_GATEWAY_HTTPS_FALLBACKS.length - 1];
 };
 
 /** Default HTTPS origin from quick-connect / {@code L-IP} when port omitted (Node {@code clipboardy} / Android WS parity). */
