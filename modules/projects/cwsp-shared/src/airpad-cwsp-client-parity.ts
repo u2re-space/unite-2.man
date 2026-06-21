@@ -36,6 +36,12 @@ export const FLEET_HOME_LAN_PREFIX = "192.168.0.";
 
 export const DEFAULT_DESK_WIRE_NODE_ID = "L-192.168.0.110";
 
+/** Fleet Linux gateway / desktop peer controllable directly by AirPad. */
+export const FLEET_GATEWAY_WIRE_NODE_ID = "L-192.168.0.200";
+
+export const isFleetGatewayWireNodeId = (nodeId: unknown): boolean =>
+    normalizeWireNodeIdForWire(nodeId).toLowerCase() === FLEET_GATEWAY_WIRE_NODE_ID.toLowerCase();
+
 /** Home fleet desk peers controllable via AirPad (`.110` ultrabook, `.111` laptop Ethernet). */
 export const FLEET_DESK_WIRE_NODE_IDS = ["L-192.168.0.110", "L-192.168.0.111"] as const;
 
@@ -58,6 +64,7 @@ export const shouldConnectViaFleetGateway = (
     routeTarget?: unknown
 ): boolean => {
     if (!isGatewayHttpsOrigin(endpointUrl)) return false;
+    if (isFleetGatewayWireNodeId(routeTarget)) return false;
     return isFleetDeskWireNodeId(routeTarget);
 };
 
@@ -71,6 +78,7 @@ export const shouldFleetDeskGatewayProbeFallbacks = (
     directUrl?: unknown
 ): boolean => {
     const normalized = normalizeWireNodeIdForWire(routeTarget);
+    if (isFleetGatewayWireNodeId(normalized)) return false;
     if (isFleetDeskWireNodeId(normalized)) return true;
     if (isGatewayHttpsOrigin(endpointUrl)) return true;
     const deskLanHost = wireNodeIdToLanHost(DEFAULT_DESK_WIRE_NODE_ID);
@@ -88,6 +96,7 @@ export const resolveFleetDeskProbeWireNodeId = (
     directUrl?: unknown
 ): string => {
     const normalized = normalizeWireNodeIdForWire(routeTarget);
+    if (isFleetGatewayWireNodeId(normalized)) return FLEET_GATEWAY_WIRE_NODE_ID;
     if (isFleetDeskWireNodeId(normalized)) return normalized;
     if (shouldFleetDeskGatewayProbeFallbacks(normalized, endpointUrl, directUrl)) {
         return DEFAULT_DESK_WIRE_NODE_ID;
@@ -135,6 +144,11 @@ export const isGatewayHttpsOrigin = (value: unknown): boolean => {
     return lower.includes("192.168.0.200") || lower.includes("45.147.121.152") || lower.includes("gateway");
 };
 
+export const isExplicitFleetGatewayTarget = (value: unknown): boolean => {
+    const normalized = normalizeWireNodeIdForWire(value);
+    return isFleetGatewayWireNodeId(normalized) || isGatewayHttpsOrigin(value);
+};
+
 /** Accept only home-fleet Client-ID; drop guest LAN ids ({@code L-192.168.165.x}). */
 export const sanitizeFleetSelfWireNodeId = (value: unknown): string => {
     const normalized = normalizeWireNodeIdForWire(value);
@@ -148,8 +162,10 @@ export const sanitizeFleetRouteTarget = (
     value: unknown,
     endpointUrl?: unknown
 ): string => {
+    const raw = String(value ?? "").trim();
     const normalized = normalizeWireNodeIdForWire(value);
     if (isAssociableFleetWireNodeId(normalized)) return normalized;
+    if (raw && isExplicitFleetGatewayTarget(raw)) return FLEET_GATEWAY_WIRE_NODE_ID;
     if (isGatewayHttpsOrigin(endpointUrl)) return DEFAULT_DESK_WIRE_NODE_ID;
     return "";
 };
@@ -248,7 +264,12 @@ const parseRouteTargetHintLocal = (value: unknown): string => {
 /** Normalize {@code cwsp.destinationNodeIds} before syncing to Android (single desk id on wire). */
 const normalizeDestinationNodeIdsForWire = (raw: unknown, fallbackDesk = "L-192.168.0.110"): string => {
     const hint = parseRouteTargetHintLocal(raw);
-    if (hint) return hint;
+    if (hint) {
+        if (isExplicitFleetGatewayTarget(hint)) return FLEET_GATEWAY_WIRE_NODE_ID;
+        const normalized = normalizeWireNodeIdForWire(hint);
+        if (isAssociableFleetWireNodeId(normalized)) return normalized;
+        return hint;
+    }
     const trimmed = String(raw || "").trim();
     if (!trimmed || trimmed === "*" || trimmed.toLowerCase() === "all" || trimmed.toLowerCase() === "broadcast") {
         return fallbackDesk;
