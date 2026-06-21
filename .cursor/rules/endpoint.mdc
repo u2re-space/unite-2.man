@@ -27,6 +27,7 @@ alwaysApply: true
 - Test with npm (do these actions)
   1. `pm2 stop cws`
   2. `npm run dev`
+- KVM cursor hostage on desk `.110`: `node scripts/kvm-cursor-unfreeze.mjs` (also wired into deploy/restart and AHK `KvmBootstrap()` on script start).
 - Source code: `apps/CrossWord/src/endpoint/server`
 
 ---

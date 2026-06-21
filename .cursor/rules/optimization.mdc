@@ -113,9 +113,12 @@ Consult these only when the task touches them:
 - `/home/u2re-dev/U2RE.space/modules/projects/uniform.ts/src/newer/`
 - `/home/u2re-dev/U2RE.space/runtime/cwsp/endpoint/`
 
----
+### SSH / remote desk tests
+- Do not sleep 30-60s+ in agent SSH probes; cap remote waits at ~25s unless the user explicitly asks for a soak test.
+- Prefer parser/status checks (`scriptblock::Create`, `pm2 status`, port probe) over full `deploy:110:restart` when validating a small fix.
+- `deploy:110:restart` remote start uses `CWSP-PM2-RemoteLaunch` schtask (/IT) + `cwsp-pm2-run-hidden.ps1`; skip post-verify with `CWSP_RESTART_SKIP_POST_VERIFY=1`.
 
-## Response style
+---
 Unless the user requests detail, keep the final response minimal.
 
 Preferred format:

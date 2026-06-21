@@ -172,6 +172,23 @@ This must be validated across:
 - proxied path
 - reverse path where applicable
 
+### KVM cursor hostage / AHK orphan recovery (Windows desk `.110`)
+KVM capture clips the cursor at screen center and hides it via `cwsp-host.ahk`. Orphan `AutoHotkey*.exe` or a crashed Java host can leave `ClipCursor` active.
+
+Recovery layers (use in order):
+1. **Double Ctrl** (500ms window) while KVM capture is active — emergency `KvmRelease` in AHK.
+2. **Script boot** — every `cwsp-host.ahk` start calls `KvmBootstrap()` (`ClipCursor(0)` + show cursor).
+3. **Deploy/restart** — `node scripts/kvm-cursor-unfreeze.mjs` (RPC `INPUT:KVM_RELEASE`, kill orphan AHK, native unclip).
+4. **PM2 contour** — `pm2-stop-stale-desk.mjs` and `pm2-start-cwsp-contour.mjs` call unfreeze on Windows before restart.
+5. **Manual** — `node scripts/kvm-cursor-unfreeze.mjs` from `cwsp-server` root on the desk host.
+
+### PM2 on desk `.110` over SSH
+PM2 started inside an OpenSSH session dies when SSH disconnects. `deploy:110:restart` and `start:110:remote` default to **detached-holder** (`cwsp-pm2-run-hidden.ps1` via `Start-Process`). Do not use SSH-sync PM2 except with `--ssh-sync` for debugging.
+
+Persistent start: run once on desk as Admin `scripts\install-desk-110-pm2-logon.cmd` (CWSP-Desk-Start ONLOGON), then `npm run deploy:110:restart -- --schtasks` or rely on logon task.
+
+Canonical PM2 home on desk: `%CWSP_SERVER_ROOT%\.data\pm2-home` (not `%USERPROFILE%\.pm2`).
+
 ---
 
 ## Logging and diagnostics requirements

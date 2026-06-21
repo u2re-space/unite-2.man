@@ -124,8 +124,8 @@ export const mapCanvasPointToScreen = (
     return undefined;
 };
 
-/** WHY: inset keeps the entry pixel inside the target screen so edge detection does not immediately hand back. */
-export const KVM_HANDOFF_INSET = 4;
+/** WHY: entry needs room beyond edgeThreshold so high-DPI/raw-input bursts do not immediately hand back. */
+export const KVM_HANDOFF_INSET = 24;
 
 /** Entry point on neighbor screen when crossing an edge from {@code fromScreen}. */
 export const kvmHandoffLocalPoint = (
