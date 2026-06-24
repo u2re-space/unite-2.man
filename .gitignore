@@ -149,6 +149,9 @@ my-resume/*
 # don't include https or any private
 private/
 private/*
+.private/
+.private/*
+.private
 https/
 https/*
 
