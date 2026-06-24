@@ -1,0 +1,45 @@
+---
+description: Project foundation, source-of-truth order, and private-data boundary
+globs: "**/*"
+alwaysApply: true
+---
+
+# Project Foundation
+
+Use this rule as the entry point for project governance. Do not duplicate the
+large CWSP/network/debug specs here; follow the source-of-truth order below.
+
+## Source-of-truth order
+
+1. User request and current attached context.
+2. `.specify/memory/constitution.md` for requirements, planning governance, and
+   the short agent operating summary. This path currently resolves through
+   `.memories/constitution.md`.
+3. `plans/Калибровка-проекта.md` for project calibration and strategy.
+4. Domain rules in `.cursor/rules/`, especially:
+   - `network.mdc` for CWSP v2 protocol and routing contracts.
+   - `debugging.mdc` for CWSP/AirPad/clipboard recovery workflow.
+   - `optimization.mdc` for token, time, and resource limits.
+5. `AGENTS.md` and `.cursor/context/base.md` for repo architecture and access
+   notes that are safe to keep public.
+
+## Operating contract
+
+- Audit first, then patch. Do not make blind edits.
+- Read narrowly and search before opening large files.
+- Keep normal probes and connection attempts near 30 seconds unless longer
+  validation is explicitly requested.
+- Preserve import hierarchy, CWSP envelope semantics, stable action names, and
+  the distinction between endpoint URL, target URL, AirPad URL, and destination
+  client ID.
+- Prefer one canonical implementation over parallel variants.
+- Verify proportionally before claiming completion.
+
+## Private data boundary
+
+- Never put passwords, tokens, keys, local credential notes, or private access
+  values in public docs, Cursor rules, `.specify`, `.memories`, `.vscode`, logs,
+  command output summaries, or final responses.
+- Keep local private connectivity notes under `private/`.
+- If a public document needs to mention access details, link to
+  `private/connectivity.md` by path only and do not quote its values.
