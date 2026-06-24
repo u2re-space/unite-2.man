@@ -1,10 +1,10 @@
 /**
  * Adaptive AirPad motion rate (IPS / Hz) — client send cadence + desk apply governor.
- * Tiers: 120 → 90 → 60 → 30 when the channel cannot keep pace.
+ * Tiers: 60 → 30 when the channel cannot keep pace.
  */
 import { isGatewayHttpsOrigin, isOffHomeFleetNetwork } from "./airpad-cwsp-client-parity.ts";
 
-export const AIRPAD_MOTION_IPS_TIERS = [120, 90, 60, 30] as const;
+export const AIRPAD_MOTION_IPS_TIERS = [60, 30] as const;
 
 /** @deprecated use {@link AIRPAD_MOTION_IPS_TIERS} */
 export const AIRPAD_MOTION_HZ_TIERS = AIRPAD_MOTION_IPS_TIERS;
@@ -39,9 +39,8 @@ export const inferAirpadMotionPathClass = (hint: AirpadMotionPathHint): AirpadMo
 };
 
 export const initialMotionIpsForPath = (path: AirpadMotionPathClass): AirpadMotionIpsTier => {
-    if (path === "lan") return 120;
-    if (path === "wan") return 90;
-    return 60;
+    if (path === "lan") return 60;
+    return 30;
 };
 
 /** @deprecated use {@link initialMotionIpsForPath} */
@@ -49,7 +48,7 @@ export const initialMotionHzForPath = initialMotionIpsForPath;
 
 /** Desk apply path: gateway-forwarded input starts lower than direct LAN. */
 export const initialApplyIpsForDeskPath = (relayViaGateway: boolean): AirpadMotionIpsTier =>
-    relayViaGateway ? 90 : 120;
+    relayViaGateway ? 30 : 60;
 
 const readPerfNow = (): number => {
     try {
