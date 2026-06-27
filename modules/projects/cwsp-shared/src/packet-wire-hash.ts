@@ -2,8 +2,15 @@
  * CWSP wire replay markers — stable {@code wireHash} on acts to stop duplicate apply + ping-pong.
  * Parity: Java {@code CwspWireHash}, Node {@code local-dispatch.ts}, browser {@code websocket.ts}.
  */
-import { CLIPBOARD_WIRE_DEDUPE_MS } from "./clipboard-wire-constants.ts";
-import { annotatePacketWireTime64 } from "./wire-time64.ts";
+import {
+    CLIPBOARD_WIRE_DEDUPE_MS,
+    PACKET_ORIGIN_TTL_MS
+} from "./clipboard-wire-constants.ts";
+import {
+    annotatePacketWireTime64,
+    isClipboardCoordinatorWhat,
+    isStalePacketOrigin
+} from "./wire-time64.ts";
 
 export { CLIPBOARD_WIRE_DEDUPE_MS };
 export const WIRE_HASH_FIELD = "wireHash";
@@ -135,7 +142,9 @@ export const computePacketWireHash = (packet: Record<string, unknown>): string =
               ? `asset:${assetHash}`
               : cheapWireHash(stableStringify(payload));
         if (!content) return "";
-        return cheapWireHash(`${op}|${what}|${sender}|${content}`);
+        const uuid = String(packet.uuid ?? "").trim();
+        const uuidMarker = uuid ? `|u:${uuid}` : "";
+        return cheapWireHash(`${op}|${what}|${sender}|${content}${uuidMarker}`);
     }
 
     if (inferWireDedupeCategory(what) === "input") {
@@ -212,6 +221,61 @@ export class PacketWireDedupeGuard {
 }
 
 export const packetWireDedupeGuard = new PacketWireDedupeGuard();
+
+/**
+ * Per-hop mesh relay dedupe — stops already-seen wireHash from floating between peers
+ * within {@link PACKET_ORIGIN_TTL_MS} without blocking first forward.
+ */
+export class PacketWireRelayDedupeGuard {
+    private readonly seen = new Map<string, number>();
+
+    constructor(private readonly maxEntries = 512) {}
+
+    shouldSuppress(packet: Record<string, unknown>): boolean {
+        if (isHighFrequencyInputPacket(packet)) return false;
+        const what = String(packet.what || packet.type || "").trim().toLowerCase();
+        const op = String(packet.op || "act").trim().toLowerCase();
+        if (isDedupeExemptWhat(what, op)) return false;
+
+        const hash = extractPacketWireHash(packet) || computePacketWireHash(packet);
+        if (!hash) return false;
+
+        const now = Date.now();
+        const key = `relay|${hash}`;
+        const prev = this.seen.get(key);
+        this.seen.set(key, now);
+        this.prune(now);
+        return prev !== undefined && now - prev < PACKET_ORIGIN_TTL_MS;
+    }
+
+    clear(): void {
+        this.seen.clear();
+    }
+
+    private prune(now: number): void {
+        const ttl = Math.max(PACKET_ORIGIN_TTL_MS * 4, 4000);
+        for (const [key, ts] of this.seen.entries()) {
+            if (now - ts > ttl) this.seen.delete(key);
+        }
+        if (this.seen.size <= this.maxEntries) return;
+        const sorted = [...this.seen.entries()].sort((a, b) => a[1] - b[1]);
+        for (let i = 0; i < sorted.length - this.maxEntries; i += 1) {
+            this.seen.delete(sorted[i]![0]!);
+        }
+    }
+}
+
+export const packetWireRelayDedupeGuard = new PacketWireRelayDedupeGuard();
+
+/** Block mesh relay for stale origin or duplicate wireHash within origin TTL. */
+export const shouldSuppressPacketRelay = (packet: Record<string, unknown>): boolean => {
+    if (isHighFrequencyInputPacket(packet)) return false;
+    const what = String(packet.what || packet.type || "").trim().toLowerCase();
+    // WHY: clipboard uses echo/poll guards; relay dedupe here blocked gateway→desk fan-out.
+    if (isClipboardCoordinatorWhat(what)) return false;
+    if (isStalePacketOrigin(packet, false)) return true;
+    return packetWireRelayDedupeGuard.shouldSuppress(packet);
+};
 
 /** High-frequency relative deltas must never be replay-suppressed (drops smooth cursor). */
 export const isHighFrequencyInputWhat = (what: unknown): boolean => {

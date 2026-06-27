@@ -2,6 +2,9 @@
  * 64-bit wire timestamps: epoch ms + sub-ms micro fraction (JSON-safe string).
  * Parity: Java {@code WireTime64} — {@code wireTime64 = ms * 1_000_000 + subUs}.
  */
+import { PACKET_ORIGIN_TTL_MS } from "./clipboard-wire-constants.ts";
+
+export { PACKET_ORIGIN_TTL_MS };
 
 export type WireTime64 = {
     /** Wall-clock epoch milliseconds ({@code Date.now()} / {@code System.currentTimeMillis()}). */
@@ -77,22 +80,79 @@ export const annotateWireTime64 = <T extends Record<string, unknown>>(payload: T
     };
 };
 
+const asRecord = (value: unknown): Record<string, unknown> =>
+    value && typeof value === "object" && !Array.isArray(value) ? (value as Record<string, unknown>) : {};
+
+const readPositiveMs = (value: unknown): number => {
+    const n = Number(value);
+    return Number.isFinite(n) && n > 0 ? n : 0;
+};
+
+/** Immutable first-send wall clock — survives gateway relay without resetting age. */
+export const packetOriginTimestampMs = (packet: Record<string, unknown>): number => {
+    const flags = asRecord(packet.flags);
+    const payload = asRecord(packet.payload ?? packet.data);
+    const wireParsed = parseWireTime64(packet.originTs ?? flags.originTs ?? payload.originTs);
+    if (wireParsed?.ts) return wireParsed.ts;
+    return (
+        readPositiveMs(packet.originTs) ||
+        readPositiveMs(flags.originTs) ||
+        readPositiveMs(payload.originTs) ||
+        readPositiveMs(packet.timestamp) ||
+        readPositiveMs(packet.ts) ||
+        readPositiveMs(flags.timestamp) ||
+        readPositiveMs(flags.ts) ||
+        readPositiveMs(payload.timestamp) ||
+        readPositiveMs(payload.ts) ||
+        0
+    );
+};
+
+/** Clipboard coordinator actions (exempt from origin-age drop). */
+export const isClipboardCoordinatorWhat = (what: unknown): boolean => {
+    const normalized = String(what || "").trim().toLowerCase();
+    if (!normalized) return false;
+    return normalized.startsWith("clipboard:") || normalized.startsWith("airpad:clipboard:");
+};
+
+/** Drop non-input acts older than {@link PACKET_ORIGIN_TTL_MS} from first origin. */
+export const isStalePacketOrigin = (
+    packet: Record<string, unknown>,
+    highFreqInput = false
+): boolean => {
+    if (highFreqInput) return false;
+    const what = String(packet.what || packet.type || "").trim().toLowerCase();
+    // WHY: clipboard may sit in pending/HTTP knock queues >4s; stale guard is for input acts.
+    if (isClipboardCoordinatorWhat(what)) return false;
+    const originTs = packetOriginTimestampMs(packet);
+    if (!originTs) return false;
+    const age = Date.now() - originTs;
+    if (age < 0) return false;
+    return age > PACKET_ORIGIN_TTL_MS;
+};
+
 /** Packet-level timestamp fields (root {@code timestamp} mirrors {@code ts}). */
 export const annotatePacketWireTime64 = <T extends Record<string, unknown>>(packet: T): T => {
     const timing = captureWireTime64();
-    const ts = Number(packet.timestamp ?? packet.ts ?? timing.ts);
+    const existingOrigin =
+        packetOriginTimestampMs(packet) ||
+        readPositiveMs(packet.timestamp) ||
+        readPositiveMs(packet.ts) ||
+        timing.ts;
+    const ts = readPositiveMs(packet.timestamp) || readPositiveMs(packet.ts) || existingOrigin;
     const subUs = Number(packet.subUs ?? timing.subUs);
     const wireTime64 = String(packet.wireTime64 ?? packet.ts64 ?? packet.wireTs ?? timing.wireTime64);
+    const priorFlags = asRecord(packet.flags);
     const flags = {
-        ...(packet.flags && typeof packet.flags === "object" && !Array.isArray(packet.flags)
-            ? (packet.flags as Record<string, unknown>)
-            : {}),
-        wireTime64,
-        ts64: wireTime64,
-        wireTs: wireTime64
+        ...priorFlags,
+        originTs: priorFlags.originTs ?? packet.originTs ?? existingOrigin,
+        wireTime64: priorFlags.wireTime64 ?? wireTime64,
+        ts64: priorFlags.ts64 ?? priorFlags.wireTime64 ?? wireTime64,
+        wireTs: priorFlags.wireTs ?? priorFlags.wireTime64 ?? wireTime64
     };
     return {
         ...packet,
+        originTs: packet.originTs ?? existingOrigin,
         ts,
         subUs,
         wireTime64,
