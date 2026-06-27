@@ -158,13 +158,13 @@ export const computePacketWireHash = (packet: Record<string, unknown>): string =
     return cheapWireHash(`${op}|${what}|${sender}|${stableStringify(payload)}`);
 };
 
-/** Attach {@code flags.wireHash} + payload mirror when missing. */
+/** Attach {@code flags.wireHash} + payload mirror; refresh when payload content changes. */
 export const annotatePacketWireHash = <T extends Record<string, unknown>>(packet: T): T => {
     const timed = annotatePacketWireTime64(packet);
-    const existing = extractPacketWireHash(timed);
-    if (existing) return timed;
     const hash = computePacketWireHash(timed);
     if (!hash) return timed;
+    const existing = extractPacketWireHash(timed);
+    if (existing === hash) return timed;
 
     const flags = { ...asRecord(timed.flags), [WIRE_HASH_FIELD]: hash };
     const payloadRaw = timed.payload ?? timed.data;
@@ -313,6 +313,9 @@ export const isHighFrequencyInputPacket = (packet: Record<string, unknown> | str
 export const classifyWireReplaySuppress = (packet: Record<string, unknown>): WireReplaySuppressMode => {
     if (isHighFrequencyInputPacket(packet)) return "none";
     if (isDiscreteInputPacket(packet)) return "none";
+    const what = String(packet.what || packet.type || "").trim().toLowerCase();
+    // WHY: clipboard echo uses classifyClipboardSuppress + poll guards, not wireHash replay.
+    if (isClipboardCoordinatorWhat(what)) return "none";
     if (packetWireDedupeGuard.shouldSuppress(packet)) return "local-only";
     return "none";
 };
