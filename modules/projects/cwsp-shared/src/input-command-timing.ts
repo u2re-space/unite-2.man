@@ -73,6 +73,50 @@ export const isInputCoordinatorWhat = (what: string): boolean => {
     );
 };
 
+/** Discrete pointer/keyboard acts — must not be stale-dropped or wire-replay suppressed like move bursts. */
+export const isDiscreteInputWhat = (what: string): boolean => {
+    const normalized = String(what || "").trim().toLowerCase();
+    return (
+        normalized === "mouse:click" ||
+        normalized === "mouse:down" ||
+        normalized === "mouse:up" ||
+        normalized === "keyboard:tap" ||
+        normalized === "keyboard:type" ||
+        normalized === "keyboard:toggle"
+    );
+};
+
+const readAirpadWrapperOp = (packet: Record<string, unknown>): string => {
+    const payload = asRecord(packet.payload ?? packet.data ?? packet.body);
+    const direct = String(payload.op ?? payload.action ?? payload.type ?? "").trim().toLowerCase();
+    if (direct) return direct;
+    const params = payload.params;
+    if (Array.isArray(params) && params.length > 0) {
+        return String(params[0] ?? "").trim().toLowerCase();
+    }
+    return "";
+};
+
+/** Packet-aware discrete input (incl. `airpad:mouse` click/down/up wrappers). */
+export const isDiscreteInputPacket = (packet: Record<string, unknown> | string): boolean => {
+    if (typeof packet === "string") return isDiscreteInputWhat(packet);
+    const what = String(packet.what || packet.type || "").trim().toLowerCase();
+    if (isDiscreteInputWhat(what)) return true;
+    if (what === "airpad:mouse" || what.startsWith("airpad:mouse")) {
+        const op = readAirpadWrapperOp(packet) || "move";
+        return (
+            op === "click" ||
+            op === "mouse:click" ||
+            op === "down" ||
+            op === "mouse:down" ||
+            op === "up" ||
+            op === "mouse:up"
+        );
+    }
+    if (what === "airpad:keyboard" || what.startsWith("airpad:keyboard")) return true;
+    return false;
+};
+
 export const isClipboardCoordinatorWhat = (what: string): boolean => {
     const normalized = String(what || "").trim().toLowerCase();
     return normalized.startsWith("clipboard:") || normalized.startsWith("airpad:clipboard:");

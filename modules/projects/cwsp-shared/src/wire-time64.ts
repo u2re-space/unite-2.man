@@ -3,6 +3,7 @@
  * Parity: Java {@code WireTime64} — {@code wireTime64 = ms * 1_000_000 + subUs}.
  */
 import { PACKET_ORIGIN_TTL_MS } from "./clipboard-wire-constants.ts";
+import { isDiscreteInputPacket } from "./input-command-timing.ts";
 
 export { PACKET_ORIGIN_TTL_MS };
 
@@ -121,8 +122,9 @@ export const isStalePacketOrigin = (
     highFreqInput = false
 ): boolean => {
     if (highFreqInput) return false;
+    if (isDiscreteInputPacket(packet)) return false;
     const what = String(packet.what || packet.type || "").trim().toLowerCase();
-    // WHY: clipboard may sit in pending/HTTP knock queues >4s; stale guard is for input acts.
+    // WHY: clipboard may sit in pending/HTTP knock queues >4s; stale guard is for mesh replay acts.
     if (isClipboardCoordinatorWhat(what)) return false;
     const originTs = packetOriginTimestampMs(packet);
     if (!originTs) return false;

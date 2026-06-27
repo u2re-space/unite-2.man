@@ -11,6 +11,9 @@ import {
     isClipboardCoordinatorWhat,
     isStalePacketOrigin
 } from "./wire-time64.ts";
+import { isDiscreteInputPacket } from "./input-command-timing.ts";
+
+export { isDiscreteInputPacket, isDiscreteInputWhat } from "./input-command-timing.ts";
 
 export { CLIPBOARD_WIRE_DEDUPE_MS };
 export const WIRE_HASH_FIELD = "wireHash";
@@ -233,6 +236,7 @@ export class PacketWireRelayDedupeGuard {
 
     shouldSuppress(packet: Record<string, unknown>): boolean {
         if (isHighFrequencyInputPacket(packet)) return false;
+        if (isDiscreteInputPacket(packet)) return false;
         const what = String(packet.what || packet.type || "").trim().toLowerCase();
         const op = String(packet.op || "act").trim().toLowerCase();
         if (isDedupeExemptWhat(what, op)) return false;
@@ -270,6 +274,7 @@ export const packetWireRelayDedupeGuard = new PacketWireRelayDedupeGuard();
 /** Block mesh relay for stale origin or duplicate wireHash within origin TTL. */
 export const shouldSuppressPacketRelay = (packet: Record<string, unknown>): boolean => {
     if (isHighFrequencyInputPacket(packet)) return false;
+    if (isDiscreteInputPacket(packet)) return false;
     const what = String(packet.what || packet.type || "").trim().toLowerCase();
     // WHY: clipboard uses echo/poll guards; relay dedupe here blocked gateway→desk fan-out.
     if (isClipboardCoordinatorWhat(what)) return false;
@@ -307,6 +312,7 @@ export const isHighFrequencyInputPacket = (packet: Record<string, unknown> | str
 /** Wire-hash replay → skip local apply (relay may continue). */
 export const classifyWireReplaySuppress = (packet: Record<string, unknown>): WireReplaySuppressMode => {
     if (isHighFrequencyInputPacket(packet)) return "none";
+    if (isDiscreteInputPacket(packet)) return "none";
     if (packetWireDedupeGuard.shouldSuppress(packet)) return "local-only";
     return "none";
 };
