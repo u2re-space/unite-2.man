@@ -12,7 +12,8 @@
     },
     "java.configuration.updateBuildConfiguration": "disabled",
     "java.project.sourcePaths": [
-        "runtime/cwsp/capacitor"
+        "apps/CWSP/java",
+        "apps/CWSAndroid/app/src/main/java"
     ],
     "files.watcherExclude": {
         "**/node_modules/**": true,
