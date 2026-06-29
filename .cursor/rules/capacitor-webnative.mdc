@@ -1,0 +1,39 @@
+---
+alwaysApply: true
+---
+Needs to make more parity with/between Capacitor version and WebNative CWSP version.
+
+Capacitor (CWSP, CWSAndroid):
+- Frontend: Capacitor (web, frontend)
+  - Contain: `minimal` shell, `network`, `airpad` and `settings` views
+  - Settings extended (contributed) by Java/native config system.
+  - Settings needs to be synchronized with internal backend...
+  - Frontend building by Vite into `./dist`.
+- Backend: Java (native code/core, platform)
+- Platform: Android
+- Build Output: `./build/...`
+- Build Command: `npm run build:capacitor` (preferred)
+- Deploys: to Android devices (incl. by ADB, or APK install)
+- Source-directory: `runtime/cwsp/capacitor` (symbolic linked)
+
+WebNative (CWSP, NodeJS, [optionally] some Java-bridge/IPC):
+- Frontend: WebView2 (web, frontend), connected with backend sub-system (such as settings, config)
+  - Contain: `minimal` shell, `network` and `settings` views
+  - Settings extended (contributed) by NodeJS/CWSP config system.
+  - Settings needs to be synchronized with internal backend (NodeJS).
+  - Frontend building by Vite into `./dist`.
+- Backend: NodeJS (with possible Java bridge/IPC support), from/by CWSP itself
+- Platform: Windows, Linux
+- Build Output: `./dist` or `./build`
+- Framework: 
+  - https://github.com/kl1ro/webnative
+  - `npm install -D @mindw1n/webnative`
+- Build Command: `npm run build:webnative` (preferred)
+- Deploy Command: 
+  - `npm run deploy:110:webnative` (preferred)
+  - `npm run deploy:200:webnative` (option)
+- Deploys: to Desktops, Windows, Linux hosts/devices (by SSH, open `cwsp-ui.exe` portable or installer alike APK).
+- Source-directory: `runtime/cwsp/webnative`
+
+May be in future non-existent Java-with-WebView2 [aka. JW2 or JWV] (Java driven Tauri or NeutralinoJS, with/by JNI)...
+- Potentially, similar with Capacitor, but for Desktop, Windows or Linux
