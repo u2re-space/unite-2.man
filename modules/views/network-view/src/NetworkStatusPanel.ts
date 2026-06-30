@@ -18,7 +18,7 @@ import {
     isPreferNativeWebsocketEnabled
 } from "views/airpad/config/config";
 import { CwsBridge } from "com/routing/native/cws-bridge";
-import { runDispatchProbeWithFallback, runEndpointProbes, type DispatchProbeReport, type NetworkProbeRow } from "./network-probe";
+import { runDispatchProbeWithFallback, runEndpointProbes, runWebnativeBackendProbe, type DispatchProbeReport, type NetworkProbeRow } from "./network-probe";
 import {
     buildCombinedPageLog,
     collectFrontendLogText,
@@ -311,15 +311,29 @@ export class NetworkStatusPanel {
             const accessToken = String(core?.socket?.accessToken ?? "");
 
             this.appendLog("Running /lna-probe on relay, direct, and fallback hosts…");
-            const probes = await runEndpointProbes({ relay, direct });
-            if (isCapacitorNative() && probes.length && probes[0]?.label.startsWith("Relay")) {
-                this.appendLog("Probes via native Java bridge (network:probe).");
+            // WHY: on the WebNative desktop shell, probe + dispatch go through the backend control
+            // RPC in ONE call (the webview can't reach LAN/WAN HTTPS directly). Falls back to the
+            // direct fetch path on other surfaces (Capacitor uses the Java bridge inside).
+            const webnative = await runWebnativeBackendProbe(
+                { relay, direct },
+                { clientId, token, accessToken }
+            );
+            let probes: NetworkProbeRow[];
+            let dispatch: DispatchProbeReport | undefined;
+            if (webnative?.probes.length) {
+                probes = webnative.probes;
+                dispatch = webnative.dispatch;
+                this.appendLog("Probes via WebNative backend control RPC (/service/endpoint-probe).");
+            } else {
+                probes = await runEndpointProbes({ relay, direct });
+                if (isCapacitorNative() && probes.length && probes[0]?.label.startsWith("Relay")) {
+                    this.appendLog("Probes via native Java bridge (network:probe).");
+                }
             }
             for (const row of probes) this.appendLog(formatProbeLine(row));
 
-            let dispatch: DispatchProbeReport | undefined;
             const okCount = probes.filter((p) => p.ok).length;
-            if (okCount || relay || direct) {
+            if (!dispatch && (okCount || relay || direct)) {
                 this.appendLog(
                     okCount
                         ? `Testing dispatch on ${okCount} reachable host(s)…`
@@ -330,6 +344,8 @@ export class NetworkStatusPanel {
                     { relay, direct },
                     { clientId, token, accessToken }
                 );
+            }
+            if (dispatch) {
                 if (dispatch.ok) {
                     this.appendLog(`Dispatch OK (${dispatch.latencyMs ?? "?"}ms)`);
                 } else {

@@ -24,6 +24,38 @@ export type DispatchProbeReport = {
 
 const trim = (value: unknown): string => (typeof value === "string" ? value.trim() : "");
 
+// --- WebNative backend proxy -----------------------------------------------------
+// WHY: on the WebNative desktop shell the webview fetch is blocked from reaching LAN/WAN HTTPS CWSP
+// origins (self-signed TLS + mixed-content + Private Network Access). The backend's /service/endpoint-probe
+// RPC runs the same probes from loopback (no webview restrictions) and returns the rows + dispatch.
+
+const isWebnativeSurface = (): boolean => {
+    try {
+        const g = globalThis as { __WEBNATIVE_AUTH__?: unknown; __CWS_WEBNATIVE_BOOT__?: unknown };
+        return Boolean(g.__WEBNATIVE_AUTH__ || g.__CWS_WEBNATIVE_BOOT__);
+    } catch { return false; }
+};
+
+const webnativeControlUrl = (pathname: string): string | null => {
+    try {
+        const auth = (globalThis as { __WEBNATIVE_AUTH__?: { port?: number; key?: string } }).__WEBNATIVE_AUTH__;
+        if (!auth?.port) return null;
+        return `http://127.0.0.1:${auth.port}${pathname}`;
+    } catch { return null; }
+};
+
+const labelForProbeCandidate = (origin: string, index: number, fields: { relay?: string; direct?: string }): string => {
+    const relaySet = new Set(splitConnectHostList(fields.relay ?? "").map((h) => normalizeProbeOrigin(h)));
+    const directSet = new Set(splitConnectHostList(fields.direct ?? "").map((h) => normalizeProbeOrigin(h)));
+    const norm = normalizeProbeOrigin(origin);
+    if (relaySet.has(norm)) return index === 0 ? "Relay / gateway" : "Relay (alt)";
+    if (directSet.has(norm)) return "Direct peer";
+    if (norm.includes("192.168.0.200")) return "Gateway LAN fallback";
+    if (norm.includes("45.147.121.152")) return "Gateway WAN fallback";
+    if (norm.includes("127.0.0.1") || norm.includes("localhost")) return "Loopback";
+    return `Candidate ${index + 1}`;
+};
+
 /** Strip probe path suffix; canonical CWSP HTTPS origin (`https://host:8434`). */
 export const normalizeProbeOrigin = (raw: string): string => {
     const t = trim(raw).replace(/\/lna-probe\/?$/i, "").replace(/\/+$/, "");
@@ -62,17 +94,6 @@ const formatNativeProbeError = (row: NativeProbeRow, ok: boolean, status?: numbe
     if (row.error) bits.push(String(row.error));
     if (status != null && status >= 0 && status !== 204) bits.push(`HTTP ${status}`);
     return bits.join(" · ") || "unreachable";
-};
-
-const labelForProbeCandidate = (origin: string, index: number, fields: { relay?: string; direct?: string }): string => {
-    const relaySet = new Set(splitConnectHostList(fields.relay ?? "").map((h) => normalizeProbeOrigin(h)));
-    const directSet = new Set(splitConnectHostList(fields.direct ?? "").map((h) => normalizeProbeOrigin(h)));
-    const norm = normalizeProbeOrigin(origin);
-    if (relaySet.has(norm)) return index === 0 ? "Relay / gateway" : "Relay (alt)";
-    if (directSet.has(norm)) return "Direct peer";
-    if (norm.includes("192.168.0.200")) return "Gateway LAN fallback";
-    if (norm.includes("45.147.121.152")) return "Gateway WAN fallback";
-    return `Candidate ${index + 1}`;
 };
 
 /** Java {@code network:probe} via CwsBridge — bypasses WebView fetch restrictions on LAN HTTPS. */
@@ -165,6 +186,11 @@ export async function runEndpointProbes(
     const nativeRows = await runNativeRouteProbes(fields);
     if (nativeRows?.length) return nativeRows;
 
+    // WHY: on the WebNative desktop shell the webview can't reach LAN/WAN HTTPS CWSP origins
+    // (self-signed TLS + mixed-content + PNA). Proxy through the backend control RPC instead.
+    const webnativeRows = await runWebnativeBackendProbes(fields);
+    if (webnativeRows?.length) return webnativeRows;
+
     const timeoutMs = opts.timeoutMs ?? 3500;
     const maxCandidates = opts.maxCandidates ?? 6;
     const rows: NetworkProbeRow[] = [];
@@ -186,6 +212,68 @@ export async function runEndpointProbes(
     }
     return rows;
 }
+
+/**
+ * WebNative backend proxy: POST `/service/endpoint-probe` with `dispatch:true` so the backend runs
+ * both the `/lna-probe` reachability set AND a `/api/network/dispatch` probe from its loopback
+ * context, then return both as a combined snapshot. Returns `null` when not on the WebNative surface
+ * or the control RPC is unreachable (so callers fall back to direct fetch).
+ */
+export async function runWebnativeBackendProbe(
+    fields: { relay?: string; direct?: string; extras?: string[] },
+    auth: { clientId?: string; token?: string; accessToken?: string }
+): Promise<{ probes: NetworkProbeRow[]; dispatch?: DispatchProbeReport } | null> {
+    if (!isWebnativeSurface()) return null;
+    const url = webnativeControlUrl("/service/endpoint-probe");
+    if (!url) return null;
+    // WHY: the control RPC requires the X-API-Key header (same as /service/config). Read it from the
+    // webnative auth manifest global the desktop shell injected.
+    const authKey = (globalThis as { __WEBNATIVE_AUTH__?: { key?: string } }).__WEBNATIVE_AUTH__?.key;
+    const origins = collectEndpointProbeCandidates(fields);
+    const controller = typeof AbortController !== "undefined" ? new AbortController() : undefined;
+    const timer = controller ? globalThis.setTimeout(() => controller.abort(), 12000) : undefined;
+    try {
+        const res = await fetch(url, {
+            method: "POST",
+            headers: authKey ? { "Content-Type": "application/json", "X-API-Key": authKey } : { "Content-Type": "application/json" },
+            body: JSON.stringify({ origins, dispatch: true, auth }),
+            signal: controller?.signal
+        } as RequestInit);
+        if (!res.ok) return null;
+        const bag = (await res.json()) as {
+            rows?: { origin: string; ok: boolean; status?: number; error?: string; latencyMs?: number }[];
+            dispatch?: { origin: string; ok: boolean; status?: number; error?: string; bodySnippet?: string; latencyMs?: number };
+        };
+        const probes: NetworkProbeRow[] = (bag.rows ?? []).map((r, i) => ({
+            label: labelForProbeCandidate(r.origin, i, fields),
+            origin: r.origin,
+            ok: r.ok,
+            status: r.status,
+            error: r.error,
+            latencyMs: r.latencyMs
+        }));
+        const dispatch = bag.dispatch
+            ? {
+                origin: bag.dispatch.origin,
+                ok: bag.dispatch.ok,
+                status: bag.dispatch.status,
+                error: bag.dispatch.error,
+                bodySnippet: bag.dispatch.bodySnippet,
+                latencyMs: bag.dispatch.latencyMs
+            }
+            : undefined;
+        return { probes, dispatch };
+    } catch {
+        return null;
+    } finally {
+        if (timer) clearTimeout(timer);
+    }
+}
+
+const runWebnativeBackendProbes = async (fields: { relay?: string; direct?: string; extras?: string[] }): Promise<NetworkProbeRow[] | null> => {
+    const r = await runWebnativeBackendProbe(fields, {});
+    return r?.probes.length ? r.probes : null;
+};
 
 export const pickDispatchOrigin = (
     probes: NetworkProbeRow[],
