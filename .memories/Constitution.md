@@ -81,3 +81,9 @@ rules may add operational detail, but should not contradict this file. Amendment
 must update `.memories/constitution.md` when the agent operating contract changes.
 
 **Version**: 1.0.0 | **Ratified**: 2026-06-24 | **Last Amended**: 2026-06-24
+
+---
+
+## Миграция на новую модель памяти
+
+Тут теперь важный вопрос и задача... Нужно перейти с Pantry на `.memories` модель. Сделать не только миграцию, перенос данных оттуда, но ещё и проделать анализ (скан) проекта (исходного кода), для актуализации всех данных.
