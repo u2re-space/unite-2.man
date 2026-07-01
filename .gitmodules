@@ -1,6 +1,3 @@
-[submodule "apps/CWSAndroid"]
-	path = apps/CWSAndroid
-	url = https://github.com/u2re-space/CWSAndroid
 [submodule "apps/CrossWord"]
 	path = apps/CrossWord
 	url = https://github.com/u2re-space/crossword
@@ -31,9 +28,6 @@
 [submodule "modules/projects/icon.ts"]
 	path = modules/projects/icon.ts
 	url = https://github.com/fest-live/icon.ts.git
-[submodule "modules/views/--recursive"]
-	path = modules/views/--recursive
-	url = https://github.com/u2re-space/markdown-view
 [submodule "modules/views/markdown-view"]
 	path = modules/views/markdown-view
 	url = https://github.com/u2re-space/markdown-view
@@ -82,3 +76,6 @@
 [submodule "modules/shells/window-frame"]
 	path = modules/shells/window-frame
 	url = https://github.com/u2re-space/window-frame
+[submodule "apps/CWSP-reborn"]
+	path = apps/CWSP-reborn
+	url = https://github.com/u2re-space/CWSP-reborn
