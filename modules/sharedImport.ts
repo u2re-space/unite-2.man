@@ -8,6 +8,7 @@ const SharedRegistry: Record<symbol, any> = (globalThis as any)?.[SharedLink] ??
 export default SharedRegistry;
 export function registerShared<T>(key: symbol, value: T) {
     SharedRegistry[key] ??= value;
+    return SharedRegistry[key];
 }
 
 export const exportShared = <T>(key: symbol, value: T) => {
