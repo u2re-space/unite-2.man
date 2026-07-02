@@ -1004,3 +1004,22 @@ When working with this repository:
     - reactive DOM framework logic → `fest/lure`
     - reusable UI components → `fest/fl-ui`
     - application-specific code → `apps/*`
+
+---
+
+## Комментарии и маркеры в коде
+
+1. Желательно в шапке (блочном комменте) кодов (вписывать, даже заранее, но ПЕРЕД backup'ом): 
+   - `*.ts`, `*.js`, `*.mjs`, `*.css`, `*.scss`, `*.tsx`, `*.jsx`, `*.esm`
+   - Оставлять или добавить/переписать heading блочный комментарий по типу:
+
+```ts
+/* 
+ * Filename: ...
+ * FullPath: ...
+ * Change date and time: {hour}.{minues}.{seconds}_{day}.{month}.{year}
+ * Reason for changes: ...
+ */
+```
+
+2. Желательно оставлять комментарии в функциях (в особенности новых), в переменных, в логике самого кода, а также их (возможно, новые) связи с другими частями этого кода. Это нужно для упрощения навигации и поиска нужны модулей и частей кода.
