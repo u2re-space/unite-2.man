@@ -207,6 +207,12 @@ VI. Per Domain SSL Certificates.
 - <https://github.com/ktorio/ktor>
 - <https://github.com/socketio/socket.io-client-java>
 - <https://github.com/socketio/engine.io-server-java>
+- <https://capacitorjs.com/>
+- <https://github.com/ionic-team/capacitor>
+- `npm install -D @capacitor/core @capacitor/cli`
+- <https://capacitorjs.com/docs/v6/android/custom-code>
+- <https://github.com/MarkusJx/node-java-bridge> (theoretically possible way to connect with neutralino)
+- <https://github.com/hunyadi/javabind> (theoretically possible way to connect with neutralino)
 
 **NodeJS:**
 
@@ -223,6 +229,9 @@ VI. Per Domain SSL Certificates.
 - <https://www.json.org/json-en.html>
 - <https://ecma-international.org/publications-and-standards/standards/ecma-404/>
 - Native JSON, Buffer or other of NodeJS API.
+- <https://github.com/nodejs/node/blob/main/src/README.md>
+- <https://github.com/neutralinojs-community/node-neutralino> (older, for connect NodeJS with neutralino)
+- <https://github.com/hschneider/neutralino-ext-node> (recent, for connect NodeJS with neutralino)
 
 **Web/PWA/Frontend:**
 
@@ -237,13 +246,17 @@ VI. Per Domain SSL Certificates.
 - <https://www.json.org/json-en.html>
 - <https://ecma-international.org/publications-and-standards/standards/ecma-404/>
 - Crypto, WebSocket, JSON, etc. API's (native)
-- Other Web Natives..
+- Other Web Natives...
+- <https://capacitorjs.com/>
+- <https://github.com/ionic-team/capacitor>
+- `npm install -D @capacitor/core @capacitor/cli`
+- <https://github.com/neutralinojs/neutralinojs> (needs also Java, and/or NodeJS extension)
 
 ---
 
-Needs to make more parity with/between Capacitor version and WebNative CWSP version.
+Needs to make more parity with/between Capacitor version and WebNative (or [Neutralino](https://github.com/neutralinojs/neutralinojs)+[NodeJS](https://github.com/hschneider/neutralino-ext-node)) CWSP version.
 
-Capacitor ("CWSP"):
+[Capacitor](https://github.com/ionic-team/capacitor) ("CWSP"):
 - Frontend: Capacitor (web, frontend)
   - Contain: `minimal` shell, `network`, `airpad` and `settings` views
   - Settings extended (contributed) by Java/native config system.
@@ -256,7 +269,7 @@ Capacitor ("CWSP"):
 - Deploys: to Android devices (incl. by ADB, or APK install)
 - Source-directory: `apps/CWSP-reborn/app/android` (symbolic linked)
 
-WebNative ("CWSP", NodeJS, [optionally] some Java-bridge/IPC):
+[WebNative](https://github.com/L2NE-dev/webnative) [or [Neutralino](https://github.com/neutralinojs/neutralinojs)+[NodeJS](https://github.com/hschneider/neutralino-ext-node)] ("CWSP", [NodeJS](https://nodejs.org/), [optionally] some Java-bridge/IPC):
 - Frontend: WebView2 (web, frontend), connected with backend sub-system (such as settings, config)
   - Contain: `minimal` shell, `network` and `settings` views
   - Settings extended (contributed) by NodeJS/CWSP config system.
@@ -277,7 +290,10 @@ WebNative ("CWSP", NodeJS, [optionally] some Java-bridge/IPC):
 - Source-directory: `apps/CWSP-reborn/app/windows` и `apps/CWSP-reborn/app/linux`
 
 May be in future non-existent Java-with-WebView2 [aka. JW2 or JWV] (Java driven Tauri or NeutralinoJS, with/by JNI)...
-- Potentially, similar with Capacitor, but for Desktop, Windows or Linux
+- Potentially, similar with [`Capacitor`](https://github.com/ionic-team/capacitor), but for Desktop, Windows or Linux.
+- Also may be tried to use [Neutralino](https://github.com/neutralinojs/neutralinojs) with Java, and other interfaces...
+  - <https://github.com/MarkusJx/node-java-bridge> (theoretically possible way to connect with neutralino)
+  - <https://github.com/hunyadi/javabind> (theoretically possible way to connect with neutralino)
 
 **Данные для ручных тестов:**
 
