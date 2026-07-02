@@ -1,4 +1,8 @@
-# U2RE.space Constitution
+# U2RE Projects Constitution
+
+- **Дата создания или обновления:** 02.07.2026
+- **Рассмотрены или прочтены:** --.--.----
+- **Изменены (автоматически):** --.--.----
 
 > **SPECIAL NOTES (FOR AGENTS), AI-RECOMMENDATIONS:**
 >
