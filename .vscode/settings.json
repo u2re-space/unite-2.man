@@ -47,5 +47,6 @@
     "git.detectSubmodules": false,
     "git.detectSubmodulesLimit": 0,
     "extensions.autoCheckUpdates": false,
-    "typescript.tsserver.maxTsServerMemory": 4096
+    "typescript.tsserver.maxTsServerMemory": 4096,
+    "js/ts.experimental.useTsgo": false
 }

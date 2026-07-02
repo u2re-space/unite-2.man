@@ -99,9 +99,9 @@ II. Приложение Android (Java, capacitor, с частичками Java)
     - кратковременный transparent overlay (со spinner) для действия "do-copy" (если выделен текст) и/или "read-clipboard"/"to-share-content" (если share-target).
     - возможность быть поверх всех приложений.
   - приложение, схожее/аналогичное (по функциям) с:
-    - https://github.com/roeticvampire/AiR-Mouse
-    - https://github.com/pritish384/AirPointer
-    - https://github.com/Sathvik-Rao/ClipCascade
+    - <https://github.com/roeticvampire/AiR-Mouse>
+    - <https://github.com/pritish384/AirPointer>
+    - <https://github.com/Sathvik-Rao/ClipCascade>
 
 III. Приложение на WebNative или ElectronJS
   - аналогично с приложением на Android
@@ -146,7 +146,8 @@ WebNative ("CWSP", NodeJS, [optionally] some Java-bridge/IPC):
 - Platform: Windows, Linux
 - Build Output: `./dist/<category>/` or `./build/<category>/`
 - Framework: 
-  - https://github.com/kl1ro/webnative
+  - <https://github.com/kl1ro/webnative>
+  - <https://github.com/L2NE-dev/webnative> (forked)
   - `npm install -D @mindw1n/webnative`
 - Build Command: `npm run build:webnative` (preferred)
 - Deploy Command: 
@@ -167,9 +168,9 @@ There is problems, and needs to solve/resolve:
 3. Port &ould still remains 8434 by default, and don't randomize ports.
    - If occupied by Cursor IDE or SSH, just skip/ignore such test and check.
 4. Now I'm using forked versions...
-   - https://github.com/L2NE-dev/webnative
+   - <https://github.com/L2NE-dev/webnative>
 5. You can look, how backend can be working/connected to app...
-   - https://github.com/L2NE-dev/webnative/tree/master/template/ts
+   - <https://github.com/L2NE-dev/webnative/tree/master/template/ts>
 
 **Данные для тестов:**
 

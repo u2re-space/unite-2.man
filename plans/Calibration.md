@@ -110,11 +110,11 @@
 **Preferred-Reasoning:** High, Extra-High or Pro
 **Preferred-Context:** 1M
 **Inspired-by-projects:**
-  - https://github.com/roeticvampire/AiR-Mouse/tree/master
-  - https://github.com/pritish384/AirPointer
-  - https://github.com/Sathvik-Rao/ClipCascade
-  - https://github.com/MicrosoftDocs/windows-dev-docs/blob/docs/hub/powertoys/mouse-without-borders.md
-  - https://github.com/symless/synergy
+  - <https://github.com/roeticvampire/AiR-Mouse/tree/master>
+  - <https://github.com/pritish384/AirPointer>
+  - <https://github.com/Sathvik-Rao/ClipCascade>
+  - <https://github.com/MicrosoftDocs/windows-dev-docs/blob/docs/hub/powertoys/mouse-without-borders.md>
+  - <https://github.com/symless/synergy>
 
 ---
 
