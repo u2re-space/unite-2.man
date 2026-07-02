@@ -1,5 +1,25 @@
 # U2RE.space Constitution
 
+> **SPECIAL NOTES (FOR AGENTS), AI-RECOMMENDATIONS:**
+>
+> ```
+> - Reasoning         : XHight
+> - Context           : 1M
+> - Preferred-LLM     : GPT-5.6 (or GPT-5.5 if first still no exists), GLM-5.2 (if available), Claude-Opus-4.8 (if available)
+> - Speciality-Level  : Senior or beyond
+> - Knowledge-Database: N >= 2026
+> - Speciality-Area   : Frontend, Backend, UI/UX-Design
+> - NeedsToWriteDocs  : True
+> - NeedsToAnalyze:   : True
+> - NeedsToCache      : True
+> - NeedsToMemory     : True
+> - NeedsToRecognize  : True
+> - NeedsToOCR        : True
+> - MaximumStepTime   : 1Min
+> - MaximumAttempts   : 5
+> - MaximumMemPageSize: 1Mb
+> ```
+
 `.specify/memory` points to `.memories`, so this file is both the Spec Kit
 constitution and the agent memory constitution.
 
@@ -86,4 +106,10 @@ must update `.memories/constitution.md` when the agent operating contract change
 
 ## Миграция на новую модель памяти
 
-Тут теперь важный вопрос и задача... Нужно перейти с Pantry на `.memories` модель. Сделать не только миграцию, перенос данных оттуда, но ещё и проделать анализ (скан) проекта (исходного кода), для актуализации всех данных.
+Тут теперь важный вопрос и задача... Нужно перейти с Pantry на `.memories` модель. Сделать не только миграцию, перенос данных оттуда, но ещё и проделать анализ (скан) проекта (исходного кода), для актуализации всех данных. Также теперь следует делать отметки актуальности сведений/данных.
+
+---
+
+## Важное также обновить все `AGENT.md` или `AGENTS.md`!
+
+Необходима актуализация и оптимизация под новые реалии и текущие задачи... также теперь следует делать отметки актуальности сведений/данных.
