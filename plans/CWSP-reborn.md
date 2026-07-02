@@ -180,7 +180,7 @@ VI. Per Domain SSL Certificates.
   - Crypted Payload [by Ecosystem Token]
   - CRC16
 
-## Frontend часть (UI/UX)
+### Frontend часть (UI/UX)
 
 - У настроек (`settings`) могут быть (свои) различные contribute от различных модулей, частей, views, сервисов или нативной части... настройки могут (или даже должны) быть связаны со своими backend'ами (например, что под localhost или нативной части), и должны быть сохраняемыми.
 - AirPad (клиентская часть) обычно применима к мобильным устройствам (в основном Android, или iOS [в будущем]).
@@ -191,6 +191,53 @@ VI. Per Domain SSL Certificates.
   - В качестве backend'ов могут быть использованы: NodeJS, или Java версии.
   - Для BFF (backend for frontend) обычно используется Fastify на NodeJS.
   - Однако Frontend могут быть запакованы (bundled) в самом приложении или расширении.
+
+### Используемые библиотеки
+
+**Java (Kotlin interop possibly):**
+
+- <https://github.com/tootallnate/java-websocket>
+- <https://github.com/kotlin/kotlinx.serialization>
+- <https://github.com/google/gson>
+- <https://github.com/peteroupc/CBOR-Java>
+- <https://github.com/c-rack/cbor-java>
+- <https://github.com/authlete/cbor>
+- <https://github.com/toon-format/toon-java.git>
+- <https://ktor.io/docs/server-websockets.html>
+- <https://github.com/ktorio/ktor>
+- <https://github.com/socketio/socket.io-client-java>
+- <https://github.com/socketio/engine.io-server-java>
+
+**NodeJS:**
+
+- <https://github.com/websockets/ws>
+- <https://nodejs.org/learn/getting-started/websocket>
+- <https://github.com/kriszyp/cbor-x>
+- <https://github.com/toon-format/toon>
+- <https://github.com/d3x0r/jsox>
+- <https://github.com/socketio/socket.IO>
+- `npm install -D socket.io socket.io-client`
+- <https://github.com/L2NE-dev/webnative>
+  - For of <https://github.com/kl1ro/webnative>
+- <https://github.com/jedisct1/libsodium.git>
+- <https://www.json.org/json-en.html>
+- <https://ecma-international.org/publications-and-standards/standards/ecma-404/>
+- Native JSON, Buffer or other of NodeJS API.
+
+**Web/PWA/Frontend:**
+
+- <https://github.com/socketio/socket.IO>
+- `npm install -D socket.io-client`
+- <https://github.com/kriszyp/cbor-x>
+- <https://github.com/toon-format/toon>
+- <https://github.com/d3x0r/jsox>
+- <https://www.w3.org/TR/webcrypto/>
+- <https://w3c.github.io/webcrypto/>
+- <https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API>
+- <https://www.json.org/json-en.html>
+- <https://ecma-international.org/publications-and-standards/standards/ecma-404/>
+- Crypto, WebSocket, JSON, etc. API's (native)
+- Other Web Natives..
 
 ---
 
@@ -241,22 +288,6 @@ May be in future non-existent Java-with-WebView2 [aka. JW2 or JWV] (Java driven 
 
 ---
 
-**Что стоит понимать?**
-- PC/Laptop Windows `192.168.0.110` (пользователь U2RE), ID `L-110`
-  - возможно, можно использовать `sudo`, так как я лично выключил UAC
-  - также из-за отсутствия WiFi соединения, можно попробовать IP `192.168.0.111`.
-- Server/Laptop `192.168.0.200` (internal) aka. `45.147.121.152` (external), with ID `L-200`
-  - пользователь `u2re-dev`
-  - пароль для root прав: `el1V&nH0`
-  - так как у него есть root, а также приложение Termux.  
-  - так что попробуй ещё реализовать reverse tunnel, и SSH (или канады) для отладки (из WAN).
-- Также VDS `call ssh root@45.150.9.153 -p 22 -i ~/.ssh/id_ecdsa` (для симуляции/эмуляции WAN, `.196`, есть root уже и с коробки). 
-- Android Device 1 `L-196`, по ADB 192.168.0.196:5555 (Main, but may/can be skipped)
-- Android Device 2 `L-210`, по ADB 192.168.0.210:5555 (May/can be skipped)
-- Android Device 3 `L-208`, по ADB 192.168.0.208:5555 (UNUSED, SKIP)
-
----
-
 ## Прошлые возможные проблемы
 
 **Которые нужно решать или избегать от их появлений:**
@@ -290,6 +321,22 @@ There (potential, possible) is problems/issues, and needs to solve/resolve/avoid
 ---
 
 ## Списки карт и комманд
+
+**Что стоит понимать?**
+- PC/Laptop Windows `192.168.0.110` (пользователь U2RE), ID `L-110`
+  - возможно, можно использовать `sudo`, так как я лично выключил UAC
+  - также из-за отсутствия WiFi соединения, можно попробовать IP `192.168.0.111`.
+- Server/Laptop `192.168.0.200` (internal) aka. `45.147.121.152` (external), with ID `L-200`
+  - пользователь `u2re-dev`
+  - пароль для root прав: `el1V&nH0`
+  - так как у него есть root, а также приложение Termux.  
+  - так что попробуй ещё реализовать reverse tunnel, и SSH (или канады) для отладки (из WAN).
+- Также VDS `call ssh root@45.150.9.153 -p 22 -i ~/.ssh/id_ecdsa` (для симуляции/эмуляции WAN, `.196`, есть root уже и с коробки). 
+- Android Device 1 `L-196`, по ADB 192.168.0.196:5555 (Main, but may/can be skipped)
+- Android Device 2 `L-210`, по ADB 192.168.0.210:5555 (May/can be skipped)
+- Android Device 3 `L-208`, по ADB 192.168.0.208:5555 (UNUSED, SKIP)
+
+---
 
 - PM2 логи в `.110`: `C:\Users\U2RE\.pm2`
 - PM2 логи в `.200`: `/home/u2re-dev/.pm2`
