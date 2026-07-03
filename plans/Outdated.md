@@ -124,7 +124,6 @@ tree -L 8 -I "node_modules" \
 │   │   │   │   └── cross
 │   │   │   ├── icons -> ../../../node_modules/@phosphor-icons/core/assets
 │   │   │   └── imgs
-│   │   ├── cwsp -> ../../runtime/cwsp
 │   │   ├── dist-crx
 │   │   │   ├── app
 │   │   │   ├── assets
@@ -211,9 +210,19 @@ tree -L 8 -I "node_modules" \
 │       │   │   ├── backend
 │       │   │   │   ├── java -> ../../../src/backend/java/linux
 │       │   │   │   └── node -> ../../../src/backend/node/linux
-│       │   │   ├── electron -> ../../src/frontend/web/electron
-│       │   │   └── webnative -> ../../src/frontend/web/webnative
-│       │   ├── pwa -> src/frontend/web/pwa
+│       │   │   ├── electron -> ../../src/frontend/web/electron/linux
+│       │   │   ├── frontend -> ../../src/frontend/web/shared
+│       │   │   ├── neutralino -> ../../src/frontend/web/neutralino/linux
+│       │   │   ├── protocol -> ../../src/protocol
+│       │   │   └── webnative -> ../../src/frontend/web/neutralino/linux
+│       │   ├── pwa
+│       │   │   ├── backend
+│       │   │   │   ├── java -> ../../../src/backend/java/pwa
+│       │   │   │   ├── node -> ../../../src/backend/node/pwa
+│       │   │   │   └── web -> ../../../src/backend/web/pwa
+│       │   │   ├── frontend -> ../../src/frontend/web/pwa/shared
+│       │   │   ├── protocol -> ../../src/protocol/web
+│       │   │   └── service -> backend/web
 │       │   ├── shared
 │       │   │   ├── java -> ../../src/backend/java
 │       │   │   ├── node -> ../../src/backend/node
@@ -223,151 +232,175 @@ tree -L 8 -I "node_modules" \
 │       │       ├── backend
 │       │       │   ├── java -> ../../../src/backend/java/windows
 │       │       │   └── node -> ../../../src/backend/node/windows
-│       │       ├── electron -> ../../src/frontend/web/electron
-│       │       ├── frontend -> ../src/frontend/web/webnative/windows
-│       │       └── protocol -> ../../src/protocol/node
+│       │       ├── electron -> ../../src/frontend/web/electron/windows
+│       │       ├── frontend -> ../../src/frontend/web/shared
+│       │       ├── neutralino -> ../../src/frontend/web/neutralino/windows
+│       │       ├── protocol -> ../../src/protocol
+│       │       └── webnative -> ../../src/frontend/web/webnative/windows
+│       ├── config
+│       ├── plans -> ../../plans
 │       ├── scripts
-│       └── src
-│           ├── backend
-│           │   ├── crx -> web/crx
-│           │   ├── java
-│           │   │   ├── android
-│           │   │   │   ├── core
-│           │   │   │   ├── emission
-│           │   │   │   ├── executor
-│           │   │   │   └── protocol -> ../../../../app/src/protocol/java
-│           │   │   ├── generic -> shared
-│           │   │   ├── linux
-│           │   │   ├── protocol -> ../../protocol/java
-│           │   │   ├── pwa
-│           │   │   ├── shared
-│           │   │   │   ├── emission
-│           │   │   │   ├── executor
-│           │   │   │   └── protocol -> ../../../protocol/java
-│           │   │   ├── submodules
-│           │   │   └── windows
-│           │   ├── node
-│           │   │   ├── android
-│           │   │   ├── fastify
-│           │   │   │   ├── emission
-│           │   │   │   ├── executor
-│           │   │   │   └── protocol -> ../../../../app/src/protocol
-│           │   │   ├── generic -> shared
-│           │   │   ├── linux
-│           │   │   │   └── protocol -> ../../../../app/src/protocol
-│           │   │   ├── protocol -> ../../protocol/node
-│           │   │   ├── pwa -> ../../../app/src/backend/node/fastify
-│           │   │   ├── shared
-│           │   │   │   ├── emission
-│           │   │   │   ├── executor
-│           │   │   │   └── protocol -> ../../../protocol/node
-│           │   │   ├── submodules
-│           │   │   └── windows
-│           │   │       └── protocol -> ../../../../app/src/protocol
-│           │   └── web
-│           │       ├── airpad
-│           │       │   ├── emission
-│           │       │   └── executor
-│           │       ├── android
-│           │       │   ├── emission
-│           │       │   └── executor
-│           │       ├── crx
-│           │       └── protocol -> ../../protocol/web
-│           ├── frontend
-│           │   ├── crx -> web/crx
-│           │   ├── java
-│           │   ├── native
-│           │   ├── submodules
-│           │   │   ├── core -> ../../../../../modules/shared/src
-│           │   │   ├── fest -> ../../../../../modules/shared/fest
-│           │   │   ├── shells -> ../../../../../modules/shared/shells
-│           │   │   └── views -> ../../../../../modules/shared/views
-│           │   └── web
-│           │       ├── assets
-│           │       ├── capacitor
-│           │       │   ├── android
-│           │       │   │   ├── shared -> ../../shared
-│           │       │   │   └── web -> shared
-│           │       │   ├── ios
-│           │       │   ├── shared
-│           │       │   │   ├── airpad -> ../../../submodules/views/airpad
-│           │       │   │   ├── minimal -> ../../../submodules/shells/minimal
-│           │       │   │   ├── network -> ../../../submodules/views/network
-│           │       │   │   └── settings -> ../../../submodules/views/settings
-│           │       │   └── web -> shared
-│           │       ├── crx
-│           │       │   ├── chrome
-│           │       │   ├── firefox
-│           │       │   ├── service
-│           │       │   └── shared
-│           │       │       ├── minimal -> ../../../submodules/shells/minimal
-│           │       │       ├── network -> ../../../submodules/views/network
-│           │       │       └── settings -> ../../../submodules/views/settings
-│           │       ├── electron
-│           │       │   ├── linux
-│           │       │   ├── shared
-│           │       │   │   ├── minimal -> ../../../submodules/shells/minimal
-│           │       │   │   ├── network -> ../../../submodules/views/network
-│           │       │   │   └── settings -> ../../../submodules/views/settings
-│           │       │   └── windows
-│           │       ├── protocol -> ../../../app/src/protocol/node
-│           │       ├── public
-│           │       ├── pwa
-│           │       │   ├── backend
-│           │       │   │   ├── java -> ../../../../backend/java/pwa
-│           │       │   │   └── node -> ../../../../backend/node/fastify
-│           │       │   ├── frontend
-│           │       │   │   ├── airpad -> ../../../submodules/views/airpad
-│           │       │   │   ├── minimal -> ../../../submodules/shells/minimal
-│           │       │   │   ├── network -> ../../../submodules/views/network
-│           │       │   │   ├── service -> ../../../../../app/pwa/service
-│           │       │   │   └── settings -> ../../../submodules/views/settings
-│           │       │   ├── protocol -> ../../../protocol/web
-│           │       │   ├── service
-│           │       │   └── shared
-│           │       ├── shared
-│           │       │   ├── airpad -> ../../submodules/views/airpad
-│           │       │   ├── minimal -> ../../submodules/shells/minimal
-│           │       │   ├── network -> ../../submodules/views/network
-│           │       │   └── settings -> ../../submodules/views/settings
-│           │       ├── submodules -> ../../../app/src/frontend/submodules
-│           │       └── webnative
-│           │           ├── linux
-│           │           │   ├── assets -> ../../assets
-│           │           │   ├── public -> ../../public
-│           │           │   ├── shared -> ../../../../../app/linux/webnative/shared
-│           │           │   └── web -> ../../../../../app/linux/webnative/web
-│           │           ├── shared -> ../../../../app/linux/webnative/web
-│           │           ├── web
-│           │           │   ├── minimal -> ../../../../../app/src/frontend/submodules/shells/minimal
-│           │           │   ├── network -> ../../../../../app/src/frontend/submodules/views/network
-│           │           │   └── settings -> ../../../../../app/src/frontend/submodules/views/settings
-│           │           └── windows
-│           │               ├── assets -> ../../assets
-│           │               ├── public -> ../../public
-│           │               ├── shared -> ../../../../../app/src/frontend/web/webnative/shared
-│           │               └── web -> ../../../../../app/src/frontend/web/webnative/web
-│           ├── protocol
-│           │   ├── java
-│           │   │   ├── codec
-│           │   │   ├── network
-│           │   │   ├── packet
-│           │   │   ├── state
-│           │   │   └── transmission
-│           │   ├── node
-│           │   │   ├── codec
-│           │   │   ├── network
-│           │   │   ├── packet
-│           │   │   ├── state
-│           │   │   └── transmission
-│           │   └── web
-│           │       ├── codec
-│           │       ├── network
-│           │       ├── packet
-│           │       ├── state
-│           │       └── transmission
-│           ├── shared
-│           └── submodules
+│       ├── src
+│       │   ├── backend
+│       │   │   ├── crx
+│       │   │   │   ├── chrome
+│       │   │   │   ├── firefox
+│       │   │   │   └── shared
+│       │   │   ├── java
+│       │   │   │   ├── android
+│       │   │   │   │   ├── core
+│       │   │   │   │   ├── emission
+│       │   │   │   │   ├── executor
+│       │   │   │   │   └── protocol -> ../../../../app/src/protocol/java
+│       │   │   │   ├── generic -> shared
+│       │   │   │   ├── linux
+│       │   │   │   │   └── protocol -> ../protocol
+│       │   │   │   ├── protocol -> ../../protocol/java
+│       │   │   │   ├── pwa
+│       │   │   │   │   ├── emission -> ../generic/emission
+│       │   │   │   │   ├── executor -> ../generic/executor
+│       │   │   │   │   ├── protocol -> ../../../protocol/java
+│       │   │   │   │   └── shared -> ../shared
+│       │   │   │   ├── shared
+│       │   │   │   │   ├── emission
+│       │   │   │   │   ├── executor
+│       │   │   │   │   └── protocol -> ../../../protocol/java
+│       │   │   │   ├── submodules
+│       │   │   │   └── windows
+│       │   │   │       └── protocol -> ../protocol
+│       │   │   ├── node
+│       │   │   │   ├── android
+│       │   │   │   │   └── protocol -> ../protocol
+│       │   │   │   ├── fastify
+│       │   │   │   │   ├── emission
+│       │   │   │   │   ├── executor
+│       │   │   │   │   └── protocol -> ../../../../app/src/protocol
+│       │   │   │   ├── generic -> shared
+│       │   │   │   ├── linux
+│       │   │   │   │   └── protocol -> ../../../../app/src/protocol
+│       │   │   │   ├── protocol -> ../../protocol/node
+│       │   │   │   ├── pwa -> ../../../app/src/backend/node/fastify
+│       │   │   │   ├── shared
+│       │   │   │   │   ├── emission
+│       │   │   │   │   ├── executor
+│       │   │   │   │   └── protocol -> ../../../protocol/node
+│       │   │   │   ├── submodules
+│       │   │   │   └── windows
+│       │   │   │       └── protocol -> ../../../../app/src/protocol
+│       │   │   └── web
+│       │   │       ├── airpad
+│       │   │       │   ├── emission
+│       │   │       │   ├── executor
+│       │   │       │   └── protocol -> ../../../protocol/web
+│       │   │       ├── android
+│       │   │       │   ├── emission
+│       │   │       │   ├── executor
+│       │   │       │   └── protocol -> ../../../protocol/web
+│       │   │       ├── protocol -> ../../protocol/web
+│       │   │       └── pwa
+│       │   │           └── protocol -> ../protocol
+│       │   ├── config -> ../config
+│       │   ├── frontend
+│       │   │   ├── crx -> web/crx
+│       │   │   ├── java
+│       │   │   ├── native
+│       │   │   ├── submodules
+│       │   │   │   ├── core -> ../../../../../modules/shared/src
+│       │   │   │   ├── fest -> ../../../../../modules/shared/fest
+│       │   │   │   ├── shells -> ../../../../../modules/shared/shells
+│       │   │   │   └── views -> ../../../../../modules/shared/views
+│       │   │   └── web
+│       │   │       ├── assets
+│       │   │       ├── capacitor
+│       │   │       │   ├── android
+│       │   │       │   │   ├── shared -> ../../shared
+│       │   │       │   │   └── web -> shared
+│       │   │       │   ├── ios
+│       │   │       │   ├── shared
+│       │   │       │   │   ├── airpad -> ../../../submodules/views/airpad
+│       │   │       │   │   ├── minimal -> ../../../submodules/shells/minimal
+│       │   │       │   │   ├── network -> ../../../submodules/views/network
+│       │   │       │   │   └── settings -> ../../../submodules/views/settings
+│       │   │       │   └── web -> shared
+│       │   │       ├── crx
+│       │   │       │   ├── chrome
+│       │   │       │   ├── firefox
+│       │   │       │   ├── service
+│       │   │       │   └── shared
+│       │   │       │       ├── minimal -> ../../../submodules/shells/minimal
+│       │   │       │       ├── network -> ../../../submodules/views/network
+│       │   │       │       └── settings -> ../../../submodules/views/settings
+│       │   │       ├── electron
+│       │   │       │   ├── linux
+│       │   │       │   ├── shared
+│       │   │       │   │   ├── minimal -> ../../../submodules/shells/minimal
+│       │   │       │   │   ├── network -> ../../../submodules/views/network
+│       │   │       │   │   └── settings -> ../../../submodules/views/settings
+│       │   │       │   └── windows
+│       │   │       ├── neutralino
+│       │   │       │   ├── linux -> ../webnative/linux
+│       │   │       │   ├── shared -> ../webnative/shared
+│       │   │       │   ├── web -> ../webnative/web
+│       │   │       │   └── windows -> ../webnative/windows
+│       │   │       ├── protocol -> ../../../app/src/protocol/node
+│       │   │       ├── public
+│       │   │       ├── pwa
+│       │   │       │   ├── desktop
+│       │   │       │   ├── mobile
+│       │   │       │   └── shared -> ../shared
+│       │   │       ├── shared
+│       │   │       │   ├── airpad -> ../../submodules/views/airpad
+│       │   │       │   ├── assets -> ../assets
+│       │   │       │   ├── minimal -> ../../submodules/shells/minimal
+│       │   │       │   ├── network -> ../../submodules/views/network
+│       │   │       │   ├── protocol -> ../../../protocol/web
+│       │   │       │   ├── public -> ../public
+│       │   │       │   └── settings -> ../../submodules/views/settings
+│       │   │       ├── submodules -> ../../../app/src/frontend/submodules
+│       │   │       └── webnative
+│       │   │           ├── linux
+│       │   │           │   ├── assets -> ../../assets
+│       │   │           │   ├── public -> ../../public
+│       │   │           │   ├── shared -> ../../../../../app/linux/webnative/shared
+│       │   │           │   └── web -> ../../../../../app/linux/webnative/web
+│       │   │           ├── shared -> ../../../../app/linux/webnative/web
+│       │   │           ├── web
+│       │   │           │   ├── minimal -> ../../../../../app/src/frontend/submodules/shells/minimal
+│       │   │           │   ├── network -> ../../../../../app/src/frontend/submodules/views/network
+│       │   │           │   └── settings -> ../../../../../app/src/frontend/submodules/views/settings
+│       │   │           └── windows
+│       │   │               ├── assets -> ../../assets
+│       │   │               ├── public -> ../../public
+│       │   │               ├── shared -> ../../../../../app/src/frontend/web/webnative/shared
+│       │   │               └── web -> ../../../../../app/src/frontend/web/webnative/web
+│       │   ├── protocol
+│       │   │   ├── java
+│       │   │   │   ├── codec
+│       │   │   │   ├── crypto
+│       │   │   │   ├── network
+│       │   │   │   ├── packet
+│       │   │   │   ├── proxy -> transmission
+│       │   │   │   ├── state
+│       │   │   │   └── transmission
+│       │   │   ├── node
+│       │   │   │   ├── codec
+│       │   │   │   ├── crypto
+│       │   │   │   ├── network
+│       │   │   │   ├── packet
+│       │   │   │   ├── proxy -> transmission
+│       │   │   │   ├── state
+│       │   │   │   └── transmission
+│       │   │   └── web
+│       │   │       ├── codec
+│       │   │       ├── crypto
+│       │   │       ├── network
+│       │   │       ├── packet
+│       │   │       ├── proxy -> transmission
+│       │   │       ├── state
+│       │   │       └── transmission
+│       │   ├── shared
+│       │   └── submodules
+│       └── tasks -> ../../tasks
 ├── assets
 │   ├── crypto
 │   ├── icons
@@ -670,6 +703,34 @@ tree -L 8 -I "node_modules" \
 ├── private
 ├── runtime
 │   ├── Dockerfile
+│   ├── fastify
+│   │   ├── api
+│   │   ├── branches
+│   │   ├── control
+│   │   ├── handlers
+│   │   ├── lib
+│   │   ├── plugins
+│   │   ├── routers
+│   │   │   ├── api
+│   │   │   ├── assistant
+│   │   │   ├── auth
+│   │   │   ├── broadcast
+│   │   │   ├── clipboard
+│   │   │   ├── contact
+│   │   │   ├── dispatch
+│   │   │   ├── getter
+│   │   │   ├── health
+│   │   │   ├── hello
+│   │   │   ├── ops
+│   │   │   ├── proxy
+│   │   │   ├── settings
+│   │   │   ├── sms
+│   │   │   ├── status
+│   │   │   ├── storage
+│   │   │   └── webdav
+│   │   └── server
+│   ├── fastify-js
+│   │   └── lib
 │   ├── frontend
 │   │   └── apps
 │   │       ├── admin -> ./server/admin
@@ -789,6 +850,7 @@ tree -L 8 -I "node_modules" \
 │   │   │   └── scripts -> ../fastify-js
 │   │   └── fastify-js
 │   │       └── lib
+│   ├── scripts
 │   └── src-tauri
 │       ├── capabilities
 │       ├── icons
