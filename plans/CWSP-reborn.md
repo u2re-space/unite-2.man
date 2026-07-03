@@ -174,6 +174,7 @@ VI. Per Domain SSL Certificates.
   - UUID
   - CommandType
   - Timestamp
+  - Sender-ID
   - Destination-IDs
   - Identify Hash
   - Meta [+ PayloadSize]
