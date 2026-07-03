@@ -162,7 +162,7 @@ VI. Per Domain SSL Certificates.
 - Протокол - отдельная часть от исполнителей (executor) и эммиторов (emission), также могут пересылаться другим клиентам (связкам, nodes, bridges), и по-сути проксироваться, без необходимости дешифрации или пере-шифрации.
   - Системы, вроде Android, Windows или Linux (могут) имеют свои правила или права (и драйвера), как обращаться с данными и пакетами, пересылать или исполнять.
   - Stale данные не могут быть переданы или исполнены по истичению срока годности.
-  - Ранее исполненные данные НЕ должны больше передаваться другим seeds/peers.
+  - Ранее исполненные (пришедщие) данные НЕ должны больше передаваться другим seeds/peers (если только не указаны другие/дополнительные адресанты), при этом важно избегать повторных исполнений или пересылок одних и тех же пакетов (с одинаковым UUID) т.е. избегать бесконечной цикличности.
   - Также на clipboard, contacts или sms есть период заморозки (от случайной передачи) в примерно 1 секунду, чтобы случайно не стриггерить по clipboard-write операцию на отправку clipboard тех же самых данных. Также пересылка, получение (исполнение) или отправка тех же самых данных, ограничены по throttle времени в 5 секунд.
 - Для MOVE или SCROLL операций, в засимости от частотности, имеют свои ограничения (лимиты) по времени.
   - При 120-pps - не более 10ms или 8ms,  очереди ожидания не больше 2 ops (и пинге менее 10ms).
@@ -171,6 +171,7 @@ VI. Per Domain SSL Certificates.
   - При  30-pps - не более 30ms или 40ms, очереди ожидания не больше 2, 3, 4 или 5 ops (и пинге менее 40ms).
 - Драйвер (executor) может исполнять по своему усмотрению (например, сглаживать или нет движения мыши/delta).
 - Любые пакеты обязательно должны содержать:
+  - UUID
   - CommandType
   - Timestamp
   - Destination-IDs
@@ -232,6 +233,10 @@ VI. Per Domain SSL Certificates.
 - <https://github.com/nodejs/node/blob/main/src/README.md>
 - <https://github.com/neutralinojs-community/node-neutralino> (older, for connect NodeJS with neutralino)
 - <https://github.com/hschneider/neutralino-ext-node> (recent, for connect NodeJS with neutralino)
+- <https://github.com/sindresorhus/clipboardy> (practically universal library for clipboard API's)
+- <https://github.com/octalmage/robotjs> (latest github version only)
+- <https://github.com/tauri-apps/tauri> (may be used with rolldown, also needs NodeJS/Rust bridges)
+- <https://github.com/napi-rs/napi-rs> (connect with Rust/rolldown/Tauri more directly)
 
 **Web/PWA/Frontend:**
 
@@ -251,6 +256,12 @@ VI. Per Domain SSL Certificates.
 - <https://github.com/ionic-team/capacitor>
 - `npm install -D @capacitor/core @capacitor/cli`
 - <https://github.com/neutralinojs/neutralinojs> (needs also Java, and/or NodeJS extension)
+- <https://github.com/tauri-apps/tauri> (may be used with rolldown, also needs NodeJS/Rust bridges)
+- <https://github.com/sindresorhus/clipboardy> (practically universal library for clipboard API's)
+- <https://github.com/vitejs/vite>
+- <https://github.com/rolldown/rolldown> (may be connected/combined with Tauri)
+- <https://vite.dev/>
+- <https://rolldown.rs/> (may be connected/combined with Tauri)
 
 ---
 
