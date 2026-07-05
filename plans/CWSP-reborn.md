@@ -194,6 +194,51 @@ VI. Per Domain SSL Certificates.
   - Для BFF (backend for frontend) обычно используется Fastify на NodeJS.
   - Однако Frontend могут быть запакованы (bundled) в самом приложении или расширении.
 
+---
+
+Needs to make more parity with/between Capacitor version and WebNative (or [Neutralino](https://github.com/neutralinojs/neutralinojs)+[NodeJS](https://github.com/hschneider/neutralino-ext-node)) CWSP version.
+
+[Capacitor](https://github.com/ionic-team/capacitor) ("CWSP"):
+- Frontend: Capacitor (web, frontend)
+  - Contain: `minimal` shell, `network`, `airpad` and `settings` views
+  - Settings extended (contributed) by Java/native config system.
+  - Settings needs to be synchronized with internal backend...
+  - Frontend building by Vite into `./dist/<category>/`.
+- Backend: Java (native code/core, platform)
+- Platform: Android
+- Build Output: `./build/<category>/...`
+- Build Command: `npm run build:capacitor` (preferred)
+- Deploys: to Android devices (incl. by ADB, or APK install)
+- Source-directory: `apps/CWSP-reborn/app/android` (symbolic linked)
+
+[WebNative](https://github.com/L2NE-dev/webnative) [or [Neutralino](https://github.com/neutralinojs/neutralinojs)+[NodeJS](https://github.com/hschneider/neutralino-ext-node)] ("CWSP", [NodeJS](https://nodejs.org/), [optionally] some Java-bridge/IPC):
+- Frontend: WebView2 (web, frontend), connected with backend sub-system (such as settings, config)
+  - Contain: `minimal` shell, `network` and `settings` views
+  - Settings extended (contributed) by NodeJS/CWSP config system.
+  - Settings needs to be synchronized with internal backend (NodeJS).
+  - Frontend building by Vite into `./dist/<category>/`.
+- Backend: NodeJS (with possible Java bridge/IPC support), from/by CWSP itself
+- Platform: Windows, Linux (and/or possibly/probably Mac-OS)
+- Build Output: `./dist/<category>/` or `./build/<category>/`
+- Framework: 
+  - <https://github.com/kl1ro/webnative>
+  - <https://github.com/L2NE-dev/webnative> (forked)
+  - `npm install -D @mindw1n/webnative`
+- Build Command: `npm run build:webnative` (preferred)
+- Deploy Command: 
+  - `npm run deploy:110:webnative` (preferred)
+  - `npm run deploy:200:webnative` (option)
+- Deploys: to Desktops, Windows, Linux hosts/devices (by SSH, open `cwsp-ui.exe` portable or installer alike APK).
+- Source-directory: `apps/CWSP-reborn/app/windows` и `apps/CWSP-reborn/app/linux`
+
+---
+
+May be in future non-existent Java-with-WebView2 [aka. JW2 or JWV] (Java driven Tauri or NeutralinoJS, with/by JNI)...
+- Potentially, similar with [`Capacitor`](https://github.com/ionic-team/capacitor), but for Desktop, Windows or Linux.
+- Also may be tried to use [Neutralino](https://github.com/neutralinojs/neutralinojs) with Java, and other interfaces...
+  - <https://github.com/MarkusJx/node-java-bridge> (theoretically possible way to connect with neutralino)
+  - <https://github.com/hunyadi/javabind> (theoretically possible way to connect with neutralino)
+
 ### Используемые библиотеки
 
 **Java (Kotlin interop possibly):**
@@ -263,49 +308,6 @@ VI. Per Domain SSL Certificates.
 - <https://github.com/rolldown/rolldown> (may be connected/combined with Tauri)
 - <https://vite.dev/>
 - <https://rolldown.rs/> (may be connected/combined with Tauri)
-
----
-
-Needs to make more parity with/between Capacitor version and WebNative (or [Neutralino](https://github.com/neutralinojs/neutralinojs)+[NodeJS](https://github.com/hschneider/neutralino-ext-node)) CWSP version.
-
-[Capacitor](https://github.com/ionic-team/capacitor) ("CWSP"):
-- Frontend: Capacitor (web, frontend)
-  - Contain: `minimal` shell, `network`, `airpad` and `settings` views
-  - Settings extended (contributed) by Java/native config system.
-  - Settings needs to be synchronized with internal backend...
-  - Frontend building by Vite into `./dist/<category>/`.
-- Backend: Java (native code/core, platform)
-- Platform: Android
-- Build Output: `./build/<category>/...`
-- Build Command: `npm run build:capacitor` (preferred)
-- Deploys: to Android devices (incl. by ADB, or APK install)
-- Source-directory: `apps/CWSP-reborn/app/android` (symbolic linked)
-
-[WebNative](https://github.com/L2NE-dev/webnative) [or [Neutralino](https://github.com/neutralinojs/neutralinojs)+[NodeJS](https://github.com/hschneider/neutralino-ext-node)] ("CWSP", [NodeJS](https://nodejs.org/), [optionally] some Java-bridge/IPC):
-- Frontend: WebView2 (web, frontend), connected with backend sub-system (such as settings, config)
-  - Contain: `minimal` shell, `network` and `settings` views
-  - Settings extended (contributed) by NodeJS/CWSP config system.
-  - Settings needs to be synchronized with internal backend (NodeJS).
-  - Frontend building by Vite into `./dist/<category>/`.
-- Backend: NodeJS (with possible Java bridge/IPC support), from/by CWSP itself
-- Platform: Windows, Linux (and/or possibly/probably Mac-OS)
-- Build Output: `./dist/<category>/` or `./build/<category>/`
-- Framework: 
-  - <https://github.com/kl1ro/webnative>
-  - <https://github.com/L2NE-dev/webnative> (forked)
-  - `npm install -D @mindw1n/webnative`
-- Build Command: `npm run build:webnative` (preferred)
-- Deploy Command: 
-  - `npm run deploy:110:webnative` (preferred)
-  - `npm run deploy:200:webnative` (option)
-- Deploys: to Desktops, Windows, Linux hosts/devices (by SSH, open `cwsp-ui.exe` portable or installer alike APK).
-- Source-directory: `apps/CWSP-reborn/app/windows` и `apps/CWSP-reborn/app/linux`
-
-May be in future non-existent Java-with-WebView2 [aka. JW2 or JWV] (Java driven Tauri or NeutralinoJS, with/by JNI)...
-- Potentially, similar with [`Capacitor`](https://github.com/ionic-team/capacitor), but for Desktop, Windows or Linux.
-- Also may be tried to use [Neutralino](https://github.com/neutralinojs/neutralinojs) with Java, and other interfaces...
-  - <https://github.com/MarkusJx/node-java-bridge> (theoretically possible way to connect with neutralino)
-  - <https://github.com/hunyadi/javabind> (theoretically possible way to connect with neutralino)
 
 **Данные для ручных тестов:**
 
