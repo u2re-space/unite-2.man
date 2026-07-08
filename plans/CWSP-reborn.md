@@ -581,3 +581,32 @@ sudo fuser -k 443/tcp 2>/dev/null || true; NODE_PATH="$(readlink -f "$(command -
 - Я лично предполагаю от 30 минут, до возможно даже целого часа, может и два... и это (при этом) главный, единственный и основной целый промпт, даже с учётом всех оптимизаций, а также проработки и доработок (но исключая возможные откаты или прерывания процесса или процессов).
 - Нужно также быть готовым к тому, что исполнение задачи (генерации) может даже оборваться, и поэтому важно сохранять по любой возможности прогресс, а не начинать всё снова/заново. 
 - Также желательно обзавестись директорией/путём `.progress/*` (и который может иметь и свои коррективы).
+
+---
+
+## Shared Symbolic Linked Modules Patterns
+
+That/such import/export pattern for shared modules is useful for avoid dublications by importing modules from differed symbolic links paths.
+
+```ts
+// For avoid symbolic link and cross-module imports issues
+
+// Symbol for the shared registry
+const SharedLink = Symbol.for("SharedLink@CWSP"); // Or any other `SharedLink@<Namespace>` pattern
+(globalThis as any)[SharedLink] ??= (globalThis as any)[SharedLink] ?? {};
+const SharedRegistry: Record<symbol, any> = (globalThis as any)?.[SharedLink] ?? {};
+
+export default SharedRegistry;
+export function registerShared<T>(key: symbol, value: T) {
+    SharedRegistry[key] ??= value;
+    return SharedRegistry[key];
+}
+
+export const exportShared = <T>(key: symbol, value: T) => {
+    return registerShared(key, value);
+}
+
+export const importShared = <T>(key: symbol) => {
+    return SharedRegistry?.[key];
+}
+```
