@@ -649,31 +649,34 @@ export const importShared = <T>(key: symbol) => {
 > Возможно потребуется корректировка suitables.
 
 **Архитектура и фундамент (основа):**
-- Fable 5 (High or Highest reasoning, 1M context)
-- GPT-5.6 (Sol, Highest Reasoning, 1M context)
+- Fable 5 (Highest reasoning or High, 1M context)
+- GPT-5.6 (Highest reasoning, 1M context) [Sol]
 
 **Дизайн и UI/UX:**
-- Fable 5 (High or Highest reasoning, 1M context)
-- GPT-5.6 (Sol or Terra, High or Highest Reasoning, 1M context)
+- Fable 5  (Highest reasoning or High, 1M context)
+- GPT-5.6  (Highest reasoning or High, 1M context) [Sol or Terra]
+- Sonnet 5 (High reasoning, most suitable context)
 
 **Имплементация и реализация основного кода (компонентов, модулей):**
-- GPT-5.6 (Sol, Highest Reasoning, 1M context or more)
-- Fable 5 (High or Highest reasoning, 1M context)
+- GPT-5.6 (Highest reasoning, 1M context or more) [Sol]
+- Fable 5 (Highest reasoning or High, 1M context)
 - GLM-5.2 (Highest, maximum suitable context)
 
 **Поправки и коррекции в коде, а также тестирование:**
-- Grok 4.5 (High reasoning) [may be Fast]
-- GLM-5.2 (Highest, maximum suitable context)
-- GPT 5.6 Terra or Luna (High or Medium reasoning, 1M context or Fast)
+- Sonnet 5 (High reasoning, or bit lower, most suitable context)
+- Grok 4.5 (High reasoning, most suitable context) [may be Fast]
+- GLM-5.2  (Highest, maximum suitable context)
+- GPT 5.6  (Highest, High or Medium reasoning, 1M context or Fast) [Terra or Luna]
 - Gemini 3.5 Flash
 
 **Code Review:**
-- GLM-5.2 (Highest, maximum suitable context)
-- GPT-5.6 (Sol or Terra, High or Highest Reasoning, 200k or 1M context)
-- Fable 5 (High or Highest reasoning, 1M context)
+- GLM-5.2  (Highest, maximum suitable context)
+- GPT-5.6  (Highest reasoning or High, 200k or 1M context) [Sol or Terra]
+- Fable 5  (Highest reasoning or High/Medium , 1M context)
+- Sonnet 5 (High reasoning, most suitable context)
 - Grok 4.5 (High reasoning)
 - Gemini 3.1 Pro
 
 **Documentation and Specification:**
-- GPT-5.6 (Sol, Highest reasoning, 1M context, cachable)
+- GPT-5.6 (Highest reasoning, 1M context, cachable) [Sol]
 - Fable 5 (Highest reasoning, 1M context)
