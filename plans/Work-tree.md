@@ -928,32 +928,32 @@ tree -L 8 -I "node_modules" \
 
 > Возможно потребуется корректировка suitables.
 
-Архитектура и фундамент (основа): 
+**Архитектура и фундамент (основа):**
 - Fable 5 (High or Highest reasoning, 1M context)
 - GPT-5.6 (Sol, Highest Reasoning, 1M context)
 
-Дизайн и UI/UX:
+**Дизайн и UI/UX:**
 - Fable 5 (High or Highest reasoning, 1M context)
 - GPT-5.6 (Sol or Terra, High or Highest Reasoning, 1M context)
 
-Имплементация и реализация основного кода (компонентов, модулей):
+**Имплементация и реализация основного кода (компонентов, модулей):**
 - GPT-5.6 (Sol, Highest Reasoning, 1M context or more)
 - Fable 5 (High or Highest reasoning, 1M context)
 - GLM-5.2 (Highest, maximum suitable context)
 
-Поправки и коррекции в коде, а также тестирование:
-- GLM-5.2 (Highest, maximum suitable context)
+**Поправки и коррекции в коде, а также тестирование:**
 - Grok 4.5 (High reasoning) [may be Fast]
+- GLM-5.2 (Highest, maximum suitable context)
 - GPT 5.6 Terra or Luna (High or Medium reasoning, 1M context or Fast)
 - Gemini 3.5 Flash
 
-Code Review:
+**Code Review:**
 - GLM-5.2 (Highest, maximum suitable context)
 - GPT-5.6 (Sol or Terra, High or Highest Reasoning, 200k or 1M context)
 - Fable 5 (High or Highest reasoning, 1M context)
 - Grok 4.5 (High reasoning)
 - Gemini 3.1 Pro
 
-Documentation and Specification:
+**Documentation and Specification:**
 - GPT-5.6 (Sol, Highest reasoning, 1M context, cachable)
 - Fable 5 (Highest reasoning, 1M context)

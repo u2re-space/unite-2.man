@@ -1,0 +1,22 @@
+{
+  "name": "debug-view",
+  "version": "1.0.0",
+  "description": "CWSP debug view",
+  "type": "module",
+  "main": "./dist/debug-view.js",
+  "module": "./dist/debug-view.js",
+  "exports": {
+    ".": "./dist/debug-view.js",
+    "./src": "./src/index.ts"
+  },
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "demo": "npm run dev",
+    "test": "vite build --config vite.config.js --mode test",
+    "build": "vite build --config vite.config.js",
+    "preview": "vite preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
