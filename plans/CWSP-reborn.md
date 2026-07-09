@@ -146,7 +146,18 @@ VI. Per Domain SSL Certificates.
   - `/ws`
   - `/auth` (автоматически, по ecosystem token)
   - `/get?query=map`  (и прочие `get` запросы, при наличии ecosystem token)
-  - `/post?device=ID` (и прочие тестовые команды, в основном для отладки системы, при наличии ecosystem token)
+  - `/post?device=<ID>` (и прочие тестовые команды, в основном для отладки системы, при наличии ecosystem token)
+- Основные query params, в том числе для отладки:
+  - `from=<ID>`
+  - `device=<ID>`
+  - `client=<ID>` (alias)
+  - `destination=<IDs>`
+  - `dst=<IDs>` (alias)
+  - `devicelist`
+  - `clientlist` (alias)
+  - `originmap`
+  - `cmd=<type>`
+  - И могут работать/проходить также и через reverse или websocket каналы.
 - Стандартый (default) порты - `8434`, хотя в advanced конфигах могут быть прописаны и иные.
 - Также возможность реализации режима ожидения, deferred или pending (но лимиты по времени ограничены).
 - Clipboard, contacts, sms, airpad, move, pointer, actions и прочие (операции, действия), будут иметь крайне ограниченный срок годности.
@@ -208,6 +219,10 @@ VI. Per Domain SSL Certificates.
 - Возможность задать список разрешенных ID (к устройству, приложению, клиенту), по умолчанию все разрешены.
 - Возможность задать список отправляемых в другие ID (к другим seed, клиентам, устройствам).
 - В Airpad возможность прописать в quick config: origin/URL/IP/ID/node и ecosystem-token (последний, по умолчанию из настроек системы самого приложения).
+- Так как системы в основном работают через `ws` (WebSocket), нужно реализовать также внутренний терминал/консоль отладки, например (включая `dst=self`):
+  - `/from=<ID> cmd=<type> dst=<IDs>`
+  - `/cmd=<type> dst=<IDs>`
+  - В целом, аналогично query params.
 
 ---
 
