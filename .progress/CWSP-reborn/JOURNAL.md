@@ -99,3 +99,19 @@
 - Protocol/backend long `../../../modules/projects/cwsp-shared` relatives → `@fest-lib/cwsp-shared/v2/*`.
 - Web backend → `protocol/web/packet/*`. Workspace includes `cwsp-shared`.
 - Checks still green: protocol 11, clipboard 5, web 9, settings 3, ws 4, topology.
+
+## 2026-07-10 17:30 +07 — Pass III consolidation / calibration
+
+- Opened `.roadmaps/CWSP-reborn/PASS-III.md` (visible via `.roadmap` → `.roadmaps`).
+- Status: consolidation / calibration; models Grok 4.5 + GLM-5.2 (Sol excluded); no Plan Mode.
+- Archives: typo aliases `.acrhive` / `.acrhives` retired; canonical `.archives` only.
+- Skill: `.cursor/skills/cwsp-reborn-pass/SKILL.md`.
+- STATE moved to pass `III`.
+
+## 2026-07-10 17:45 +07 — Pass III closed
+
+- Typo aliases `.acrhive` / `.acrhives` removed from disk; canonical `.archives` only.
+- Docs/.analysis/memory calibrated; README status updated.
+- Skill `.cursor/skills/cwsp-reborn-pass` landed for cheaper future work.
+- Smoke: protocol-facades 11/11, ws-loopback 4/4.
+- Next: driver readiness / APK / desk WebNative (Pass II open items).

@@ -4,10 +4,7 @@
   "pass": "II",
   "createdAt": "2026-07-10T14:16:43+07:00",
   "archiveMode": "git-backed-immutable-baseline",
-  "compatibilityAliases": [
-    ".acrhive",
-    ".acrhives"
-  ],
+  "compatibilityAliases": [],
   "repositories": {
     "workspace": {
       "path": ".",
@@ -52,5 +49,12 @@
     "logs",
     "private data",
     "credentials"
-  ]
+  ],
+  "compatibilityAliasesRetired": [
+    ".acrhive",
+    ".acrhives"
+  ],
+  "notes": {
+    "passIII": "Typo aliases .acrhive/.acrhives retired; use .archives only."
+  }
 }

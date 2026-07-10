@@ -4,8 +4,11 @@ This archive preserves the exact pre-Pass-II state through immutable Git commit
 references in `manifest.json`. It is intentionally Git-backed instead of
 duplicating source trees.
 
-The user-requested compatibility paths `.acrhive/` and `.acrhives/` both resolve
-to the canonical `.archives/` directory.
+**Canonical path:** `.archives/` only.
+
+Pass III (2026-07-10) retired the misspelled compatibility symlinks `.acrhive`
+and `.acrhives`. Do not recreate them; update any leftover references to
+`.archives`.
 
 ## Recovery rule
 
@@ -21,5 +24,5 @@ configuration from an archive.
 
 The recorded workspace and CWSP-reborn commits contain the original Pass-I
 plans, roadmaps, analysis, documentation, rules, progress state, and config
-documentation. Any Pass-II update must keep its predecessor recoverable through
+documentation. Any later pass must keep its predecessor recoverable through
 these commit references.

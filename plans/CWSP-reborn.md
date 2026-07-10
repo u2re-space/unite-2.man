@@ -4,6 +4,46 @@
 - **Рассмотрены или прочтены:** 10.07.2026
 - **Изменены (автоматически):** 10.07.2026
 
+---
+
+## Pass II → III Foundation (memory, 2026-07-10)
+
+Compact current-state memory. Treat as truth; detailed evidence in
+`apps/CWSP-reborn/.analysis/` and `apps/CWSP-reborn/docs/`.
+
+**Source of truth (SoT):**
+
+- Protocol v2 contract: `.cursor/rules/network.mdc`.
+- Shared protocol package: `modules/projects/cwsp-shared` (`@fest-lib/cwsp-shared` v2, 29 tests).
+- Protocol facades: `apps/CWSP-reborn/src/protocol/{node,web}` (thin re-exports + WS helpers).
+- Import aliases: `@fest-lib/cwsp-shared/v2/*`, `cwsp-shared/*`, `protocol/{node,web}/*`, `backend/{node,web}/*` (tsconfig + Vite + `scripts/resolve-aliases.mjs` for Node `--test`).
+- Ingress adapter: `runtime/cwsp/adapters/ingress-normalize.{ts,mjs}` soft-binds legacy `normalizeFrame`.
+
+**Check commands (all green in Pass II):**
+
+- `npm run check:protocol-facades` (11/11) — normalize/clipboard/UUID/WS URL
+- `npm run check:settings-backend` (3/3) — `/service/config` get/patch
+- `npm run check:clipboard-backend` (5/5) — memory + asset + echo suppress
+- `npm run check:web-backend` (9/9) — IDB memory, share target, clipboard emit
+- `npm run check:ws-loopback` (4/4) — destination preserve + optional WS echo
+- `node runtime/cwsp/adapters/smoke.mjs` (4/4) — symlink + ingress import
+- `npm run check:java-protocol` (24/24); `npm run check:java-backend` (3/3)
+- Topology index builds 4/4; Gradle tasks OK JDK17; Android pure merge OK
+
+**Open blockers (do not claim ready):**
+
+- Capacitor Android APK assembly (dep/assets)
+- Full endpoint TLS `:8434` boot + driver readiness/debug relay
+- OS input drivers: Robot/AHK/AutoKey
+- Desk WebNative packaging
+
+**Typo note:** `apps/CWSP-reborn/docs/platforns` (historical misspelling) is
+symlinked as `docs/drivers` and projected across many paths; left in place to
+avoid breaking links. See `docs/platforns/README.md`. Canonical driver docs are
+`docs/Drivers.md`.
+
+---
+
 ## Поправки и оптимизации процессов
 
 > Можно взять за основу и план, а также в качестве новых правил...

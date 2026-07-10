@@ -10,7 +10,7 @@
 ## Wave 0 — Continuity
 
 - [x] Record repository commits and archive Pass-I originals.
-- [x] Provide `.acrhive` and `.acrhives` compatibility aliases.
+- [x] Archive aliases: typo paths `.acrhive` / `.acrhives` retired; canonical `.archives` only (Pass III).
 - [x] Open Pass-II progress state and recovery manifest.
 
 ## Wave 1 — P1/P2 source and build baseline
