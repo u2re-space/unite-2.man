@@ -92,12 +92,12 @@ Alternate desktop shell beside WebNative: [NeutralinoJS](https://github.com/neut
 
 ## 9. Open blockers
 
-- APK: Capacitor Android dep + assets copy
-- Full PM2/TLS boot on `:8434`
 - Driver readiness + debug relay
 - Desk WebNative packaged shell vs `build/webnative`
 - Robot/AHK/AutoKey stubs
-- Gradle requires JDK 17 (`JAVA_HOME`)
+- Phone ADB E2 proven on `.196`; `.208`/`.210` ADB not yet open
+
+**Resolved (2026-07-10):** TLS `:8434` PM2 boot + native `/ws`; Capacitor APK + phone `.196` `/ws` E2.
 
 ## 10. Parallelization
 

@@ -2,11 +2,11 @@
   "schemaVersion": 1,
   "project": "CWSP-reborn",
   "pass": "III",
-  "updatedAt": "2026-07-10T18:05:00+07:00",
+  "updatedAt": "2026-07-10T18:55:00+07:00",
   "status": "complete",
   "activePhase": "Pass-III-closed",
-  "activeTask": "next-P6-driver-readiness-or-APK",
-  "lastCompletedTask": "start-deploy-scripts-wired",
+  "activeTask": "next-driver-readiness-or-webnative-desk",
+  "lastCompletedTask": "tls-endpoint-boot-and-phone-ws-e2",
   "roadmap": ".roadmaps/CWSP-reborn/PASS-III.md",
   "plan": ".roadmaps/CWSP-reborn/PASS-III.md",
   "memory": ".memories/CWSP-reborn.md",
@@ -25,26 +25,28 @@
     "Pass III: docs/.analysis/memory calibrated",
     "Pass III: smoke protocol-facades 11 + ws-loopback 4",
     "start/deploy npm scripts + PM2 ecosystem",
-    "Neutralino future contour documented (PASS-III + skill)"
+    "Neutralino future contour documented (PASS-III + skill)",
+    "TLS endpoint boot on :8434 (PM2 cwsp + native /ws)",
+    "Live /ws E2 on phone L-192.168.0.196 → 192.168.0.200:8434"
   ],
   "blockers": [
-    "APK blocked: capacitor-android dep not wired; Capacitor assets not copied",
-    "Gradle must use JAVA_HOME=JDK 17 (host default JDK 24 too new)",
-    "Full PM2/TLS endpoint boot on :8434 still deferred",
     "Driver readiness and debug relay not yet verified",
     "Robot/AHK/AutoKey drivers still deferred stubs",
-    "Desk WebNative packaged shell vs build/webnative not yet run"
+    "Desk WebNative packaged shell vs build/webnative not yet run",
+    "ADB :5555 refused on .208/.210 (only .196 proven for phone E2)"
   ],
   "nextActions": [
     "driver readiness + debug relay local evidence",
-    "Capacitor android dep + copy assets for APK attempt",
-    "desk WebNative packaged shell smoke",
-    "optional: wire Android Coordinator to space.u2re.cwsp.protocol.Packet"
+    "Desk WebNative packaged shell",
+    "Enable ADB on .208/.210 and re-run phone:ws-e2"
   ],
   "verification": {
     "topology": "pass-4",
     "protocolFacades": "pass-11",
     "wsLoopback": "pass-4",
+    "tlsEndpoint8434": "pass",
+    "wsLiveLan": "pass",
+    "phoneWsE2_196": "pass",
     "passIIIArchivesCanonical": "pass",
     "passIIISkill": "pass",
     "passIIIDocsCalibrate": "pass",
