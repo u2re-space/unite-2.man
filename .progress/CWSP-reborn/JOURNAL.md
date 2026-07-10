@@ -108,10 +108,9 @@
 - Skill: `.cursor/skills/cwsp-reborn-pass/SKILL.md`.
 - STATE moved to pass `III`.
 
-## 2026-07-10 17:45 +07 — Pass III closed
+## 2026-07-10 17:50 +07 — Android clipboard executor protocol path
 
-- Typo aliases `.acrhive` / `.acrhives` removed from disk; canonical `.archives` only.
-- Docs/.analysis/memory calibrated; README status updated.
-- Skill `.cursor/skills/cwsp-reborn-pass` landed for cheaper future work.
-- Smoke: protocol-facades 11/11, ws-loopback 4/4.
-- Next: driver readiness / APK / desk WebNative (Pass II open items).
+- `executor.Clipboard` now handles clipboard:* ask/act (read/write/update/clear/isReady)
+  via pluggable Driver; MemoryDriver for host-free tests; adaptEmission for OS bridge.
+- `core.Coordinator` routes clipboard actions exclusively through the executor.
+- `check-java-android-pure` runs MergeTest + ClipboardExecutorTest.
