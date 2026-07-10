@@ -1,0 +1,19 @@
+# AGENT_BOOTSTRAP
+
+Start here after every interruption or model handoff.
+
+1. Read `AGENTS.md`.
+2. Read `.memory/project.md`.
+3. Read `.progress/current.md`.
+4. Read `.progress/recovery-checklist.md`.
+5. Read `docs/mvp-scope.md`.
+6. Read `docs/build-run-test.md`.
+7. Inspect git status.
+8. Continue from the first unchecked recovery checklist item.
+
+Rules:
+- Do not expand scope.
+- Do not redesign existing UI/UX.
+- Work on one checkpoint at a time.
+- Update progress before stopping.
+- Preserve existing working code and UI.

@@ -104,17 +104,17 @@ How &ould works our network.
 
 ```
 [ Laptop/Ultrabook ] Bi-dir  {[ Server (Endpoint), Have External Entry IP ]}
-[ L-192.168.0.110  ] ←←---→→ {[ 192.168.0.200:8434 / 45.147.121.152:8434  ]}
+[ L-110  ] ←←---→→ {[ 192.168.0.200:8434 / 45.147.121.152:8434  ]}
           ↑                         ↑                         ↑
           ┷                         ↑                         ↑ 
           |                         ↓                         ↓ 
-          ┗------------------{[ [L-192.168.0.196] |- - -| [L-192.168.0.208] |- - -| [L-192.168.0.210] ]}   # Phone device groups (cws-androids, PWA-airpad)
+          ┗------------------{[ [L-196] |- - -| [L-208] |- - -| [L-210] ]}   # Phone device groups (cws-androids, PWA-airpad)
                                 [Android Phone 1]         [Android Phone 2]         [Android Phone 3]
 ```
 
 ### Topology
 
-**L-192.168.0.110 <---> L-192.168.0.196**
+**L-110 <---> L-196**
 - clipboard (via android application, and cwsp endpoint server)
 - `airpad` signals (PWA/WebView application)
   - mouse
@@ -122,7 +122,7 @@ How &ould works our network.
   - clipboard
 - tunneling through 192.168.0.200:8434 / 45.147.121.152:8434 if in LTE/NAT mode, using identification client token
 
-**L-192.168.0.110 <---> L-192.168.0.208**
+**L-110 <---> L-208**
 - clipboard (via android application, and cwsp endpoint server)
 - `airpad` signals (PWA/WebView application)
   - mouse
@@ -130,7 +130,7 @@ How &ould works our network.
   - clipboard
 - tunneling through 192.168.0.200:8434 / 45.147.121.152:8434 if in LTE/NAT mode, using identification client token
 
-**L-192.168.0.110 <---> L-192.168.0.210**
+**L-110 <---> L-210**
 - clipboard (via android application, and cwsp endpoint server)
 - `airpad` signals (PWA/WebView application)
   - mouse
@@ -138,15 +138,15 @@ How &ould works our network.
   - clipboard
 - tunneling through 192.168.0.200:8434 / 45.147.121.152:8434 if in LTE/NAT mode, using identification client token
 
-**L-192.168.0.196 <---> L-192.168.0.208**
+**L-196 <---> L-208**
 - clipboard (via android application, and cwsp endpoint server)
 - tunneling through 192.168.0.200:8434 / 45.147.121.152:8434 if one of in LTE/NAT mode, using identification client token
 
-**L-192.168.0.110 <---> {[ 192.168.0.200:8434 / 45.147.121.152:8434 ]}**
+**L-110 <---> {[ 192.168.0.200:8434 / 45.147.121.152:8434 ]}**
 - initiated or initiator exchanger (bridge/tunnel/link)
-- `L-192.168.0.110` is AirPad controllable (by PWA apps)
+- `L-110` is AirPad controllable (by PWA apps)
   - Or directly, or through bridge/proxy
-- `L-192.168.0.110` is one of `clipboard` (and/or other data) synchronize/exchanger member
+- `L-110` is one of `clipboard` (and/or other data) synchronize/exchanger member
   - Devices through bridge/proxy can/may ask or pass `clipboard` (and/or other data) data
 
 **{[ 192.168.0.200:8434 / 45.147.121.152:8434 ]}** 
@@ -156,25 +156,50 @@ How &ould works our network.
 
 ## Potential routes what needs to support
 
-- Airpad (PWA) or Native from `L-192.168.0.196` to https://192.168.0.110:8434/ (local/private network)
-- Airpad (PWA) or Native from `L-192.168.0.196` through `https://192.168.0.200:8434/`  to `L-192.168.0.110` (local/private network)
-- Airpad (PWA) or Native from `L-192.168.0.196` through `https://45.147.121.152:8434/` to `L-192.168.0.110` (any network of device)
-- Native (app) Clipboard (and/or other data) from `L-192.168.0.196` to https://192.168.0.110:8434/ (local network, directly)
-- Native (app) Clipboard (and/or other data) from `L-192.168.0.196` to through `https://192.168.0.200:8434/`  to `L-192.168.0.110` (local network, directly)
-- Native (app) Clipboard (and/or other data) from `L-192.168.0.196` to through `https://45.147.121.152:8434/` to `L-192.168.0.110` (any network of device)
-- CWSP/`endpoint` Clipboard (and/or other data) from `L-192.168.0.110` to https://192.168.0.196:8434/ (rare case, local network, directly)
-- CWSP/`endpoint` Clipboard (and/or other data) from `L-192.168.0.110` to through `https://192.168.0.200:8434/`  to `L-192.168.0.196` (local network, directly)
-- CWSP/`endpoint` Clipboard (and/or other data) from `L-192.168.0.110` to through `https://45.147.121.152:8434/` to `L-192.168.0.196` (any network of device)
+- Airpad (PWA) or Native from `L-196` to https://192.168.0.110:8434/ (local/private network)
+- Airpad (PWA) or Native from `L-196` through `https://192.168.0.200:8434/`  to `L-110` (local/private network)
+- Airpad (PWA) or Native from `L-196` through `https://45.147.121.152:8434/` to `L-110` (any network of device)
+- Native (app) Clipboard (and/or other data) from `L-196` to https://192.168.0.110:8434/ (local network, directly)
+- Native (app) Clipboard (and/or other data) from `L-196` to through `https://192.168.0.200:8434/`  to `L-110` (local network, directly)
+- Native (app) Clipboard (and/or other data) from `L-196` to through `https://45.147.121.152:8434/` to `L-110` (any network of device)
+- CWSP/`endpoint` Clipboard (and/or other data) from `L-110` to https://192.168.0.196:8434/ (rare case, local network, directly)
+- CWSP/`endpoint` Clipboard (and/or other data) from `L-110` to through `https://192.168.0.200:8434/`  to `L-196` (local network, directly)
+- CWSP/`endpoint` Clipboard (and/or other data) from `L-110` to through `https://45.147.121.152:8434/` to `L-196` (any network of device)
 
 ---
 
-### `L-192.168.0.196` may/can be:
+### `L-196` may/can be:
 
 - Simulator/debug client from `45.150.9.153` (VDS), with a configured client token instead of IP
 - PWA or Native application from NAT (unknown IP, but with a configured client token instead of IP)
 - PWA or Native application from private/local network with IP `192.168.0.196`.
 
-### `L-192.168.0.210` may/can be:
+### `L-210` may/can be:
 
 - PWA or Native application from private/local network with IP `192.168.0.210`.
 - NAT/LTE client with a configured client token when LAN IP is unknown.
+
+---
+
+
+# Multi-Model Operating Rule
+
+Model roles:
+- Grok 4.5: audit, critique, risk detection, blocker analysis, recovery planning.
+- GLM 5.2: implementation, small patches, build fixes, checklist execution.
+- GPT-5.6: foundation rebuild, high-level consolidation, final arbitration only if budget allows.
+
+Default permissions:
+- Grok 4.5 should not edit files unless explicitly instructed.
+- GLM 5.2 should not redesign architecture unless a documented blocker proves it is required.
+- No model should expand scope.
+- No model should redesign existing UI/UX.
+- No model should continue past one checkpoint without reporting.
+
+Handoff rule:
+Every model must leave:
+- what it inspected;
+- what it changed, if anything;
+- command run;
+- result;
+- next exact action.
