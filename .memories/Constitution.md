@@ -1,8 +1,8 @@
 # U2RE Projects Constitution
 
-- **Дата создания или обновления:** 02.07.2026
-- **Рассмотрены или прочтены:** --.--.----
-- **Изменены (автоматически):** --.--.----
+- **Дата создания или обновления:** 10.07.2026
+- **Рассмотрены или прочтены:** 10.07.2026
+- **Изменены (автоматически):** 10.07.2026
 
 > **SPECIAL NOTES (FOR AGENTS), AI-RECOMMENDATIONS:**
 >
@@ -77,7 +77,7 @@ surface.
 ## Project Constraints
 
 - Preserve the project hierarchy and import direction documented in `AGENTS.md`
-  and `.cursor/context/base.md`.
+  and `plans/INDEX.md`.
 - Preserve CWSP v2 packet semantics, stable action names, and route diagnostics
   unless a migration is explicitly accepted.
 - Do not conflate Endpoint URL, direct target URL, AirPad target URL, and
@@ -94,23 +94,26 @@ surface.
 2. Identify actual architecture and data flow before editing.
 3. Make the smallest correction that satisfies the requirement.
 4. Run the narrowest verification that can prove the result.
-5. Document meaningful decisions in the appropriate rule, plan, memory, or pantry
-   note.
+5. Document meaningful decisions in the appropriate rule, plan, or `.memories`
+   entry; external session notes may supplement but never replace repository state.
 6. Report changed files, validation performed, and unresolved risks.
 
 ## Governance
 
 This constitution is the Spec Kit authority for requirements and planning. Cursor
 rules may add operational detail, but should not contradict this file. Amendments
-must update `.memories/constitution.md` when the agent operating contract changes.
+must update `.memories/Constitution.md` when the agent operating contract changes.
 
-**Version**: 1.0.0 | **Ratified**: 2026-06-24 | **Last Amended**: 2026-06-24
+**Version**: 1.1.0 | **Ratified**: 2026-06-24 | **Last Amended**: 2026-07-10
 
 ---
 
 ## Миграция на новую модель памяти
 
-Тут теперь важный вопрос и задача... Нужно перейти с Pantry на `.memories` модель. Сделать не только миграцию, перенос данных оттуда, но ещё и проделать анализ (скан) проекта (исходного кода), для актуализации всех данных. Также теперь следует делать отметки актуальности сведений/данных.
+`.memories` является канонической репозиторной памятью решений и
+неочевидных сведений. Внешние session-note системы могут использоваться как
+дополнительный кеш, но важные решения должны быть перенесены в `.memories` с
+датой наблюдения, evidence-путями, статусом актуальности и следующим безопасным действием.
 
 ---
 
@@ -141,7 +144,12 @@ must update `.memories/constitution.md` when the agent operating contract change
 
 ## Системы backup'ов
 
-Теперь крайне рекоммендуется создавать специальные `./backups/{hour}-{minutes}-{seconds}_{day}.{month}.{year}/*` [время брать от первой возможной правки] перед (любыми) внесениями изменений в коде (частичный слепок от структуры исходного кода, и сами преждние файлы исходного кода). Делается это с целой (хотя бы, частично) предотвратить возможные повреждения от изменений при помощи ИИ и агентов.
+Перед значимыми изменениями создаётся manifest в `.backups/manifests/` с
+репозиторием, baseline commit, scope и SHA-256 прежних файлов. Для восстановления
+предпочитаются Git-объекты и reviewable patches. Полные копии source tree,
+generated/vendor/cache/log данные и private values в `.backups` запрещены.
+Игнорируемый `.backups` является только локальным recovery-слоем; долговременная
+история хранится в проверенных commit'ах или отдельном явно управляемом backup.
 
 ---
 

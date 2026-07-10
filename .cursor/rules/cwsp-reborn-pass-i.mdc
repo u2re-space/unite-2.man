@@ -1,0 +1,45 @@
+---
+description: CWSP-reborn Pass-I scope, readiness evidence, and platform parity
+globs: "{apps/CWSP-reborn/**,modules/views/**}"
+alwaysApply: false
+---
+
+# CWSP-reborn Pass I
+
+## Read first
+
+1. `plans/INDEX.md`
+2. `.progress/CWSP-reborn/STATE.json`
+3. `.roadmaps/CWSP-reborn/PASS-I.md`
+4. `apps/CWSP-reborn/.analysis/architecture.md`
+5. `.cursor/rules/network.mdc` for packet semantics
+
+## Scope
+
+- Pass I is documentation, analysis, governance, recovery, and minimal structural scaffolding.
+- Do not implement product behavior unless a later task explicitly authorizes it.
+- Treat `src/` as intended canonical source and `app/` as projection, but verify every link.
+- Never edit generated, vendor, build, Gradle-cache, or mirrored alias output.
+
+## Readiness
+
+- E0: inventoried.
+- E1: contract documented.
+- E2: focused link/type/build verification passed.
+- E3: local frontend/backend integration passed.
+- E4: target device and route passed.
+
+Do not call a platform or capability ready below its required evidence level.
+
+## Parity
+
+- Share envelope, settings schema, view contracts, and diagnostics.
+- Keep Android Java and desktop Node/native drivers platform-specific.
+- Capacitor includes AirPad; WebNative currently targets minimal, network, and settings.
+- Preserve endpoint URL, direct URL, AirPad target, and destination ID as separate fields.
+
+## Safety
+
+- Do not remove `network-old` or `input-old` until replacement imports and tests pass.
+- Do not merge v1 crypto/encoding proposals into v2 without explicit version negotiation.
+- Keep credentials and private connectivity data under `private/` only.

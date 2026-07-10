@@ -683,6 +683,6 @@ How &ould works our network.
 
 ### `L-192.168.0.196` may/can be:
 
-- Simulator/debug client from `45.150.9.153` (VDS), with client token `n3v3rm1nd` instead of IP
-- PWA or Native application from NAT (unknown IP, but with client token `n3v3rm1nd` instead of IP)
+- Simulator/debug client from `45.150.9.153` (VDS), with a configured client token instead of IP
+- PWA or Native application from NAT (unknown IP, but with a configured client token instead of IP)
 - PWA or Native application from private/local network with IP `192.168.0.196`.

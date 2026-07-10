@@ -95,7 +95,7 @@ VDS / client / application / PWA side.
 
 Required association:
 - `clientId = L-192.168.0.196`
-- `token = n3v3rm1nd`
+- `token = ${CWS_CLIENT_TOKEN}` from private environment/config
 
 ### `L-192.168.0.208`
 Additional Android client that may participate in synchronization scenarios.
@@ -105,7 +105,7 @@ Additional Android client (new smartphone on LAN `192.168.0.210`).
 
 Required association (same token model as other phones):
 - `clientId = L-192.168.0.210`
-- `token = n3v3rm1nd` (or env/config override)
+- `token = ${CWS_CLIENT_TOKEN}` from private environment/config
 
 ---
 
@@ -114,7 +114,7 @@ Do not permanently hardcode secrets into source unless absolutely necessary.
 
 If values such as the following are required:
 - `clientId = L-192.168.0.196`
-- `token = n3v3rm1nd`
+- `token = ${CWS_CLIENT_TOKEN}`
 
 prefer:
 - environment variables

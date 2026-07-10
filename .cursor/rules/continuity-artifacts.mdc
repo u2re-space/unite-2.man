@@ -1,0 +1,42 @@
+---
+description: Interruption-safe roadmap, progress, memory, and recovery artifacts
+globs: "{.roadmaps/**,.progress/**,.backups/**,.memories/**,plans/**}"
+alwaysApply: false
+---
+
+# Continuity Artifacts
+
+## Canonical roles
+
+- `plans/` explains accepted work and exact execution steps.
+- `.roadmaps/` orders phases, dependencies, and evidence gates.
+- `.progress/<project>/STATE.json` is the machine-readable resume pointer.
+- `.progress/<project>/JOURNAL.md` is append-only human context.
+- `.memories/` stores concise durable decisions and non-obvious findings.
+- `.backups/` stores manifests and reviewed patches, not copied source trees.
+
+## Before significant edits
+
+1. Confirm the relevant repository status.
+2. Create a manifest with timestamp, scope, baseline state, and pre-edit hashes.
+3. Set one active task in `STATE.json`.
+4. Add a journal entry with the next safe action.
+
+## At each checkpoint
+
+- Record changed files, commands, results, blockers, and rollback reference.
+- Mark unverified scenarios explicitly.
+- Keep only one active task.
+- Update memory only for durable decisions or findings.
+
+## On interruption
+
+Resume from `STATE.json` and the latest journal entry. Do not restart broad
+discovery unless evidence is stale or the recorded paths no longer exist.
+
+## Safety
+
+- Exclude generated, vendor, cache, log, and private data.
+- Never store passwords, tokens, keys, clipboard content, or private access notes.
+- Do not create divergent files through `.memory`, `tasks`, `.cursor/plans`, or
+  other aliases when a canonical path exists.

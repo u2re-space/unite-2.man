@@ -12,16 +12,16 @@ large CWSP/network/debug specs here; follow the source-of-truth order below.
 ## Source-of-truth order
 
 1. User request and current attached context.
-2. `.specify/memory/constitution.md` for requirements, planning governance, and
-   the short agent operating summary. This path currently resolves through
-   `.memories/constitution.md`.
-3. `plans/Калибровка-проекта.md` for project calibration and strategy.
+2. `.memories/Constitution.md` for requirements, planning governance, and the
+   short agent operating summary. `.specify/memory/Constitution.md` resolves to
+   the same canonical file.
+3. `plans/Calibration.md` for project calibration and strategy.
 4. Domain rules in `.cursor/rules/`, especially:
    - `network.mdc` for CWSP v2 protocol and routing contracts.
    - `debugging.mdc` for CWSP/AirPad/clipboard recovery workflow.
    - `optimization.mdc` for token, time, and resource limits.
-5. `AGENTS.md` and `.cursor/context/base.md` for repo architecture and access
-   notes that are safe to keep public.
+5. `plans/INDEX.md`, `AGENTS.md`, and the relevant project `.analysis/` for
+   architecture and access notes that are safe to keep public.
 
 ## Operating contract
 

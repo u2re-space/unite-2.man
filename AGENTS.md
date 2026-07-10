@@ -81,17 +81,12 @@ When the task is relevant, also inspect these paths:
 
 ---
 
-## SSH access
+## Remote access
 
-Available SSH targets include:
-
-- `ssh U2RE@192.168.0.110`
-- `ssh U2RE@192.168.0.111`
-- `ssh u2re-dev@192.168.0.200`
-- `ssh u2re-dev@192.168.0.201`
-- External access / VDS example:
-  - `ssh u2re-dev@45.147.121.152`
-  - `ssh root@45.150.9.153 -p 22 -i ~/.ssh/id_ecdsa`
+Remote roles include the Windows desk, gateway/server, and WAN simulator.
+Exact hosts, usernames, keys, elevation policy, and connection commands are
+private operational data stored in `private/connectivity.md`. Public agent
+guidance may use logical node IDs and safe command names only.
 
 ---
 
@@ -175,11 +170,11 @@ How &ould works our network.
 
 ### `L-192.168.0.196` may/can be:
 
-- Simulator/debug client from `45.150.9.153` (VDS), with client token `n3v3rm1nd` instead of IP
-- PWA or Native application from NAT (unknown IP, but with client token `n3v3rm1nd` instead of IP)
+- Simulator/debug client from `45.150.9.153` (VDS), with a configured client token instead of IP
+- PWA or Native application from NAT (unknown IP, but with a configured client token instead of IP)
 - PWA or Native application from private/local network with IP `192.168.0.196`.
 
 ### `L-192.168.0.210` may/can be:
 
 - PWA or Native application from private/local network with IP `192.168.0.210`.
-- NAT/LTE client with token `n3v3rm1nd` when LAN IP is unknown.
+- NAT/LTE client with a configured client token when LAN IP is unknown.

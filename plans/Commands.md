@@ -62,7 +62,7 @@ msbuild windows.slnx /p:Platform=x64 /m /p:Configuration=Release
 ## Данные для CWSP к `.110` хосту
 
 - `L-110`
-- `n3v3rm1nd`
+- `<configured-client-token>` from private environment/config
 - `L-210,L-196,L-208`
 - `https://45.147.121.152:8434/`
 
