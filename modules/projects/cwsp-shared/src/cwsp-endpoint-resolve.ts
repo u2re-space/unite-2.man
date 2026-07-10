@@ -7,7 +7,7 @@ import { splitMultiValueList } from "./multi-value-list.ts";
  * no port). When the port is omitted we probe common HTTPS/HTTP ports via `/lna-probe`.
  */
 
-export const CWSP_DEFAULT_HTTPS_PORTS = [8434, 443, 9443, 7443, 8444, 8445, 18443] as const;
+export const CWSP_DEFAULT_HTTPS_PORTS = [8434, 9443, 7443, 8444, 8445, 18443] as const;
 export const CWSP_DEFAULT_HTTP_PORTS = [8080, 8081, 8082, 18080, 80, 8888] as const;
 
 export type ParsedConnectHost = {
@@ -139,13 +139,21 @@ export const normalizeProbeHttpsOrigin = (raw: string): string => {
     return `${proto}://${parsed.host}:8434`;
 };
 
-/** COMPAT: rewrite persisted CWSP HTTPS URLs (legacy `:8443`, typo `:8343` → `:8434`). */
+/** COMPAT: rewrite persisted CWSP HTTPS URLs (legacy `:8443`, typo `:8343` → `:8434`).
+ * Also inject `:8434` when host has no port — bare `45.147.121.152` otherwise dials :443 → /ws 404.
+ */
 export const migrateLegacyCwspPublicPort = (raw: string): string => {
     const t = trim(raw);
     if (!t) return t;
-    return t
+    const rewritten = t
         .replace(/(?<![0-9]):8443(?![0-9])/g, ":8434")
         .replace(/(?<![0-9]):8343(?![0-9])/g, ":8434");
+    // Multi-host lists: normalize each segment that looks like a connect host.
+    const parts = splitConnectHostList(rewritten);
+    if (parts.length <= 1) {
+        return normalizeProbeHttpsOrigin(rewritten) || rewritten;
+    }
+    return parts.map((part) => normalizeProbeHttpsOrigin(part) || part).join(";");
 };
 
 export type EndpointProbeCandidateFields = {

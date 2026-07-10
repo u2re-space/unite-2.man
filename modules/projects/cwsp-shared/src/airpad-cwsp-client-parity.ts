@@ -14,48 +14,83 @@ import { splitMultiValueList } from "./multi-value-list.ts";
 /** AirPad popup / view persisted remote block (`airpad-view` / embedding shells). */
 export const AIRPAD_REMOTE_CONFIG_STORAGE_KEY = "airpad.remote.connection.v1";
 
-/** {@code L-192.168.0.110} → bare connect host when suffix is IP/domain (Java {@code CwspRouteTargets} parity). */
+/** Home fleet LAN only ({@code 192.168.0.x}) — guest {@code 192.168.165.x} must not become Client-ID. */
+export const FLEET_HOME_LAN_PREFIX = "192.168.0.";
+
+/** {@code L-192.168.0.110} / {@code L-110} → bare connect host for dialing (not identity rewrite). */
 export const wireNodeIdToBareConnectHost = (value: unknown): string => {
     const trimmed = String(value ?? "").trim();
     if (!/^L-/i.test(trimmed)) return "";
     const bare = trimmed.replace(/^L-/i, "").trim();
-    return looksLikeConnectHost(bare) ? bare : "";
+    if (looksLikeConnectHost(bare)) return bare;
+    if (/^\d{1,3}$/.test(bare)) return `${FLEET_HOME_LAN_PREFIX}${bare}`;
+    return "";
 };
 
-/** Normalize wire node id ({@code L-192.168.0.110}). */
+/** Normalize wire node id without expanding short ↔ full forms.
+ * Clients keep short ids ({@code L-196}); full {@code L-192.168.0.196} stays as-is until {@link toShortFleetWireNodeId}.
+ */
 export const normalizeWireNodeIdForWire = (value: unknown): string => {
     const trimmed = String(value ?? "").trim();
     if (!trimmed) return "";
-    if (/^L-/i.test(trimmed)) return `L-${trimmed.slice(2)}`;
-    if (/^\d{1,3}(?:\.\d{1,3}){3}(?::\d+)?$/.test(trimmed)) return `L-${trimmed.split(":")[0]}`;
+    if (/^L-/i.test(trimmed)) {
+        const body = trimmed.slice(2).trim();
+        if (!body) return "";
+        return `L-${body}`;
+    }
+    if (/^\d{1,3}(?:\.\d{1,3}){3}(?::\d+)?$/.test(trimmed)) {
+        return `L-${trimmed.split(":")[0]}`;
+    }
+    // Bare octet "196" → short L-196 (settings convenience), not full LAN id.
+    if (/^\d{1,3}$/.test(trimmed)) {
+        return `L-${trimmed}`;
+    }
     return trimmed;
 };
 
-/** Home fleet LAN only ({@code 192.168.0.x}) — guest {@code 192.168.165.x} must not become Client-ID. */
-export const FLEET_HOME_LAN_PREFIX = "192.168.0.";
-
-export const DEFAULT_DESK_WIRE_NODE_ID = "L-192.168.0.110";
-
-/** Fleet Linux gateway / desktop peer controllable directly by AirPad. */
-export const FLEET_GATEWAY_WIRE_NODE_ID = "L-192.168.0.200";
-
-export const isFleetGatewayWireNodeId = (nodeId: unknown): boolean =>
-    normalizeWireNodeIdForWire(nodeId).toLowerCase() === FLEET_GATEWAY_WIRE_NODE_ID.toLowerCase();
-
-/** Home fleet desk peers controllable via AirPad (`.110` ultrabook, `.111` laptop Ethernet). */
-export const FLEET_DESK_WIRE_NODE_IDS = ["L-192.168.0.110", "L-192.168.0.111"] as const;
-
-export const isFleetDeskWireNodeId = (nodeId: unknown): boolean => {
-    const normalized = normalizeWireNodeIdForWire(nodeId).toLowerCase();
-    if (!normalized) return false;
-    return FLEET_DESK_WIRE_NODE_IDS.some((entry) => entry.toLowerCase() === normalized);
+/**
+ * Prefer short fleet Client-ID for apps/UI ({@code L-196}).
+ * Full home-LAN ids collapse: {@code L-192.168.0.196} → {@code L-196}.
+ */
+export const toShortFleetWireNodeId = (value: unknown): string => {
+    const normalized = normalizeWireNodeIdForWire(value);
+    if (!normalized) return "";
+    const full = /^L-192\.168\.0\.(\d{1,3})$/i.exec(normalized);
+    if (full) return `L-${full[1]}`;
+    if (/^L-\d{1,3}$/i.test(normalized)) return `L-${normalized.slice(2)}`;
+    return normalized;
 };
 
-/** Infer {@code L-192.168.0.x} from a home-fleet page/shell host. */
+/** Home-fleet identity equality: {@code L-196} ≡ {@code L-192.168.0.196}. */
+export const fleetWireNodeIdsEquivalent = (a: unknown, b: unknown): boolean => {
+    const left = toShortFleetWireNodeId(a).toLowerCase();
+    const right = toShortFleetWireNodeId(b).toLowerCase();
+    return Boolean(left) && left === right;
+};
+
+/** Desk AirPad target — short id preferred in clients. */
+export const DEFAULT_DESK_WIRE_NODE_ID = "L-110";
+
+/** Fleet gateway peer — short id preferred in clients. */
+export const FLEET_GATEWAY_WIRE_NODE_ID = "L-200";
+
+export const isFleetGatewayWireNodeId = (nodeId: unknown): boolean =>
+    fleetWireNodeIdsEquivalent(nodeId, FLEET_GATEWAY_WIRE_NODE_ID);
+
+/** Home fleet desk peers controllable via AirPad (`.110` ultrabook, `.111` laptop Ethernet). */
+export const FLEET_DESK_WIRE_NODE_IDS = ["L-110", "L-111"] as const;
+
+export const isFleetDeskWireNodeId = (nodeId: unknown): boolean => {
+    const shortId = toShortFleetWireNodeId(nodeId).toLowerCase();
+    if (!shortId) return false;
+    return FLEET_DESK_WIRE_NODE_IDS.some((entry) => entry.toLowerCase() === shortId);
+};
+
+/** Infer short desk Client-ID from a home-fleet page/shell host ({@code 192.168.0.110} → {@code L-110}). */
 export const resolveDeskWireNodeIdFromPageHost = (pageHost?: unknown): string => {
     const host = String(pageHost ?? "").trim();
     if (!isHomeFleetLanHost(host)) return "";
-    return `L-${host}`;
+    return toShortFleetWireNodeId(`L-${host}`);
 };
 
 /** Routed desk control through fleet ingress ({@code .200} / {@code 45.147.121.152}). */
@@ -124,6 +159,8 @@ export const wireNodeIdToLanHost = (nodeId: unknown): string => {
     const normalized = normalizeWireNodeIdForWire(nodeId);
     if (!normalized.toLowerCase().startsWith("l-")) return "";
     const host = normalized.slice(2).trim();
+    // Short Client-ID L-196 → 192.168.0.196 for connect-host resolution only.
+    if (/^\d{1,3}$/.test(host)) return `${FLEET_HOME_LAN_PREFIX}${host}`;
     return /^\d{1,3}(?:\.\d{1,3}){3}$/.test(host) ? host : "";
 };
 
@@ -132,9 +169,11 @@ export const isHomeFleetLanHost = (host: unknown): boolean => {
     return t.startsWith(FLEET_HOME_LAN_PREFIX);
 };
 
-/** True for canonical home fleet node ids ({@code L-192.168.0.x}). */
+/** True for home fleet Client-IDs: short {@code L-196} or full {@code L-192.168.0.196}. */
 export const isAssociableFleetWireNodeId = (nodeId: unknown): boolean => {
-    const host = wireNodeIdToLanHost(nodeId);
+    const normalized = normalizeWireNodeIdForWire(nodeId);
+    if (/^L-\d{1,3}$/i.test(normalized)) return true;
+    const host = wireNodeIdToLanHost(normalized);
     return host ? isHomeFleetLanHost(host) : false;
 };
 
@@ -149,10 +188,11 @@ export const isExplicitFleetGatewayTarget = (value: unknown): boolean => {
     return isFleetGatewayWireNodeId(normalized) || isGatewayHttpsOrigin(value);
 };
 
-/** Accept only home-fleet Client-ID; drop guest LAN ids ({@code L-192.168.165.x}). */
+/** Accept home-fleet Client-ID; persist/return short form ({@code L-196}) for apps. */
 export const sanitizeFleetSelfWireNodeId = (value: unknown): string => {
     const normalized = normalizeWireNodeIdForWire(value);
-    return isAssociableFleetWireNodeId(normalized) ? normalized : "";
+    if (!isAssociableFleetWireNodeId(normalized)) return "";
+    return toShortFleetWireNodeId(normalized);
 };
 
 /**
@@ -163,8 +203,8 @@ export const sanitizeFleetRouteTarget = (
     endpointUrl?: unknown
 ): string => {
     const raw = String(value ?? "").trim();
-    const normalized = normalizeWireNodeIdForWire(value);
-    if (isAssociableFleetWireNodeId(normalized)) return normalized;
+    const shortId = sanitizeFleetSelfWireNodeId(value);
+    if (shortId) return shortId;
     if (raw && isExplicitFleetGatewayTarget(raw)) return FLEET_GATEWAY_WIRE_NODE_ID;
     if (isGatewayHttpsOrigin(endpointUrl)) return DEFAULT_DESK_WIRE_NODE_ID;
     return "";
@@ -262,19 +302,19 @@ const parseRouteTargetHintLocal = (value: unknown): string => {
 };
 
 /** Normalize {@code cwsp.destinationNodeIds} before syncing to Android (single desk id on wire). */
-const normalizeDestinationNodeIdsForWire = (raw: unknown, fallbackDesk = "L-192.168.0.110"): string => {
+const normalizeDestinationNodeIdsForWire = (raw: unknown, fallbackDesk = DEFAULT_DESK_WIRE_NODE_ID): string => {
     const hint = parseRouteTargetHintLocal(raw);
     if (hint) {
         if (isExplicitFleetGatewayTarget(hint)) return FLEET_GATEWAY_WIRE_NODE_ID;
-        const normalized = normalizeWireNodeIdForWire(hint);
-        if (isAssociableFleetWireNodeId(normalized)) return normalized;
+        const shortId = sanitizeFleetSelfWireNodeId(hint);
+        if (shortId) return shortId;
         return hint;
     }
     const trimmed = String(raw || "").trim();
     if (!trimmed || trimmed === "*" || trimmed.toLowerCase() === "all" || trimmed.toLowerCase() === "broadcast") {
         return fallbackDesk;
     }
-    return trimmed;
+    return toShortFleetWireNodeId(trimmed) || trimmed;
 };
 
 /**

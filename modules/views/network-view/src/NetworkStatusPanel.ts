@@ -126,7 +126,7 @@ export class NetworkStatusPanel {
 
                     <label class="cw-network-dest-field">
                         <span>Destination node ids</span>
-                        <input type="text" data-dest-ids placeholder="L-196;L-210;L-110" autocomplete="off" />
+                        <input type="text" data-dest-ids placeholder="L-196;L-210;L-208" autocomplete="off" />
                     </label>
                     <p class="cw-network-dest-hint">Probe clipboard:isReady to each id via gateway (45.147 / .200) — works for Android↔Android on LAN too.</p>
 
@@ -236,7 +236,7 @@ export class NetworkStatusPanel {
         ].join("\n");
         if (this.els.destInput && !this.els.destInput.value.trim()) {
             const share = String(settings?.shell?.clipboardShareDestinationIds || "").trim();
-            this.els.destInput.value = route && route !== "*" ? route : share || "L-196;L-210;L-110";
+            this.els.destInput.value = route && route !== "*" ? route : share || "L-196;L-210;L-208";
         }
     }
 
