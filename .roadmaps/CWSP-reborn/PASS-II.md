@@ -1,7 +1,7 @@
 # CWSP-reborn Pass II Execution Ledger
 
 - **Started:** 2026-07-10T14:16:43+07:00
-- **Updated:** 2026-07-10T16:29:00+07:00
+- **Updated:** 2026-07-10T17:15:00+07:00
 - **Status:** in progress
 - **Baseline archive:** `.archives/CWSP-reborn/pass-II-2026-07-10/manifest.json`
 - **Models:** Grok 4.5 Highest + GLM-5.2 Highest (GPT-5.6-Sol excluded)
@@ -36,8 +36,8 @@ Owners:
 - [x] Add canonical fixtures and policy tests.
 - [x] Create canonical `runtime/cwsp/endpoint` path (symlink + adapters).
 - [x] Fill thin `apps/CWSP-reborn/src/protocol` web/node facades (+ focused test).
-- [ ] Bind the legacy endpoint runtime handlers to shared semantics (deeper integration).
-- [ ] Pass local normalization/routing/readiness tests against a live `/ws` loopback.
+- [x] Bind the legacy endpoint runtime handlers to shared semantics (soft-bind `normalizeFrame` + `ingress-normalize`).
+- [x] Pass local normalization/routing tests against a live `/ws` loopback harness (`check:ws-loopback` 4/4).
 
 ## Wave 3 — P4 views and settings
 
@@ -72,10 +72,10 @@ Owners:
 
 ## Wave 5 — P6 local integration
 
-- [ ] Direct loopback `/ws` packet flow.
-- [ ] Routed loopback destination preservation.
-- [ ] Settings get/patch persistence.
-- [ ] Clipboard text/DataAsset contract.
+- [x] Direct loopback `/ws` packet flow (harness + optional `ws` echo).
+- [x] Routed loopback destination preservation (`cwsp_route_target` / destinations).
+- [x] Settings get/patch persistence (`check:settings-backend` 3/3).
+- [x] Clipboard text/DataAsset contract (Node executor + web/PWA emission; `check:clipboard-backend` + `check:web-backend`).
 - [ ] Driver readiness and debug relay.
 
 Remote/device E4 work runs only if local E2/E3 evidence is green and target

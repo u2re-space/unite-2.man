@@ -81,3 +81,12 @@
 - Java backend beside Node: `check:java-backend` 3/3.
 - Android bridges: `check-java-android-pure` OK; Capacitor `./gradlew tasks` OK (JDK 17).
 - Next: endpoint↔cwsp-shared binding + `/ws` loopback; optional typed Packet on Coordinator; APK deps.
+
+## 2026-07-10 17:15 +07 — Node/TS/WEB/PWA protocol + backend wave
+
+- Protocol facades filled (re-exports + WS/UUID/Timestamp); deferred crypto/QUIC/transmission stubs.
+- Node Clipboardy emission/executor + optional `enableClipboard` on WebNative bootstrap.
+- Web/PWA IDB/ShareTarget/LaunchQueue + airpad clipboard emission (no UI).
+- Soft-bind legacy `normalizeFrame` + `ingress-normalize` + `/ws` loopback harness.
+- Checks: protocol-facades 11, clipboard 5, web-backend 9, ws-loopback 4, settings 3, smoke 4/4.
+- Next: driver readiness / debug relay; APK deps; Wave 6 docs closure.
