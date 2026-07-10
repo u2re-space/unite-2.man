@@ -277,8 +277,8 @@ Needs to make more parity with/between Capacitor version and WebNative (or [Neut
   - Frontend building by Vite into `./dist/<category>/`.
 - Backend: Java (native code/core, platform)
 - Platform: Android
-- Build Output: `./build/<category>/...`
-- Build Command: `npm run build:capacitor` (preferred)
+- Build Output: `./build/capacitor/web/` (Vite), `./build/capacitor/apk/` (APKs; also via `dist` → `build`)
+- Build Command: `npm run build:capacitor` (web); `npm run build:capacitor:apk` (web + Gradle + publish APKs)
 - Deploys: to Android devices (incl. by ADB, or APK install)
 - Source-directory: `apps/CWSP-reborn/app/android` (symbolic linked)
 
