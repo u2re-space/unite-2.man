@@ -1,12 +1,12 @@
 {
-  "name": "debug-view",
+  "name": "developer-view",
   "version": "1.0.0",
-  "description": "CWSP debug view",
+  "description": "CWSP developer view",
   "type": "module",
-  "main": "./dist/debug-view.js",
-  "module": "./dist/debug-view.js",
+  "main": "./dist/developer-view.js",
+  "module": "./dist/developer-view.js",
   "exports": {
-    ".": "./dist/debug-view.js",
+    ".": "./dist/developer-view.js",
     "./src": "./src/index.ts"
   },
   "scripts": {

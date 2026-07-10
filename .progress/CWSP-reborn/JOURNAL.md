@@ -75,26 +75,9 @@
 - Next action: review Pass I, choose the first platform contour, then create a
   read-only symlink manifest.
 
-## 2026-07-10 14:16 +07 — Pass II started
+## 2026-07-10 16:57 +07 — Java dual-stack wave closed
 
-- User authorized full implementation from the prepared roadmaps without Plan Mode.
-- Execution remains in the primary worktree because the workspace explicitly
-  excludes non-primary worktrees unless requested.
-- Baseline commits were clean and recorded for the workspace, CWSP-reborn,
-  AirPad view, Settings view, and legacy endpoint repositories.
-- Pass-I originals are recoverable through
-  `.archives/CWSP-reborn/pass-II-2026-07-10/manifest.json`; compatibility aliases
-  `.acrhive` and `.acrhives` resolve to `.archives`.
-- Six independent read-only agent audits mapped:
-  - P1/P2 links and target web builds;
-  - shared CWSP v2 fixtures and packet ownership;
-  - AirPad/Network/Settings/Debug/Developer work;
-  - Android contour;
-  - Windows/Linux WebNative contour;
-  - legacy endpoint promotion.
-- Confirmed first dependency wave:
-  1. topology RED test and selected link repair;
-  2. independent Capacitor/WebNative static bundles;
-  3. shared protocol fixtures and view facades;
-  4. platform backends and local integration.
-- Active task: `P1.0-topology-red-test`.
+- Java protocol v2: `check:java-protocol` 24/24.
+- Java backend beside Node: `check:java-backend` 3/3.
+- Android bridges: `check-java-android-pure` OK; Capacitor `./gradlew tasks` OK (JDK 17).
+- Next: endpoint↔cwsp-shared binding + `/ws` loopback; optional typed Packet on Coordinator; APK deps.

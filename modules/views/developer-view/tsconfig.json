@@ -70,7 +70,7 @@
             "views/airpad/*": ["../airpad-view/src/*"],
             "boot/native/cws-bridge": ["../../projects/subsystem/src/routing/native/cws-bridge.ts"],
             "boot/frontend-debug-capture": ["../../projects/subsystem/src/boot/frontend-debug-capture.ts"],
-            "shared/native/clipboard-device": ["../../projects/subsystem/src/routing/native/clipboard-device.ts"]
+            "shared/native/clipboard-device": ["../../projects/subsystem/src/routing/native/clipboard-device.ts"],
         },
         "target": "ESNext",
         "module": "ESNext",

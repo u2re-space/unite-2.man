@@ -1,25 +1,28 @@
 # CWSP-reborn Pass II Execution Ledger
 
 - **Started:** 2026-07-10T14:16:43+07:00
+- **Updated:** 2026-07-10T16:29:00+07:00
 - **Status:** in progress
 - **Baseline archive:** `.archives/CWSP-reborn/pass-II-2026-07-10/manifest.json`
+- **Models:** Grok 4.5 Highest + GLM-5.2 Highest (GPT-5.6-Sol excluded)
 - **Rule:** independent agents own disjoint files; shared boundaries merge in dependency order
 
 ## Wave 0 — Continuity
 
 - [x] Record repository commits and archive Pass-I originals.
 - [x] Provide `.acrhive` and `.acrhives` compatibility aliases.
-- [ ] Open Pass-II progress state and recovery manifest.
+- [x] Open Pass-II progress state and recovery manifest.
 
 ## Wave 1 — P1/P2 source and build baseline
 
 Owner: `apps/CWSP-reborn`
 
-- [ ] Add a failing topology test.
-- [ ] Repair selected WebNative links without touching compatibility-only CRX.
-- [ ] Add target-aware Vite/TypeScript configuration.
-- [ ] Add minimal Capacitor and WebNative frontend entrypoints.
-- [ ] Produce independent static bundles and focused type evidence.
+- [x] Add a failing topology test.
+- [x] Repair selected WebNative links without touching compatibility-only CRX.
+- [x] Add target-aware Vite/TypeScript configuration.
+- [x] Add minimal Capacitor and WebNative frontend entrypoints.
+- [x] Produce independent static bundles and focused type evidence.
+- [x] Emit installable `index.html` shells via platform-rooted Vite builds.
 
 ## Wave 2 — P3 protocol and endpoint
 
@@ -29,10 +32,12 @@ Owners:
 - `runtime/legacy/endpoint` — physical endpoint adapter/runtime.
 - `apps/CWSP-reborn/src/protocol` — thin platform facades.
 
-- [ ] Restore one shared v2 contract package with failing tests first.
-- [ ] Add canonical fixtures and policy tests.
-- [ ] Bind the endpoint to shared semantics without duplicating builders.
-- [ ] Pass local normalization/routing/readiness tests.
+- [x] Restore one shared v2 contract package with failing tests first.
+- [x] Add canonical fixtures and policy tests.
+- [x] Create canonical `runtime/cwsp/endpoint` path (symlink + adapters).
+- [x] Fill thin `apps/CWSP-reborn/src/protocol` web/node facades (+ focused test).
+- [ ] Bind the legacy endpoint runtime handlers to shared semantics (deeper integration).
+- [ ] Pass local normalization/routing/readiness tests against a live `/ws` loopback.
 
 ## Wave 3 — P4 views and settings
 
@@ -42,24 +47,28 @@ Owners:
 - `modules/views/settings-view`
 - root-owned Network/Debug/Developer view packages
 
-- [ ] Replace broken AirPad migration links with compatibility facades.
-- [ ] Add settings sync/contribution tests.
-- [ ] Add Network capability/a11y tests and behavior.
-- [ ] Implement gated Debug and Developer minimum surfaces with tests.
+- [x] Replace broken AirPad migration links with compatibility facades.
+- [x] Add settings sync/contribution tests.
+- [x] Add Network capability/a11y tests and behavior (22/22 contracts).
+- [x] Implement gated Debug and Developer minimum surfaces with tests (still unregistered in shells).
+- [x] Split `developer-view` from symlink-to-`debug-view` into a real package.
 
 ## Wave 4 — P5 platform contours
 
 ### Android
 
-- [ ] Add a reproducible Capacitor/Gradle graph.
-- [ ] Implement the minimum native settings/clipboard/coordinator bridge.
-- [ ] Assemble an APK or record a concrete toolchain blocker.
+- [x] Add a reproducible Capacitor/Gradle graph (scaffold; `./gradlew tasks` OK with JDK 17).
+- [x] Implement the minimum native settings/clipboard/coordinator bridge (`check-java-android-pure` OK; typed Packet wiring optional).
+- [ ] Assemble an APK or record a concrete toolchain blocker (Capacitor Android dep + assets copy still blocking APK).
 
 ### Desktop
 
-- [ ] Add shared Node settings/backend contract.
-- [ ] Run Windows-oriented WebNative frontend/backend locally.
-- [ ] Apply the same backend contract to Linux with explicit driver capability.
+- [x] Add shared Node settings/backend contract.
+- [x] Wire Windows/Linux WebNative json + settings projections + focused tests.
+- [ ] Run a packaged WebNative shell against `build/webnative` on a desk host.
+- [x] Land Java alternative backend beside Node (`src/backend/java/shared`) — `check:java-backend` 3/3.
+- [x] Land shared Java CWSP v2 protocol (`src/protocol/java`) — `check:java-protocol` 24/24.
+- [x] Wire Android Java settings/clipboard/coordinator to platform APIs (`check-java-android-pure` OK).
 
 ## Wave 5 — P6 local integration
 

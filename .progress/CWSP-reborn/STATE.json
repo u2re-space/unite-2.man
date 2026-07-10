@@ -2,11 +2,11 @@
   "schemaVersion": 1,
   "project": "CWSP-reborn",
   "pass": "II",
-  "updatedAt": "2026-07-10T14:16:43+07:00",
+  "updatedAt": "2026-07-10T16:57:00+07:00",
   "status": "in_progress",
-  "activePhase": "P1",
-  "activeTask": "P1.0-topology-red-test",
-  "lastCompletedTask": "P0.7-verify-and-close",
+  "activePhase": "P6",
+  "activeTask": "P6-ws-loopback-and-endpoint-binding",
+  "lastCompletedTask": "P5-java-dual-stack",
   "roadmap": ".roadmaps/CWSP-reborn/PASS-II.md",
   "plan": ".roadmaps/CWSP-reborn/PASS-II.md",
   "memory": ".memories/CWSP-reborn-Pass-I.md",
@@ -14,36 +14,56 @@
   "baseline": {
     "workspaceCommit": "ac79197eb320efdfe7e68258ca0d42027cc9f0e7",
     "cwspRebornCommit": "0e0aeeafe13ff24b8c2353f91e3ea3cc619579c9",
-    "workspaceGitClean": true,
-    "cwspRebornGitClean": true,
     "archive": ".archives/CWSP-reborn/pass-II-2026-07-10/manifest.json"
   },
   "completed": [
-    "governance inventory",
-    "architecture and symlink audit",
-    "view package audit",
-    "protocol and driver audit",
-    "planning and recovery audit",
-    "Pass-I roadmaps and execution plan",
-    "product documentation baseline",
-    "governance, memory, progress, and recovery scaffolding",
-    "public authentication and remote-access detail scrub",
-    "JSON, schema, link, lint, placeholder, public-data, and diff validation",
-    "Pass-II immutable baseline archive"
+    "P1 topology 4/4",
+    "P2 Capacitor/WebNative bundles with index.html",
+    "cwsp-shared v2 29 tests",
+    "runtime/cwsp/endpoint symlink + smoke 3/3",
+    "protocol web/node facades 6/6",
+    "settings-view contracts 49/49",
+    "airpad facade stable regression",
+    "debug/developer gated surfaces",
+    "WebNative Node settings backend 3/3",
+    "network-view contracts 22/22",
+    "Android Capacitor contour: gradlew tasks BUILD SUCCESSFUL (JDK 17)",
+    "Java alternative backend beside Node (check:java-backend 3/3)",
+    "Android Java bridges: SharedPreferences/ClipboardManager/Coordinator + MergeTest OK",
+    "Java CWSP v2 protocol base (check:java-protocol 24/24)"
   ],
   "blockers": [
-    "runtime/cwsp endpoint path is absent; only a legacy endpoint tree is present",
-    "CWSP-reborn Vite, TypeScript, Gradle, platform scripts, and config are placeholders",
-    "multiple platform symlinks are broken or cyclic",
-    "debug-view and developer-view have empty entrypoints"
+    "APK blocked: capacitor-android dep not wired; Capacitor assets not copied",
+    "Gradle must use JAVA_HOME=JDK 17 (host default JDK 24 too new)",
+    "Coordinator still uses packet maps; typed Packet wiring optional follow-up",
+    "legacy endpoint handlers not bound to cwsp-shared at runtime",
+    "no live /ws E2 loopback evidence"
   ],
   "nextActions": [
-    "write and run the failing P1 topology test",
-    "repair only the selected Capacitor and WebNative projections",
-    "build independent target web bundles before native packaging"
+    "bind endpoint handlers to cwsp-shared; local /ws loopback",
+    "optional: wire Android Coordinator to space.u2re.cwsp.protocol.Packet",
+    "Capacitor android dep + copy assets for APK attempt",
+    "update product docs from evidence"
   ],
   "verification": {
-    "passICompletedAt": "2026-07-10T13:50:09+07:00",
-    "passII": "pending"
+    "topology": "pass",
+    "buildCapacitor": "pass-with-index-html",
+    "buildWebnative": "pass-with-index-html",
+    "cwspSharedTests": "pass-29",
+    "protocolFacades": "pass-6",
+    "endpointPathSmoke": "pass-3",
+    "settingsContracts": "pass-49",
+    "airpadFacadeStable": "pass",
+    "debugDeveloperGates": "pass-2+2",
+    "nodeSettingsBackend": "pass-3",
+    "networkViewContracts": "pass-22",
+    "javaBackend": "pass-3",
+    "javaAndroid": "pass-pure-merge",
+    "javaProtocol": "pass-24",
+    "androidGradleTasks": "pass-jdk17"
+  },
+  "agents": {
+    "models": ["grok-4.5-fast-xhigh", "glm-5.2-high"],
+    "excluded": ["gpt-5.6-sol"]
   }
 }

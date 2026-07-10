@@ -1,3 +1,10 @@
+/*
+ * Filename: index.ts
+ * FullPath: modules/views/network-view/src/index.ts
+ * Change date and time: 16.42.00_10.07.2026
+ * Reason for changes: Pass-II — export Network capability + a11y contracts for Cap/WebNative
+ */
+
 /**
  * Network View — CWSP connection status and probe diagnostics (Capacitor home).
  */
@@ -7,6 +14,34 @@ import type { BaseViewOptions } from "views/types";
 import { NetworkStatusPanel } from "./NetworkStatusPanel";
 
 export type NetworkViewOptions = BaseViewOptions;
+
+export {
+    detectNetworkSurface,
+    isNetworkProbePathReady,
+    resolveNetworkCapabilities,
+    summarizeNetworkCapabilities,
+    type NetworkCapability,
+    type NetworkCapabilityHints,
+    type NetworkCapabilityId,
+    type NetworkCapabilityState,
+    type NetworkCapabilitySummary,
+    type NetworkSurface
+} from "./network-capability";
+
+export {
+    NETWORK_A11Y,
+    applyNetworkA11y,
+    auditNetworkA11y,
+    createNetworkA11yFixture,
+    type NetworkA11yIssue
+} from "./network-a11y";
+
+export {
+    labelForProbeCandidate,
+    normalizeProbeOrigin,
+    pickDispatchOrigin,
+    type NetworkProbeOriginRow
+} from "./network-probe-origin";
 
 export class NetworkView implements View {
     id = "network" as const;

@@ -1,3 +1,10 @@
+/*
+ * Filename: NetworkStatusPanel.ts
+ * FullPath: modules/views/network-view/src/NetworkStatusPanel.ts
+ * Change date and time: 16.42.00_10.07.2026
+ * Reason for changes: Pass-II — apply Network a11y contract after mount (live status + log)
+ */
+
 /**
  * Network status panel — connection state, HTTP probes, dispatch auth errors.
  */
@@ -28,6 +35,7 @@ import {
     timestampFilename
 } from "./network-log-export";
 import { initFrontendDebugCapture } from "boot/frontend-debug-capture";
+import { applyNetworkA11y } from "./network-a11y";
 
 // @ts-ignore
 import style from "./network.scss?inline";
@@ -140,6 +148,10 @@ export class NetworkStatusPanel {
         this.els.log = this.root.querySelector("[data-log]");
         this.els.testBtn = this.root.querySelector('[data-action="test"]');
         this.els.reconnectBtn = this.root.querySelector('[data-action="reconnect"]');
+
+        // WHY: a11y contract (landmarks / live regions) is applied after query wiring
+        // so tests can audit the same attributes the live panel exposes.
+        applyNetworkA11y(this.root);
 
         this.els.testBtn?.addEventListener("click", () => void this.runFullTest());
         this.els.reconnectBtn?.addEventListener("click", () => void this.reconnectWs());
