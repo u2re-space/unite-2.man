@@ -2,11 +2,11 @@
   "schemaVersion": 1,
   "project": "CWSP-reborn",
   "pass": "III",
-  "updatedAt": "2026-07-10T17:45:00+07:00",
+  "updatedAt": "2026-07-10T18:05:00+07:00",
   "status": "complete",
   "activePhase": "Pass-III-closed",
   "activeTask": "next-P6-driver-readiness-or-APK",
-  "lastCompletedTask": "P3-consolidation-complete",
+  "lastCompletedTask": "start-deploy-scripts-wired",
   "roadmap": ".roadmaps/CWSP-reborn/PASS-III.md",
   "plan": ".roadmaps/CWSP-reborn/PASS-III.md",
   "memory": ".memories/CWSP-reborn.md",
@@ -23,7 +23,9 @@
     "Pass III: .acrhive/.acrhives retired; canonical .archives",
     "Pass III: cwsp-reborn-pass skill",
     "Pass III: docs/.analysis/memory calibrated",
-    "Pass III: smoke protocol-facades 11 + ws-loopback 4"
+    "Pass III: smoke protocol-facades 11 + ws-loopback 4",
+    "start/deploy npm scripts + PM2 ecosystem",
+    "Neutralino future contour documented (PASS-III + skill)"
   ],
   "blockers": [
     "APK blocked: capacitor-android dep not wired; Capacitor assets not copied",

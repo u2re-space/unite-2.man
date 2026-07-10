@@ -51,6 +51,28 @@ Align docs/rules/progress with implementation; retire `.acrhive` / `.acrhives` t
 | Android `./gradlew tasks` | pass (JDK 17) |
 | `check-java-android-pure` | pass-pure-merge |
 
+## Future — Neutralino desktop contour
+
+**Status:** future / not started. Documentation-only; no code, config, build, or deploy wiring in this pass.
+
+Intent: NeutralinoJS + Node extension as an alternate Windows/Linux desktop shell beside WebNative, reusing the same Node backend settings/control surfaces and CWSP v2 protocol facades. Capacitor remains the Android contour.
+
+References:
+- https://github.com/neutralinojs/neutralinojs
+- https://github.com/hschneider/neutralino-ext-node
+- https://neutralino.js.org/
+
+Scope when started:
+- Frontend: same minimal shell / network / settings views, built by Vite into `./dist/<category>/`.
+- Backend: Node extension (`neutralino-ext-node`) hosting the existing Node settings/control backend; optional Java-bridge/IPC unchanged.
+- Platform: Windows, Linux (macOS possible later).
+- Build/deploy: would add `build:neutralino` and `deploy:<host>:neutralino` families mirroring `webnative`.
+- Settings: reuse the same `settings:get` / `settings:patch` contract; no new settings system.
+
+Related npm scripts (wired in `apps/CWSP-reborn/package.json`): `start`, `start:node`, `start:java`, `start:pm2*`, `deploy:110*`, `deploy:200:*` — see skill §7. Neutralino build/deploy family still future-only.
+
+Non-goals: replace WebNative, change Capacitor/Android contour, or alter CWSP v2 packet semantics.
+
 ## Continuity pointers
 
 - Progress: `.progress/CWSP-reborn/STATE.json` + `JOURNAL.md`

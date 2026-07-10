@@ -302,6 +302,12 @@ Needs to make more parity with/between Capacitor version and WebNative (or [Neut
 - Deploys: to Desktops, Windows, Linux hosts/devices (by SSH, open `cwsp-ui.exe` portable or installer alike APK).
 - Source-directory: `apps/CWSP-reborn/app/windows` и `apps/CWSP-reborn/app/linux`
 
+#### Future — Neutralino desktop contour (future / not started)
+
+Alternate Windows/Linux desktop shell beside WebNative: [NeutralinoJS](https://github.com/neutralinojs/neutralinojs) + [Node extension](https://github.com/hschneider/neutralino-ext-node) ([docs](https://neutralino.js.org/)). Reuses the same Node backend settings/control surfaces and CWSP v2 protocol facades; Capacitor stays Android. No Neutralino code/config/build/deploy wiring yet. When started, expect a `build:neutralino` + `deploy:<host>:neutralino` family mirroring `webnative`.
+
+Start/deploy scripts for Node/Java dual-stack are wired in `apps/CWSP-reborn/package.json` (`start`, `start:node`, `start:java`, `start:pm2*`, `deploy:110*`, `deploy:200:*`).
+
 ---
 
 May be in future non-existent Java-with-WebView2 [aka. JW2 or JWV] (Java driven Tauri or NeutralinoJS, with/by JNI)...

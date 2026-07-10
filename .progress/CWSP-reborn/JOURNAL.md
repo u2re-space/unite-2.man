@@ -114,3 +114,11 @@
   via pluggable Driver; MemoryDriver for host-free tests; adaptEmission for OS bridge.
 - `core.Coordinator` routes clipboard actions exclusively through the executor.
 - `check-java-android-pure` runs MergeTest + ClipboardExecutorTest.
+
+## 2026-07-10 18:05 +07 — start/deploy npm scripts + Neutralino plan note
+
+- Wired `start`, `start:node`, `start:java`, `start:pm2*`, `deploy:110*`, `deploy:200:*`
+  via `scripts/start-runtime.mjs`, `deploy-runtime.mjs`, `lib/runtime-env.mjs`, `ecosystem.config.cjs`.
+- Defaults: desk `C:/Users/U2RE/cwsp-{node,java}`; gateway `/home/u2re-dev/cwsp-{node,java}`.
+- Deploy stages for target OS (110=windows, 200=linux). Dry-run smoke OK.
+- Neutralino future contour documented in PASS-III + skill §8 (no code yet).

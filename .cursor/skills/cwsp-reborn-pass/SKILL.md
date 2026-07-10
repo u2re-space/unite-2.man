@@ -68,7 +68,29 @@ description: >-
 - `developer-view` is a real package (no longer symlink-to-`debug-view`).
 - `runtime/cwsp/endpoint` is the canonical path; do not invent a second tree.
 
-## 7. Open blockers
+## 7. Start / deploy (cwd: `apps/CWSP-reborn`)
+
+| Script | Behavior |
+|---|---|
+| `npm run start` / `start:node` | Foreground Node backend |
+| `npm run start:java` | `javac` + foreground Java main |
+| `npm run start:pm2` | PM2 both (`cwsp-reborn-node` + `cwsp-reborn-java`) |
+| `npm run start:pm2:node` / `start:pm2:java` | PM2 single runtime |
+| `npm run deploy:110` | Both runtimes → desk `C:/Users/U2RE/cwsp-{node,java}` |
+| `npm run deploy:110:node` / `deploy:110:java` | Desk only |
+| `npm run deploy:200:node` / `deploy:200:java` | Gateway `/home/u2re-dev/cwsp-{node,java}` |
+
+Implementations: `scripts/start-runtime.mjs`, `scripts/deploy-runtime.mjs`, `scripts/lib/runtime-env.mjs`, `ecosystem.config.cjs`.
+
+- Deploy stages for **target OS** (110=windows, 200=linux), not the build host.
+- Override hosts/dirs via `CWSP_DEPLOY_{110,200}_{HOST,USER,DIR_NODE,DIR_JAVA}`.
+- Prefer `--dry-run` before first live sync.
+
+## 8. Future — Neutralino (not started)
+
+Alternate desktop shell beside WebNative: [NeutralinoJS](https://github.com/neutralinojs/neutralinojs) + [neutralino-ext-node](https://github.com/hschneider/neutralino-ext-node) ([docs](https://neutralino.js.org/)). Capacitor stays Android. When started: `build:neutralino` + `deploy:*:neutralino` mirroring webnative. Ledger: `.roadmaps/CWSP-reborn/PASS-III.md` § Future.
+
+## 9. Open blockers
 
 - APK: Capacitor Android dep + assets copy
 - Full PM2/TLS boot on `:8434`
@@ -77,13 +99,13 @@ description: >-
 - Robot/AHK/AutoKey stubs
 - Gradle requires JDK 17 (`JAVA_HOME`)
 
-## 8. Parallelization
+## 10. Parallelization
 
 - Agents own **disjoint file sets** only.
 - Shared boundaries merge in dependency order (shared → protocol → backend → views → platform).
 - Do **not** edit `apps/CWSP-reborn/docs` or `.analysis` unless that ownership is assigned.
 
-## 9. Resume protocol
+## 11. Resume protocol
 
 1. Read `.progress/CWSP-reborn/STATE.json`.
 2. Read latest `JOURNAL.md` entry.
@@ -91,7 +113,7 @@ description: >-
 4. Execute only `activeTask`; record outcomes before switching.
 5. Prefer Pass II/III evidence over fresh discovery.
 
-## 10. Private data
+## 12. Private data
 
 - Never quote secrets from `private/connectivity.md`.
 - Public docs may link the path only.
