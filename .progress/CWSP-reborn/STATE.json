@@ -2,11 +2,11 @@
   "schemaVersion": 1,
   "project": "CWSP-reborn",
   "pass": "II",
-  "updatedAt": "2026-07-10T17:15:00+07:00",
+  "updatedAt": "2026-07-10T17:25:00+07:00",
   "status": "in_progress",
   "activePhase": "P6",
   "activeTask": "P6-driver-readiness-debug-relay",
-  "lastCompletedTask": "P6-node-web-protocol-backend-wave",
+  "lastCompletedTask": "P6-tsconfig-short-aliases",
   "roadmap": ".roadmaps/CWSP-reborn/PASS-II.md",
   "plan": ".roadmaps/CWSP-reborn/PASS-II.md",
   "memory": ".memories/CWSP-reborn-Pass-I.md",
@@ -33,7 +33,8 @@
     "Java CWSP v2 protocol base (check:java-protocol 24/24)",
     "Node clipboard backend 5/5",
     "Web/PWA backend protocol seams 9/9",
-    "ingress-normalize soft-bind + ws-loopback 4/4"
+    "ingress-normalize soft-bind + ws-loopback 4/4",
+    "tsconfig/Vite/Node short aliases (@fest-lib/cwsp-shared, protocol/*, backend/*)"
   ],
   "blockers": [
     "APK blocked: capacitor-android dep not wired; Capacitor assets not copied",

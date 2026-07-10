@@ -90,3 +90,12 @@
 - Soft-bind legacy `normalizeFrame` + `ingress-normalize` + `/ws` loopback harness.
 - Checks: protocol-facades 11, clipboard 5, web-backend 9, ws-loopback 4, settings 3, smoke 4/4.
 - Next: driver readiness / debug relay; APK deps; Wave 6 docs closure.
+
+## 2026-07-10 17:25 +07 — tsconfig alias + short imports
+
+- Extended `tsconfig.json` / `src/tsconfig.json` / `app/tsconfig.json` with
+  `@fest-lib/cwsp-shared`, `protocol/{node,web}/*`, `backend/{node,web}/*`.
+- Vite aliases aligned; Node loader `scripts/resolve-aliases.mjs` wired into check scripts.
+- Protocol/backend long `../../../modules/projects/cwsp-shared` relatives → `@fest-lib/cwsp-shared/v2/*`.
+- Web backend → `protocol/web/packet/*`. Workspace includes `cwsp-shared`.
+- Checks still green: protocol 11, clipboard 5, web 9, settings 3, ws 4, topology.
