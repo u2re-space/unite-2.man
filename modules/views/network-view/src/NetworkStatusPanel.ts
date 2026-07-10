@@ -25,7 +25,8 @@ import {
     isPreferNativeWebsocketEnabled
 } from "views/airpad/config/config";
 import { CwsBridge } from "com/routing/native/cws-bridge";
-import { runDispatchProbeWithFallback, runEndpointProbes, runWebnativeBackendProbe, type DispatchProbeReport, type NetworkProbeRow } from "./network-probe";
+import { runDispatchProbeWithFallback, runEndpointProbes, runWebnativeBackendProbe, parseDestinationIds, probeDestinationLinks, type DispatchProbeReport, type DestinationLinkProbe, type NetworkProbeRow } from "./network-probe";
+import { resolveEcosystemToken } from "com/config/SettingsTypes";
 import {
     buildCombinedPageLog,
     collectFrontendLogText,
@@ -43,6 +44,7 @@ import style from "./network.scss?inline";
 type ProbeSnapshot = {
     probes: NetworkProbeRow[];
     dispatch?: DispatchProbeReport;
+    destinations?: DestinationLinkProbe[];
 };
 
 const isCapacitorNative = (): boolean => {
@@ -83,6 +85,8 @@ export class NetworkStatusPanel {
         probeList: null as HTMLElement | null,
         log: null as HTMLElement | null,
         testBtn: null as HTMLButtonElement | null,
+        destBtn: null as HTMLButtonElement | null,
+        destInput: null as HTMLInputElement | null,
         reconnectBtn: null as HTMLButtonElement | null
     };
 
@@ -115,9 +119,16 @@ export class NetworkStatusPanel {
 
                     <div class="cw-network-actions">
                         <button type="button" data-action="test">Run network test</button>
+                        <button type="button" data-action="check-destinations">Check destinations</button>
                         <button type="button" data-action="reconnect">Reconnect WS</button>
                         <button type="button" data-action="open-settings">Settings</button>
                     </div>
+
+                    <label class="cw-network-dest-field">
+                        <span>Destination node ids</span>
+                        <input type="text" data-dest-ids placeholder="L-196;L-210;L-110" autocomplete="off" />
+                    </label>
+                    <p class="cw-network-dest-hint">Probe clipboard:isReady to each id via gateway (45.147 / .200) — works for Android↔Android on LAN too.</p>
 
                     <div class="cw-network-actions cw-network-actions--logs">
                         <button type="button" data-action="copy-frontend-log">Copy Frontend Log</button>
@@ -147,6 +158,8 @@ export class NetworkStatusPanel {
         this.els.probeList = this.root.querySelector("[data-probe-list]");
         this.els.log = this.root.querySelector("[data-log]");
         this.els.testBtn = this.root.querySelector('[data-action="test"]');
+        this.els.destBtn = this.root.querySelector('[data-action="check-destinations"]');
+        this.els.destInput = this.root.querySelector("[data-dest-ids]");
         this.els.reconnectBtn = this.root.querySelector('[data-action="reconnect"]');
 
         // WHY: a11y contract (landmarks / live regions) is applied after query wiring
@@ -154,6 +167,7 @@ export class NetworkStatusPanel {
         applyNetworkA11y(this.root);
 
         this.els.testBtn?.addEventListener("click", () => void this.runFullTest());
+        this.els.destBtn?.addEventListener("click", () => void this.runDestinationCheck());
         this.els.reconnectBtn?.addEventListener("click", () => void this.reconnectWs());
         this.root.querySelector('[data-action="open-settings"]')?.addEventListener("click", () => {
             globalThis.dispatchEvent(
@@ -220,6 +234,10 @@ export class NetworkStatusPanel {
             `Client: ${clientId}`,
             `Route: ${route}`
         ].join("\n");
+        if (this.els.destInput && !this.els.destInput.value.trim()) {
+            const share = String(settings?.shell?.clipboardShareDestinationIds || "").trim();
+            this.els.destInput.value = route && route !== "*" ? route : share || "L-196;L-210;L-110";
+        }
     }
 
     private renderProbes(snapshot: ProbeSnapshot): void {
@@ -237,6 +255,16 @@ export class NetworkStatusPanel {
                 statusText: d.statusText,
                 error: d.error || (d.bodySnippet ? d.bodySnippet.slice(0, 120) : undefined),
                 latencyMs: d.latencyMs
+            });
+        }
+        for (const dest of snapshot.destinations || []) {
+            rows.push({
+                label: `Destination ${dest.id}`,
+                origin: dest.origin || dest.id,
+                ok: dest.ok,
+                status: dest.status,
+                error: dest.error || (dest.bodySnippet ? dest.bodySnippet.slice(0, 120) : undefined),
+                latencyMs: dest.latencyMs
             });
         }
 
@@ -319,8 +347,9 @@ export class NetworkStatusPanel {
             const relay = String(core?.endpointUrl ?? "");
             const direct = String(core?.ops?.directUrl ?? "");
             const clientId = String(core?.userId ?? "");
-            const token = String(core?.userKey ?? "");
-            const accessToken = String(core?.socket?.accessToken ?? "");
+            const eco = resolveEcosystemToken(settings);
+            const token = eco;
+            const accessToken = eco;
 
             this.appendLog("Running /lna-probe on relay, direct, and fallback hosts…");
             // WHY: on the WebNative desktop shell, probe + dispatch go through the backend control
@@ -386,6 +415,55 @@ export class NetworkStatusPanel {
             this.appendLog(String(error instanceof Error ? error.message : error));
         } finally {
             this.running = false;
+            if (this.els.testBtn) this.els.testBtn.disabled = false;
+        }
+    }
+
+    private async runDestinationCheck(): Promise<void> {
+        if (this.running) return;
+        this.running = true;
+        if (this.els.destBtn) this.els.destBtn.disabled = true;
+        if (this.els.testBtn) this.els.testBtn.disabled = true;
+        try {
+            const settings = await loadSettings().catch(() => null);
+            this.renderConfig(settings);
+            const core = settings?.core;
+            const relay = String(core?.endpointUrl ?? "");
+            const direct = String(core?.ops?.directUrl ?? "");
+            const clientId = String(core?.userId ?? "");
+            const eco = resolveEcosystemToken(settings);
+            const raw =
+                this.els.destInput?.value?.trim() ||
+                String(core?.socket?.routeTarget || "") ||
+                String(settings?.shell?.clipboardShareDestinationIds || "");
+            const ids = parseDestinationIds(raw);
+            if (!ids.length) {
+                this.appendLog("No destination ids — enter L-196;L-210;… or set routeTarget in Settings.");
+                return;
+            }
+            this.appendLog(`Checking ${ids.length} destination(s) via gateway: ${ids.join(", ")}`);
+            const destinations = await probeDestinationLinks(
+                ids,
+                { relay, direct },
+                { clientId, token: eco, accessToken: eco }
+            );
+            for (const row of destinations) {
+                this.appendLog(
+                    `Dest ${row.id}: ${row.ok ? "OK" : "FAIL"}${row.latencyMs != null ? ` (${row.latencyMs}ms)` : ""}${row.error ? ` — ${row.error}` : ""}`
+                );
+            }
+            this.renderProbes({ probes: [], destinations });
+            this.probeSummary = destinations
+                .map(
+                    (d) =>
+                        `Dest ${d.id}: ${d.ok ? "OK" : "FAIL"} ${d.origin} ${d.error ?? d.status ?? ""}`
+                )
+                .join("\n");
+        } catch (error) {
+            this.appendLog(String(error instanceof Error ? error.message : error));
+        } finally {
+            this.running = false;
+            if (this.els.destBtn) this.els.destBtn.disabled = false;
             if (this.els.testBtn) this.els.testBtn.disabled = false;
         }
     }

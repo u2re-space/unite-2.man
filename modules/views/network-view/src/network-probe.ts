@@ -354,3 +354,149 @@ export async function runDispatchProbe(
         if (timer) clearTimeout(timer);
     }
 }
+
+/** Split destination id list (`L-196;L-210` / commas / spaces / newlines). */
+export const parseDestinationIds = (raw: string | undefined | null): string[] => {
+    const text = String(raw || "").trim();
+    if (!text) return [];
+    const seen = new Set<string>();
+    const out: string[] = [];
+    for (const part of text.split(/[,;\s\n\r]+/)) {
+        const id = part.trim();
+        if (!id || seen.has(id)) continue;
+        seen.add(id);
+        out.push(id);
+    }
+    return out;
+};
+
+export type DestinationLinkProbe = {
+    id: string;
+    ok: boolean;
+    origin: string;
+    status?: number;
+    error?: string;
+    latencyMs?: number;
+    bodySnippet?: string;
+};
+
+/**
+ * Ask each destination via gateway `/api/network/dispatch` (`clipboard:isReady`).
+ * WHY: verifies node-to-node routing through the coordinator, not just host reachability.
+ */
+export async function probeDestinationLinks(
+    destinations: string[],
+    fields: { relay?: string; direct?: string },
+    auth: { clientId?: string; token?: string; accessToken?: string },
+    opts: { timeoutMs?: number; originHint?: string } = {}
+): Promise<DestinationLinkProbe[]> {
+    const ids = destinations.map((d) => d.trim()).filter(Boolean);
+    if (!ids.length) return [];
+
+    const timeoutMs = opts.timeoutMs ?? 8000;
+    const seeds = [
+        normalizeProbeOrigin(opts.originHint || ""),
+        ...collectEndpointProbeCandidates(fields).map(normalizeProbeOrigin)
+    ].filter(Boolean);
+    const origin = seeds[0] || "";
+    if (!origin) {
+        return ids.map((id) => ({ id, ok: false, origin: "", error: "no gateway origin" }));
+    }
+
+    const clientId = trim(auth.clientId);
+    const token = trim(auth.token);
+    const accessToken = trim(auth.accessToken);
+    const results: DestinationLinkProbe[] = [];
+
+    for (const id of ids) {
+        const started = Date.now();
+        const headers: Record<string, string> = { "Content-Type": "application/json" };
+        if (accessToken) headers["x-auth-token"] = accessToken;
+        if (token) headers["x-cws-token"] = token;
+
+        const body = {
+            userId: clientId,
+            byId: clientId,
+            from: clientId,
+            token,
+            op: "ask",
+            what: "clipboard:isReady",
+            purpose: "clipboard",
+            nodes: [id],
+            destinations: [id],
+            payload: { probe: true, destination: id }
+        };
+
+        if (isCapacitorCwsNativeShell()) {
+            try {
+                const native = await invokeCwsPlatformIPC({
+                    channel: "network:dispatch-probe",
+                    payload: {
+                        origin,
+                        clientId,
+                        token,
+                        accessToken,
+                        what: "clipboard:isReady",
+                        nodes: [id],
+                        destinations: [id]
+                    }
+                });
+                const bag = native as unknown as Record<string, unknown>;
+                const status = typeof bag.statusCode === "number" ? bag.statusCode : undefined;
+                const ok = Boolean(bag.ok);
+                const errorRaw = typeof bag.error === "string" ? bag.error.trim() : "";
+                results.push({
+                    id,
+                    origin,
+                    ok,
+                    status,
+                    latencyMs: Date.now() - started,
+                    bodySnippet: typeof bag.bodySnippet === "string" ? bag.bodySnippet : undefined,
+                    error: ok ? undefined : errorRaw || (status != null ? `HTTP ${status}` : "dispatch failed")
+                });
+                continue;
+            } catch {
+                /* fall through to fetch */
+            }
+        }
+
+        const controller = typeof AbortController !== "undefined" ? new AbortController() : undefined;
+        const timer =
+            controller && timeoutMs > 0
+                ? globalThis.setTimeout(() => controller.abort(), timeoutMs)
+                : undefined;
+        try {
+            const res = await fetch(`${origin}/api/network/dispatch`, {
+                method: "POST",
+                mode: "cors",
+                cache: "no-store",
+                credentials: "omit",
+                headers,
+                body: JSON.stringify(body),
+                signal: controller?.signal
+            } as RequestInit);
+            const text = await res.text().catch(() => "");
+            const ok = res.ok;
+            results.push({
+                id,
+                origin,
+                ok,
+                status: res.status,
+                latencyMs: Date.now() - started,
+                bodySnippet: text.slice(0, 240),
+                error: ok ? undefined : `HTTP ${res.status}${res.statusText ? ` ${res.statusText}` : ""}`.trim()
+            });
+        } catch (error: unknown) {
+            results.push({
+                id,
+                origin,
+                ok: false,
+                error: describeFetchError(error),
+                latencyMs: Date.now() - started
+            });
+        } finally {
+            if (timer) clearTimeout(timer);
+        }
+    }
+    return results;
+}

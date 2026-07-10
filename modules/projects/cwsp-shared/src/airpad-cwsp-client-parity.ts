@@ -501,10 +501,13 @@ export function appSettingsToRemoteConnectionV1(appSettings: Record<string, unkn
         readNestedString(appSettings, ["core", "admin", "httpsOrigin"]);
 
     const accessToken =
+        readNestedString(appSettings, ["core", "ecosystemToken"]) ||
         trimOrUndef(String(socket.accessToken ?? socket.airpadAuthToken ?? "")) ||
+        readNestedString(appSettings, ["core", "userKey"]) ||
         undefined;
 
     const identificationToken =
+        readNestedString(appSettings, ["core", "ecosystemToken"]) ||
         readNestedString(appSettings, ["core", "userKey"]) ||
         readNestedString(appSettings, ["core", "socket", "clientAccessToken"]) ||
         readNestedString(appSettings, ["core", "socket", "accessToken"]);

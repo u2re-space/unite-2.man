@@ -119,6 +119,29 @@
         font-size: 0.8rem;
     }
 
+    .cw-network-dest-field {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        font-size: 0.88rem;
+    }
+
+    .cw-network-dest-field input {
+        appearance: none;
+        border: 1px solid light-dark(rgba(0, 0, 0, 0.12), rgba(255, 255, 255, 0.14));
+        background: light-dark(#fff, #1e1e1e);
+        color: inherit;
+        border-radius: 0.5rem;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.9rem;
+    }
+
+    .cw-network-dest-hint {
+        margin: 0;
+        font-size: 0.8rem;
+        opacity: 0.8;
+    }
+
     .cw-network-probes {
         display: flex;
         flex-direction: column;
