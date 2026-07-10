@@ -1,19 +1,22 @@
 {
   "schemaVersion": 1,
   "project": "CWSP-reborn",
-  "pass": "I",
-  "updatedAt": "2026-07-10T13:50:09+07:00",
-  "status": "prepared",
+  "pass": "II",
+  "updatedAt": "2026-07-10T14:16:43+07:00",
+  "status": "in_progress",
   "activePhase": "P1",
-  "activeTask": null,
+  "activeTask": "P1.0-topology-red-test",
   "lastCompletedTask": "P0.7-verify-and-close",
-  "roadmap": ".roadmaps/CWSP-reborn/PASS-I.md",
-  "plan": "plans/CWSP-reborn-Pass-I.md",
+  "roadmap": ".roadmaps/CWSP-reborn/PASS-II.md",
+  "plan": ".roadmaps/CWSP-reborn/PASS-II.md",
   "memory": ".memories/CWSP-reborn-Pass-I.md",
-  "backupManifest": ".backups/manifests/2026-07-10T13-14-41+07-00.json",
+  "backupManifest": ".backups/manifests/2026-07-10T14-16-43+07-00-pass-II.json",
   "baseline": {
+    "workspaceCommit": "ac79197eb320efdfe7e68258ca0d42027cc9f0e7",
+    "cwspRebornCommit": "0e0aeeafe13ff24b8c2353f91e3ea3cc619579c9",
     "workspaceGitClean": true,
-    "cwspRebornGitClean": true
+    "cwspRebornGitClean": true,
+    "archive": ".archives/CWSP-reborn/pass-II-2026-07-10/manifest.json"
   },
   "completed": [
     "governance inventory",
@@ -25,7 +28,8 @@
     "product documentation baseline",
     "governance, memory, progress, and recovery scaffolding",
     "public authentication and remote-access detail scrub",
-    "JSON, schema, link, lint, placeholder, public-data, and diff validation"
+    "JSON, schema, link, lint, placeholder, public-data, and diff validation",
+    "Pass-II immutable baseline archive"
   ],
   "blockers": [
     "runtime/cwsp endpoint path is absent; only a legacy endpoint tree is present",
@@ -34,20 +38,12 @@
     "debug-view and developer-view have empty entrypoints"
   ],
   "nextActions": [
-    "review the prepared Pass-I artifacts",
-    "select Android Capacitor or Windows WebNative as the first build contour",
-    "start P1 with a read-only symlink manifest"
+    "write and run the failing P1 topology test",
+    "repair only the selected Capacitor and WebNative projections",
+    "build independent target web bundles before native packaging"
   ],
   "verification": {
-    "completedAt": "2026-07-10T13:50:09+07:00",
-    "jsonParse": "pass",
-    "manifestSchema": "pass",
-    "canonicalPaths": "pass",
-    "lints": "pass",
-    "placeholderScan": "pass",
-    "publicDataScan": "pass",
-    "rootDiffCheck": "pass with core.whitespace=cr-at-eol",
-    "cwspRebornDiffCheck": "pass",
-    "productCodeChanged": false
+    "passICompletedAt": "2026-07-10T13:50:09+07:00",
+    "passII": "pending"
   }
 }

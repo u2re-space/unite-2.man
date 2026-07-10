@@ -1,0 +1,49 @@
+{
+    "name": "@fest-lib/cwsp-shared",
+    "version": "0.1.0",
+    "description": "Isomorphic CWSP wire helpers plus transport-neutral v2 packet contracts",
+    "license": "MIT",
+    "private": true,
+    "type": "module",
+    "sideEffects": false,
+    "engines": {
+        "node": ">=22.6"
+    },
+    "files": [
+        "src",
+        "fixtures"
+    ],
+    "types": "./src/index.ts",
+    "main": "./src/index.ts",
+    "module": "./src/index.ts",
+    "exports": {
+        ".": {
+            "types": "./src/index.ts",
+            "import": "./src/index.ts",
+            "default": "./src/index.ts"
+        },
+        "./v2": {
+            "types": "./src/v2/index.ts",
+            "import": "./src/v2/index.ts",
+            "default": "./src/v2/index.ts"
+        },
+        "./v2/*": "./src/v2/*.ts",
+        "./types": "./src/v2/types.ts",
+        "./normalize": "./src/v2/normalize.ts",
+        "./normalizer": "./src/v2/normalize.ts",
+        "./packet": "./src/v2/packet.ts",
+        "./builder": "./src/v2/packet.ts",
+        "./clipboard": "./src/v2/clipboard.ts",
+        "./extensions": "./src/v2/extensions.ts",
+        "./policy": "./src/v2/policy.ts",
+        "./validation": "./src/v2/validation.ts",
+        "./fixtures/v2/*": "./fixtures/v2/*",
+        "./package.json": "./package.json",
+        "./*": "./src/*.ts"
+    },
+    "scripts": {
+        "test": "node --experimental-strip-types --test test/*.test.ts",
+        "typecheck": "tsc --noEmit --project ./tsconfig.json",
+        "check": "npm test && npm run typecheck"
+    }
+}

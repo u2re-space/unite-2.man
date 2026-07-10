@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "project": "CWSP-reborn",
+  "pass": "II",
+  "createdAt": "2026-07-10T14:16:43+07:00",
+  "archiveMode": "git-backed-immutable-baseline",
+  "compatibilityAliases": [
+    ".acrhive",
+    ".acrhives"
+  ],
+  "repositories": {
+    "workspace": {
+      "path": ".",
+      "commit": "ac79197eb320efdfe7e68258ca0d42027cc9f0e7"
+    },
+    "cwspReborn": {
+      "path": "apps/CWSP-reborn",
+      "commit": "0e0aeeafe13ff24b8c2353f91e3ea3cc619579c9"
+    },
+    "airpadView": {
+      "path": "modules/views/airpad-view",
+      "commit": "3d3ca7684b90a46e25051175e18bab94b1b2500d"
+    },
+    "settingsView": {
+      "path": "modules/views/settings-view",
+      "commit": "09ee7b8b84770d7bcf113523b4765a4c5c0d0d17"
+    },
+    "legacyEndpoint": {
+      "path": "runtime/legacy/endpoint",
+      "commit": "a9a79b939103478568095570599d8fced64bba33"
+    }
+  },
+  "archivedArtifactRoots": [
+    "plans/",
+    ".roadmaps/CWSP-reborn/",
+    ".memories/CWSP-reborn-Pass-I.md",
+    ".progress/CWSP-reborn/",
+    "apps/CWSP-reborn/.analysis/",
+    "apps/CWSP-reborn/docs/",
+    "apps/CWSP-reborn/config/"
+  ],
+  "recovery": {
+    "trackedFiles": "recover from the repository and commit recorded above",
+    "generatedFiles": "regenerate; never archive build output",
+    "privateFiles": "excluded; use the private recovery process"
+  },
+  "exclusions": [
+    "node_modules",
+    "build",
+    "dist",
+    ".gradle",
+    "logs",
+    "private data",
+    "credentials"
+  ]
+}
