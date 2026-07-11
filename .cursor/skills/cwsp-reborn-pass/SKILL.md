@@ -78,17 +78,25 @@ description: >-
 | `npm run start:pm2:node` / `start:pm2:java` | PM2 single runtime |
 | `npm run deploy:110` | Both runtimes → desk `C:/U2RE/cwsp-{node,java}` |
 | `npm run deploy:110:node` / `deploy:110:java` | Desk only |
+| `npm run deploy:110:neutralino` | Desk Neutralino → `C:/U2RE/cwsp-neutralino` |
 | `npm run deploy:200:node` / `deploy:200:java` | Gateway `/home/u2re-dev/cwsp-{node,java}` |
+| `npm run deploy:200:neutralino` | Gateway `/home/u2re-dev/cwsp-neutralino` |
 
-Implementations: `scripts/start-runtime.mjs`, `scripts/deploy-runtime.mjs`, `scripts/lib/runtime-env.mjs`, `ecosystem.config.cjs`.
+Implementations: `scripts/start-runtime.mjs`, `scripts/deploy-runtime.mjs`, `scripts/lib/runtime-env.mjs`, `scripts/build-neutralino.mjs`, `ecosystem.config.cjs`.
 
 - Deploy stages for **target OS** (110=windows, 200=linux), not the build host.
-- Override hosts/dirs via `CWSP_DEPLOY_{110,200}_{HOST,USER,DIR_NODE,DIR_JAVA}`.
+- Override hosts/dirs via `CWSP_DEPLOY_{110,200}_{HOST,USER,DIR_NODE,DIR_JAVA,DIR_NEUTRALINO}`.
 - Prefer `--dry-run` before first live sync.
+- Neutralino: deploys exe + `resources.neu` + `extensions/` + `backend/node/`; auto-builds if package missing (`--rebuild` forces).
 
-## 8. Future — Neutralino (not started)
+## 8. Neutralino desktop shell
 
-Alternate desktop shell beside WebNative: [NeutralinoJS](https://github.com/neutralinojs/neutralinojs) + [neutralino-ext-node](https://github.com/hschneider/neutralino-ext-node) ([docs](https://neutralino.js.org/)). Capacitor stays Android. When started: `build:neutralino` + `deploy:*:neutralino` mirroring webnative. Ledger: `.roadmaps/CWSP-reborn/PASS-III.md` § Future.
+Alternate desktop shell beside WebNative: [NeutralinoJS](https://github.com/neutralinojs/neutralinojs) + [neutralino-ext-node](https://github.com/hschneider/neutralino-ext-node) ([docs](https://neutralino.js.org/)). Capacitor stays Android.
+
+- Build: `npm run build:neutralino:windows` (or `:linux`)
+- Backend-only refresh: `npm run build:neutralino:backend`
+- Deploy desk: `npm run deploy:110:neutralino`
+- Ledger: `.roadmaps/CWSP-reborn/PASS-III.md` § Future.
 
 ## 9. Open blockers
 
