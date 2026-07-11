@@ -119,6 +119,6 @@
 
 - Wired `start`, `start:node`, `start:java`, `start:pm2*`, `deploy:110*`, `deploy:200:*`
   via `scripts/start-runtime.mjs`, `deploy-runtime.mjs`, `lib/runtime-env.mjs`, `ecosystem.config.cjs`.
-- Defaults: desk `C:/Users/U2RE/cwsp-{node,java}`; gateway `/home/u2re-dev/cwsp-{node,java}`.
+- Defaults: desk `C:/U2RE/cwsp-{node,java}`; gateway `/home/u2re-dev/cwsp-{node,java}`.
 - Deploy stages for target OS (110=windows, 200=linux). Dry-run smoke OK.
 - Neutralino future contour documented in PASS-III + skill §8 (no code yet).

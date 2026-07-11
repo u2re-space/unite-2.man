@@ -76,7 +76,7 @@ description: >-
 | `npm run start:java` | `javac` + foreground Java main |
 | `npm run start:pm2` | PM2 both (`cwsp-reborn-node` + `cwsp-reborn-java`) |
 | `npm run start:pm2:node` / `start:pm2:java` | PM2 single runtime |
-| `npm run deploy:110` | Both runtimes → desk `C:/Users/U2RE/cwsp-{node,java}` |
+| `npm run deploy:110` | Both runtimes → desk `C:/U2RE/cwsp-{node,java}` |
 | `npm run deploy:110:node` / `deploy:110:java` | Desk only |
 | `npm run deploy:200:node` / `deploy:200:java` | Gateway `/home/u2re-dev/cwsp-{node,java}` |
 
