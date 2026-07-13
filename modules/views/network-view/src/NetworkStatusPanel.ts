@@ -1,8 +1,8 @@
 /*
  * Filename: NetworkStatusPanel.ts
  * FullPath: modules/views/network-view/src/NetworkStatusPanel.ts
- * Change date and time: 15.20.00_13.07.2026
- * Reason for changes: Neutralino — show Node clipboard-hub /ws status, not WebView WebSocket.
+ * Change date and time: 18.50.00_13.07.2026
+ * Reason for changes: Capacitor — poll Java coordinator:status for /ws, not WebView WebSocket.
  */
 
 /**
@@ -25,7 +25,7 @@ import {
     isNeutralinoNodeClipboardHubOwned,
     isPreferNativeWebsocketEnabled
 } from "views/airpad/config/config";
-import { CwsBridge } from "com/routing/native/cws-bridge";
+import { CwsBridge, invokeCwsNative } from "com/routing/native/cws-bridge";
 import { runDispatchProbeWithFallback, runEndpointProbes, runWebnativeBackendProbe, parseDestinationIds, probeDestinationLinks, type DispatchProbeReport, type DestinationLinkProbe, type NetworkProbeRow } from "./network-probe";
 import { resolveEcosystemToken } from "com/config/SettingsTypes";
 import {
@@ -273,14 +273,16 @@ export class NetworkStatusPanel {
 
     private setWsUi(connected: boolean, detail?: string): void {
         if (!this.els.wsCard || !this.els.wsValue) return;
-        const nativeOwns = isCapacitorNative() && isPreferNativeWebsocketEnabled();
-        if (nativeOwns) {
-            this.els.wsCard.dataset.state = "warn";
-            this.els.wsValue.textContent = "Native Java WebSocket";
+        const javaOwns = isCapacitorNative() && isPreferNativeWebsocketEnabled();
+        if (javaOwns) {
+            this.els.wsCard.dataset.state = connected ? "ok" : "bad";
+            this.els.wsValue.textContent = connected
+                ? "Java CwspBridge Connected"
+                : "Java CwspBridge Disconnected";
             if (this.els.wsDetail) {
                 this.els.wsDetail.textContent =
                     detail ||
-                    "CwspRuntime holds `/ws` in the Android service — WebView hub socket is not used.";
+                    "CwspBridgeService holds `/ws` — WebView browser WebSocket is not used.";
             }
             return;
         }
@@ -299,6 +301,26 @@ export class NetworkStatusPanel {
         this.els.wsCard.dataset.state = connected ? "ok" : "bad";
         this.els.wsValue.textContent = connected ? "Connected" : "Disconnected";
         if (this.els.wsDetail) this.els.wsDetail.textContent = detail || "";
+    }
+
+    private async refreshJavaHubStatus(): Promise<void> {
+        try {
+            const result = await invokeCwsNative("coordinator:status", {});
+            const echo = (result.echo ?? {}) as {
+                connected?: boolean;
+                wsOpen?: boolean;
+                daemon?: boolean;
+            };
+            const connected = Boolean(echo.wsOpen ?? echo.connected ?? result.ok);
+            const parts = [
+                echo.daemon === false ? "daemon-stopped" : "daemon",
+                connected ? "ws-open" : "ws-closed"
+            ];
+            this.setWsUi(connected, parts.join(" · "));
+        } catch (error) {
+            this.setWsUi(false, "Java coordinator:status unreachable");
+            this.appendLog(String(error instanceof Error ? error.message : error));
+        }
     }
 
     private applyNodeHubStatus(status: NodeHubStatus | null): void {
@@ -413,6 +435,33 @@ export class NetworkStatusPanel {
             return;
         }
 
+        // WHY: Capacitor Java CwspBridgeService owns /ws — poll coordinator:status, skip WebView WS.
+        if (isCapacitorNative() && isPreferNativeWebsocketEnabled()) {
+            this.els.nativeCard?.removeAttribute("hidden");
+            try {
+                const info = await CwsBridge.getShellInfo();
+                if (this.els.nativeValue) {
+                    this.els.nativeValue.textContent = info.native
+                        ? `Capacitor · Java /ws · ${info.platform ?? "android"}`
+                        : "Web fallback";
+                }
+                if (this.els.nativeCard) {
+                    this.els.nativeCard.dataset.state = info.native ? "ok" : "warn";
+                }
+            } catch (error) {
+                if (this.els.nativeValue) {
+                    this.els.nativeValue.textContent = "Bridge unavailable";
+                }
+                this.appendLog(String(error instanceof Error ? error.message : error));
+            }
+            await this.refreshJavaHubStatus();
+            this.nodeHubPoll = setInterval(() => void this.refreshJavaHubStatus(), 2500);
+            const settings = await loadSettings().catch(() => null);
+            this.renderConfig(settings);
+            this.appendLog("Ready — WebSocket status from Java CwspBridgeService (not WebView).");
+            return;
+        }
+
         initWebSocket(null);
         this.wsUnsub = onWSConnectionChange((connected) => {
             this.setWsUi(connected);
@@ -447,7 +496,16 @@ export class NetworkStatusPanel {
 
     private async reconnectWs(): Promise<void> {
         if (isCapacitorNative() && isPreferNativeWebsocketEnabled()) {
-            this.appendLog("Native WebSocket — reconnect via Android CWSP service / Settings save.");
+            this.appendLog("Reconnecting Java CwspBridge /ws…");
+            try {
+                const result = await invokeCwsNative("runtime:reload-settings", {});
+                await this.refreshJavaHubStatus();
+                this.appendLog(
+                    result?.ok ? "Java /ws reconnect requested" : "Java /ws reconnect failed"
+                );
+            } catch (error) {
+                this.appendLog(String(error instanceof Error ? error.message : error));
+            }
             return;
         }
         if (isNeutralinoNodeClipboardHubOwned()) {
@@ -554,6 +612,8 @@ export class NetworkStatusPanel {
                 } catch {
                     /* status poll optional after probe */
                 }
+            } else if (isCapacitorNative() && isPreferNativeWebsocketEnabled()) {
+                await this.refreshJavaHubStatus();
             }
         } catch (error) {
             this.appendLog(String(error instanceof Error ? error.message : error));
