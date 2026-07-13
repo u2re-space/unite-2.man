@@ -1,8 +1,8 @@
 /*
  * Filename: NetworkStatusPanel.ts
  * FullPath: modules/views/network-view/src/NetworkStatusPanel.ts
- * Change date and time: 16.42.00_10.07.2026
- * Reason for changes: Pass-II — apply Network a11y contract after mount (live status + log)
+ * Change date and time: 15.20.00_13.07.2026
+ * Reason for changes: Neutralino — show Node clipboard-hub /ws status, not WebView WebSocket.
  */
 
 /**
@@ -22,6 +22,7 @@ import {
 } from "shared/transport/websocket";
 import {
     isMaintainHubSocketConnectionEnabled,
+    isNeutralinoNodeClipboardHubOwned,
     isPreferNativeWebsocketEnabled
 } from "views/airpad/config/config";
 import { CwsBridge } from "com/routing/native/cws-bridge";
@@ -47,6 +48,16 @@ type ProbeSnapshot = {
     destinations?: DestinationLinkProbe[];
 };
 
+type NodeHubStatus = {
+    ok?: boolean;
+    running?: boolean;
+    connected?: boolean;
+    hubUrl?: string;
+    localId?: string;
+    lastError?: string;
+    hasToken?: boolean;
+};
+
 const isCapacitorNative = (): boolean => {
     try {
         const cap = (globalThis as { Capacitor?: { isNativePlatform?: () => boolean } }).Capacitor;
@@ -54,6 +65,58 @@ const isCapacitorNative = (): boolean => {
     } catch {
         return false;
     }
+};
+
+const readControlAuth = (): { port: number; key: string } => {
+    try {
+        const g = globalThis as unknown as {
+            __WEBNATIVE_AUTH__?: { port?: number; key?: string };
+            __NEUTRALINO_AUTH__?: { port?: number; key?: string };
+        };
+        const auth = g.__WEBNATIVE_AUTH__ || g.__NEUTRALINO_AUTH__;
+        return {
+            port: Number(auth?.port) || 18765,
+            key: String(auth?.key || "cwsp-neutralino-local")
+        };
+    } catch {
+        return { port: 18765, key: "cwsp-neutralino-local" };
+    }
+};
+
+const fetchNodeClipboardHubStatus = async (): Promise<NodeHubStatus | null> => {
+    const { port, key } = readControlAuth();
+    const ctrl =
+        typeof AbortSignal !== "undefined" && typeof AbortSignal.timeout === "function"
+            ? AbortSignal.timeout(2000)
+            : undefined;
+    const res = await fetch(`http://127.0.0.1:${port}/service/clipboard-hub`, {
+        method: "GET",
+        headers: { "X-API-Key": key },
+        cache: "no-store",
+        signal: ctrl
+    });
+    if (!res.ok) return null;
+    return (await res.json()) as NodeHubStatus;
+};
+
+const reloadNodeClipboardHub = async (): Promise<NodeHubStatus | null> => {
+    const { port, key } = readControlAuth();
+    const ctrl =
+        typeof AbortSignal !== "undefined" && typeof AbortSignal.timeout === "function"
+            ? AbortSignal.timeout(3000)
+            : undefined;
+    const res = await fetch(`http://127.0.0.1:${port}/service/clipboard-hub`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-API-Key": key
+        },
+        body: JSON.stringify({ reload: true, force: true }),
+        cache: "no-store",
+        signal: ctrl
+    });
+    if (!res.ok) return null;
+    return (await res.json()) as NodeHubStatus;
 };
 
 const formatProbeLine = (row: NetworkProbeRow): string => {
@@ -71,6 +134,7 @@ export class NetworkStatusPanel {
     private root: HTMLElement | null = null;
     private sheet: CSSStyleSheet | null = null;
     private wsUnsub: (() => void) | null = null;
+    private nodeHubPoll: ReturnType<typeof setInterval> | null = null;
     private running = false;
     private logLines: string[] = [];
     private probeSummary = "";
@@ -192,6 +256,10 @@ export class NetworkStatusPanel {
     unmount(): void {
         this.wsUnsub?.();
         this.wsUnsub = null;
+        if (this.nodeHubPoll) {
+            clearInterval(this.nodeHubPoll);
+            this.nodeHubPoll = null;
+        }
         this.root?.remove();
         this.root = null;
     }
@@ -216,9 +284,37 @@ export class NetworkStatusPanel {
             }
             return;
         }
+        if (isNeutralinoNodeClipboardHubOwned()) {
+            this.els.wsCard.dataset.state = connected ? "ok" : "bad";
+            this.els.wsValue.textContent = connected
+                ? "Node clipboard-hub Connected"
+                : "Node clipboard-hub Disconnected";
+            if (this.els.wsDetail) {
+                this.els.wsDetail.textContent =
+                    detail ||
+                    "LAN clipboard uses Node `/service/clipboard-hub` — not the WebView WebSocket API.";
+            }
+            return;
+        }
         this.els.wsCard.dataset.state = connected ? "ok" : "bad";
         this.els.wsValue.textContent = connected ? "Connected" : "Disconnected";
         if (this.els.wsDetail) this.els.wsDetail.textContent = detail || "";
+    }
+
+    private applyNodeHubStatus(status: NodeHubStatus | null): void {
+        if (!status) {
+            this.setWsUi(false, "Node clipboard-hub unreachable (:18765)");
+            return;
+        }
+        const connected = Boolean(status.connected);
+        const parts = [
+            status.running ? "running" : "stopped",
+            status.localId ? `id=${status.localId}` : "",
+            status.hasToken === false ? "no-token" : "",
+            status.hubUrl ? status.hubUrl : "",
+            status.lastError ? `err=${status.lastError}` : ""
+        ].filter(Boolean);
+        this.setWsUi(connected, parts.join(" · "));
     }
 
     private renderConfig(settings: AppSettings | null): void {
@@ -294,6 +390,29 @@ export class NetworkStatusPanel {
 
     private async bootstrap(): Promise<void> {
         initFrontendDebugCapture();
+
+        // WHY: Neutralino/WebNative clipboard LAN sync is Node-owned — never bind UI to WebView WS.
+        if (isNeutralinoNodeClipboardHubOwned()) {
+            this.els.nativeCard?.removeAttribute("hidden");
+            if (this.els.nativeValue) this.els.nativeValue.textContent = "Node clipboard-hub";
+            if (this.els.nativeCard) this.els.nativeCard.dataset.state = "ok";
+            const refresh = async () => {
+                try {
+                    const status = await fetchNodeClipboardHubStatus();
+                    this.applyNodeHubStatus(status);
+                } catch (error) {
+                    this.applyNodeHubStatus(null);
+                    this.appendLog(String(error instanceof Error ? error.message : error));
+                }
+            };
+            await refresh();
+            this.nodeHubPoll = setInterval(() => void refresh(), 2500);
+            const settings = await loadSettings().catch(() => null);
+            this.renderConfig(settings);
+            this.appendLog("Ready — WebSocket status from Node clipboard-hub (not WebView).");
+            return;
+        }
+
         initWebSocket(null);
         this.wsUnsub = onWSConnectionChange((connected) => {
             this.setWsUi(connected);
@@ -329,6 +448,22 @@ export class NetworkStatusPanel {
     private async reconnectWs(): Promise<void> {
         if (isCapacitorNative() && isPreferNativeWebsocketEnabled()) {
             this.appendLog("Native WebSocket — reconnect via Android CWSP service / Settings save.");
+            return;
+        }
+        if (isNeutralinoNodeClipboardHubOwned()) {
+            this.appendLog("Reloading Node clipboard-hub…");
+            try {
+                const status = await reloadNodeClipboardHub();
+                this.applyNodeHubStatus(status);
+                this.appendLog(
+                    status?.connected
+                        ? "Node clipboard-hub reconnected"
+                        : `Node clipboard-hub not connected${status?.lastError ? `: ${status.lastError}` : ""}`
+                );
+            } catch (error) {
+                this.applyNodeHubStatus(null);
+                this.appendLog(String(error instanceof Error ? error.message : error));
+            }
             return;
         }
         this.appendLog("Reconnecting WebSocket…");
@@ -406,9 +541,18 @@ export class NetworkStatusPanel {
                 .filter(Boolean)
                 .join("\n");
 
-            if (!isCapacitorNative() || !isPreferNativeWebsocketEnabled()) {
+            if (
+                !isNeutralinoNodeClipboardHubOwned() &&
+                (!isCapacitorNative() || !isPreferNativeWebsocketEnabled())
+            ) {
                 if (!isWSConnected() && isMaintainHubSocketConnectionEnabled()) {
                     connectWS();
+                }
+            } else if (isNeutralinoNodeClipboardHubOwned()) {
+                try {
+                    this.applyNodeHubStatus(await fetchNodeClipboardHubStatus());
+                } catch {
+                    /* status poll optional after probe */
                 }
             }
         } catch (error) {
