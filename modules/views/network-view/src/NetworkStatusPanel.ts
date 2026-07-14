@@ -75,11 +75,11 @@ const readControlAuth = (): { port: number; key: string } => {
         };
         const auth = g.__WEBNATIVE_AUTH__ || g.__NEUTRALINO_AUTH__;
         return {
-            port: Number(auth?.port) || 18765,
+            port: Number(auth?.port) || 19875,
             key: String(auth?.key || "cwsp-neutralino-local")
         };
     } catch {
-        return { port: 18765, key: "cwsp-neutralino-local" };
+        return { port: 19875, key: "cwsp-neutralino-local" };
     }
 };
 
@@ -325,7 +325,7 @@ export class NetworkStatusPanel {
 
     private applyNodeHubStatus(status: NodeHubStatus | null): void {
         if (!status) {
-            this.setWsUi(false, "Node clipboard-hub unreachable (:18765)");
+            this.setWsUi(false, "Node clipboard-hub unreachable (:19875)");
             return;
         }
         const connected = Boolean(status.connected);

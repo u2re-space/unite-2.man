@@ -1,77 +1,40 @@
 # Clipboard Prompt Popup Design
 
 **Date:** 2026-07-14  
-**Status:** Approved (user)  
-**Scope:** Neutralino Windows (primary); Capacitor/Android (partial parity)  
-**Approach:** Hybrid C — Node clipboard-hub detects + decides; separate Neutralino `popup` window shows UI
+**Status:** Amended — independent process required  
+**Scope:** Neutralino Windows (primary); Capacitor/Android (partial parity)
 
-## Problem
+## Amendment (2026-07-14 evening)
 
-Outbound local copy and inbound remote clipboard currently auto-share / auto-apply with no confirm UX. Users need settings-driven auto vs ask flows and a tray-safe toast window with spoiler preview.
+`Neutralino.window.create` from the main app is **not viable**: each created window is an isolated Neutralino process that re-runs extensions (second Node backend / hub). That approach is abandoned.
 
-## Decisions
+**Replacement:**
+1. Node clipboard-hub owns prompt state + `/service/clipboard-prompt` HTTP IPC (unchanged).
+2. Hub spawns an **independent** Neutralino binary with `clipboard-prompt.config.json`:
+   - `enableExtensions: false` (must not start extNode)
+   - own UI port `18766` (only Neutralino static server; control RPC stays on `18765`)
+   - auth via `CWSP_CONTROL_PORT` / `CWSP_CONTROL_KEY` env + shared `.tmp/cwsp-control-auth.json`
+3. Main WebView bridge (`clipboard-prompt-bridge`) is a no-op.
+4. Optional future: dedicated WS/SSE push on control host; HTTP poll is enough for v1 independent process.
 
-1. **Toast surface (Windows):** dedicated always-on-top Neutralino window (mode `popup` already in `neutralino.config.json`), not main WebView overlay.
-2. **Position:** right-bottom on Windows; Android left-bottom / notification style.
-3. **Dismiss:** 10s default auto-dismiss; timeout on ask = dismiss (no share / no apply).
-4. **Models:** Grok audit + GLM-5.2 implement; no Composer.
+## Settings (`shell`) — still valid
 
-## Settings (`shell`)
+| Key | Type | Default |
+|---|---|---|
+| `clipboardOutboundMode` | `"auto" \| "ask"` | `"auto"` |
+| `clipboardInboundMode` | `"auto" \| "ask"` | `"auto"` |
+| `clipboardOutboundShowErase` | `boolean` | `true` |
+| `clipboardInboundShowUndo` | `boolean` | `true` |
+| `clipboardPromptDismissMs` | `number` | `10000` |
 
-| Key | Type | Default | Meaning |
-|---|---|---|---|
-| `clipboardOutboundMode` | `"auto" \| "ask"` | `"auto"` | On local user copy |
-| `clipboardInboundMode` | `"auto" \| "ask"` | `"auto"` | On remote/app clipboard change |
-| `clipboardOutboundShowErase` | `boolean` | `true` | Auto-share popup shows Erase |
-| `clipboardInboundShowUndo` | `boolean` | `true` | Auto-accept popup shows Undo |
-| `clipboardPromptDismissMs` | `number` | `10000` | Auto-dismiss delay |
+## Android
 
-Existing gates remain: `acceptInboundClipboardData`, `applyRemoteClipboardToDevice`, `clipboardShareDestinationIds`, allow lists.
+Notification-channel actions (Accept/Dismiss/Undo/Share/Erase) — Phase 2 implementation.
 
-## Outbound (local copy)
+## Canonical modules
 
-- **auto:** share immediately; show popup (spoiler + optional Erase + Dismiss).
-- **ask:** hold share until Share; Dismiss / timeout → do not share.
-- Erase: clear local clipboard (after share when auto; only if user taps Erase).
-
-## Inbound (remote / service)
-
-- **auto:** apply immediately; show popup (spoiler + optional Undo + Dismiss).
-- **ask:** hold apply until Accept; Dismiss / timeout → do not apply.
-- Undo: restore previous local clipboard snapshot captured before apply.
-
-## Neutralino popup UI
-
-- Mode `popup`: borderless, transparent, hidden by default, ~360×160–220.
-- alwaysOnTop; place at right-bottom of work area.
-- Spoiler: collapsed text truncate / image thumb; expand on click.
-- Android-like card styling (shared CSS tokens where possible).
-- IPC: hub ↔ popup via control HTTP and/or Neutralino events (`clipboard-prompt`).
-
-## Android (partial)
-
-- Same settings keys in Settings contributions + `SettingsTypes`.
-- Inbound: notification and/or left-bottom toast with Accept/Dismiss/Undo when feasible.
-- Outbound ask/auto full popup parity is phase 2 if FGS notification actions are insufficient.
-
-## Non-goals (this pass)
-
-- Redesign main Settings layout beyond new fields.
-- Change CWSP v2 wire envelope.
-- Force-share when `acceptInboundClipboardData` is false.
-
-## Canonical touch points
-
-- `modules/views/shared/src/other/config/SettingsTypes.ts`
-- `modules/views/shared/src/other/config/settings/contributions/cwsp.ts`
-- `apps/CWSP-reborn/src/backend/node/shared/neutralino/clipboard-hub.ts`
-- `apps/CWSP-reborn/app/windows/neutralino/neutralino.config.json` (+ mirrors)
-- New: clipboard prompt popup web entry + styles under Neutralino resources / frontend
-- Android: `CwspBridgeService` / notification path (partial)
-
-## Self-review
-
-- No placeholders left for required behavior.
-- Defaults match user-approved design.
-- Scope split: Neutralino first, Android partial second.
-- Secrets stay out of docs.
+- `clipboard-prompt.config.json` — independent Neutralino app config
+- `src/backend/node/shared/neutralino/clipboard-prompt-host.ts` — spawn/kill
+- `src/backend/node/shared/neutralino/clipboard-hub.ts` — policy + state
+- `resources/clipboard-prompt/*` — popup UI
+- `CwspBridgeService.java` — Android notifications
