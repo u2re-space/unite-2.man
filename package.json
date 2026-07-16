@@ -42,12 +42,12 @@
         "@vitejs/devtools": ">=0.0.0-alpha.32"
     },
     "optionalDependencies": {
-        "@rolldown/binding-darwin-arm64": "1.0.0-rc.13",
-        "@rolldown/binding-darwin-x64": "1.0.0-rc.13",
-        "@rolldown/binding-linux-arm64-gnu": "1.0.0-rc.13",
-        "@rolldown/binding-linux-x64-gnu": "1.0.0-rc.13",
-        "@rolldown/binding-linux-x64-musl": "1.0.0-rc.13",
-        "@rolldown/binding-win32-x64-msvc": "1.0.0-rc.13"
+        "@rolldown/binding-darwin-arm64": "1.1.5",
+        "@rolldown/binding-darwin-x64": "1.1.5",
+        "@rolldown/binding-linux-arm64-gnu": "1.1.5",
+        "@rolldown/binding-linux-x64-gnu": "^1.1.5",
+        "@rolldown/binding-linux-x64-musl": "1.1.5",
+        "@rolldown/binding-win32-x64-msvc": "1.1.5"
     },
     "devDependencies": {
         "@crxjs/vite-plugin": "^2.4.0",
@@ -59,6 +59,7 @@
         "postcss-scss": "^4.0.9",
         "prettier": "^3.8.1",
         "quill": "^2.0.0-beta.2",
+        "rolldown": "^1.1.5",
         "stylelint": "^17.3.0",
         "stylelint-config-standard-scss": "^17.0.0",
         "stylelint-plugin-logical-css": "^2.0.2",
