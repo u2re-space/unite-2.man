@@ -1,8 +1,10 @@
 /*
  * Filename: NetworkStatusPanel.ts
  * FullPath: modules/views/network-view/src/NetworkStatusPanel.ts
- * Change date and time: 18.50.00_13.07.2026
+ * Change date and time: 11.40.00_18.07.2026
  * Reason for changes: Capacitor — poll Java coordinator:status for /ws, not WebView WebSocket.
+ *   2026-07-18: Neutralino — when :19875 unreachable, dispatch backend.ensure
+ *   (throttled) so tray/IPC drops can self-heal without WebView /ws.
  */
 
 /**
@@ -67,6 +69,9 @@ const isCapacitorNative = (): boolean => {
     }
 };
 
+const DEFAULT_CONTROL_PORT = 29110;
+const DEFAULT_CONTROL_KEY = "cwsp-neutralino-local";
+
 const readControlAuth = (): { port: number; key: string } => {
     try {
         const g = globalThis as unknown as {
@@ -75,48 +80,141 @@ const readControlAuth = (): { port: number; key: string } => {
         };
         const auth = g.__WEBNATIVE_AUTH__ || g.__NEUTRALINO_AUTH__;
         return {
-            port: Number(auth?.port) || 19875,
-            key: String(auth?.key || "cwsp-neutralino-local")
+            port: Number(auth?.port) || DEFAULT_CONTROL_PORT,
+            key: String(auth?.key || DEFAULT_CONTROL_KEY)
         };
     } catch {
-        return { port: 19875, key: "cwsp-neutralino-local" };
+        return { port: DEFAULT_CONTROL_PORT, key: DEFAULT_CONTROL_KEY };
+    }
+};
+
+/** Refresh loopback auth from disk — Cursor.exe often steals :19875; backend may bind :19876+. */
+const refreshControlAuthFromDisk = async (): Promise<void> => {
+    try {
+        const g = globalThis as unknown as {
+            NL_PATH?: string;
+            Neutralino?: { filesystem?: { readFile?: (p: string) => Promise<string> } };
+            __WEBNATIVE_AUTH__?: { port?: number; key?: string };
+            __NEUTRALINO_AUTH__?: { port?: number; key?: string };
+        };
+        const root = typeof g.NL_PATH === "string" ? g.NL_PATH : "";
+        const readFile = g.Neutralino?.filesystem?.readFile;
+        if (!root || !readFile) return;
+        const raw = await readFile(`${root}/.tmp/cwsp-control-auth.json`);
+        const parsed = JSON.parse(raw) as { port?: number; key?: string };
+        const port = Number(parsed?.port);
+        if (!Number.isFinite(port) || port < 1024 || port === 8434) return;
+        const next = { port, key: String(parsed?.key || "cwsp-neutralino-local") };
+        g.__WEBNATIVE_AUTH__ = next;
+        g.__NEUTRALINO_AUTH__ = next;
+    } catch {
+        /* ignore */
+    }
+};
+
+const probeControlPort = async (port: number, key: string): Promise<NodeHubStatus | null> => {
+    const ctrl =
+        typeof AbortSignal !== "undefined" && typeof AbortSignal.timeout === "function"
+            ? AbortSignal.timeout(1500)
+            : undefined;
+    try {
+        const res = await fetch(`http://127.0.0.1:${port}/service/clipboard-hub`, {
+            method: "GET",
+            headers: { "X-API-Key": key },
+            cache: "no-store",
+            signal: ctrl
+        });
+        if (!res.ok) return null;
+        const json = (await res.json()) as NodeHubStatus;
+        // WHY: Cursor empty-proxy can return non-CWSP bodies — require hub shape.
+        if (typeof json?.running !== "boolean" && typeof json?.connected !== "boolean") {
+            return null;
+        }
+        return json;
+    } catch {
+        return null;
     }
 };
 
 const fetchNodeClipboardHubStatus = async (): Promise<NodeHubStatus | null> => {
-    const { port, key } = readControlAuth();
-    const ctrl =
-        typeof AbortSignal !== "undefined" && typeof AbortSignal.timeout === "function"
-            ? AbortSignal.timeout(2000)
-            : undefined;
-    const res = await fetch(`http://127.0.0.1:${port}/service/clipboard-hub`, {
-        method: "GET",
-        headers: { "X-API-Key": key },
-        cache: "no-store",
-        signal: ctrl
-    });
-    if (!res.ok) return null;
-    return (await res.json()) as NodeHubStatus;
+    await refreshControlAuthFromDisk();
+    const auth = readControlAuth();
+    const candidates = Array.from(
+        new Set([auth.port, DEFAULT_CONTROL_PORT, 29110, 19875, 19876].filter((p) => p > 1024))
+    );
+    for (const port of candidates) {
+        const status = await probeControlPort(port, auth.key);
+        if (status) {
+            const g = globalThis as unknown as {
+                __WEBNATIVE_AUTH__?: { port: number; key: string };
+                __NEUTRALINO_AUTH__?: { port: number; key: string };
+            };
+            g.__WEBNATIVE_AUTH__ = { port, key: auth.key };
+            g.__NEUTRALINO_AUTH__ = { port, key: auth.key };
+            return status;
+        }
+    }
+    return null;
 };
 
 const reloadNodeClipboardHub = async (): Promise<NodeHubStatus | null> => {
+    // Discover live control first — POST to Cursor-owned :19875 always fails empty.
+    const discovered = await fetchNodeClipboardHubStatus();
     const { port, key } = readControlAuth();
     const ctrl =
         typeof AbortSignal !== "undefined" && typeof AbortSignal.timeout === "function"
             ? AbortSignal.timeout(3000)
             : undefined;
-    const res = await fetch(`http://127.0.0.1:${port}/service/clipboard-hub`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "X-API-Key": key
-        },
-        body: JSON.stringify({ reload: true, force: true }),
-        cache: "no-store",
-        signal: ctrl
-    });
-    if (!res.ok) return null;
-    return (await res.json()) as NodeHubStatus;
+    try {
+        const res = await fetch(`http://127.0.0.1:${port}/service/clipboard-hub`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-API-Key": key
+            },
+            body: JSON.stringify({ reload: true, force: true }),
+            cache: "no-store",
+            signal: ctrl
+        });
+        if (!res.ok) return discovered;
+        return (await res.json()) as NodeHubStatus;
+    } catch {
+        return discovered;
+    }
+};
+
+/** Throttle extNode backend.ensure when control host is down. */
+let lastBackendEnsureAt = 0;
+let lastHubHealAt = 0;
+const ensureNeutralinoBackend = async (): Promise<boolean> => {
+    const now = Date.now();
+    if (now - lastBackendEnsureAt < 8000) return false;
+    lastBackendEnsureAt = now;
+    try {
+        const NL = (globalThis as {
+            Neutralino?: {
+                extensions?: {
+                    dispatch?: (id: string, event: string, data: unknown) => Promise<unknown>;
+                };
+            };
+        }).Neutralino;
+        if (!NL?.extensions?.dispatch) return false;
+        await NL.extensions.dispatch("extNode", "runNode", {
+            function: "backend.ensure",
+            parameter: null
+        });
+        return true;
+    } catch {
+        return false;
+    }
+};
+
+/** When hub is running but /ws dropped, force a reconnect (throttled). */
+const healDisconnectedHub = async (): Promise<NodeHubStatus | null> => {
+    const now = Date.now();
+    if (now - lastHubHealAt < 10000) return null;
+    lastHubHealAt = now;
+    return reloadNodeClipboardHub();
 };
 
 const formatProbeLine = (row: NetworkProbeRow): string => {
@@ -325,7 +423,7 @@ export class NetworkStatusPanel {
 
     private applyNodeHubStatus(status: NodeHubStatus | null): void {
         if (!status) {
-            this.setWsUi(false, "Node clipboard-hub unreachable (:19875)");
+            this.setWsUi(false, `Node clipboard-hub unreachable (:${readControlAuth().port})`);
             return;
         }
         const connected = Boolean(status.connected);
@@ -420,10 +518,22 @@ export class NetworkStatusPanel {
             if (this.els.nativeCard) this.els.nativeCard.dataset.state = "ok";
             const refresh = async () => {
                 try {
-                    const status = await fetchNodeClipboardHubStatus();
+                    await refreshControlAuthFromDisk();
+                    let status = await fetchNodeClipboardHubStatus();
+                    // WHY: running but disconnected = /ws dropped after boot race or gateway bounce.
+                    if (status?.running && !status.connected) {
+                        const healed = await healDisconnectedHub();
+                        if (healed) status = healed;
+                    }
                     this.applyNodeHubStatus(status);
+                    // WHY: control host may be down after IPC recycle — ask extNode to respawn.
+                    if (!status) {
+                        const ensured = await ensureNeutralinoBackend();
+                        if (ensured) this.appendLog("Requested backend.ensure (control unreachable).");
+                    }
                 } catch (error) {
                     this.applyNodeHubStatus(null);
+                    void ensureNeutralinoBackend();
                     this.appendLog(String(error instanceof Error ? error.message : error));
                 }
             };
