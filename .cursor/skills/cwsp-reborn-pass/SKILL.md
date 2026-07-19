@@ -21,8 +21,9 @@ description: >-
 | Shared v2 contract | `modules/projects/cwsp-shared` |
 | Protocol facades | `apps/CWSP-reborn/src/protocol/{node,web,java}` |
 | Backend | `apps/CWSP-reborn/src/backend/{node,web,java}` |
-| Canonical endpoint | `runtime/cwsp/endpoint` (symlink → legacy adapters) |
-| Legacy endpoint | `runtime/legacy/endpoint` |
+| Canonical endpoint | `apps/CWSP-reborn/runtime/endpoint` |
+| Compat endpoint paths | `runtime/cwsp/endpoint`, `runtime/legacy/endpoint` (symlinks) |
+| Ingress adapters | `apps/CWSP-reborn/runtime/adapters` |
 | Progress | `.progress/CWSP-reborn/STATE.json` + `JOURNAL.md` |
 | Roadmaps | `.roadmaps/CWSP-reborn/` (`.roadmap` → `.roadmaps`) |
 | Archive | `.archives/CWSP-reborn/` |
@@ -66,7 +67,7 @@ description: >-
 - Protocol/backend may be hardlinked across mirrors — edit one inode.
 - `app/` is mostly platform projection via symlinks to `src/`; prefer `src/`.
 - `developer-view` is a real package (no longer symlink-to-`debug-view`).
-- `runtime/cwsp/endpoint` is the canonical path; do not invent a second tree.
+- Endpoint SoT is `apps/CWSP-reborn/runtime/endpoint`; `runtime/cwsp/*` are compat symlinks only.
 
 ## 7. Start / deploy (cwd: `apps/CWSP-reborn`)
 
