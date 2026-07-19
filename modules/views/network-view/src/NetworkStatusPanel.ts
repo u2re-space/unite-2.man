@@ -137,10 +137,30 @@ const probeControlPort = async (port: number, key: string): Promise<NodeHubStatu
 };
 
 const fetchNodeClipboardHubStatus = async (): Promise<NodeHubStatus | null> => {
+    // WHY: public /cwsp (cwsp-control) must not PNA-scan loopback unless Neutralino bridge is live.
+    try {
+        const g = globalThis as unknown as { __CWS_NODE_CLIPBOARD_HUB__?: boolean };
+        const surface = document.documentElement?.dataset?.cwspSurface;
+        if (surface === "cwsp-control" && !g.__CWS_NODE_CLIPBOARD_HUB__) {
+            return null;
+        }
+    } catch {
+        /* ignore */
+    }
+
     await refreshControlAuthFromDisk();
     const auth = readControlAuth();
+    const publicControl =
+        typeof document !== "undefined" &&
+        document.documentElement?.dataset?.cwspSurface === "cwsp-control";
+    // Public hub: only the configured control port (+ 29110). Never spam Cursor :19875/:19876.
     const candidates = Array.from(
-        new Set([auth.port, DEFAULT_CONTROL_PORT, 29110, 19875, 19876].filter((p) => p > 1024))
+        new Set(
+            (publicControl
+                ? [auth.port, DEFAULT_CONTROL_PORT, 29110]
+                : [auth.port, DEFAULT_CONTROL_PORT, 29110, 19875, 19876]
+            ).filter((p) => p > 1024)
+        )
     );
     for (const port of candidates) {
         const status = await probeControlPort(port, auth.key);
