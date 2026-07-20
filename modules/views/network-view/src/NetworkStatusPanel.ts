@@ -531,8 +531,20 @@ export class NetworkStatusPanel {
     private async bootstrap(): Promise<void> {
         initFrontendDebugCapture();
 
+        // WHY: public Control SPA must not poll loopback clipboard-hub with desk X-API-Key (401 flood).
+        let publicHttpsSpa = false;
+        try {
+            const host = String(location.hostname || "");
+            publicHttpsSpa =
+                location.protocol === "https:" &&
+                host !== "localhost" &&
+                host !== "127.0.0.1";
+        } catch {
+            publicHttpsSpa = true;
+        }
+
         // WHY: Neutralino/WebNative clipboard LAN sync is Node-owned — never bind UI to WebView WS.
-        if (isNeutralinoNodeClipboardHubOwned()) {
+        if (!publicHttpsSpa && isNeutralinoNodeClipboardHubOwned()) {
             this.els.nativeCard?.removeAttribute("hidden");
             if (this.els.nativeValue) this.els.nativeValue.textContent = "Node clipboard-hub";
             if (this.els.nativeCard) this.els.nativeCard.dataset.state = "ok";
