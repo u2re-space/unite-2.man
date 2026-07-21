@@ -8,7 +8,10 @@
 
 import {
     collectEndpointProbeCandidates,
+    CWSP_FLEET_LAN_GATEWAY_HOST,
+    CWSP_FLEET_WAN_GATEWAY_HOST_FALLBACK,
     parseConnectHostInput,
+    resolveFleetWanGatewayHost,
     splitConnectHostList
 } from "cwsp-shared/cwsp-endpoint-resolve";
 
@@ -46,8 +49,26 @@ export const labelForProbeCandidate = (
     const norm = normalizeProbeOrigin(origin);
     if (relaySet.has(norm)) return index === 0 ? "Relay / gateway" : "Relay (alt)";
     if (directSet.has(norm)) return "Direct peer";
-    if (norm.includes("192.168.0.200")) return "Gateway LAN fallback";
-    if (norm.includes("45.147.121.152")) return "Gateway WAN fallback";
+    if (norm.includes(CWSP_FLEET_LAN_GATEWAY_HOST)) return "Gateway LAN fallback";
+    // WHY: configured relay/WAN host from settings || historical WAN IP fallback.
+    const wanHost = resolveFleetWanGatewayHost({
+        relay: fields.relay,
+        extras: [fields.direct],
+    }).toLowerCase();
+    const hostPart = (() => {
+        try {
+            return new URL(norm).hostname.toLowerCase();
+        } catch {
+            return norm.toLowerCase();
+        }
+    })();
+    if (
+        hostPart === wanHost
+        || hostPart === CWSP_FLEET_WAN_GATEWAY_HOST_FALLBACK
+        || norm.includes(CWSP_FLEET_WAN_GATEWAY_HOST_FALLBACK)
+    ) {
+        return "Gateway WAN fallback";
+    }
     if (norm.includes("127.0.0.1") || norm.includes("localhost")) return "Loopback";
     return `Candidate ${index + 1}`;
 };
