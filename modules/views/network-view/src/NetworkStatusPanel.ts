@@ -1,12 +1,13 @@
 /*
  * Filename: NetworkStatusPanel.ts
  * FullPath: modules/views/network-view/src/NetworkStatusPanel.ts
- * Change date and time: 11.50.00_21.07.2026
+ * Change date and time: 13.20.00_21.07.2026
  * Reason for changes: Capacitor — poll Java coordinator:status for /ws, not WebView WebSocket.
  *   2026-07-18: Neutralino — when :19875 unreachable, dispatch backend.ensure
  *   (throttled) so tray/IPC drops can self-heal without WebView /ws.
  *   2026-07-21: Control SPA (cwsp.u2re.space) — Hub status N/A (no browser fleet /ws);
  *     HTTP/destination probes remain the diagnostic surface.
+ *   2026-07-21: Capacitor wake (visibility/pageshow) → runtime:reload-settings if /ws down.
  */
 
 /**
@@ -626,6 +627,27 @@ export class NetworkStatusPanel {
             };
             await refresh();
             this.nodeHubPoll = setInterval(() => void refresh(), 2500);
+            // WHY: after sleep/idle, WebView wakes before /ws — force ensure+reload once.
+            const onVisible = () => {
+                if (document.visibilityState !== "visible") return;
+                void (async () => {
+                    const status = await fetchNodeClipboardHubStatus();
+                    if (!status) {
+                        const ensured = await ensureNeutralinoBackend();
+                        if (ensured) this.appendLog("Wake: backend.ensure (control was down).");
+                        return;
+                    }
+                    if (status.running && !status.connected) {
+                        const healed = await healDisconnectedHub();
+                        if (healed) {
+                            this.applyNodeHubStatus(healed);
+                            this.appendLog("Wake: clipboard-hub reload requested.");
+                        }
+                    }
+                })();
+            };
+            document.addEventListener("visibilitychange", onVisible);
+            window.addEventListener("pageshow", onVisible);
             const settings = await loadSettings().catch(() => null);
             this.renderConfig(settings);
             this.appendLog("Ready — WebSocket status from Node clipboard-hub (not WebView).");
@@ -653,6 +675,30 @@ export class NetworkStatusPanel {
             }
             await this.refreshJavaHubStatus();
             this.nodeHubPoll = setInterval(() => void this.refreshJavaHubStatus(), 2500);
+            // WHY: after idle/Doze WebView wakes with sticky dead /ws — force Java reconnect once.
+            const onCapVisible = () => {
+                if (document.visibilityState !== "visible") return;
+                void (async () => {
+                    await this.refreshJavaHubStatus();
+                    const open = this.els.wsCard?.dataset.state === "ok";
+                    if (!open) {
+                        this.appendLog("Wake: Java /ws reconnect…");
+                        try {
+                            const result = await invokeCwsNative("runtime:reload-settings", {});
+                            await this.refreshJavaHubStatus();
+                            this.appendLog(
+                                result?.ok
+                                    ? "Wake: Java /ws reconnect requested."
+                                    : "Wake: Java /ws reconnect failed."
+                            );
+                        } catch (error) {
+                            this.appendLog(String(error instanceof Error ? error.message : error));
+                        }
+                    }
+                })();
+            };
+            document.addEventListener("visibilitychange", onCapVisible);
+            window.addEventListener("pageshow", onCapVisible);
             const settings = await loadSettings().catch(() => null);
             this.renderConfig(settings);
             this.appendLog("Ready — WebSocket status from Java CwspBridgeService (not WebView).");
