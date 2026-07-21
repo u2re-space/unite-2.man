@@ -8,6 +8,14 @@
  *   2026-07-21: Control SPA (cwsp.u2re.space) — Hub status N/A (no browser fleet /ws);
  *     HTTP/destination probes remain the diagnostic surface.
  *   2026-07-21: Capacitor wake (visibility/pageshow) → runtime:reload-settings if /ws down.
+ *   2026-07-21: Stop probing Cursor-owned :19875/:19876 from the Neutralino desk
+ *     path too — candidate ports are now [auth.port, DEFAULT_CONTROL_PORT, 29110]
+ *     for both desk and cwsp-control surfaces (Cursor.exe steals those ports →
+ *     ERR_EMPTY_RESPONSE noise).
+ *   2026-07-21d: Neutralino Network — drop-zone posts absolute paths to
+ *     POST /service/files-ingress (Open-for-Share without Explorer Copy).
+ *   2026-07-21e: Paste (Ctrl+V) of files — same ingress; fallback fromClipboard
+ *     reads OS CF_HDROP when WebView File.path is empty.
  */
 
 /**
@@ -182,16 +190,13 @@ const fetchNodeClipboardHubStatus = async (): Promise<NodeHubStatus | null> => {
 
     await refreshControlAuthFromDisk();
     const auth = readControlAuth();
-    const publicControl =
-        typeof document !== "undefined" &&
-        document.documentElement?.dataset?.cwspSurface === "cwsp-control";
-    // Public hub: only the configured control port (+ 29110). Never spam Cursor :19875/:19876.
+    // WHY: never probe Cursor-owned :19875/:19876 — Cursor.exe steals those ports
+    // and POSTs always fail with ERR_EMPTY_RESPONSE, producing noise + false
+    // negatives. Control lives on the configured port (+ DEFAULT_CONTROL_PORT /
+    // 29110 fallback). Same list for Neutralino desk and the cwsp-control surface.
     const candidates = Array.from(
         new Set(
-            (publicControl
-                ? [auth.port, DEFAULT_CONTROL_PORT, 29110]
-                : [auth.port, DEFAULT_CONTROL_PORT, 29110, 19875, 19876]
-            ).filter((p) => p > 1024)
+            [auth.port, DEFAULT_CONTROL_PORT, 29110].filter((p) => p > 1024)
         )
     );
     for (const port of candidates) {
@@ -301,7 +306,9 @@ export class NetworkStatusPanel {
         testBtn: null as HTMLButtonElement | null,
         destBtn: null as HTMLButtonElement | null,
         destInput: null as HTMLInputElement | null,
-        reconnectBtn: null as HTMLButtonElement | null
+        reconnectBtn: null as HTMLButtonElement | null,
+        filesDropzone: null as HTMLElement | null,
+        filesDropStatus: null as HTMLElement | null
     };
 
     mount(parent: HTMLElement): HTMLElement {
@@ -344,6 +351,12 @@ export class NetworkStatusPanel {
                     </label>
                     <p class="cw-network-dest-hint">Probe clipboard:isReady to each id via gateway (45.147 / .200) — works for Android↔Android on LAN too.</p>
 
+                    <div class="cw-network-dropzone" data-files-dropzone hidden tabindex="0" role="region" aria-label="Open for Share drop or paste zone">
+                        <div class="cw-network-dropzone__title">Drop or paste files to share</div>
+                        <p class="cw-network-dropzone__hint">Drop or paste (Ctrl+V) files here to Open for Share to configured peers (Neutralino desk).</p>
+                        <div class="cw-network-dropzone__status" data-files-drop-status aria-live="polite"></div>
+                    </div>
+
                     <div class="cw-network-actions cw-network-actions--logs">
                         <button type="button" data-action="copy-frontend-log">Copy Frontend Log</button>
                         <button type="button" data-action="copy-logcat">Copy Logcat</button>
@@ -375,6 +388,8 @@ export class NetworkStatusPanel {
         this.els.destBtn = this.root.querySelector('[data-action="check-destinations"]');
         this.els.destInput = this.root.querySelector("[data-dest-ids]");
         this.els.reconnectBtn = this.root.querySelector('[data-action="reconnect"]');
+        this.els.filesDropzone = this.root.querySelector("[data-files-dropzone]");
+        this.els.filesDropStatus = this.root.querySelector("[data-files-drop-status]");
 
         // WHY: a11y contract (landmarks / live regions) is applied after query wiring
         // so tests can audit the same attributes the live panel exposes.
@@ -383,6 +398,7 @@ export class NetworkStatusPanel {
         this.els.testBtn?.addEventListener("click", () => void this.runFullTest());
         this.els.destBtn?.addEventListener("click", () => void this.runDestinationCheck());
         this.els.reconnectBtn?.addEventListener("click", () => void this.reconnectWs());
+        this.wireFilesDropzone();
         this.root.querySelector('[data-action="open-settings"]')?.addEventListener("click", () => {
             globalThis.dispatchEvent(
                 new CustomEvent("cw:view-open-request", { detail: { viewId: "settings", target: "minimal" } })
@@ -569,6 +585,128 @@ export class NetworkStatusPanel {
             ` as HTMLElement;
             this.els.probeList.append(el);
         }
+    }
+
+    /**
+     * Neutralino desk: drop or paste files onto the Network view to Open-for-Share.
+     * WHY: Explorer Copy is one path; drag-drop / Ctrl+V in the CWSP window are
+     * explicit share paths. Absolute paths come from Neutralino/Chromium
+     * `File.path`; paste falls back to Node reading OS CF_HDROP.
+     */
+    private wireFilesDropzone(): void {
+        const zone = this.els.filesDropzone;
+        if (!zone) return;
+        // Only Neutralino Node hub owns /service/files-ingress.
+        if (!isNeutralinoNodeClipboardHubOwned() || isPublicControlSpa()) {
+            zone.hidden = true;
+            return;
+        }
+        zone.hidden = false;
+
+        const setStatus = (msg: string): void => {
+            if (this.els.filesDropStatus) this.els.filesDropStatus.textContent = msg;
+            this.appendLog(msg);
+        };
+
+        const runIngress = (label: string, paths: string[], fromClipboard: boolean): void => {
+            void this.ingressFilesForShare(paths, fromClipboard).then(
+                (msg) => setStatus(msg),
+                (err) =>
+                    setStatus(
+                        `${label} failed: ${err instanceof Error ? err.message : String(err)}`
+                    )
+            );
+        };
+
+        const onDrag = (e: DragEvent): void => {
+            e.preventDefault();
+            e.stopPropagation();
+            zone.classList.toggle("is-dragover", e.type === "dragover" || e.type === "dragenter");
+            if (e.type === "dragleave" || e.type === "drop") {
+                zone.classList.remove("is-dragover");
+            }
+        };
+
+        zone.addEventListener("dragenter", onDrag);
+        zone.addEventListener("dragover", onDrag);
+        zone.addEventListener("dragleave", onDrag);
+        zone.addEventListener("drop", (e) => {
+            onDrag(e);
+            runIngress("Drop", this.pathsFromFileList(e.dataTransfer?.files), false);
+        });
+
+        // WHY: paste on the zone or anywhere on the Network panel (when not typing in an input).
+        const onPaste = (e: ClipboardEvent): void => {
+            const t = e.target as HTMLElement | null;
+            if (
+                t &&
+                (t.closest("input, textarea, [contenteditable='true']") ||
+                    t.tagName === "INPUT" ||
+                    t.tagName === "TEXTAREA")
+            ) {
+                return;
+            }
+            const paths = this.pathsFromFileList(e.clipboardData?.files);
+            const items = Array.from(e.clipboardData?.items || []);
+            const hasFileItems = items.some((it) => it.kind === "file");
+            const types = Array.from(e.clipboardData?.types || []);
+            const plain = String(e.clipboardData?.getData("text/plain") || "").trim();
+            const looksLikeFiles =
+                hasFileItems ||
+                paths.length > 0 ||
+                types.some((ty) => /Files|text\/uri-list|CF_HDROP/i.test(ty)) ||
+                zone.contains(t as Node) ||
+                t === zone ||
+                // WHY: Explorer CF_HDROP often exposes neither FileList nor types in WebView2;
+                // empty text + Network paste → ask Node to read the OS drop list.
+                (!plain && this.root.contains(t as Node));
+            if (!looksLikeFiles) return;
+            e.preventDefault();
+            e.stopPropagation();
+            // Prefer WebView paths; otherwise Node re-reads CF_HDROP.
+            runIngress("Paste", paths, paths.length === 0);
+        };
+
+        zone.addEventListener("paste", onPaste);
+        // WHY: Ctrl+V while Network is focused (not only when dropzone has focus).
+        this.root.addEventListener("paste", onPaste);
+    }
+
+    /** Absolute paths from Neutralino/WebView2 File.path (empty in normal browsers). */
+    private pathsFromFileList(files: FileList | null | undefined): string[] {
+        if (!files || files.length === 0) return [];
+        const paths: string[] = [];
+        for (let i = 0; i < files.length; i++) {
+            const f = files.item(i) as File & { path?: string };
+            if (!f) continue;
+            const p = String(f.path || "").trim();
+            if (p) paths.push(p);
+        }
+        return paths;
+    }
+
+    private async ingressFilesForShare(paths: string[], fromClipboard: boolean): Promise<string> {
+        if (!fromClipboard && paths.length === 0) {
+            return "No files to share.";
+        }
+        await refreshControlAuthFromDisk();
+        const auth = readControlAuth();
+        const res = await fetch(`http://127.0.0.1:${auth.port}/service/files-ingress`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-API-Key": auth.key
+            },
+            body: JSON.stringify(
+                fromClipboard ? { fromClipboard: true, paths } : { paths }
+            )
+        });
+        const body = (await res.json().catch(() => ({}))) as Record<string, unknown>;
+        if (!res.ok || body.ok === false) {
+            throw new Error(String(body.error || `HTTP ${res.status}`));
+        }
+        const count = Number(body.fileCount || paths.length || 0);
+        return `Shared ${count} file(s) → transfer ${String(body.transferId || "?")} (${String(body.phase || "ok")})`;
     }
 
     private async bootstrap(): Promise<void> {
