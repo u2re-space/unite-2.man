@@ -1,10 +1,12 @@
 /*
  * Filename: NetworkStatusPanel.ts
  * FullPath: modules/views/network-view/src/NetworkStatusPanel.ts
- * Change date and time: 11.40.00_18.07.2026
+ * Change date and time: 11.50.00_21.07.2026
  * Reason for changes: Capacitor — poll Java coordinator:status for /ws, not WebView WebSocket.
  *   2026-07-18: Neutralino — when :19875 unreachable, dispatch backend.ensure
  *   (throttled) so tray/IPC drops can self-heal without WebView /ws.
+ *   2026-07-21: Control SPA (cwsp.u2re.space) — Hub status N/A (no browser fleet /ws);
+ *     HTTP/destination probes remain the diagnostic surface.
  */
 
 /**
@@ -64,6 +66,35 @@ const isCapacitorNative = (): boolean => {
     try {
         const cap = (globalThis as { Capacitor?: { isNativePlatform?: () => boolean } }).Capacitor;
         return typeof cap?.isNativePlatform === "function" && Boolean(cap.isNativePlatform());
+    } catch {
+        return false;
+    }
+};
+
+/**
+ * Public Control SPA on VDS (cwsp.u2re.space) — static UI only.
+ * WHY: connectWS() intentionally no-ops here so a browser tab does not steal
+ * the same clientId as Capacitor/Neutralino on the gateway hub.
+ */
+const isPublicControlSpa = (): boolean => {
+    try {
+        // Native shells own /ws — never classify as browser Control SPA.
+        if (isCapacitorNative()) return false;
+        if (isNeutralinoNodeClipboardHubOwned()) return false;
+        const surface = String(
+            document.documentElement?.dataset?.cwspSurface || ""
+        ).toLowerCase();
+        const host = String(location.hostname || "").toLowerCase();
+        if (surface === "cwsp-control") return true;
+        if (host === "cwsp.u2re.space" || host === "www.cwsp.u2re.space") {
+            return true;
+        }
+        // Generic public HTTPS SPA (not loopback) — no local clipboard-hub.
+        return (
+            location.protocol === "https:" &&
+            host !== "localhost" &&
+            host !== "127.0.0.1"
+        );
     } catch {
         return false;
     }
@@ -391,6 +422,17 @@ export class NetworkStatusPanel {
 
     private setWsUi(connected: boolean, detail?: string): void {
         if (!this.els.wsCard || !this.els.wsValue) return;
+        if (isPublicControlSpa()) {
+            // WHY: Control SPA never holds fleet /ws — "Disconnected" was a false alarm.
+            this.els.wsCard.dataset.state = "warn";
+            this.els.wsValue.textContent = "N/A — Control SPA";
+            if (this.els.wsDetail) {
+                this.els.wsDetail.textContent =
+                    detail ||
+                    "Hub lives on Neutralino/Capacitor → gateway :8434. This page only runs HTTP probes.";
+            }
+            return;
+        }
         const javaOwns = isCapacitorNative() && isPreferNativeWebsocketEnabled();
         if (javaOwns) {
             this.els.wsCard.dataset.state = connected ? "ok" : "bad";
@@ -532,15 +574,28 @@ export class NetworkStatusPanel {
         initFrontendDebugCapture();
 
         // WHY: public Control SPA must not poll loopback clipboard-hub with desk X-API-Key (401 flood).
-        let publicHttpsSpa = false;
-        try {
-            const host = String(location.hostname || "");
-            publicHttpsSpa =
-                location.protocol === "https:" &&
-                host !== "localhost" &&
-                host !== "127.0.0.1";
-        } catch {
-            publicHttpsSpa = true;
+        const publicHttpsSpa = isPublicControlSpa();
+
+        // Control SPA: HTTP probes only — connectWS() is a no-op by design (same clientId kick).
+        if (publicHttpsSpa) {
+            this.els.nativeCard?.removeAttribute("hidden");
+            if (this.els.nativeValue) {
+                this.els.nativeValue.textContent = "Browser · no local hub";
+            }
+            if (this.els.nativeCard) this.els.nativeCard.dataset.state = "warn";
+            this.setWsUi(false);
+            if (this.els.reconnectBtn) {
+                this.els.reconnectBtn.disabled = true;
+                this.els.reconnectBtn.title =
+                    "Fleet /ws is owned by Neutralino/Capacitor — use Run network test here.";
+            }
+            const settings = await loadSettings().catch(() => null);
+            this.renderConfig(settings);
+            this.appendLog(
+                "Control SPA — WebSocket hub N/A (use Neutralino/Capacitor for live /ws)."
+            );
+            this.appendLog("Ready — tap Run network test for HTTP/dispatch probes.");
+            return;
         }
 
         // WHY: Neutralino/WebNative clipboard LAN sync is Node-owned — never bind UI to WebView WS.
@@ -637,6 +692,14 @@ export class NetworkStatusPanel {
     }
 
     private async reconnectWs(): Promise<void> {
+        if (isPublicControlSpa()) {
+            this.appendLog(
+                "Reconnect WS skipped — Control SPA does not own fleet /ws (would kick Capacitor/Neutralino)."
+            );
+            this.appendLog("Use Run network test / Check destinations, or reconnect from the desk/phone app.");
+            this.setWsUi(false);
+            return;
+        }
         if (isCapacitorNative() && isPreferNativeWebsocketEnabled()) {
             this.appendLog("Reconnecting Java CwspBridge /ws…");
             try {
@@ -741,7 +804,9 @@ export class NetworkStatusPanel {
                 .filter(Boolean)
                 .join("\n");
 
-            if (
+            if (isPublicControlSpa()) {
+                this.setWsUi(false);
+            } else if (
                 !isNeutralinoNodeClipboardHubOwned() &&
                 (!isCapacitorNative() || !isPreferNativeWebsocketEnabled())
             ) {
