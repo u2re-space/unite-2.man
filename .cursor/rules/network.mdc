@@ -399,6 +399,41 @@ Compatibility aliases:
 
 Dispatch payloads may nest another action inside `payload.payload` or `payload.data`. The runtime unwraps these before local handling so nested clipboard and readiness flows behave correctly.
 
+## Path Capability Mesh (`network:pathCapability`)
+
+Continuous P2P path discovery so Cap/Neu know `lan-direct` / `lan-gateway` / `wan-gateway` **before** file transfer (not only at Accept).
+
+### Canonical action
+
+- `network:pathCapability` (`op`: `act` announce, `ask` on-demand, `result` snapshot reply)
+- Shared SoT: `modules/projects/cwsp-shared` (`path-capability.ts`)
+- Cap runner: `emission/PathCapabilityMesh.java` (WS open, `NetworkCallback`, ~45s interval)
+- Neu runner: `path-capability-mesh.ts` (clipboard-hub connected / reload / interval)
+
+### Probe oracles (cheap, no blob token)
+
+- `lan-direct` → `HEAD http://<peerLan>:8434/service/pair/hello`
+- `lan-gateway` → `GET https://192.168.0.200:8434/lna-probe` (or configured LAN gateway)
+- `wan-gateway` → `GET https://<wanHost>:8434/lna-probe`
+
+### Accept / Offer consume
+
+- Prefer known-up classes; **drop** known-down `lan-direct` candidates from the hedge list
+- **Do not** flip global order to gateway-first when peer is unknown/ok — keep peer → gwLAN → WAN
+- Cold cache: keep full hedge (final HEAD only on miss/stale)
+
+### Validation matrix (connect-before-transfer)
+
+| Scenario | Expect before Share/Accept |
+|---|---|
+| Cap A + Cap B same Wi‑Fi | logcat `path-capability` `lan-direct ok=true` for peer |
+| Cap on LTE | `lan-direct ok=false`, `wan-gateway ok=true` |
+| Neu `.110` after WS connect | backend log `cwsp-path-capability` `probe-complete` lists Cap peers |
+| Accept with cold cache | hedge still works (no mesh required) |
+| Clipboard / WS hello | unchanged |
+
+Device validation: rebuild Cap APK (`npm run build:capacitor:apk`) and Neu backend (`npm run build:neutralino:backend` + `deploy:110:neutralino`).
+
 ## App / Shell Notes
 
 ### Frontend / web app
@@ -577,6 +612,7 @@ The following action names should be treated as stable contract names unless the
 - `keyboard:isReady`
 - `voice:submit`
 - `network:dispatch`
+- `network:pathCapability`
 - `notification:speak`
 - `sms:send`
 - `debug:log`
