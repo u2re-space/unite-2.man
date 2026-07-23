@@ -232,6 +232,89 @@ Runtime behavior:
 
 The chosen transport may be attached to dispatched payloads for diagnostics.
 
+## Multi-Hub Failover + Identity Peer Maps
+
+WAN/NAT clients may configure **multiple** gateway/hub/relay URLs. Policy is **1A**:
+
+- One active hub `/ws` at a time (ordered failover; sticky last-good).
+- Not parallel dual fan-out to all hubs while one is healthy.
+- Candidates from settings/env (`core.endpointUrl`, `CWSP_HUB_URLS`, remoteHost, …)
+  via shared `hubFailoverCandidates()`.
+- **LTE / off-LAN:** demote RFC1918 hubs (e.g. `192.168.0.200`). Soft-drop
+  `close(1000)` must **not** rotate onto unreachable LAN; stick on the public
+  relay (`orderHubCandidatesPreferPublic` / Cap cellular reorder + sticky-public).
+  Helpers: `isPrivateLanHost`, `nextHubCandidateIndex(..., { preferPublic })`.
+
+### Peer maps (2A + 2B)
+
+P2P dial targets are **not** bound to the currently selected hub. Local devices merge:
+
+1. **Self-announce (2A)** — peers advertise Control `endpoints[]` on `network:pathCapability`
+   (LAN Control + optional `CWSP_PUBLIC_CONTROL_URL` as `wan-direct`).
+2. **Hub registry (2B)** — `ask`/`result` `network:peerRegistry` from the active hub
+   (`viaHub: true`; connected peer ids + known origins).
+3. **Local durable cache** — Neu `.data/peer-endpoints.json`; Cap SharedPreferences
+   `cwsp_peer_endpoints_v1`.
+
+Trust on merge: probe-verified > self > hub > stale cache.
+
+### Dial preference (invariant)
+
+Identity-verified `lan-direct` → identity-verified `wan-direct` (white/public Control)
+→ active hub/relay (failover by availability).
+
+Helper: `orderedDialCandidates(toId, endpoints)`.
+
+### Identity-verified probes
+
+`GET /service/pair/hello?expectId=<peerId>` must return matching `clientId` / `peerId`
+(short/long forms collapse). Mismatch → `409`. `/lna-probe` alone is reachability-only
+and must **not** mark a path `verified` for dial preference.
+
+### Validation matrix (multi-hub)
+
+| Scenario | Expect |
+|---|---|
+| Two hubs configured; primary up | Stay on primary `/ws` |
+| Primary killed | Failover to next candidate; sticky last-good on recover |
+| Same Wi‑Fi Cap↔Neu | Prefer verified LAN map over either hub |
+| Cap on LTE; peer has wan-direct | Prefer verified wan-direct before hub |
+| Identity mismatch on hello | Do not mark lan-direct verified |
+
+## Cap / Neu LAN Peer WS Autonomy (Hub Fallback)
+
+When Cap (Android Control `:8434`) and Neu (desk Control `:8434` / `:29110`) share a LAN
+and mesh reports `lan-direct` up, peers may keep **clipboard** and **files signaling**
+alive without the gateway hub.
+
+Locked policy:
+
+- **Hub primary** — while the gateway `/ws` is OPEN and healthy, Cap and Neu use a single
+  client socket to the hub (with multi-hub failover list when the active one fails).
+- **Peer Control `/ws` fallback** — only when hub is down, connect fails, or `send` fails.
+  Not dual fan-out while the hub is healthy.
+- Same CWSP JSON envelope; no Socket.IO on peer Control.
+- Auth on peer `/ws`: query `clientId` + fleet token (same style as hub), validated against
+  local Configure / token store.
+- Dial candidates: `orderedDialCandidates` (verified LAN → wan-direct) then
+  `peerControlWsCandidates` cold fallback (`:8434`, desk also `:29110`).
+- Mesh probes continue on network change even if hub is down; announce when any socket opens.
+- File **bytes** stay on Control HTTP blob paths (unchanged Accept order).
+
+### Validation matrix
+
+| Scenario | Expect |
+|---|---|
+| Hub up | Unchanged: single hub `/ws` for clipboard + files offer |
+| Hub killed; Cap+Neu same Wi‑Fi; mesh lan-direct ok | Clipboard + files:offer still deliver over peer Control `/ws` |
+| Hub killed; Cap on LTE | No peer path — fail soft / queue; no false LAN success |
+| Hub restored | Prefer hub again |
+| File Accept bytes | Still peer HTTP blob first (already implemented) |
+
+Deploy to validate on devices: rebuild Cap APK (`npm run build:capacitor`) and redeploy Neu
+(`npm run deploy:110:webnative` or Neutralino Windows/Linux build). Unit coverage:
+`cwsp-shared` map/order helpers + Neu `clipboard-hub-peer-ws.test.ts` (peer + hub failover).
+
 ## Clipboard Contract
 
 ### Canonical clipboard actions
