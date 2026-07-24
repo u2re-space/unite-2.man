@@ -28,7 +28,6 @@
         "modules/shells/immersive-shell",
         "modules/shells/minimal-shell",
         "modules/shells/window-frame",
-        "modules/views/airpad-view",
         "modules/views/editor-view",
         "modules/views/explorer-view",
         "modules/views/history-view",

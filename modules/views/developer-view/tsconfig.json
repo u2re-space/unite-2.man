@@ -67,7 +67,6 @@
             "shared/transport/websocket": ["../../projects/subsystem/src/boot/websocket.ts"],
             "cwsp-shared/*": ["../../projects/cwsp-shared/src/*"],
             "fest/cwsp-shared": ["../../projects/cwsp-shared/src/index.ts"],
-            "views/airpad/*": ["../airpad-view/src/*"],
             "boot/native/cws-bridge": ["../../projects/subsystem/src/routing/native/cws-bridge.ts"],
             "boot/frontend-debug-capture": ["../../projects/subsystem/src/boot/frontend-debug-capture.ts"],
             "shared/native/clipboard-device": ["../../projects/subsystem/src/routing/native/clipboard-device.ts"],

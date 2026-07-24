@@ -37,7 +37,7 @@ import {
     isMaintainHubSocketConnectionEnabled,
     isNeutralinoNodeClipboardHubOwned,
     isPreferNativeWebsocketEnabled
-} from "views/airpad/config/config";
+} from "cwsp-shared/remote-connection-runtime";
 import { CwsBridge, invokeCwsNative } from "com/routing/native/cws-bridge";
 import { runDispatchProbeWithFallback, runEndpointProbes, runWebnativeBackendProbe, parseDestinationIds, probeDestinationLinks, type DispatchProbeReport, type DestinationLinkProbe, type NetworkProbeRow } from "./network-probe";
 import { resolveEcosystemToken } from "com/config/SettingsTypes";

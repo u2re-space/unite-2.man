@@ -58,24 +58,51 @@
             "veela-lib/*": [
                 "../../projects/veela.css/src/scss/*"
             ],
-            "boot/*": ["../shared/src/boot/*"],
-            "views/*": ["../shared/views/*"],
-            "shells/*": ["../shared/shells/*"],
-            "core/*": ["../shared/src/*"],
-            "com/*": ["../shared/src/*"],
-            "shared/*": ["../shared/src/*"],
-            "shared/transport/websocket": ["../../projects/subsystem/src/boot/websocket.ts"],
-            "cwsp-shared/*": ["../../projects/cwsp-shared/src/*"],
-            "fest/cwsp-shared": ["../../projects/cwsp-shared/src/index.ts"],
-            "views/airpad/*": ["../airpad-view/src/*"],
-            "boot/native/cws-bridge": ["../../projects/subsystem/src/routing/native/cws-bridge.ts"],
-            "boot/frontend-debug-capture": ["../../projects/subsystem/src/boot/frontend-debug-capture.ts"],
-            "shared/native/clipboard-device": ["../../projects/subsystem/src/routing/native/clipboard-device.ts"]
+            "boot/*": [
+                "../shared/src/boot/*"
+            ],
+            "views/*": [
+                "../shared/views/*"
+            ],
+            "shells/*": [
+                "../shared/shells/*"
+            ],
+            "core/*": [
+                "../shared/src/*"
+            ],
+            "com/*": [
+                "../shared/src/*"
+            ],
+            "shared/*": [
+                "../shared/src/*"
+            ],
+            "shared/transport/websocket": [
+                "../../projects/subsystem/src/boot/websocket.ts"
+            ],
+            "cwsp-shared/*": [
+                "../../projects/cwsp-shared/src/*"
+            ],
+            "fest/cwsp-shared": [
+                "../../projects/cwsp-shared/src/index.ts"
+            ],
+            "boot/native/cws-bridge": [
+                "../../projects/subsystem/src/routing/native/cws-bridge.ts"
+            ],
+            "boot/frontend-debug-capture": [
+                "../../projects/subsystem/src/boot/frontend-debug-capture.ts"
+            ],
+            "shared/native/clipboard-device": [
+                "../../projects/subsystem/src/routing/native/clipboard-device.ts"
+            ]
         },
         "target": "ESNext",
         "module": "ESNext",
         "moduleResolution": "bundler",
-        "lib": ["ESNext", "DOM", "WebWorker"],
+        "lib": [
+            "ESNext",
+            "DOM",
+            "WebWorker"
+        ],
         "esModuleInterop": true,
         "strict": true,
         "forceConsistentCasingInFileNames": true,
