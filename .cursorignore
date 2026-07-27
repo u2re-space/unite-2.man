@@ -12,6 +12,13 @@ target/
 bin/
 obj/
 
+# Runtime / local caches (can grow to multi-GB; never index)
+.data/
+**/.data/
+**/cwsp-files-blobs/
+.worktrees/
+**/*.blob
+
 # Logs & temp
 *.log
 logs/

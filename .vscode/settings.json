@@ -15,6 +15,12 @@
         "apps/CWSP/java",
         "apps/CWSAndroid/app/src/main/java"
     ],
+    "files.exclude": {
+        "**/.data": true,
+        "**/cwsp-files-blobs": true,
+        "**/.worktrees": true,
+        "**/*.blob": true
+    },
     "files.watcherExclude": {
         "**/node_modules/**": true,
         "**/.git/**": true,
@@ -22,6 +28,10 @@
         "**/dist/**": true,
         "**/dist-crx/**": true,
         "**/build/**": true,
+        "**/.data/**": true,
+        "**/cwsp-files-blobs/**": true,
+        "**/.worktrees/**": true,
+        "**/*.blob": true,
         "**/runtime/cwsp/**": true,
         "**/runtime/node_modules/**": true,
         "**/runtime/legacy/**": true,
@@ -37,6 +47,9 @@
         "**/dist": true,
         "**/dist-crx": true,
         "**/build": true,
+        "**/.data": true,
+        "**/cwsp-files-blobs": true,
+        "**/.worktrees": true,
         "**/runtime/cwsp": true,
         "**/runtime/node_modules": true,
         "**/runtime/legacy": true,
