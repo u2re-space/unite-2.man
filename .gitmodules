@@ -82,3 +82,6 @@
 [submodule "apps/CWSP-direct"]
 	path = apps/CWSP-direct
 	url = https://github.com/u2re-space/CWSP-direct.git
+[submodule "apps/CWSP-shell"]
+	path = apps/CWSP-shell
+	url = https://github.com/u2re-space/CWSP-shell.git
