@@ -79,3 +79,6 @@
 [submodule "apps/CWSP-reborn"]
 	path = apps/CWSP-reborn
 	url = https://github.com/u2re-space/CWSP-reborn
+[submodule "apps/CWSP-direct"]
+	path = apps/CWSP-direct
+	url = https://github.com/u2re-space/CWSP-direct.git
