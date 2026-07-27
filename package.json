@@ -35,7 +35,8 @@
         "modules/views/markdown-view",
         "modules/views/settings-view",
         "modules/views/workcenter-view",
-        "apps/*"
+        "apps/CWSP-reborn",
+        "apps/CrossWord"
     ],
     "overrides": {
         "@vitejs/devtools": ">=0.0.0-alpha.32"
