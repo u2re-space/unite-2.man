@@ -12,9 +12,9 @@ Available for changing by AI. Recomments to change it, if something is wrong.
 This document describes the current v2 network contract used across:
 
 - `runtime/cwsp/endpoint/server`
-- `apps/CrossWord/src/frontend`
-- `apps/CrossWord/src/pwa`
-- `apps/CrossWord/src/crx`
+- `apps/CWSP-shell/src/frontend`
+- `apps/CWSP-shell/src/pwa`
+- `apps/CWSP-shell/src/crx`
 - AirPad views and rails
 - native bridges that reuse the same envelope semantics
 
@@ -521,7 +521,7 @@ Device validation: rebuild Cap APK (`npm run build:capacitor:apk`) and Neu backe
 
 ### Frontend / web app
 
-`apps/CrossWord/src/frontend/shared/transport/websocket.ts` is the browser-side compatibility layer. It:
+`apps/CWSP-shell/src/frontend/shared/transport/websocket.ts` is the browser-side compatibility layer. It:
 
 - builds canonical coordinator packets
 - sends them over Socket.IO `data`

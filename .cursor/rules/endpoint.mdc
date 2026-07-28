@@ -11,24 +11,24 @@ alwaysApply: true
 
 ## How to test `endpoint`
 
-- Directory: `apps/CrossWord/src/endpoint`
+- Directory: `apps/CWSP-shell/src/endpoint`
 - View logs: `pm2 logs`
   - Clear logs: `rm -rf ~/.pm2/logs/*`
 - Restart: `pm2 restart ecosystem.config.cjs --only cws --env production --update-env`
 - Rebuild and load to the target host: `npm run build`
-- Configs (in `apps/CrossWord/src/endpoint`):
+- Configs (in `apps/CWSP-shell/src/endpoint`):
   - `scripts/*`
   - `portable.config.json`
   - `config/*.json`
   - `ecosystem.config.cjs`
   - `package.json`
 - AirPad:
-  - `apps/CrossWord/src/frontend/views/airpad/`
+  - `apps/CWSP-shell/src/frontend/views/airpad/`
 - Test with npm (do these actions)
   1. `pm2 stop cws`
   2. `npm run dev`
 - KVM cursor hostage on desk `.110`: `node scripts/kvm-cursor-unfreeze.mjs` (also wired into deploy/restart and AHK `KvmBootstrap()` on script start).
-- Source code: `apps/CrossWord/src/endpoint/server`
+- Source code: `apps/CWSP-shell/src/endpoint/server`
 
 ---
 
