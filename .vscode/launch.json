@@ -6,7 +6,7 @@
       "type": "chrome",
       "request": "attach",
       "port": 9222,
-      "webRoot": "${workspaceFolder}/apps/CrossWord",
+      "webRoot": "${workspaceFolder}/apps/CWSP-document",
       "sourceMaps": true,
       "sourceMapPathOverrides": {
         "webpack:///./*": "${webRoot}/*",

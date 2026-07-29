@@ -85,3 +85,9 @@
 [submodule "apps/CWSP-shell"]
 	path = apps/CWSP-shell
 	url = https://github.com/u2re-space/CWSP-shell.git
+[submodule "apps/CWSP-crx"]
+	path = apps/CWSP-crx
+	url = https://github.com/u2re-space/CWSP-crx
+[submodule "apps/CWSP-shared"]
+	path = apps/CWSP-shared
+	url = https://github.com/u2re-space/CWSP-shared.git
