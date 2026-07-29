@@ -35,6 +35,10 @@ const CAPACITOR_SHARE_INTENT = resolve(
     workspaceRoot,
     "modules/projects/subsystem/src/boot/capacitor-share-intent.ts"
 );
+const PWA_HANDLING = resolve(
+    workspaceRoot,
+    "modules/projects/subsystem/src/routing/pwa/pwa-handling.ts"
+);
 
 const cwspAirpadParityFinds = new Set([
     "cwsp-shared/airpad-cwsp-client-parity",
@@ -50,7 +54,8 @@ const viewSharedAliases = [
     { find: "views/network", replacement: NETWORK_VIEW_ENTRY },
     { find: "com/config/Settings", replacement: SETTINGS_CONFIG },
     { find: "com/config/SettingsContributions", replacement: SETTINGS_CONTRIBUTIONS },
-    { find: "boot/capacitor-share-intent", replacement: CAPACITOR_SHARE_INTENT }
+    { find: "boot/capacitor-share-intent", replacement: CAPACITOR_SHARE_INTENT },
+    { find: "core/pwa/pwa-handling", replacement: PWA_HANDLING }
 ];
 
 /**
