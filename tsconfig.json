@@ -67,16 +67,16 @@
                 "./modules/projects/fl.ui/src/ui/*"
             ],
             "@rs-com/*": [
-                "./apps/CrossWord/src/com/*"
+                "apps/CWSP-document/src/com/*"
             ],
             "@rs-core/*": [
-                "./apps/CrossWord/src/core/*"
+                "apps/CWSP-document/src/core/*"
             ],
             "@rs-frontend/*": [
-                "./apps/CrossWord/src/frontend/*"
+                "apps/CWSP-document/src/frontend/*"
             ],
             "@rs-shared/*": [
-                "./apps/CrossWord/shared/*"
+                "apps/CWSP-document/shared/*"
             ]
         },
         "lib": [
