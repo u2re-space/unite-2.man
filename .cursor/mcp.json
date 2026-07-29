@@ -2,7 +2,10 @@
   "mcpServers": {
     "mdn": {
       "command": "npx",
-      "args": ["-y", "mdn-mcp"]
+      "args": [
+        "-y",
+        "mdn-mcp"
+      ]
     },
     "puppeteer": {
       "command": "npx",
@@ -13,7 +16,13 @@
     },
     "chrome-devtools": {
       "command": "npx",
-      "args": ["-y", "chrome-devtools-mcp@latest"]
+      "args": [
+        "-y",
+        "chrome-devtools-mcp@latest"
+      ]
+    },
+    "vite": {
+      "url": "https://0.0.0.0:443/__mcp/sse"
     }
   }
 }
