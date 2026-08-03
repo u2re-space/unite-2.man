@@ -317,7 +317,6 @@ export class NetworkStatusPanel {
         this.root = H`
             <div class="cw-network-view" data-view="network">
                 <header class="cw-network-view__header">
-                    <h1>CWSP Network</h1>
                     <p>Connection status, reachability probes, and dispatch errors.</p>
                 </header>
 

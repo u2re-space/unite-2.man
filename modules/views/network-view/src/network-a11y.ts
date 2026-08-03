@@ -180,7 +180,6 @@ export const createNetworkA11yFixture = (doc: Document = document): HTMLElement 
     root.dataset.view = "network";
     root.innerHTML = `
         <header class="cw-network-view__header">
-            <h1>CWSP Network</h1>
             <p>Connection status, reachability probes, and dispatch errors.</p>
         </header>
         <div class="cw-network-body">

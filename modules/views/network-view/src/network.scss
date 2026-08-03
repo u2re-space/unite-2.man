@@ -60,6 +60,9 @@
         border-radius: 10px;
         border: 1px solid light-dark(rgba(0, 0, 0, 0.08), rgba(255, 255, 255, 0.1));
         background: light-dark(rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.04));
+        text-align: start;
+        justify-content: start;
+        justify-items: start;
     }
 
     .cw-network-status-card[data-state="ok"] {
@@ -147,12 +150,16 @@
         flex-direction: column;
         gap: 0.45rem;
         min-block-size: 0;
+        flex-wrap: nowrap;
+        min-block-size: max-content;
     }
 
     .cw-network-probes [data-probe-list] {
         display: flex;
         flex-direction: column;
         gap: 0.45rem;
+        flex-wrap: nowrap;
+        min-block-size: max-content;
     }
 
     .cw-network-probes h2 {
@@ -167,6 +174,7 @@
         border-radius: 8px;
         background: light-dark(rgba(0, 0, 0, 0.04), rgba(255, 255, 255, 0.05));
         font-size: 0.82rem;
+        min-block-size: max-content;
     }
 
     .cw-network-probe-row[data-ok="true"] {
@@ -199,6 +207,12 @@
         padding: 0.55rem 1rem 0.85rem;
         border-block-start: 1px solid light-dark(rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.12));
         background: light-dark(rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.22));
+        text-align: start;
+        justify-content: start;
+        justify-items: start;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        min-block-size: max-content;
     }
 
     .cw-network-log-panel__title {
@@ -223,6 +237,9 @@
         background: light-dark(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.35));
         white-space: pre-wrap;
         word-break: break-word;
+        text-align: start;
+        justify-content: start;
+        justify-items: start;
     }
 
     /* Neutralino desk: drag/paste files onto Network to Open-for-Share */
