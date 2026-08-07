@@ -8,13 +8,11 @@
     ],
     "exclude": [
         "node_modules/**",
-        "dist/**":
+        "dist/**",
         "build/**",
         "coverage/**",
         "logs/**",
         "cache/**",
-        "temp/**",
-        "tmp/**",
         "temp/**",
         "tmp/**",
         "runtime/**"
