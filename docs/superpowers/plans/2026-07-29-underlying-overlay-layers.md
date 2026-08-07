@@ -268,7 +268,7 @@ Expected: DOM-order + shift z-index assertions PASS. Fix `order-equal` edge if n
 - [x] **Step 1: Generalize Register**
 
 ```ts
-import { DOMMixin } from "fest/dom";
+import { DOMMixin } from "@fest-lib/dom";
 import { appendAsOverlay, appendAsUnderlying } from "./AnchorOverlay";
 import type { LayerRole } from "./types";
 
@@ -360,7 +360,7 @@ Replace broken path:
 ```ts
 // OLD (broken):
 // import { createUnderlyingShadow, createDropShadow } from "../../../../modules/projects/lur.e/src/extension/overlay/UnderlyingShadow"
-import { createDropShadow } from "fest/lure"
+import { createDropShadow } from "@fest-lib/lure"
 ```
 
 - [x] **Step 4: Manual smoke** — import `createDropShadow` from `fest/lure` in a tiny console check / layers suite extension.
@@ -442,7 +442,7 @@ import { createDropShadow } from "fest/lure"
  * FullPath: modules/projects/fl.ui/test/suites/layers.ts
  * Reason: Demo glass+underlying glow and scroll+overlay scrollbars.
  */
-import { createBlurShadow, appendAsOverlay, ScrollBar } from "fest/lure";
+import { createBlurShadow, appendAsOverlay, ScrollBar } from "@fest-lib/lure";
 import "../../src/styles/ui/_layers.scss"; // or project style entry if ?inline required
 
 export function mount(el: HTMLElement): void {

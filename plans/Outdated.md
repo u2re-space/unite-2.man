@@ -962,8 +962,8 @@ Examples:
 ```ts
 // Allowed:
 // Level 2 imports Level 1
-import { something } from "fest/object";
-import { domHelper } from "fest/dom";
+import { something } from "@fest-lib/object";
+import { domHelper } from "@fest-lib/dom";
 ```
 
 Example:
@@ -995,8 +995,8 @@ Examples:
 ```ts
 // Forbidden:
 // Level 1 must not import Level 2 or Level 3
-import { something } from "fest/lure";
-import { Button } from "fest/fl-ui";
+import { something } from "@fest-lib/lure";
+import { Button } from "@fest-lib/fl-ui";
 ```
 
 Examples:

@@ -31,25 +31,25 @@
             "com/config/Settings": [
                 "../../shared/runtime/settings-config.ts"
             ],
-            "fest/*": [
+            "@fest-lib/*": [
                 "../../shared/fest/*"
             ],
-            "fest/dom": [
+            "@fest-lib/dom": [
                 "../../projects/dom.ts/src/index.ts"
             ],
-            "fest/lure": [
+            "@fest-lib/lure": [
                 "../../projects/lur.e/src/index.ts"
             ],
-            "fest/object": [
+            "@fest-lib/object": [
                 "../../projects/object.ts/src/index.ts"
             ],
-            "fest/core": [
+            "@fest-lib/core": [
                 "../../projects/core.ts/src/index.ts"
             ],
-            "fest/icon": [
+            "@fest-lib/icon": [
                 "../../projects/icon.ts/src/index.ts"
             ],
-            "fest/uniform": [
+            "@fest-lib/uniform": [
                 "../../projects/uniform.ts/src/index.ts"
             ],
             "veela-lib": [
@@ -82,7 +82,7 @@
             "cwsp-shared/*": [
                 "../../projects/cwsp-shared/src/*"
             ],
-            "fest/cwsp-shared": [
+            "@fest-lib/cwsp-shared": [
                 "../../projects/cwsp-shared/src/index.ts"
             ],
             "boot/native/cws-bridge": [

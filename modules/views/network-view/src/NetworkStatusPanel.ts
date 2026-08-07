@@ -22,8 +22,8 @@
  * Network status panel — connection state, HTTP probes, dispatch auth errors.
  */
 
-import { H } from "fest/lure";
-import { loadAsAdopted } from "fest/dom";
+import { H } from "@fest-lib/lure";
+import { loadAsAdopted } from "@fest-lib/dom";
 import { loadSettings } from "com/config/Settings";
 import type { AppSettings } from "com/config/SettingsTypes";
 import {

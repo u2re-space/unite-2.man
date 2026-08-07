@@ -8,7 +8,7 @@
     ],
     "exclude": [
         "node_modules/**",
-        "dist/**",
+        "dist/**":
         "build/**",
         "coverage/**",
         "logs/**",
@@ -36,31 +36,31 @@
             "/frontend/*": [
                 "./frontend/*"
             ],
-            "fest/*": [
+            "@fest-lib/*": [
                 "./modules/shared/fest/*"
             ],
-            "fest/lure": [
+            "@fest-lib/lure": [
                 "./modules/projects/lur.e/src/index.ts"
             ],
-            "fest/object": [
+            "@fest-lib/object": [
                 "./modules/projects/object.ts/src/index.ts"
             ],
-            "fest/dom": [
+            "@fest-lib/dom": [
                 "./modules/projects/dom.ts/src/index.ts"
             ],
-            "fest/core": [
+            "@fest-lib/core": [
                 "./modules/projects/core.ts/src/index.ts"
             ],
-            "fest/icon": [
+            "@fest-lib/icon": [
                 "./modules/projects/icon.ts/src/index.ts"
             ],
-            "fest/uniform": [
+            "@fest-lib/uniform": [
                 "./modules/projects/uniform.ts/src/index.ts"
             ],
-            "fest/fl-ui": [
+            "@fest-lib/fl-ui": [
                 "./modules/projects/fl.ui/src/index.ts"
             ],
-            "fest/ui": [
+            "@fest-lib/ui": [
                 "./modules/projects/fl.ui/src/index.ts"
             ],
             "@fl-ui/*": [

@@ -31,25 +31,25 @@
             "com/config/Settings": [
                 "../../shared/runtime/settings-config.ts"
             ],
-            "fest/*": [
+            "@fest-lib/*": [
                 "../../shared/fest/*"
             ],
-            "fest/dom": [
+            "@fest-lib/dom": [
                 "../../projects/dom.ts/src/index.ts"
             ],
-            "fest/lure": [
+            "@fest-lib/lure": [
                 "../../projects/lur.e/src/index.ts"
             ],
-            "fest/object": [
+            "@fest-lib/object": [
                 "../../projects/object.ts/src/index.ts"
             ],
-            "fest/core": [
+            "@fest-lib/core": [
                 "../../projects/core.ts/src/index.ts"
             ],
-            "fest/icon": [
+            "@fest-lib/icon": [
                 "../../projects/icon.ts/src/index.ts"
             ],
-            "fest/uniform": [
+            "@fest-lib/uniform": [
                 "../../projects/uniform.ts/src/index.ts"
             ],
             "veela-lib": [
@@ -66,7 +66,7 @@
             "shared/*": ["../shared/src/*"],
             "shared/transport/websocket": ["../../projects/subsystem/src/boot/websocket.ts"],
             "cwsp-shared/*": ["../../projects/cwsp-shared/src/*"],
-            "fest/cwsp-shared": ["../../projects/cwsp-shared/src/index.ts"],
+            "@fest-lib/cwsp-shared": ["../../projects/cwsp-shared/src/index.ts"],
             "boot/native/cws-bridge": ["../../projects/subsystem/src/routing/native/cws-bridge.ts"],
             "boot/frontend-debug-capture": ["../../projects/subsystem/src/boot/frontend-debug-capture.ts"],
             "shared/native/clipboard-device": ["../../projects/subsystem/src/routing/native/clipboard-device.ts"],
