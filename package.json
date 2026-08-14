@@ -52,6 +52,7 @@
     "devDependencies": {
         "@crxjs/vite-plugin": "^2.4.0",
         "@mindw1n/webnative": "^4.0.0",
+        "@rolldown/binding-linux-x64-gnu": "^1.2.4",
         "@rollup/rollup-linux-x64-gnu": "^4.60.3",
         "@vitejs/plugin-basic-ssl": "^2.1.0",
         "eslint": "^10.0.0",
@@ -64,6 +65,7 @@
         "stylelint-config-standard-scss": "^17.0.0",
         "stylelint-plugin-logical-css": "^2.0.2",
         "stylelint-scss": "^7.0.0",
+        "tsconfig": "^7.0.0",
         "typescript": ">=6.0.0-beta",
         "vite": "^8.0.7"
     }
