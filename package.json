@@ -51,6 +51,7 @@
     },
     "devDependencies": {
         "@crxjs/vite-plugin": "^2.4.0",
+        "@esbuild/linux-x64": "^0.28.2",
         "@mindw1n/webnative": "^4.0.0",
         "@rolldown/binding-linux-x64-gnu": "^1.2.4",
         "@rollup/rollup-linux-x64-gnu": "^4.60.3",

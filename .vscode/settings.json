@@ -84,5 +84,19 @@
     "editor.allowVariableFontsInAccessibilityMode": true,
     "terminal.integrated.suggest.insertTrailingSpace": true,
     "editor.formatOnType": false,
-    "editor.formatOnPaste": true
+    "editor.formatOnPaste": true,
+    "terminal.integrated.enableImages": true,
+    "eslint.useESLintClass": true,
+    "js/ts.implicitProjectConfig.target": "ESNext",
+    "python.analysis.enableSnippetExtraTelemetry": true,
+    "editor.fontFamily": "'Moonaspace Neon Var', 'Fira Code', Consolas, 'Courier New', monospace",
+    "editor.fontSize": 11,
+    "terminal.integrated.allowInUntrustedWorkspace": true,
+    "editor.unicodeHighlight.includeComments": false,
+    "editor.unicodeHighlight.nonBasicASCII": false,
+    "editor.suggest.shareSuggestSelections": true,
+    "chat.agent.sandbox.allowNetwork": true,
+    "terminal.integrated.allowMnemonics": true,
+    "debug.allowBreakpointsEverywhere": true,
+    "extensions.allowOpenInModalEditor": true
 }
