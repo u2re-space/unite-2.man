@@ -60,10 +60,7 @@ Layer strategy:
 
 ## Quality gates
 
-- After substantive changes, run relevant checks:
-  - `npm run build`
-  - `npm run build:crx`
-  - `npm run dev`
+Do not run `npm run build`, `build:crx`, or `dev` unless the user asks or a targeted package check is not enough.
 
 ---
 

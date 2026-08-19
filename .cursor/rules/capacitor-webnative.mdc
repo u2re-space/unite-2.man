@@ -1,5 +1,7 @@
 ---
-alwaysApply: true
+description: Capacitor vs WebNative/Neutralino parity for CWSP shells
+globs: "{apps/CWSP-reborn/**,**/capacitor/**,**/android/**,**/webnative/**,**/neutralino/**}"
+alwaysApply: false
 ---
 Needs to make more parity with/between Capacitor version and WebNative CWSP version.
 

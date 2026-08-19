@@ -117,11 +117,9 @@ Alternate desktop shell beside WebNative: [NeutralinoJS](https://github.com/neut
 
 ## 11. Resume protocol
 
-1. Read `.progress/CWSP-reborn/STATE.json`.
-2. Read latest `JOURNAL.md` entry.
-3. Open active pass ledger (`.roadmaps/CWSP-reborn/PASS-III.md`).
-4. Execute only `activeTask`; record outcomes before switching.
-5. Prefer Pass II/III evidence over fresh discovery.
+1. Read `.progress/CWSP-reborn/STATE.json` only.
+2. Open the pass ledger or `JOURNAL.md` if the active task is unclear.
+3. Execute `activeTask`. Do not re-run green `check:*` unless related code changed **and** proof is required.
 
 ## 12. Private data
 

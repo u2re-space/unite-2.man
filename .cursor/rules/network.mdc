@@ -1,6 +1,7 @@
 ---
-description: CWSP network stack docs and specifications
-alwaysApply: true
+description: CWSP v2 protocol, routing, clipboard, AirPad. Attach only for those tasks — not always-on.
+globs: "{apps/CWSP-*/**,runtime/cwsp/**,runtime/legacy/**,modules/projects/cwsp-shared/**,**/airpad/**,**/*clipboard*,**/socket/**}"
+alwaysApply: false
 ---
 
 # CWSP Network Stack v2 Specification
@@ -738,70 +739,9 @@ If both `admin` and `publicWeb` are disabled, a minimal core-only HTTP(S) host i
 - `/ws` is the native-first route, but Socket.IO and HTTP remain important compatibility paths.
 - The specification should prefer describing canonical meaning first, then compatibility aliases second.
 
----
+## Topology (canonical copy)
 
-## Network stack:
-
-How &ould works our network.
-
-```
-[ Laptop/Ultrabook ] Bi-dir  {[ Server (Endpoint), Have External Entry IP ]}
-[ L-192.168.0.110  ] ←←---→→ {[ 192.168.0.200:8434 / 45.147.121.152:8434  ]}
-          ↑                         ↑                         ↑
-          ┷                         ↑                         ↑ 
-          |                         ↓                         ↓ 
-          ┗------------------{[ [L-192.168.0.196] |- - -| [L-192.168.0.208] ]}   # Phone device groups (cws-androids, PWA-airpad)
-                                [Android Phone 1]         [Android Phone 2]
-```
-
-### Topology
-
-**L-192.168.0.110 <---> L-192.168.0.196**
-- clipboard (via android application, and cwsp endpoint server)
-- `airpad` signals (PWA/WebView application)
-  - mouse
-  - keyboard
-  - clipboard
-- tunneling through 192.168.0.200:8434 / 45.147.121.152:8434 if in LTE/NAT mode, using identification client token
-
-**L-192.168.0.110 <---> L-192.168.0.208**
-- clipboard (via android application, and cwsp endpoint server)
-- `airpad` signals (PWA/WebView application)
-  - mouse
-  - keyboard
-  - clipboard
-- tunneling through 192.168.0.200:8434 / 45.147.121.152:8434 if in LTE/NAT mode, using identification client token
-
-**L-192.168.0.196 <---> L-192.168.0.208**
-- clipboard (via android application, and cwsp endpoint server)
-- tunneling through 192.168.0.200:8434 / 45.147.121.152:8434 if one of in LTE/NAT mode, using identification client token
-
-**L-192.168.0.110 <---> {[ 192.168.0.200:8434 / 45.147.121.152:8434 ]}**
-- initiated or initiator exchanger (bridge/tunnel/link)
-- `L-192.168.0.110` is AirPad controllable (by PWA apps)
-  - Or directly, or through bridge/proxy
-- `L-192.168.0.110` is one of `clipboard` (and/or other data) synchronize/exchanger member
-  - Devices through bridge/proxy can/may ask or pass `clipboard` (and/or other data) data
-
-**{[ 192.168.0.200:8434 / 45.147.121.152:8434 ]}** 
-- is in general a central coordinator (bridge, and/or tunnel/proxy)
-
----
-
-## Potential routes what needs to support
-
-- Airpad (PWA) or Native from `L-192.168.0.196` to https://192.168.0.110:8434/ (local/private network)
-- Airpad (PWA) or Native from `L-192.168.0.196` through `https://192.168.0.200:8434/`  to `L-192.168.0.110` (local/private network)
-- Airpad (PWA) or Native from `L-192.168.0.196` through `https://45.147.121.152:8434/` to `L-192.168.0.110` (any network of device)
-- Native (app) Clipboard (and/or other data) from `L-192.168.0.196` to https://192.168.0.110:8434/ (local network, directly)
-- Native (app) Clipboard (and/or other data) from `L-192.168.0.196` to through `https://192.168.0.200:8434/`  to `L-192.168.0.110` (local network, directly)
-- Native (app) Clipboard (and/or other data) from `L-192.168.0.196` to through `https://45.147.121.152:8434/` to `L-192.168.0.110` (any network of device)
-- CWSP/`endpoint` Clipboard (and/or other data) from `L-192.168.0.110` to https://192.168.0.196:8434/ (rare case, local network, directly)
-- CWSP/`endpoint` Clipboard (and/or other data) from `L-192.168.0.110` to through `https://192.168.0.200:8434/`  to `L-192.168.0.196` (local network, directly)
-- CWSP/`endpoint` Clipboard (and/or other data) from `L-192.168.0.110` to through `https://45.147.121.152:8434/` to `L-192.168.0.196` (any network of device)
-
-### `L-192.168.0.196` may/can be:
-
-- Simulator/debug client from `45.150.9.153` (VDS), with a configured client token instead of IP
-- PWA or Native application from NAT (unknown IP, but with a configured client token instead of IP)
-- PWA or Native application from private/local network with IP `192.168.0.196`.
+- L-110 desk AirPad/clipboard endpoint; L-200 / public :8434 is the coordinator/hub.
+- L-196 / L-208 / L-210 phones: clipboard + AirPad; LTE uses hub with client token (see `private/connectivity.md`).
+- Routes: phone→L-110 direct LAN, or via L-200, or via public hub. Same for clipboard both ways.
+- L-196 may be LAN, NAT, or VDS simulator (token identity, not IP).

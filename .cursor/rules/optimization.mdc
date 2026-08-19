@@ -1,131 +1,33 @@
 ---
-description: Token optimization, concise output, and low-noise workflow
-globs: *
+description: Token, time, and verification budget for all agents
 alwaysApply: true
 ---
 
-# Optimization Rules
+# Optimization
 
-## Primary goal
+Minimize tokens and wall-clock. User instructions in `AGENTS.md` override skills.
 
-Minimize token usage, avoid unnecessary context loading, and keep outputs short unless more detail is necessary for correctness.
+## Context
 
-## Hard rules
+- Grep/search before opening files. Read the smallest range that answers the question.
+- Do not load `build/`, `.gradle/`, minified bundles, lockfiles, `.archives`, `.backups`, or `.superpowers/sdd`.
+- Do not read Constitution, Calibration, INDEX, pantry, or network/debug specs unless this task needs them.
+- Do not duplicate unchanged code in replies.
 
-### 1) Read narrowly
-- Do not read entire large files unless necessary.
-- Use search tools first (for example: Grep, SemanticSearch, symbol search).
-- When reading a file, restrict to the smallest relevant range.
-- Do not proactively inspect generated, vendor, or build outputs.
+## Time
 
-Examples of low-value context to avoid unless strictly needed:
-- `build/`
-- `.gradle/`
-- generated bundles
-- minified scripts
-- large lockfiles
+- No extra agents (review, Bugbot, security-review, explore-the-whole-repo) unless the user asks.
+- No full test suites, `npm run build`, `build:crx`, deploy, PM2, ADB, or SSH unless the change requires that proof or the user asks.
+- Cap probes at ~25s. Do not soak, poll, or sleep unless asked.
+- One narrow check beats a compatibility matrix.
 
-### 2) Do not duplicate unchanged code
-- Do not print large code blocks that were not modified.
-- Do not restate full files when only a small part changed.
-- Prefer targeted edits over full-file rewrites when practical.
+## Output
 
-### 3) Keep responses compact
-- Default to a short answer.
-- Do not add long introductions, summaries, or explanations unless the user asks for them or they are necessary.
-- After completing a task, prefer:
-  - 1 short confirmation line, or
-  - 2–4 short bullets with only the essential result
+- Default: 1 confirmation line, or 2–4 bullets (changed / checked / blocker).
+- Do not write `BUGFIX*`, `SUMMARY*`, `CHECKLIST*`, `REPORT*`, `FINAL*` files unless asked.
 
-Good default response shape:
-- what changed
-- what was checked
-- any blocker or risk
+## CWSP
 
-### 4) Create only necessary files
-- Create only files required for implementation, tests, or directly requested deliverables.
-- Do not create auxiliary report files unless the user explicitly asks.
-
-Do not create files like:
-- `BUGFIX*.md`
-- `SUMMARY*.md`
-- `CHECKLIST*.md`
-- `REPORT*.md`
-- `FINAL*.md`
-
-### 5) Batch edits efficiently
-- Group related changes into as few edits as reasonably possible.
-- Avoid noisy micro-edits when one coherent patch is clearer.
-- Do not touch unrelated files.
-
----
-
-## Operational guidance
-
-### Investigate only what is relevant
-- Do not scan all contexts, logs, or external locations by default.
-- Check logs, specs, or external paths only when they are relevant to the user’s task.
-
-### Logs-first, when debugging runtime issues
-If the task involves crashes, failed services, runtime regressions, or deployment/debugging:
-
-1. Check the most relevant logs first.
-2. Prioritize recent log tails and the most actionable errors.
-3. Preserve evidence before considering cleanup.
-
-Typical locations:
-- `~/.pm2/logs`
-- relevant shell / terminal history or session logs
-
-### Do not clear logs by default
-- Do not delete or truncate PM2, shell, or service logs unless this is explicitly needed and safe.
-- If cleanup is useful, inspect first, then clean only stale or irrelevant logs.
-
-### Use SSH only when needed
-If local evidence is insufficient and the task requires remote verification, SSH may be used for relevant hosts documented in project instructions.
-
-### Prefer patch-oriented changes
-- Analyze first, then prepare a focused patch.
-- Apply changes only after identifying the exact target.
-- If a patch fails, re-read the affected code narrowly and retry with a corrected patch.
-
-### Validate proportionally
-After code changes, run only the smallest relevant verification:
-- targeted build
-- targeted tests
-- lint, if relevant
-
-Do not run broad verification if a narrower check is sufficient.
-
----
-
-## Project-specific notes
-
-### CWSP endpoint work
-If the task changes `runtime/cwsp/endpoint`, relevant validation may include the local workflow in that directory, such as build/distribution or PM2 restart steps, but only when necessary for the task.
-
-Path:
-- `/home/u2re-dev/U2RE.space/runtime/cwsp/endpoint`
-
-### Additional relevant code locations
-Consult these only when the task touches them:
-
-- `/home/u2re-dev/U2RE.space/modules/projects/uniform.ts/src/newer/`
-- `/home/u2re-dev/U2RE.space/runtime/cwsp/endpoint/`
-
-### SSH / remote desk tests
-- Do not sleep 30-60s+ in agent SSH probes; cap remote waits at ~25s unless the user explicitly asks for a soak test.
-- Prefer parser/status checks (`scriptblock::Create`, `pm2 status`, port probe) over full `deploy:110:restart` when validating a small fix.
-- `deploy:110:restart` remote start uses `CWSP-PM2-RemoteLaunch` schtask (/IT) + `cwsp-pm2-run-hidden.ps1`; skip post-verify with `CWSP_RESTART_SKIP_POST_VERIFY=1`.
-
----
-Unless the user requests detail, keep the final response minimal.
-
-Preferred format:
-- `✅ Done`
-- or:
-  - `✅ Done`
-  - `Tests: ...`
-  - `Note: ...`
-
-Avoid long narrative writeups by default.
+- Protocol: `.cursor/rules/network.mdc` (not always-on).
+- Recovery: `.cursor/rules/debugging.mdc` (not always-on).
+- Do not re-run green `check:*` scripts unless related code changed.

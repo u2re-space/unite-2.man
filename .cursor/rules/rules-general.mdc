@@ -1,126 +1,31 @@
 ---
-description: Canonical repo-wide engineering workflow rule
-alwaysApply: true
+description: Cross-language workflow when editing source
+globs: "*.ts,*.tsx,*.js,*.mjs,*.css,*.scss"
+alwaysApply: false
 ---
-
-> NOTE: Canonical general rule. Keep cross-language workflow here; keep language specifics in `rules-js.mdc` and `rules-css.mdc`.
 
 # General Canonical Rule
 
-## Primary goals
+Language details: `rules-js.mdc`, `rules-css.mdc`. Comments: `comments-special-comments.mdc`.
+
+## Goals
 
 1. Preserve behavior and public contracts.
-2. Keep one source of truth; avoid parallel implementations.
-3. Keep diffs small, reviewable, and deterministic.
+2. One source of truth; no parallel implementations.
+3. Small, reviewable diffs.
 
-## Required workflow
+## Workflow
 
-- Respect project config: `tsconfig.json`, `package.json`, `vite.config.*`.
-- Use modern browser/web standards for current Chromium targets unless task requires legacy behavior.
-- Normalize formatting with minimal churn (spaces only; keep surrounding style).
-- Remove dead code and duplicate logic when safe.
-- Align imports/paths with project aliases and conventions.
-- If behavior is ambiguous, ask targeted questions instead of guessing.
-- Make import or modules paths symbolic links (and/or relative) friendly/compatible, and if needed, edit/change `tsconfig.json` or any other import maps.
+- Follow `tsconfig.json`, `package.json`, `vite.config.*`.
+- Chromium-current web standards unless the task needs legacy behavior.
+- Spaces-only formatting; keep surrounding style.
+- Remove dead/duplicate code when safe.
+- Ask when behavior is ambiguous.
 
 ## Quality gates
 
-- After substantive edits, run relevant checks:
-  - `npm run build`
-  - `npm run build:crx`
-  - `npm run dev`
-- If errors are reported:
-  - fix root causes, not symptoms
-  - do a preventive sweep for similar patterns
-  - centralize recurring fixes into a shared helper when appropriate
+Run the narrowest check for the touched package only, and only if the change can break runtime. Do not run `npm run build`, `build:crx`, or `dev` unless the user asks or a targeted check is insufficient.
 
-## Architecture guardrails
+## Guardrails
 
-- Prefer cohesive feature modules over fragmented micro-files.
-- Avoid circular dependencies and unnecessary abstractions.
-- Preserve API boundaries; refactor behind stable exports.
-
----
-
-## Some specifications
-
-Search and read in:
-- `/home/u2re-dev/U2RE.space/modules/projects/uniform.ts/src/newer/` (internal)
-- `/home/u2re-dev/U2RE.space/runtime/cwsp/endpoint/` (network)
-
----
-
-## Model selection
-
-- **Analysis / architecture / planning:** Claude Opus 4.6, GPT 5.4 (`high` or `xhigh`), Gemini 3.1 Pro
-- **Coding / implementation / refactoring:** GPT-5.4 (`low` or `medium`), Claude 4.6 Sonnet, Gemini 3.1 Pro
-- **Edits / fixes / refinements:** `GPT-5.3-codex-spark`, GPT-5.4 (`instant`, `none`, or `minimal` reasoning), Claude 4.5 Haiku, Gemini 3 Flash
-- **Documentation / specs:** GPT-5.4 (`low` or `medium`), Claude 4.6 Sonnet, Gemini 3.1 Pro
-- **Recognition / scanning / images:** GPT-5.4 (`low`, `instant`, `none`, or `minimal`), Claude 4.6 Sonnet, Gemini 3.1 Pro, or Gemini 3 Flash
-
----
-
-## Network stack:
-
-How &ould works our network.
-
-```
-[ Laptop/Ultrabook ] Bi-dir  {[ Server (Endpoint), Have External Entry IP ]}
-[ L-192.168.0.110  ] ←←---→→ {[ 192.168.0.200:8434 / 45.147.121.152:8434  ]}
-          ↑                         ↑                         ↑
-          ┷                         ↑                         ↑ 
-          |                         ↓                         ↓ 
-          ┗------------------{[ [L-192.168.0.196] |- - -| [L-192.168.0.208] ]}   # Phone device groups (cws-androids, PWA-airpad)
-                                [Android Phone 1]         [Android Phone 2]
-```
-
-### Topology
-
-**L-192.168.0.110 <---> L-192.168.0.196**
-- clipboard (via android application, and cwsp endpoint server)
-- `airpad` signals (PWA/WebView application)
-  - mouse
-  - keyboard
-  - clipboard
-- tunneling through 192.168.0.200:8434 / 45.147.121.152:8434 if in LTE/NAT mode, using identification client token
-
-**L-192.168.0.110 <---> L-192.168.0.208**
-- clipboard (via android application, and cwsp endpoint server)
-- `airpad` signals (PWA/WebView application)
-  - mouse
-  - keyboard
-  - clipboard
-- tunneling through 192.168.0.200:8434 / 45.147.121.152:8434 if in LTE/NAT mode, using identification client token
-
-**L-192.168.0.196 <---> L-192.168.0.208**
-- clipboard (via android application, and cwsp endpoint server)
-- tunneling through 192.168.0.200:8434 / 45.147.121.152:8434 if one of in LTE/NAT mode, using identification client token
-
-**L-192.168.0.110 <---> {[ 192.168.0.200:8434 / 45.147.121.152:8434 ]}**
-- initiated or initiator exchanger (bridge/tunnel/link)
-- `L-192.168.0.110` is AirPad controllable (by PWA apps)
-  - Or directly, or through bridge/proxy
-- `L-192.168.0.110` is one of `clipboard` (and/or other data) synchronize/exchanger member
-  - Devices through bridge/proxy can/may ask or pass `clipboard` (and/or other data) data
-
-**{[ 192.168.0.200:8434 / 45.147.121.152:8434 ]}** 
-- is in general a central coordinator (bridge, and/or tunnel/proxy)
-
----
-
-## Комментарии и маркеры в коде
-
-1. Желательно в шапке (блочном комменте) кодов (вписывать, даже заранее, но ПЕРЕД backup'ом): 
-   - `*.ts`, `*.js`, `*.mjs`, `*.css`, `*.scss`, `*.tsx`, `*.jsx`, `*.esm`
-   - Оставлять или добавить/переписать heading блочный комментарий по типу:
-
-    ```ts
-    /* 
-    * Filename: ...
-    * FullPath: ...
-    * Change date and time: {hour}.{minues}.{seconds}_{day}.{month}.{year}
-    * Reason for changes: ...
-    */
-    ```
-
-2. Желательно оставлять комментарии в функциях (в особенности новых), в переменных, в логике самого кода, а также их (возможно, новые) связи с другими частями этого кода. Это нужно для упрощения навигации и поиска нужны модулей и частей кода.
+Cohesive modules, no new circular deps, stable public APIs.

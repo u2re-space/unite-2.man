@@ -17,10 +17,9 @@ alwaysApply: false
 
 ## Before significant edits
 
-1. Confirm the relevant repository status.
-2. Create a manifest with timestamp, scope, baseline state, and pre-edit hashes.
-3. Set one active task in `STATE.json`.
-4. Add a journal entry with the next safe action.
+Skip manifests and journal updates unless the user asked or this is a CWSP-reborn pass checkpoint.
+
+For those checkpoints: confirm git status, then one active task in `STATE.json`.
 
 ## At each checkpoint
 

@@ -1,99 +1,22 @@
 ---
-alwaysApply: true
+description: Endpoint test/restart notes. Attach for endpoint/runtime work — not always-on.
+globs: "{**/endpoint/**,runtime/cwsp/**,apps/CWSP-reborn/runtime/**,apps/CWSP-shell/**}"
+alwaysApply: false
 ---
 
-# About project in general
+# Endpoint operations
 
-- Git: Conventional Commits (feat/fix/refactor/docs/test/chore)
-- Logging: structured logging, zerolog
-- Used tools: `pm2`, `vite`, `npm`, `tsx`, `npx`, `nvm`, `pwsh`, `bash`
-- Deployment SSH hosts and machine-specific absolute paths are documented outside the repository.
+- Git: Conventional Commits (`feat` / `fix` / `refactor` / `docs` / `test` / `chore`)
+- Tools: `pm2`, `vite`, `npm`, `tsx`, `npx`, `nvm`, `pwsh`, `bash`
+- Hosts and private paths: `private/connectivity.md` (do not quote)
 
-## How to test `endpoint`
+## How to test `endpoint` (only when this task needs it)
 
-- Directory: `apps/CWSP-shell/src/endpoint`
-- View logs: `pm2 logs`
-  - Clear logs: `rm -rf ~/.pm2/logs/*`
+- Code: `apps/CWSP-shell/src/endpoint/server` (compat) or `apps/CWSP-reborn/runtime/endpoint`
+- Logs: `pm2 logs` — do not truncate unless asked
 - Restart: `pm2 restart ecosystem.config.cjs --only cws --env production --update-env`
-- Rebuild and load to the target host: `npm run build`
-- Configs (in `apps/CWSP-shell/src/endpoint`):
-  - `scripts/*`
-  - `portable.config.json`
-  - `config/*.json`
-  - `ecosystem.config.cjs`
-  - `package.json`
-- AirPad:
-  - `apps/CWSP-shell/src/frontend/views/airpad/`
-- Test with npm (do these actions)
-  1. `pm2 stop cws`
-  2. `npm run dev`
-- KVM cursor hostage on desk `.110`: `node scripts/kvm-cursor-unfreeze.mjs` (also wired into deploy/restart and AHK `KvmBootstrap()` on script start).
-- Source code: `apps/CWSP-shell/src/endpoint/server`
+- Local iterate: `pm2 stop cws` then `npm run dev` in the endpoint package
+- KVM cursor hostage on desk `.110`: `node scripts/kvm-cursor-unfreeze.mjs`
+- AirPad UI: `apps/CWSP-shell/src/frontend/views/airpad/`
 
----
-
-## Network stack:
-
-How &ould works our network.
-
-```
-[ Laptop/Ultrabook ] Bi-dir  {[ Server (Endpoint), Have External Entry IP ]}
-[ L-192.168.0.110  ] ←←---→→ {[ 192.168.0.200:8434 / 45.147.121.152:8434  ]}
-          ↑                         ↑                         ↑
-          ┷                         ↑                         ↑ 
-          |                         ↓                         ↓ 
-          ┗------------------{[ [L-192.168.0.196] |- - -| [L-192.168.0.208] ]}   # Phone device groups (cws-androids, PWA-airpad)
-                                [Android Phone 1]         [Android Phone 2]
-```
-
-### Topology
-
-**L-192.168.0.110 <---> L-192.168.0.196**
-- clipboard (via android application, and cwsp endpoint server)
-- `airpad` signals (PWA/WebView application)
-  - mouse
-  - keyboard
-  - clipboard
-- tunneling through 192.168.0.200:8434 / 45.147.121.152:8434 if in LTE/NAT mode, using identification client token
-
-**L-192.168.0.110 <---> L-192.168.0.208**
-- clipboard (via android application, and cwsp endpoint server)
-- `airpad` signals (PWA/WebView application)
-  - mouse
-  - keyboard
-  - clipboard
-- tunneling through 192.168.0.200:8434 / 45.147.121.152:8434 if in LTE/NAT mode, using identification client token
-
-**L-192.168.0.196 <---> L-192.168.0.208**
-- clipboard (via android application, and cwsp endpoint server)
-- tunneling through 192.168.0.200:8434 / 45.147.121.152:8434 if one of in LTE/NAT mode, using identification client token
-
-**L-192.168.0.110 <---> {[ 192.168.0.200:8434 / 45.147.121.152:8434 ]}**
-- initiated or initiator exchanger (bridge/tunnel/link)
-- `L-192.168.0.110` is AirPad controllable (by PWA apps)
-  - Or directly, or through bridge/proxy
-- `L-192.168.0.110` is one of `clipboard` (and/or other data) synchronize/exchanger member
-  - Devices through bridge/proxy can/may ask or pass `clipboard` (and/or other data) data
-
-**{[ 192.168.0.200:8434 / 45.147.121.152:8434 ]}** 
-- is in general a central coordinator (bridge, and/or tunnel/proxy)
-
----
-
-## Potential routes what needs to support
-
-- Airpad (PWA) or Native from `L-192.168.0.196` to https://192.168.0.110:8434/ (local/private network)
-- Airpad (PWA) or Native from `L-192.168.0.196` through `https://192.168.0.200:8434/`  to `L-192.168.0.110` (local/private network)
-- Airpad (PWA) or Native from `L-192.168.0.196` through `https://45.147.121.152:8434/` to `L-192.168.0.110` (any network of device)
-- Native (app) Clipboard (and/or other data) from `L-192.168.0.196` to https://192.168.0.110:8434/ (local network, directly)
-- Native (app) Clipboard (and/or other data) from `L-192.168.0.196` to through `https://192.168.0.200:8434/`  to `L-192.168.0.110` (local network, directly)
-- Native (app) Clipboard (and/or other data) from `L-192.168.0.196` to through `https://45.147.121.152:8434/` to `L-192.168.0.110` (any network of device)
-- CWSP/`endpoint` Clipboard (and/or other data) from `L-192.168.0.110` to https://192.168.0.196:8434/ (rare case, local network, directly)
-- CWSP/`endpoint` Clipboard (and/or other data) from `L-192.168.0.110` to through `https://192.168.0.200:8434/`  to `L-192.168.0.196` (local network, directly)
-- CWSP/`endpoint` Clipboard (and/or other data) from `L-192.168.0.110` to through `https://45.147.121.152:8434/` to `L-192.168.0.196` (any network of device)
-
-### `L-192.168.0.196` may/can be:
-
-- Simulator/debug client from `45.150.9.153` (VDS), with a configured client token instead of IP
-- PWA or Native application from NAT (unknown IP, but with a configured client token instead of IP)
-- PWA or Native application from private/local network with IP `192.168.0.196`.
+Topology and packet contract: `.cursor/rules/network.mdc`.

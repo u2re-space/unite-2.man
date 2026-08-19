@@ -7,21 +7,15 @@
 > **SPECIAL NOTES (FOR AGENTS), AI-RECOMMENDATIONS:**
 >
 > ```
-> - Reasoning         : XHight
-> - Context           : 1M
-> - Preferred-LLM     : GPT-5.6 (or GPT-5.5 if first still no exists), GLM-5.2 (if available), Claude-Opus-4.8 (if available)
-> - Speciality-Level  : Senior or beyond
-> - Knowledge-Database: N >= 2026
-> - Speciality-Area   : Frontend, Backend, UI/UX-Design
-> - NeedsToWriteDocs  : True
-> - NeedsToAnalyze:   : True
-> - NeedsToCache      : True
-> - NeedsToMemory     : True
-> - NeedsToRecognize  : True
-> - NeedsToOCR        : True
+> - Reasoning         : match the task; do not default to XHigh
+> - Context           : spend little; do not fill the window
+> - Preferred-LLM     : cheapest model that can do the task
+> - NeedsToWriteDocs  : False unless the user asked
+> - NeedsToAnalyze    : only the touched surface
+> - NeedsToCache      : False
+> - NeedsToMemory     : only durable decisions; skip pantry by default
 > - MaximumStepTime   : 1Min
 > - MaximumAttempts   : 5
-> - MaximumMemPageSize: 1Mb
 > ```
 
 `.specify/memory` points to `.memories`, so this file is both the Spec Kit
@@ -29,14 +23,12 @@ constitution and the agent memory constitution.
 
 ## Agent Operating Summary
 
-- Read facts first: inspect relevant files, rules, and current architecture.
-- Spend context carefully: search first, read narrow ranges, avoid generated and
-  vendor output.
-- Protect private data: keep credential values under `private/` and do not quote
-  them in public docs or final responses.
-- Preserve contracts: import hierarchy, CWSP envelope semantics, stable action
-  names, and destination routing concepts.
-- Verify proportionally before claiming completion.
+- Do not preload this constitution, Calibration, INDEX, pantry, or network/debug specs.
+- Search first, read narrow ranges, skip generated/vendor output.
+- Do not spawn reviewers or run full tests/builds unless the user asks or the change requires that proof.
+- Protect private data: keep credentials under `private/`; never quote them.
+- Preserve import hierarchy and CWSP envelope semantics when those files are in play.
+- Verify proportionally. Docs/rules-only changes need no runtime suite.
 
 ## Core Principles
 
@@ -69,15 +61,14 @@ ignored by Git and agent indexing.
 
 ### V. Operational Verification
 
-Validation must match risk. Documentation/rule changes require targeted text and
-secret-leak checks. Runtime, network, CWSP, AirPad, Android, or clipboard changes
-require focused compatibility checks and diagnostics appropriate to the touched
-surface.
+Validation must match risk. Docs/rules-only changes need no runtime suite.
+Runtime/CWSP/AirPad/Android/clipboard changes get the narrowest check for the
+touched surface — not a full matrix, and not extra review agents, unless asked.
 
 ## Project Constraints
 
-- Preserve the project hierarchy and import direction documented in `AGENTS.md`
-  and `plans/INDEX.md`.
+- Preserve the project hierarchy and import direction documented in
+  `.cursor/rules/project.mdc`.
 - Preserve CWSP v2 packet semantics, stable action names, and route diagnostics
   unless a migration is explicitly accepted.
 - Do not conflate Endpoint URL, direct target URL, AirPad target URL, and
@@ -90,13 +81,11 @@ surface.
 
 ## Development Workflow
 
-1. Audit the relevant implementation, documents, and current rules.
-2. Identify actual architecture and data flow before editing.
-3. Make the smallest correction that satisfies the requirement.
-4. Run the narrowest verification that can prove the result.
-5. Document meaningful decisions in the appropriate rule, plan, or `.memories`
-   entry; external session notes may supplement but never replace repository state.
-6. Report changed files, validation performed, and unresolved risks.
+1. Inspect only the files this task can change.
+2. Patch the smallest correction.
+3. Run the narrowest verification that can prove the result — or skip if docs/rules-only.
+4. Do not write reports, checklists, or review packages unless asked.
+5. Record durable decisions in `.memories/` only when they are not obvious from the code.
 
 ## Governance
 
@@ -104,7 +93,7 @@ This constitution is the Spec Kit authority for requirements and planning. Curso
 rules may add operational detail, but should not contradict this file. Amendments
 must update `.memories/Constitution.md` when the agent operating contract changes.
 
-**Version**: 1.1.0 | **Ratified**: 2026-06-24 | **Last Amended**: 2026-07-10
+**Version**: 1.2.0 | **Ratified**: 2026-06-24 | **Last Amended**: 2026-08-19
 
 ---
 

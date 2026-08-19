@@ -1,164 +1,23 @@
 ---
-description: Project anatomy
+description: Library hierarchy and import direction
 alwaysApply: true
 ---
 
-> NOTE: This file mirrors the repo root rules in `.cursor/rules/project.mdc`.
-> Prefer editing the root copy and then syncing here if needed.
+# Project anatomy
 
-# Our projects (for following)
+Chromium-first. Imports only lower → higher (same-level imports are discouraged).
 
-- <https://github.com/u2re-space/crossword>
-- <https://github.com/u2re-space/unite-2.man>
-- <https://github.com/fest-live/>
+| Level | Library | Path |
+|---|---|---|
+| 0.5 | `fest/core` | `modules/projects/core.ts` |
+| 1 | `fest/dom` | `modules/projects/dom.ts` |
+| 1 | `fest/object` | `modules/projects/object.ts` |
+| 1 | `fest/veela` | `modules/projects/veela.css` |
+| 2 | `fest/lure` | `modules/projects/lur.e` |
+| 2 | `fest/icon` | `modules/projects/icon.ts` |
+| 3 | `fest/fl-ui` | `modules/projects/fl.ui` |
+| 4 | apps | `apps/*` |
 
----
+Example: `fest/lure` may import `fest/object` / `fest/dom`. `fest/object` must not import `fest/lure` or `fest/fl-ui`.
 
-## Some specifications
-
-Search and read in:
-- `/home/u2re-dev/U2RE.space/modules/projects/uniform.ts/src/newer/` (internal)
-- `/home/u2re-dev/U2RE.space/runtime/cwsp/endpoint/` (network)
-
----
-
-## Supported Features
-
-Currently, only Chromium-based browsers most suitable.
-
-- <https://chromestatus.com/>
-- <https://developer.chrome.com/>
-- <https://caniuse.com/>
-
----
-
-## 🌳 Project Hierarchy
-
-### ⛰️ Level 0 (project root)
-
-- `./` - Project root directory
-- `modules/` - Modules directory
-- `modules/projects` - Submodules and our libraries
-- `modules/shared/` - Shared modules, utilities, etc.
-- `runtime/` - Application running backend runtimes
-- `externals/` - Dist external and our libraries.
-- `assets/` - Project assets, images, fonts, etc.
-
-### 🚧 Level 0.5 (root core libraries)
-
-- `modules/projects/core.ts` - JS/TS utils and helpers library
-
-### 🚧 Level 1 (core libraries)
-
-- `modules/projects/dom.ts` - DOM utils and helpers library
-- `modules/projects/object.ts` - Core reactivity library
-- `modules/projects/veela.css` - CSS framework
-
-### 🧱 Level 2 (derived libraries)
-
-- `modules/projects/lur.e` - Reactive DOM framework
-- `modules/projects/icon.ts` - Icon library (web component)
-
-### 🏗️ Level 3 (UI libraries)
-
-- `modules/projects/fl.ui` - UI system and components library
-
-### 🏬 Level 4 (applications)
-
-- `apps/*` - Applications projects
-
----
-
-## 🧩 Import rules
-
-- ✅ Allowed imports from lower level to higher level only.
-- ⚠️ Normally, imports between in same level or not approved.
-- ⛔ Imports in lower level from next level is not allowed.
-
-### 🧪 Examples
-
-- ✅ `fest/lure` can import `fest/object` or `fest/dom`, but not vice versa.
-- ⚠️ `fest/object` and `fest/dom`, or something in same level, isn't allowed to import vice versa...
-- ⛔ `fest/object`, `fest/dom` isn't allowed to import `fest/lure` or `fest/fl-ui`.
-
----
-
-## Common Imports
-
-- `fest/core` - Core TS/JS utilities and helpers library
-- `fest/dom` - DOM utils and helpers library
-- `fest/lure` - reactive DOM framework
-- `fest/object` - Core reactivity library
-- `fest/fl-ui` - UI system and components library
-- `fest/veela` - CSS framework
-- `fest/icon` - Icon library (web component)
-
----
-
-## Project Directory Mapping
-
-By default, use key-name as import root.
-
-| Library | Path |
-|---|---|
-| `fest/core`   | `modules/projects/core.ts`    |
-| `fest/lure`   | `modules/projects/lur.e`      |
-| `fest/dom`    | `modules/projects/dom.ts`     |
-| `fest/object` | `modules/projects/object.ts`  |
-| `fest/fl-ui`  | `modules/projects/fl.ui`      |
-| `fest/veela`  | `modules/projects/veela.css`  |
-| `fest/icon`   | `modules/projects/icon.ts`    |
-
----
-
-## Symbolic links
-
-Now practically everywhere will be used symbolic links to simplify contexts.
-
----
-
-## Network stack:
-
-How &ould works our network.
-
-```
-[ Laptop/Ultrabook ] Bi-dir  {[ Server (Endpoint), Have External Entry IP ]}
-[ L-192.168.0.110  ] ←←---→→ {[ 192.168.0.200:8434 / 45.147.121.152:8434  ]}
-          ↑                         ↑                         ↑
-          ┷                         ↑                         ↑ 
-          |                         ↓                         ↓ 
-          ┗------------------{[ [L-192.168.0.196] |- - -| [L-192.168.0.208] ]}   # Phone device groups (cws-androids, PWA-airpad)
-                                [Android Phone 1]         [Android Phone 2]
-```
-
-### Topology
-
-**L-192.168.0.110 <---> L-192.168.0.196**
-- clipboard (via android application, and cwsp endpoint server)
-- `airpad` signals (PWA/WebView application)
-  - mouse
-  - keyboard
-  - clipboard
-- tunneling through 192.168.0.200:8434 / 45.147.121.152:8434 if in LTE/NAT mode, using identification client token
-
-**L-192.168.0.110 <---> L-192.168.0.208**
-- clipboard (via android application, and cwsp endpoint server)
-- `airpad` signals (PWA/WebView application)
-  - mouse
-  - keyboard
-  - clipboard
-- tunneling through 192.168.0.200:8434 / 45.147.121.152:8434 if in LTE/NAT mode, using identification client token
-
-**L-192.168.0.196 <---> L-192.168.0.208**
-- clipboard (via android application, and cwsp endpoint server)
-- tunneling through 192.168.0.200:8434 / 45.147.121.152:8434 if one of in LTE/NAT mode, using identification client token
-
-**L-192.168.0.110 <---> {[ 192.168.0.200:8434 / 45.147.121.152:8434 ]}**
-- initiated or initiator exchanger (bridge/tunnel/link)
-- `L-192.168.0.110` is AirPad controllable (by PWA apps)
-  - Or directly, or through bridge/proxy
-- `L-192.168.0.110` is one of `clipboard` (and/or other data) synchronize/exchanger member
-  - Devices through bridge/proxy can/may ask or pass `clipboard` (and/or other data) data
-
-**{[ 192.168.0.200:8434 / 45.147.121.152:8434 ]}** 
-- is in general a central coordinator (bridge, and/or tunnel/proxy)
+Prefer symlinks over copied trees. CWSP topology is in `.cursor/rules/network.mdc`, not here.

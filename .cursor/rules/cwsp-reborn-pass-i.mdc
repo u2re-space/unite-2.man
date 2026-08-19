@@ -8,11 +8,7 @@ alwaysApply: false
 
 ## Read first
 
-1. `plans/INDEX.md`
-2. `.progress/CWSP-reborn/STATE.json`
-3. `.roadmaps/CWSP-reborn/PASS-I.md`
-4. `apps/CWSP-reborn/.analysis/architecture.md`
-5. `.cursor/rules/network.mdc` for packet semantics
+`.progress/CWSP-reborn/STATE.json` only. Open the pass ledger or `network.mdc` if the active task needs them. Do not re-read INDEX, architecture, or green `check:*` output.
 
 ## Scope
 

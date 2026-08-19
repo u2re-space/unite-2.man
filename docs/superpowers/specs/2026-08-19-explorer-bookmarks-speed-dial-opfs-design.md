@@ -1,7 +1,7 @@
 # Explorer Bookmarks + Speed Dial OPFS Design
 
 Date: 2026-08-19  
-Status: draft (awaiting user review before implementation plan)
+Status: implemented (pending CRX smoke) — Tasks 1–5 complete; unit tests green for PathRouter / LinkStore / ChromeBookmarksBackend. CRX on-device smoke (`/bookmarks/` R/W, mirror bookmark bar, folder → Explorer, LS→OPFS migration) still owed.
 
 ## Goal
 

@@ -1,8 +1,7 @@
 ---
-description: Recovery and stabilization rule for CWSP endpoint, AirPad routing, clipboard sync, TLS/HTTPS, direct/proxy/reverse connectivity, Android/PWA integration, and diagnostics.
-globs:
-  - "**/*"
-alwaysApply: true
+description: CWSP/AirPad/clipboard recovery. Attach for endpoint, TLS, routing, Android diagnostics — not always-on.
+globs: "{apps/CWSP-*/**,runtime/cwsp/**,runtime/legacy/**,**/airpad/**,**/*clipboard*,**/android/**,**/ecosystem.config.*}"
+alwaysApply: false
 ---
 
 # CWSP / AirPad / Clipboard Recovery Rule
@@ -22,38 +21,17 @@ When working in this repository, prioritize recovery and stabilization of the fo
 
 ---
 
-## Mandatory execution model
-Always work in this order:
+## Execution model
 
-1. audit current implementation
-2. identify actual architecture and data flow
-3. make targeted corrections
-4. run compatibility tests
-5. inspect logs and diagnostics
-6. iterate further if needed
-7. document final state
+Audit the touched surface, then patch. Do not blind-edit.
 
-Do not perform blind edits without understanding root cause and impact.
+Do not run compatibility matrices, device E2E, ADB, deploy, or PM2 unless the change can break those paths or the user asks. Logs-first only when diagnosing a live failure.
 
 ---
 
-## Mandatory pre-change checks
-Before editing related code, inspect all relevant parts of the system:
+## Pre-change checks
 
-- `package.json`
-- `main`, `module`, `type`, `exports`, `bin`
-- start/build/dev scripts
-- ESM/CJS compatibility
-- import/export paths
-- runtime entrypoints
-- server/client bootstrap flow
-- websocket/network transport layers
-- HTTPS/TLS configuration
-- reverse proxy behavior
-- routing by destination client ID
-- AirPad settings persistence
-- clipboard event flow
-- cursor/input event flow
+Inspect only the files on the path you are changing (entrypoint, transport, TLS, routing, or clipboard as applicable). Do not inventory the whole stack on every edit.
 
 ---
 
@@ -191,71 +169,17 @@ Canonical PM2 home on desk: `%CWSP_SERVER_ROOT%\.data\pm2-home` (not `%USERPROFI
 
 ---
 
-## Logging and diagnostics requirements
-Always consider operational visibility:
+## Logging
 
-- PM2 logs
-- PM2 process configuration
-- PM2 cleanup/flush when logs are oversized
-- ADB diagnostics
-- Android logcat
-- health checks
-- smoke tests
-
-If you change services, startup flow, or connectivity behavior, also add or improve diagnostics commands and document them.
-
----
-
-## Files and artifacts you may need to create or update
-When necessary, create or fix:
-
-- `package.json`
-- runtime scripts
-- PM2 ecosystem config
-- TLS/HTTPS configs
-- proxy configs
-- AirPad configuration persistence
-- integration / compatibility tests
-- diagnostics scripts
-- docs
-- migration notes
-- `.env.example`
-
----
+When diagnosing a live failure, check the relevant PM2 log, logcat, or health probe first. Do not add diagnostics scripts or docs unless the user asks or the failure lacks a signal.
 
 ## Quality bar
-Do not treat the work as complete unless the following are confirmed where applicable:
 
-- CWSP endpoint is repaired
-- module/import issues are repaired
-- HTTPS/TLS is restored
-- direct connection works
-- routed/proxy connection works
-- clipboard sync works
-- cursor movement works
-- AirPad settings persistence works
-- Android/PWA integration is restored or explicitly prepared/documented
-- PM2/logging/diagnostics are operational and documented
+Prove only the scenario this change can break. Do not require a full clipboard/AirPad/TLS/Android matrix unless the user asks or you touched that path.
 
----
+## Reporting
 
-## Required reporting style
-After each significant iteration, report:
-
-1. what was found
-2. what is being changed
-3. why it is being changed
-4. how it will be validated
-5. what risks remain
-
-In the final report, always include:
-
-- changed files
-- changed configs
-- added tests/scripts
-- compatibility matrix
-- validated scenarios
-- unresolved scenarios or risks
+Use the short optimization.mdc format. No compatibility-matrix writeups unless asked.
 
 ---
 

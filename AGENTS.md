@@ -1,205 +1,29 @@
 # AGENTS.md
 
-## Token usage optimization
+This file overrides skills (pantry, superpowers, Bugbot, review loops, GSD).
 
-Keep context usage efficient:
+## Token and time budget
 
-- Prefer **Grep / ripgrep** when locating functions, classes, variables, or symbols instead of opening large files.
-- Read only the relevant file ranges when a file is large.
-- Do not proactively load generated or vendor output into context, such as:
-  - `build/`
-  - `.gradle/`
-  - minified bundles
-  - other generated artifacts
-- Be concise in both internal reasoning and user-facing responses.
+- Do not preload domain specs. Read `.cursor/rules/network.mdc` / `debugging.mdc` only for CWSP network, clipboard, AirPad, or endpoint work.
+- Do not spawn reviewers, Bugbot, security-review, or extra agents unless the user asks.
+- Do not run full test suites, `npm run build`, deploy, PM2, ADB, or SSH unless the change needs that proof or the user asks.
+- Verify only the touched surface. Skip verification for docs/rules-only edits.
+- Grep before reading. Read narrow ranges. Skip `build/`, `.gradle/`, minified, lockfiles, `.archives`, `.backups`, `.superpowers/sdd`.
+- Short replies. No reports, checklists, or review writeups unless asked.
+- Skip pantry, Constitution, Calibration, INDEX, and AGENT_BOOTSTRAP rituals unless resuming CWSP-reborn or the user asks.
 
----
+## Hierarchy
 
-## Commenting and special comments
+Import only lower → higher. Mapping: `.cursor/rules/project.mdc`.
 
-When editing `*.ts` / `*.tsx` / `*.js` / `*.mjs` files:
+## Comments
 
-- Add comments for intent, invariants, side effects, protocol/data-shape expectations, lifecycle, trust boundaries, and non-obvious tradeoffs.
-- Prefer module-level block comments for non-trivial files and JSDoc for exported functions, classes, and methods when behavior is not obvious from the signature.
-- Do not add narration comments that merely restate syntax or variable assignments.
-- Keep comments close to the code they describe, and update or delete stale comments in the same edit.
-- Extend an existing good overview comment instead of stacking duplicate comment blocks.
+When editing TS/JS: `.cursor/rules/comments-special-comments.mdc`.
 
-Use these special markers consistently when they help:
+## Secrets
 
-- `NOTE:` general local context for future humans or AI.
-- `WHY:` rationale that is not obvious from the implementation.
-- `INVARIANT:` a property that must remain true across edits.
-- `TODO(owner/date-or-issue):` a concrete follow-up with enough context to act.
-- `FIXME:` known wrong behavior that should be corrected soon.
-- `HACK:` temporary workaround; include the intended removal condition.
-- `COMPAT:` compatibility behavior for browser/protocol/migration quirks.
-- `SECURITY:` validation or secret-handling boundaries.
-- `PERF:` hot-path or latency-sensitive behavior.
-- `AI-READ:` rare handoff note for hidden contracts or repo-specific traps.
+Never quote `private/`. Link the path only.
 
-Comment hygiene rules:
+## CWSP nodes (names only)
 
-- Do not introduce marker spam; one precise comment is better than many weak ones.
-- Do not leave bare `TODO` / `FIXME` comments without actionable context.
-- Preserve valid special comments during refactors, but remove them once they stop being true.
-
----
-
-### npm command defaults
-
-These commands default to the **`cwsp` hybrid flavor** (`space.u2re.cwsp`):
-
-- `npm run dev`
-- `npm run assemble`
-- `npm run build`
-
-### Product flavors
-
-| Flavor | `applicationId` | Purpose |
-|---|---|---|
-| `cws` | `space.u2re.cws` | Legacy NativeScript flavor (removed; use `cwsp` / CWSAndroid Java) |
-
----
-
-## Additional code locations
-
-When the task is relevant, also inspect these paths:
-
-- `/home/u2re-dev/U2RE.space/modules/projects/uniform.ts/src/newer/` — internal
-- `/home/u2re-dev/U2RE.space/runtime/cwsp/endpoint/` — network-related
-
----
-
-## Model selection
-
-- **Analysis / architecture / planning:** Claude Opus 4.6, GPT 5.4 (`high` or `xhigh`), Gemini 3.1 Pro
-- **Coding / implementation / refactoring:** GPT-5.4 (`low` or `medium`), Claude 4.6 Sonnet, Gemini 3.1 Pro
-- **Edits / fixes / refinements:** `GPT-5.3-codex-spark`, GPT-5.4 (`instant`, `none`, or `minimal` reasoning), Claude 4.5 Haiku, Gemini 3 Flash
-- **Documentation / specs:** GPT-5.4 (`low` or `medium`), Claude 4.6 Sonnet, Gemini 3.1 Pro
-- **Recognition / scanning / images:** GPT-5.4 (`low`, `instant`, `none`, or `minimal`), Claude 4.6 Sonnet, Gemini 3.1 Pro, or Gemini 3 Flash
-
----
-
-## Remote access
-
-Remote roles include the Windows desk, gateway/server, and WAN simulator.
-Exact hosts, usernames, keys, elevation policy, and connection commands are
-private operational data stored in `private/connectivity.md`. Public agent
-guidance may use logical node IDs and safe command names only.
-
----
-
-## Android debugging
-
-- ADB usage (`adb` and/or `adb shell`)
-- Connect to `192.168.0.196:5555` (defaultly)
-- Reading logcat
-
----
-
-## Network stack:
-
-How &ould works our network.
-
-```
-[ Laptop/Ultrabook ] Bi-dir  {[ Server (Endpoint), Have External Entry IP ]}
-[ L-110  ] ←←---→→ {[ 192.168.0.200:8434 / 45.147.121.152:8434  ]}
-          ↑                         ↑                         ↑
-          ┷                         ↑                         ↑ 
-          |                         ↓                         ↓ 
-          ┗------------------{[ [L-196] |- - -| [L-208] |- - -| [L-210] ]}   # Phone device groups (cws-androids, PWA-airpad)
-                                [Android Phone 1]         [Android Phone 2]         [Android Phone 3]
-```
-
-### Topology
-
-**L-110 <---> L-196**
-- clipboard (via android application, and cwsp endpoint server)
-- `airpad` signals (PWA/WebView application)
-  - mouse
-  - keyboard
-  - clipboard
-- tunneling through 192.168.0.200:8434 / 45.147.121.152:8434 if in LTE/NAT mode, using identification client token
-
-**L-110 <---> L-208**
-- clipboard (via android application, and cwsp endpoint server)
-- `airpad` signals (PWA/WebView application)
-  - mouse
-  - keyboard
-  - clipboard
-- tunneling through 192.168.0.200:8434 / 45.147.121.152:8434 if in LTE/NAT mode, using identification client token
-
-**L-110 <---> L-210**
-- clipboard (via android application, and cwsp endpoint server)
-- `airpad` signals (PWA/WebView application)
-  - mouse
-  - keyboard
-  - clipboard
-- tunneling through 192.168.0.200:8434 / 45.147.121.152:8434 if in LTE/NAT mode, using identification client token
-
-**L-196 <---> L-208**
-- clipboard (via android application, and cwsp endpoint server)
-- tunneling through 192.168.0.200:8434 / 45.147.121.152:8434 if one of in LTE/NAT mode, using identification client token
-
-**L-110 <---> {[ 192.168.0.200:8434 / 45.147.121.152:8434 ]}**
-- initiated or initiator exchanger (bridge/tunnel/link)
-- `L-110` is AirPad controllable (by PWA apps)
-  - Or directly, or through bridge/proxy
-- `L-110` is one of `clipboard` (and/or other data) synchronize/exchanger member
-  - Devices through bridge/proxy can/may ask or pass `clipboard` (and/or other data) data
-
-**{[ 192.168.0.200:8434 / 45.147.121.152:8434 ]}** 
-- is in general a central coordinator (bridge, and/or tunnel/proxy)
-
----
-
-## Potential routes what needs to support
-
-- Airpad (PWA) or Native from `L-196` to https://192.168.0.110:8434/ (local/private network)
-- Airpad (PWA) or Native from `L-196` through `https://192.168.0.200:8434/`  to `L-110` (local/private network)
-- Airpad (PWA) or Native from `L-196` through `https://45.147.121.152:8434/` to `L-110` (any network of device)
-- Native (app) Clipboard (and/or other data) from `L-196` to https://192.168.0.110:8434/ (local network, directly)
-- Native (app) Clipboard (and/or other data) from `L-196` to through `https://192.168.0.200:8434/`  to `L-110` (local network, directly)
-- Native (app) Clipboard (and/or other data) from `L-196` to through `https://45.147.121.152:8434/` to `L-110` (any network of device)
-- CWSP/`endpoint` Clipboard (and/or other data) from `L-110` to https://192.168.0.196:8434/ (rare case, local network, directly)
-- CWSP/`endpoint` Clipboard (and/or other data) from `L-110` to through `https://192.168.0.200:8434/`  to `L-196` (local network, directly)
-- CWSP/`endpoint` Clipboard (and/or other data) from `L-110` to through `https://45.147.121.152:8434/` to `L-196` (any network of device)
-
----
-
-### `L-196` may/can be:
-
-- Simulator/debug client from `45.150.9.153` (VDS), with a configured client token instead of IP
-- PWA or Native application from NAT (unknown IP, but with a configured client token instead of IP)
-- PWA or Native application from private/local network with IP `192.168.0.196`.
-
-### `L-210` may/can be:
-
-- PWA or Native application from private/local network with IP `192.168.0.210`.
-- NAT/LTE client with a configured client token when LAN IP is unknown.
-
----
-
-
-# Multi-Model Operating Rule
-
-Model roles:
-- Grok 4.5: audit, critique, risk detection, blocker analysis, recovery planning.
-- GLM 5.2: implementation, small patches, build fixes, checklist execution.
-- GPT-5.6: foundation rebuild, high-level consolidation, final arbitration only if budget allows.
-
-Default permissions:
-- Grok 4.5 should not edit files unless explicitly instructed.
-- GLM 5.2 should not redesign architecture unless a documented blocker proves it is required.
-- No model should expand scope.
-- No model should redesign existing UI/UX.
-- No model should continue past one checkpoint without reporting.
-
-Handoff rule:
-Every model must leave:
-- what it inspected;
-- what it changed, if anything;
-- command run;
-- result;
-- next exact action.
+L-110 desk, L-200 gateway, L-196 / L-208 / L-210 phones. Topology lives in `.cursor/rules/network.mdc`.

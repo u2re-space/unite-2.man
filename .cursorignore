@@ -48,10 +48,15 @@ htmlcov/
 .DS_Store
 Thumbs.db
 
-# Cursor - не тянуть в контекст
+# Cursor - do not pull into context
 .cursor/analysis/
 .cursor/plans/
 .cursor/snapshots/
+
+# Heavy agent dumps (open by path only if the task needs them)
+.archives/
+.backups/
+.superpowers/sdd/
 
 # Token optimization - ignore large unneeded files
 package-lock.json
