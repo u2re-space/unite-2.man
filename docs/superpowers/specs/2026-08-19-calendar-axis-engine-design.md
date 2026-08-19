@@ -138,7 +138,7 @@ interface TimelineAxes {
 - Span along the **time** axis (start + duration).
 - Pin to **day** or **branch** on the other axis.
 - Multi-day week events: clip/continue per day as today.
-- Day view: missing/invalid mapping without id → `unassigned`; unknown id → dynamic lane.
+- Day view: missing `branchId` → `unassigned`; unknown id → dynamic lane.
 
 ### Interactions (v1)
 
