@@ -1,16 +1,18 @@
 # U2RE Planning Index
 
-- **Updated:** 2026-07-10
+- **Updated:** 2026-08-22
 - **Purpose:** identify canonical planning artifacts and prevent edits through mirrors
 
 ## Source-of-truth order
 
 1. Current user request.
-2. `.memories/Constitution.md`.
-3. `plans/Calibration.md`.
-4. Domain rules under `.cursor/rules/`.
-5. Product plan and analysis listed below.
-6. Progress and recovery evidence.
+2. `.progress/CURRENT.json` (live thread across models).
+2b. `.progress/MAP.json` (search cache: tag → paths).
+3. `.memories/Constitution.md` when amending process.
+4. `plans/Calibration.md`.
+5. Domain rules under `.cursor/rules/`.
+6. Product plan and analysis listed below.
+7. Named-pass state: `.progress/<project>/STATE.json`.
 
 ## CWSP-reborn
 
@@ -20,6 +22,7 @@
 - Architecture snapshot: `apps/CWSP-reborn/.analysis/architecture.md`
 - Product specification: `apps/CWSP-reborn/docs/Specification.md`
 - Network semantics: `.cursor/rules/network.mdc`
+- Live workspace thread: `.progress/CURRENT.json`
 - Resume state: `.progress/CWSP-reborn/STATE.json`
 - Operational memory: `.memories/CWSP-reborn-Pass-I.md`
 

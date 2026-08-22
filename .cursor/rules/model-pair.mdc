@@ -1,6 +1,6 @@
 ---
-description: Implementer/mapper pair for any LLMs (Grok 4.6, GPT 5.6 Luna, others)
-globs: "{modules/projects/{veela.css,fl.ui,lur.e,dom.ts}/**,modules/shells/**,apps/**,.cursor/rules/**}"
+description: Implementer/mapper pair and cross-model handoff
+globs: "{modules/projects/{veela.css,fl.ui,lur.e,dom.ts}/**,modules/shells/**,apps/**,.cursor/rules/**,.progress/**}"
 alwaysApply: false
 ---
 
@@ -15,6 +15,18 @@ alwaysApply: false
 
 Same roles apply to GLM / Claude / others when the user names them.
 
+## Thread (do not lose the work)
+
+Canonical live pointer: `.progress/CURRENT.json`. Named-pass ledger: `.progress/<project>/STATE.json`.
+
+1. Start: read `CURRENT.json`. Tag lookup: `MAP.json`. If `project` is a pass, also read that `STATE.json`.
+2. Do not re-audit paths listed in `lastDone` / `paths` / MAP tags unless the user changed the goal or those files are gone.
+3. Mapper: put `CONFLICTS` / `SAFE_FIRST_FIXES` / `DO_NOT_TOUCH` into `CURRENT.json` and new hubs into `MAP.json`. No parallel notes under aliases.
+4. Implementer: apply one SoT or named-consumer patch. Then set `lastDone`, `next`, `paths`, `models.last`.
+5. End of a meaningful turn: refresh `updatedAt`, `intent`, `status`. Keep `lastDone` to the last 3–5 facts.
+
+Durable decisions that must survive weeks go to `.memories/`, not `CURRENT.json`.
+
 ## Shared
 
 - Tokens: `.cursor/rules/design-tokens.mdc`. Library: `.cursor/rules/library-contracts.mdc`.
@@ -23,4 +35,4 @@ Same roles apply to GLM / Claude / others when the user names them.
 
 ## Handoff
 
-Mapper reports. Implementer applies one SoT or named-consumer patch. Mapper re-checks only that surface.
+Mapper reports in `CURRENT.json`. Implementer applies. Mapper re-checks only that surface.

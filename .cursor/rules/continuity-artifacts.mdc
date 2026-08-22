@@ -10,30 +10,39 @@ alwaysApply: false
 
 - Repo-root `AGENTS.md` is the live agent contract. `.cursor/docs/AGENTS.md` is the CWSP docs guide (different file).
 - `.cursor/plans/**` and `.cursor/context/**` are mirrors. Edit the real path once.
+- `.progress/CURRENT.json` is the workspace thread any model reads first.
+- `.progress/MAP.json` is the search cache: tag/synonym → paths. Not a full tree.
+- `.progress/<project>/STATE.json` is the machine-readable resume pointer for a named pass.
+- `.progress/<project>/JOURNAL.md` is append-only human context for that pass.
 - `plans/` explains accepted work and exact execution steps.
 - `.roadmaps/` orders phases, dependencies, and evidence gates.
-- `.progress/<project>/STATE.json` is the machine-readable resume pointer.
-- `.progress/<project>/JOURNAL.md` is append-only human context.
 - `.memories/` stores concise durable decisions and non-obvious findings.
 - `.backups/` stores manifests and reviewed patches, not copied source trees.
+
+`feat/cwsp-launcher` did not carry newer AI contracts than `main` (2026-08-22). Do not copy rules from that branch over this tree.
+
+## CURRENT.json fields
+
+`thread`, `intent`, `status`, `project`, `lastDone[]`, `next`, `blockers[]`, `paths[]`, `models.{implementer,mapper,last}`, optional `passState`.
+
+No secrets. No pantry dumps. Three to five `lastDone` lines is enough.
 
 ## Before significant edits
 
 Skip manifests and journal updates unless the user asked or this is a CWSP-reborn pass checkpoint.
 
-For those checkpoints: confirm git status, then one active task in `STATE.json`.
+For those checkpoints: confirm git status, then one active task in `STATE.json`. Always keep `CURRENT.json` aligned with that task.
 
 ## At each checkpoint
 
 - Record changed files, commands, results, blockers, and rollback reference.
 - Mark unverified scenarios explicitly.
-- Keep only one active task.
+- Keep only one active task in `STATE.json` and one live `thread` in `CURRENT.json`.
 - Update memory only for durable decisions or findings.
 
 ## On interruption
 
-Resume from `STATE.json` and the latest journal entry. Do not restart broad
-discovery unless evidence is stale or the recorded paths no longer exist.
+Resume from `CURRENT.json`, then the named `STATE.json` if `project` points at a pass. Do not restart broad discovery unless evidence is stale or the recorded paths no longer exist.
 
 ## Safety
 

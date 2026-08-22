@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-08-22T22:17:00+07:00",
+  "how": "Resolve tag or synonym → Read only those paths. If missing: one Grep for FIND:<tag>. Never walk skip.",
+  "skip": [
+    ".archives",
+    ".backups",
+    ".backup",
+    ".superpowers/sdd",
+    ".trunk",
+    "build",
+    ".gradle",
+    "node_modules",
+    "dist",
+    "lockfiles"
+  ],
+  "markers": [
+    "FIND:",
+    "TAG:",
+    "MAP:",
+    "WHY:",
+    "INVARIANT:",
+    "AI-READ:",
+    "PERF:",
+    "COMPAT:"
+  ],
+  "synonyms": {
+    "нить": "thread",
+    "токены": "budget",
+    "герцовка": "high-refresh",
+    "fps": "high-refresh",
+    "безфигур": "shapeless",
+    "иконки": "icon-picker",
+    "лаунчер": "speed-dial",
+    "веела": "veela",
+    "cwsp": "network"
+  },
+  "tags": {
+    "thread": [".progress/CURRENT.json"],
+    "map": [".progress/MAP.json"],
+    "budget": ["AGENTS.md", ".cursor/rules/optimization.mdc"],
+    "pair": [".cursor/rules/model-pair.mdc"],
+    "constitution": [".memories/Constitution.md"],
+    "comments": [".cursor/rules/comments-special-comments.mdc"],
+    "hierarchy": [".cursor/rules/project.mdc"],
+    "veela": [".cursor/rules/design-tokens.mdc", "modules/projects/veela.css"],
+    "overlays": [".cursor/rules/library-contracts.mdc"],
+    "network": [".cursor/rules/network.mdc"],
+    "debug": [".cursor/rules/debugging.mdc"],
+    "core": ["modules/projects/core.ts"],
+    "dom": ["modules/projects/dom.ts"],
+    "object": ["modules/projects/object.ts"],
+    "uniform": ["modules/projects/uniform.ts"],
+    "lure": ["modules/projects/lur.e"],
+    "icon": ["modules/projects/icon.ts"],
+    "image": ["modules/projects/image.ts"],
+    "fl-ui": ["modules/projects/fl.ui"],
+    "speed-dial": ["modules/projects/fl.ui/src/ui/speed-dial"],
+    "shapeless": [
+      "modules/projects/fl.ui/src/ui/speed-dial/tile-icon.ts",
+      "modules/projects/fl.ui/src/ui/speed-dial/SpeedDial.scss",
+      "apps/CWSP-shell/src/frontend/views/home/navigation/app-menu/AppMenu.ts"
+    ],
+    "icon-picker": ["modules/projects/fl.ui/src/ui/speed-dial/icon-resource-picker.ts"],
+    "high-refresh": [
+      "apps/CWSP-shell/src/java/space/u2re/cwsp/DisplayRefreshUnlock.java",
+      "apps/CWSP-shell/src/java/space/u2re/cwsp/MainActivity.java"
+    ],
+    "cwsp-reborn": [
+      ".progress/CWSP-reborn/STATE.json",
+      ".cursor/skills/cwsp-reborn-pass/SKILL.md"
+    ]
+  }
+}

@@ -2,9 +2,13 @@
 
 Do not run this ritual on every chat. Live contract is `AGENTS.md`.
 
-Resume only when the user asks or the task is an interrupted CWSP-reborn pass:
+Cheap resume (any thread):
 
 1. `AGENTS.md` (already in context)
-2. `.progress/CWSP-reborn/STATE.json` if that project is in play
+2. `.progress/CURRENT.json`
+3. `.progress/MAP.json` only if you need a tag → path
 
-Then continue the recorded active task. Do not expand scope, redesign UI, or re-read Constitution/Calibration/INDEX.
+CWSP-reborn pass only: then `.progress/CWSP-reborn/STATE.json`.
+
+Do not expand scope, redesign UI, or re-read Constitution / Calibration / INDEX / archives / backups.
+One Grep for `FIND:<tag>` if MAP misses. Do not repo-walk `skip` in MAP.

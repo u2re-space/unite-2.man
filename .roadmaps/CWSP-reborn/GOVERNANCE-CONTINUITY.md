@@ -15,6 +15,7 @@
 | Product documentation | `apps/CWSP-reborn/docs/` |
 | Analysis snapshot | `apps/CWSP-reborn/.analysis/` |
 | Roadmaps | `.roadmaps/CWSP-reborn/` |
+| Live thread (any model) | `.progress/CURRENT.json` |
 | Resume state | `.progress/CWSP-reborn/STATE.json` |
 | Operational memory | `.memories/CWSP-reborn-Pass-I.md` |
 | Recovery manifests | `.backups/manifests/` |

@@ -24,6 +24,11 @@ alwaysApply: false
 - `SECURITY:` trust boundary, validation requirement, or secret-handling constraint.
 - `PERF:` hot path, cache expectation, batching rule, or latency-sensitive behavior.
 - `AI-READ:` rare handoff note for code with hidden contracts or repo-specific traps that are easy to break.
+- `FIND:tag` grep hook for a search hub (one word, kebab-case). Keep in the file header.
+- `TAG:a,b` optional extra hubs when one file owns several concepts.
+- `MAP:path` pointer to the canonical file when this copy is not SoT.
+
+Search: resolve `tag` via `.progress/MAP.json` first. Grep `FIND:tag` only if MAP misses.
 
 ## Editing rules
 

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "updatedAt": "2026-08-22T22:18:00+07:00",
+  "thread": "search-map and token budget",
+  "intent": "Cheap search: MAP tags + FIND hubs. Do not walk archives or re-read the whole tree.",
+  "status": "active",
+  "project": "workspace",
+  "lastDone": [
+    "Added .progress/MAP.json (tag/synonym → paths, skip list, markers)",
+    "Search protocol in AGENTS.md + optimization.mdc; FIND hubs on shapeless and high-refresh",
+    "AGENT.md is a symlink to AGENTS.md — do not write a second contract there"
+  ],
+  "next": "Use MAP before Grep. Add a tag when a new hub is found. Do not generate a full codebase tree.",
+  "blockers": [],
+  "paths": [
+    ".progress/MAP.json",
+    ".progress/CURRENT.json",
+    "AGENTS.md",
+    ".cursor/rules/optimization.mdc",
+    ".cursor/rules/comments-special-comments.mdc"
+  ],
+  "models": {
+    "implementer": "Grok 4.6",
+    "mapper": "GPT 5.6 Luna 1M Max",
+    "last": "implementer"
+  },
+  "passState": ".progress/CWSP-reborn/STATE.json"
+}

@@ -1,8 +1,8 @@
 # U2RE Projects Constitution
 
-- **Дата создания или обновления:** 10.07.2026
-- **Рассмотрены или прочтены:** 10.07.2026
-- **Изменены (автоматически):** 10.07.2026
+- **Дата создания или обновления:** 22.08.2026
+- **Рассмотрены или прочтены:** 22.08.2026
+- **Изменены (автоматически):** 22.08.2026
 
 > **SPECIAL NOTES (FOR AGENTS), AI-RECOMMENDATIONS:**
 >
@@ -24,7 +24,8 @@ constitution and the agent memory constitution.
 ## Agent Operating Summary
 
 - Do not preload this constitution, Calibration, INDEX, pantry, or network/debug specs.
-- Search first, read narrow ranges, skip generated/vendor output.
+- Continuing work: read `.progress/CURRENT.json` first (small). Do not restart discovery if it is fresh.
+- Search: `.progress/MAP.json` then at most one `FIND:<tag>` Grep. Skip archives/backups/trunk.
 - Do not spawn reviewers or run full tests/builds unless the user asks or the change requires that proof.
 - Protect private data: keep credentials under `private/`; never quote them.
 - Preserve import hierarchy and CWSP envelope semantics when those files are in play.
@@ -86,6 +87,7 @@ touched surface — not a full matrix, and not extra review agents, unless asked
 3. Run the narrowest verification that can prove the result — or skip if docs/rules-only.
 4. Do not write reports, checklists, or review packages unless asked.
 5. Record durable decisions in `.memories/` only when they are not obvious from the code.
+6. Keep the live workspace thread in `.progress/CURRENT.json` so a later model resumes the same intent.
 
 ## Governance
 
@@ -93,7 +95,11 @@ This constitution is the Spec Kit authority for requirements and planning. Curso
 rules may add operational detail, but should not contradict this file. Amendments
 must update `.memories/Constitution.md` when the agent operating contract changes.
 
-**Version**: 1.2.0 | **Ratified**: 2026-06-24 | **Last Amended**: 2026-08-19
+**Version**: 1.3.1 | **Ratified**: 2026-06-24 | **Last Amended**: 2026-08-22
+
+Cross-model continuity (1.3.0): `.progress/CURRENT.json` is the live thread.
+Search cache (1.3.1): `.progress/MAP.json` — tag/synonym → paths; `FIND:tag` in hubs.
+`feat/cwsp-launcher` had no newer AI/LLM contracts than `main` on 2026-08-22.
 
 ---
 
@@ -184,43 +190,39 @@ export const importShared = <T>(key: symbol) => {
 
 ## Важное примечание - роли ИИ, агентов и моделей
 
-> Возможно потребуется корректировка suitables.
+Roles, not brands. Live pair: `AGENTS.md` + `.cursor/rules/model-pair.mdc`.
+Thread: `.progress/CURRENT.json` (then `.progress/<project>/STATE.json` if named).
+
+| Role | Default (2026-08-22) | Writes |
+| --- | --- | --- |
+| Implementer | Grok 4.6 groups | SoT and real files |
+| Mapper | GPT 5.6 Luna (1M Max) | `CONFLICTS` / `SAFE_FIRST_FIXES` / `DO_NOT_TOUCH` in CURRENT only |
+
+The user may name GLM / Claude / others. If two models would edit one file, implementer writes.
+
+Brand lists below are historical suitables, not the live contract.
 
 **Архитектура и фундамент (основа):**
 
-- Fable 5 (Highest reasoning or High, 1M context)
-- GPT-5.6 (Highest reasoning, 1M context) [Sol]
+- GPT-5.6 Luna (1M Max) as mapper
+- Grok 4.6 as implementer when the scan is already in CURRENT
 
 **Дизайн и UI/UX:**
 
-- Fable 5  (Highest reasoning or High, 1M context)
-- GPT-5.6  (Highest reasoning or High, 1M context) [Sol or Terra]
-- Sonnet 5 (High reasoning, most suitable context)
+- Grok 4.6 (implementer) after mapper scan
+- GPT-5.6 Luna / Terra when the user names them
+- Sonnet / GLM when the user names them
 
-**Имплементация и реализация основного кода (компонентов, модулей):**
+**Имплементация и реализация основного кода:**
 
-- GPT-5.6 (Highest reasoning, 1M context or more) [Sol]
-- Fable 5 (Highest reasoning or High, 1M context)
-- GLM-5.2 (Highest, maximum suitable context)
+- Grok 4.6 (implementer)
+- GLM-5.2 when the user names it
 
-**Поправки и коррекции в коде, а также тестирование:**
+**Поправки, коррекции, тестирование:**
 
-- Sonnet 5 (High reasoning, or bit lower, most suitable context)
-- Grok 4.5 (High reasoning, most suitable context) [may be Fast]
-- GLM-5.2  (Highest, maximum suitable context)
-- GPT 5.6  (Highest, High or Medium reasoning, 1M context or Fast) [Terra or Luna]
-- Gemini 3.5 Flash
+- Grok 4.6
+- GLM-5.2 / Sonnet when the user names them
 
-**Code Review:**
+**Code Review / Documentation:**
 
-- GLM-5.2  (Highest, maximum suitable context)
-- GPT-5.6  (Highest reasoning or High, 200k or 1M context) [Sol or Terra]
-- Fable 5  (Highest reasoning or High/Medium , 1M context)
-- Sonnet 5 (High reasoning, most suitable context)
-- Grok 4.5 (High reasoning)
-- Gemini 3.1 Pro
-
-**Documentation and Specification:**
-
-- GPT-5.6 (Highest reasoning, 1M context, cachable) [Sol]
-- Fable 5 (Highest reasoning, 1M context)
+- Only when the user asks. Mapper findings go to CURRENT, not a review file.

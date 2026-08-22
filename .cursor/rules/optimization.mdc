@@ -9,10 +9,13 @@ Minimize tokens and wall-clock. User instructions in `AGENTS.md` override skills
 
 ## Context
 
-- Grep/search before opening files. Read the smallest range that answers the question.
-- Do not load `build/`, `.gradle/`, minified bundles, lockfiles, `.archives`, `.backups`, or `.superpowers/sdd`.
+- Resume: `.progress/CURRENT.json`, then `.progress/MAP.json` if you need a tag → path.
+- If MAP has the tag, Read those paths only. Do not repo-walk.
+- Else one Grep for `FIND:<tag>` or a marker (`WHY:`, `INVARIANT:`, `AI-READ:`). Then narrow Read.
+- Do not load `build/`, `.gradle/`, minified bundles, lockfiles, `.archives`, `.backups`, `.backup`, `.trunk`, or `.superpowers/sdd`.
 - Do not read Constitution, Calibration, INDEX, pantry, or network/debug specs unless this task needs them.
 - Do not duplicate unchanged code in replies.
+- After a hit, add or refresh the tag in `MAP.json` (one line). Do not grow MAP into a tree dump.
 
 ## Time
 

@@ -13,7 +13,7 @@ Do not preload the files below. Open one only when the task needs it.
 2. `AGENTS.md` (live contract) and `.cursor/rules/optimization.mdc` (always-on budget).
 3. Domain on demand: `library-contracts.mdc`, `design-tokens.mdc`, `model-pair.mdc`, `network.mdc` / `debugging.mdc`.
 4. Governance if amending process: `.memories/Constitution.md`.
-5. Resume a pass: `.progress/<project>/STATE.json`, then the active ledger.
+5. Resume work: `.progress/CURRENT.json`. Tag lookup: `.progress/MAP.json`. Named pass: `.progress/<project>/STATE.json`.
 6. Do not edit `.cursor/{plans,context}/**` mirrors; edit the real file once.
 
 ## Operating contract

@@ -10,8 +10,8 @@ description: >-
 
 ## 1. Models / mode
 
-- Use **Grok 4.5** + **GLM-5.2** only.
-- **No Sol** (GPT-5.6-Sol excluded).
+- Workspace pair in `AGENTS.md` wins: implementer = Grok 4.6; mapper = GPT 5.6 Luna.
+- Read `.progress/CURRENT.json` before this skill. Use this skill only when the thread is CWSP-reborn.
 - **No Plan Mode** unless the user explicitly asks.
 
 ## 2. Source-of-truth map
