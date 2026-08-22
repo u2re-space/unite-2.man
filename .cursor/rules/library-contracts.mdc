@@ -1,0 +1,22 @@
+---
+description: Current LUR.E and FL-UI contracts for library and CWSP shell work
+globs: "{modules/projects/{lur.e,fl.ui,dom.ts,object.ts,core.ts,veela.css,icon.ts,image.ts,uniform.ts}/**,apps/CWSP-reborn/{src,app}/**}"
+alwaysApply: false
+---
+
+# Library/UI contracts
+
+- Imports follow `core → dom/object/veela → lure → fl.ui/apps`; lower layers never import higher ones.
+- Token defaults emit only from veela `core/misc/_tokens.scss`. Consumers override context or use `var(--token, fallback)`. Contract: `.cursor/rules/design-tokens.mdc`. Implementer/mapper: `.cursor/rules/model-pair.mdc`.
+- Reuse LUR.E `TriggerCore`: `once`/`debounce`/`prevent`/`stop`/`capture`/`passive`, `withTriggerModifiers`, `refTrigger`, and `E({ on })` handler-modifier tuples; preserve `EventListenerObject` handlers.
+- Use `bindOutsideDismiss` for transient surfaces: composed paths, panel roots, exception nodes/selectors/predicates, Escape, and idempotent cleanup. Keep `makeClickOutsideTrigger` and `makeInterruptTrigger` compatible.
+- Use `resolveOverlayHost` and `registerTransientOverlay`; same-kind overlays close LIFO via fractional ordering without changing priority bands.
+- Use `resolvePlacement` / `placeOverlay` with CSS-anchor-to-JS fallback and the fixed client viewport descriptor from `dom.ts`.
+- `datasetLink` is bidirectional; `stylePropLink` / `cssVarLink` are ref→DOM. Use their `datasetRef` / `stylePropRef` / `cssVarRef` helpers.
+- Form controls use `formLink` / `selectLink` or `FormBinding` (`bindFormControl`, `formRef`) for text, number, checked, radio, and select; mount lifecycle stays opt-in through `bindWhileConnected`.
+- Unified ContextMenu preserves placement/host/transient session cleanup. ChromeFlyout keeps fixed Win11 placement, Calendar/QS exclusivity, `bindOutsideDismiss`, and one per-session back entry; do not re-register it in `overlay-back`.
+- `openModal` is document-body native-dialog-first with controlled fallback, focus restore, transient LIFO close, and bundled `ui-modal-*` styles. Do not bulk-migrate ShortcutEditor or legacy callers.
+- Speed Dial keeps icon and label layers separate over shared persisted cells; sync the active workspace snapshot for every add/update/remove, including Network deletion. An explicitly empty stored grid prevents legacy re-import.
+- New overlay UI (menu, modal, toast, tooltip, prompt) consumes veela tokens + LUR.E `TriggerCore` / `bindOutsideDismiss` / `resolvePlacement`. Do not emit a second `:root` palette or unlayered `--color-*`.
+- Defer date/time/color/file controls; tooltip/prompt/toast consolidation; anchor-relative ChromeFlyout; key/outside/gesture expansion; S/bindStyle + Typed OM/Houdini/WAAPI; production editor migrations; env-shell duplicate-tree consolidation.
+- Verification is targeted only: `modules/projects/lur.e/package.json` `npm test` runs linker/interaction/placement/overlay-host/trigger-core/form-binding; FL-UI browser paths are `test/{workspace-snapshot,modal-lifecycle,chrome-flyout-lifecycle,form-binding-lifecycle}.test.ts` and `test/{playground,suites/{forms,modal,overlays}}.ts`. Do not claim a monorepo build or deploy passed.

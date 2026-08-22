@@ -1,6 +1,6 @@
 # AGENT_BOOTSTRAP
 
-Do not run this ritual on every chat.
+Do not run this ritual on every chat. Live contract is `AGENTS.md`.
 
 Resume only when the user asks or the task is an interrupted CWSP-reborn pass:
 
