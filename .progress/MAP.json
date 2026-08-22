@@ -76,6 +76,11 @@
       "apps/CWSP-shell/src/java/space/u2re/cwsp/MainActivity.java",
       "apps/CWSP-transfer/src/frontend/web/capacitor/capacitor.config.json"
     ],
+    "taskbar-under": [
+      "modules/projects/fl.ui/src/ui/navigation/taskbar/element/TaskBar.ts",
+      "modules/projects/fl.ui/src/ui/navigation/taskbar/scss/TaskBar.scss",
+      "modules/projects/lur.e/src/design/layers/UnderlyingShadow.ts"
+    ],
     "light-theme": [
       "modules/projects/veela.css/src/scss/core/misc/_tokens.scss",
       "modules/projects/fl.ui/src/ui/navigation/taskbar/scss/TaskBar.scss",
