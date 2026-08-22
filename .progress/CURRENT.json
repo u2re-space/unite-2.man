@@ -1,22 +1,20 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-22T22:21:00+07:00",
-  "thread": "trunk symlink repair",
-  "intent": ".trunk links resolve to ~/.cache/trunk; do not repo-walk .trunk.",
+  "updatedAt": "2026-08-22T22:58:00+07:00",
+  "thread": "capacitor chrome bars",
+  "intent": "Remove native CWSP ActionBar title strip; keep 3-button nav hidden.",
   "status": "active",
-  "project": "workspace",
+  "project": "CWSP-transfer",
   "lastDone": [
-    "Recreated ~/.cache/trunk/repos/51ca5dc88e93516bfcddfd6056a725ef/{actions,logs,notifications,out,tools}",
-    ".trunk/* relative links now resolve; cache was missing, not wrong targets",
-    "Search MAP + FIND hubs already in place"
+    "AppTheme is NoActionBar (was DarkActionBar — that painted the CWSP title strip)",
+    "MainActivity hides support ActionBar in transfer + shell"
   ],
-  "next": "If Trunk tools are needed, run trunk to populate the empty cache. Do not rewrite .trunk links.",
-  "blockers": [
-    "Trunk CLI not installed; cache dirs are empty"
-  ],
+  "next": "Rebuild transfer (and shell) APK — black CWSP title bar should be gone.",
+  "blockers": [],
   "paths": [
-    ".trunk",
-    ".progress/MAP.json"
+    "apps/CWSP-shell/src/java/space/u2re/cwsp/MainActivity.java",
+    "apps/CWSP-shell/src/frontend/web/capacitor-launcher/entry.ts",
+    "apps/CWSP-shell/src/frontend/web/capacitor-launcher/capacitor.config.json"
   ],
   "models": {
     "implementer": "Grok 4.6",

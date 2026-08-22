@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-22T22:21:00+07:00",
+  "updatedAt": "2026-08-22T22:50:00+07:00",
   "how": "Resolve tag or synonym → Read only those paths. If missing: one Grep for FIND:<tag>. Never walk skip.",
   "skip": [
     ".archives",
@@ -70,7 +70,17 @@
       ".progress/CWSP-reborn/STATE.json",
       ".cursor/skills/cwsp-reborn-pass/SKILL.md"
     ],
-    "trunk": [".trunk"]
-  }
+    "trunk": [".trunk"],
+    "navbar": [
+      "apps/CWSP-transfer/src/backend/java/space/u2re/cwsp/MainActivity.java",
+      "apps/CWSP-shell/src/java/space/u2re/cwsp/MainActivity.java",
+      "apps/CWSP-transfer/src/frontend/web/capacitor/capacitor.config.json"
+    ],
+    "light-theme": [
+      "modules/projects/veela.css/src/scss/core/misc/_tokens.scss",
+      "modules/projects/fl.ui/src/ui/navigation/taskbar/scss/TaskBar.scss",
+      "modules/projects/fl.ui/src/ui/navigation/app-menu/AppMenu.scss",
+      "modules/projects/fl.ui/src/ui/speed-dial/SpeedDial.scss"
+    ]
   }
 }
