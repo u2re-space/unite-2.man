@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-22T22:17:00+07:00",
+  "updatedAt": "2026-08-22T22:21:00+07:00",
   "how": "Resolve tag or synonym → Read only those paths. If missing: one Grep for FIND:<tag>. Never walk skip.",
   "skip": [
     ".archives",
@@ -69,6 +69,8 @@
     "cwsp-reborn": [
       ".progress/CWSP-reborn/STATE.json",
       ".cursor/skills/cwsp-reborn-pass/SKILL.md"
-    ]
+    ],
+    "trunk": [".trunk"]
+  }
   }
 }
