@@ -40,6 +40,18 @@ test("detectNetworkSurface reports webnative from auth or boot globals", () => {
     assert.equal(detectNetworkSurface({}), "web");
 });
 
+test("detectNetworkSurface treats Neutralino desk as web even with WebNative auth", () => {
+    assert.equal(
+        detectNetworkSurface({
+            __CWS_NEUTRALINO_BOOT__: true,
+            __WEBNATIVE_AUTH__: { port: 29110 },
+            __CWS_WEBNATIVE_BOOT__: true
+        }),
+        "web"
+    );
+    assert.equal(detectNetworkSurface({ Neutralino: {}, NL_OS: "Windows" }), "web");
+});
+
 test("Capacitor summary separates transport WS from native bridge platform capability", () => {
     const summary = summarizeNetworkCapabilities("capacitor", {
         wsConnected: true,

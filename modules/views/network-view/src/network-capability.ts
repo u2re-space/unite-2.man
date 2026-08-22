@@ -1,9 +1,8 @@
 /*
  * Filename: network-capability.ts
  * FullPath: modules/views/network-view/src/network-capability.ts
- * Change date and time: 16.40.00_10.07.2026
- * Reason for changes: Pass-II — separate transport status from platform capability readiness
- *   for Capacitor + WebNative Network view contract tests.
+ * Change date and time: 15.45.00_22.08.2026
+ * Reason for changes: Neutralino desk must not classify as WebNative (no endpoint-probe).
  */
 
 /**
@@ -73,6 +72,9 @@ export interface NetworkCapabilitySummary {
 
 type GlobalHints = {
     Capacitor?: { isNativePlatform?: () => boolean };
+    Neutralino?: unknown;
+    NL_OS?: unknown;
+    __CWS_NEUTRALINO_BOOT__?: unknown;
     __WEBNATIVE_AUTH__?: { port?: number; key?: string };
     __CWS_WEBNATIVE_BOOT__?: unknown;
 };
@@ -90,6 +92,8 @@ export const detectNetworkSurface = (g: GlobalHints = globalThis as GlobalHints)
         /* ignore */
     }
     try {
+        // WHY: Neutralino injects WebNative-shaped control auth; probe RPC is WebNative-only.
+        if (g.__CWS_NEUTRALINO_BOOT__ || g.NL_OS != null || g.Neutralino) return "web";
         if (g.__WEBNATIVE_AUTH__ || g.__CWS_WEBNATIVE_BOOT__) return "webnative";
     } catch {
         /* ignore */
