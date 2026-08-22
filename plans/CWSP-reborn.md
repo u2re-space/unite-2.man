@@ -44,6 +44,21 @@ avoid breaking links. See `docs/platforns/README.md`. Canonical driver docs are
 
 ---
 
+## Library/UI contracts (verified 2026-08-22)
+
+- Hierarchy is `core → dom/object/veela → lure → fl.ui/apps`; never add higher-level imports to lower layers. This also governs Uniform, Icon, Image, and CWSP shell consumers.
+- LUR.E `TriggerCore` is the canonical event adapter: modifiers are `once`/`debounce`/`prevent`/`stop`/`capture`/`passive`; use `withTriggerModifiers` and `refTrigger`; `E({ on })` accepts `[handler, modifiers]` while preserving `EventListenerObject`.
+- `bindOutsideDismiss` supplies composed-path panel roots, exception nodes/selectors/custom predicate, Escape, and idempotent cleanup; keep `makeClickOutsideTrigger` and `makeInterruptTrigger` compatible.
+- Overlay primitives are `resolveOverlayHost` and `registerTransientOverlay`; same-kind transient overlays close LIFO through fractional ordering without changing priority bands. `resolvePlacement` / `placeOverlay` use CSS-anchor progressive fallback and `dom.ts` fixed-overlay client viewport bounds.
+- DOM bindings: `datasetLink` is bidirectional; `stylePropLink` / `cssVarLink` are ref→DOM, with `datasetRef` / `stylePropRef` / `cssVarRef`. Forms use `formLink` / `selectLink` and `FormBinding` (`bindFormControl`, `formRef`) for text/number/checked/radio/select; `bindWhileConnected` is opt-in mount lifecycle.
+- FL-UI: unified ContextMenu uses placement, resolved host, transient registration, and session cleanup. ChromeFlyout uses `bindOutsideDismiss` plus one per-session transient overlay; keep its public API, fixed Win11 placement, Calendar/QS exclusivity, and avoid duplicate ChromeFlyout registration in `overlay-back`.
+- `openModal` is document-body native-dialog-first with controlled div fallback, focus restore, transient modal registration, and nested LIFO close; `ui-modal-*` styles are bundled. ShortcutEditor and other legacy paths remain deliberately unmigrated.
+- Speed Dial keeps two label/icon layers over shared persisted icon cells. Every add/update/remove, including Network deletion, syncs the active workspace snapshot; an explicitly empty stored grid blocks legacy re-import.
+- Targeted evidence only (not a monorepo build/deploy): `modules/projects/lur.e/package.json` `npm test` runs linker/interaction/placement/overlay-host/trigger-core/form-binding drivers; FL-UI browser paths are `modules/projects/fl.ui/test/{workspace-snapshot,modal-lifecycle,chrome-flyout-lifecycle,form-binding-lifecycle}.test.ts`, with `test/playground.ts` and `test/suites/{forms,modal,overlays}.ts`.
+- Immediate follow-ups: date/time/color/file controls; tooltip/prompt/toast consolidation; anchor-relative ChromeFlyout; key/outside/gesture expansion beyond existing primitives; S/bindStyle and Typed OM/Houdini/WAAPI refactor; production editor migrations; environment-shell duplicate-tree consolidation.
+
+---
+
 ## Поправки и оптимизации процессов
 
 > Можно взять за основу и план, а также в качестве новых правил...

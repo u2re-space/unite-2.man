@@ -16,6 +16,10 @@ This file overrides skills (pantry, superpowers, Bugbot, review loops, GSD).
 
 Import only lower → higher. Mapping: `.cursor/rules/project.mdc`.
 
+## Library/UI context
+
+- For current LUR.E / Object / DOM / FL-UI contracts and CWSP shell consumers, read `.cursor/rules/library-contracts.mdc`; durable status and deferred work are in `.memories/CWSP-reborn.md`.
+
 ## Comments
 
 When editing TS/JS: `.cursor/rules/comments-special-comments.mdc`.
