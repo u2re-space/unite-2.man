@@ -1,8 +1,8 @@
 /*
  * Filename: network-probe.ts
  * FullPath: modules/views/network-view/src/network-probe.ts
- * Change date and time: 16.43.00_10.07.2026
- * Reason for changes: Pass-II — re-export pure origin helpers from network-probe-origin
+ * Change date and time: 15.45.00_22.08.2026
+ * Reason for changes: Neutralino desk is not WebNative — skip /service/endpoint-probe.
  */
 
 import {
@@ -41,8 +41,24 @@ const trim = (value: unknown): string => (typeof value === "string" ? value.trim
 // origins (self-signed TLS + mixed-content + Private Network Access). The backend's /service/endpoint-probe
 // RPC runs the same probes from loopback (no webview restrictions) and returns the rows + dispatch.
 
+const isNeutralinoDesktop = (): boolean => {
+    try {
+        const g = globalThis as {
+            Neutralino?: unknown;
+            NL_OS?: unknown;
+            __CWS_NEUTRALINO_BOOT__?: unknown;
+        };
+        return Boolean(g.__CWS_NEUTRALINO_BOOT__ || g.NL_OS != null || g.Neutralino);
+    } catch {
+        return false;
+    }
+};
+
 const isWebnativeSurface = (): boolean => {
     try {
+        // WHY: Neutralino chrome reuses __WEBNATIVE_AUTH__ for :29110 control, but that
+        // sidecar has no /service/endpoint-probe (WebNative-only). Treat NL as browser fetch.
+        if (isNeutralinoDesktop()) return false;
         const g = globalThis as { __WEBNATIVE_AUTH__?: unknown; __CWS_WEBNATIVE_BOOT__?: unknown };
         return Boolean(g.__WEBNATIVE_AUTH__ || g.__CWS_WEBNATIVE_BOOT__);
     } catch { return false; }

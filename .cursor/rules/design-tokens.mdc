@@ -13,7 +13,7 @@ fl.ui `src/styles/ui/_variables.scss` is standalone fallback only.
 ## Emit vs consume
 
 - New defaults go in the SoT file. Components, shells, and apps do not open a second `:root` palette.
-- Never set `--color-*` / `--space-*` / `--radius-*` in unlayered `:root` — that beats `@layer tokens`. Standalone fallbacks stay inside `@layer tokens` and use the same seed (`#5a7fff`).
+- Never set `--color-*` / `--space-*` / `--radius-*` in unlayered `:root` — that beats `@layer tokens`. Standalone fallbacks stay inside `@layer tokens` and use the same seed (`#5a9ec8`). Capacitor may override the seed from Material You; Neutralino Appearance may set `appearance.color`.
 - Context overrides (`[data-theme]`, host, shadow) and `var(--token, fallback)` at use sites are allowed.
 - `--u2-color-mod` lives in the SoT; duplicate the function only in the fl.ui fallback file.
 - Prefer `--color-*`, `--space-*`, `--radius-*`, `--text-*`, `--transition-*`, `--ui-*`.

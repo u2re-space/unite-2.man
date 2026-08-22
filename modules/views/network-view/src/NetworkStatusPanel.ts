@@ -338,7 +338,7 @@ export class NetworkStatusPanel {
                     </div>
 
                     <div class="cw-network-actions">
-                        <button type="button" data-action="test">Run network test</button>
+                        <button type="button" class="primary" data-action="test">Run network test</button>
                         <button type="button" data-action="check-destinations">Check destinations</button>
                         <button type="button" data-action="reconnect">Reconnect WS</button>
                         <button type="button" data-action="open-settings">Settings</button>
