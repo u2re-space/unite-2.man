@@ -1,0 +1,39 @@
+---
+description: Design-token SoT and CSS variable contract for veela, fl.ui, shells, and apps
+globs: "{modules/projects/{veela.css,fl.ui,lur.e,dom.ts}/**,modules/shells/**,apps/**}*.{scss,css}"
+alwaysApply: false
+---
+
+# Design tokens
+
+SoT values: `modules/projects/veela.css/src/scss/core/misc/_tokens.scss` (`@layer tokens` on `:root, :host, :scope`).
+Layer order SoT: `modules/projects/veela.css/src/scss/_layers.scss`.
+fl.ui `src/styles/ui/_variables.scss` is standalone fallback only.
+
+## Emit vs consume
+
+- New defaults go in the SoT file. Components, shells, and apps do not open a second `:root` palette.
+- Never set `--color-*` / `--space-*` / `--radius-*` in unlayered `:root` — that beats `@layer tokens`. Standalone fallbacks stay inside `@layer tokens` and use the same seed (`#5a7fff`).
+- Context overrides (`[data-theme]`, host, shadow) and `var(--token, fallback)` at use sites are allowed.
+- `--u2-color-mod` lives in the SoT; duplicate the function only in the fl.ui fallback file.
+- Prefer `--color-*`, `--space-*`, `--radius-*`, `--text-*`, `--transition-*`, `--ui-*`.
+
+## Alias, do not fork
+
+| Role | Canonical | Compat alias |
+|---|---|---|
+| Type | `--text-*` | `--font-*`, `--font-size-*` |
+| Motion | `--transition-*` | `--motion-*`, `--duration-*` |
+| Box | `--space-*` | `--padding-*`, `--gap-*` |
+| Icon | `--ui-icon-*` | `--icon-size-*` on host only |
+| Surface | `--color-surface` | `--surface-color`, `--fl-surface`, `--wf-md-surface` |
+
+❌ `--color-primary: #3794ff` in a component. ✅ `var(--color-primary)`.
+❌ A second `@layer tokens, base, …` prelude. ✅ `@use` the SoT layers file.
+❌ Edit symlink / `fest/` / `shared/` / `styles/{lib,runtime}` mirrors. ✅ Edit the real package file.
+
+## Android 17 lean
+
+SoT only: M3 Expressive shape (`--shape-*` aliases), 48dp `--touch-min`, `--state-opacity-*`, `--ease-emphasized` / `--ease-expressive`. Do not invent per-component radii.
+
+`lib/veela.mdc` is conceptual. Do not copy numeric scales from it.

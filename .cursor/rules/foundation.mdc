@@ -10,10 +10,11 @@ Do not preload the files below. Open one only when the task needs it.
 ## Source of truth (on demand)
 
 1. User request and attached context.
-2. `.cursor/rules/optimization.mdc` (always-on budget) and `AGENTS.md`.
-3. Domain: `network.mdc` / `debugging.mdc` only for CWSP network, clipboard, AirPad, endpoint.
+2. `AGENTS.md` (live contract) and `.cursor/rules/optimization.mdc` (always-on budget).
+3. Domain on demand: `library-contracts.mdc`, `design-tokens.mdc`, `model-pair.mdc`, `network.mdc` / `debugging.mdc`.
 4. Governance if amending process: `.memories/Constitution.md`.
-5. Resume CWSP-reborn: `.progress/CWSP-reborn/STATE.json`, then the active pass ledger.
+5. Resume a pass: `.progress/<project>/STATE.json`, then the active ledger.
+6. Do not edit `.cursor/{plans,context}/**` mirrors; edit the real file once.
 
 ## Operating contract
 

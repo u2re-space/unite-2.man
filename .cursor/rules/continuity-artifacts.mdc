@@ -8,6 +8,8 @@ alwaysApply: false
 
 ## Canonical roles
 
+- Repo-root `AGENTS.md` is the live agent contract. `.cursor/docs/AGENTS.md` is the CWSP docs guide (different file).
+- `.cursor/plans/**` and `.cursor/context/**` are mirrors. Edit the real path once.
 - `plans/` explains accepted work and exact execution steps.
 - `.roadmaps/` orders phases, dependencies, and evidence gates.
 - `.progress/<project>/STATE.json` is the machine-readable resume pointer.

@@ -1,0 +1,26 @@
+---
+description: Implementer/mapper pair for any LLMs (Grok 4.6, GPT 5.6 Luna, others)
+globs: "{modules/projects/{veela.css,fl.ui,lur.e,dom.ts}/**,modules/shells/**,apps/**,.cursor/rules/**}"
+alwaysApply: false
+---
+
+# Model pair
+
+`AGENTS.md` wins. Spawn a second model only when the user asks.
+
+## Roles
+
+- **Implementer** (Grok 4.6 groups by default): patch SoT and real package files. Own the write if both would touch the same path.
+- **Mapper** (GPT 5.6 Luna 1M Max by default): wide consumer/duplicate/prelude scan. Return `CONFLICTS` / `SAFE_FIRST_FIXES` / `DO_NOT_TOUCH`. Do not rewrite SoT.
+
+Same roles apply to GLM / Claude / others when the user names them.
+
+## Shared
+
+- Tokens: `.cursor/rules/design-tokens.mdc`. Library: `.cursor/rules/library-contracts.mdc`.
+- Edit real files only. Alias leftover names. One implementation.
+- Preserve wallpaper / `data-theme` / markdown contrast unless that theme is the task.
+
+## Handoff
+
+Mapper reports. Implementer applies one SoT or named-consumer patch. Mapper re-checks only that surface.

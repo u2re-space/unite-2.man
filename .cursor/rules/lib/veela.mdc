@@ -1,6 +1,9 @@
 ---
+description: Veela.CSS concepts (color functions, Agate.UX). Live token values are not here.
 alwaysApply: false
 ---
+
+> **SoT:** Token *values* and aliases live in `modules/projects/veela.css/src/scss/core/misc/_tokens.scss`. Agent contract: `.cursor/rules/design-tokens.mdc`. Do not copy numeric scales from this file.
 
 # 🌸 Veela.CSS 🌸
 

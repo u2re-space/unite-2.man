@@ -1,6 +1,7 @@
 # AGENTS.md
 
-This file overrides skills (pantry, superpowers, Bugbot, review loops, GSD).
+Live agent contract. Overrides pantry, superpowers, Bugbot, review loops, and GSD.
+`AGENT.md` is a pointer. Do not edit `.cursor/{plans,context}/**` mirrors.
 
 ## Token and time budget
 
@@ -9,16 +10,29 @@ This file overrides skills (pantry, superpowers, Bugbot, review loops, GSD).
 - Do not run full test suites, `npm run build`, deploy, PM2, ADB, or SSH unless the change needs that proof or the user asks.
 - Verify only the touched surface. Skip verification for docs/rules-only edits.
 - Grep before reading. Read narrow ranges. Skip `build/`, `.gradle/`, minified, lockfiles, `.archives`, `.backups`, `.superpowers/sdd`.
-- Short replies. No reports, checklists, or review writeups unless asked.
-- Skip pantry, Constitution, Calibration, INDEX, and AGENT_BOOTSTRAP rituals unless resuming CWSP-reborn or the user asks.
+- Short replies. No reports, checklists, review writeups, or `CHANGELOG*` dumps unless asked.
+- Skip pantry, Constitution, Calibration, INDEX, and `AGENT_BOOTSTRAP.txt` unless resuming CWSP-reborn or the user asks.
+
+## Read map (open one)
+
+| Need | File |
+|---|---|
+| Library / overlays | `.cursor/rules/library-contracts.mdc` |
+| Tokens / CSS SoT | `.cursor/rules/design-tokens.mdc` |
+| Model pair | `.cursor/rules/model-pair.mdc` |
+| Resume a pass | `.progress/<project>/STATE.json` |
+| CWSP docs-only | `.cursor/docs/AGENTS.md` |
+| Durable decisions | `.memories/` (`.memory` is a symlink) |
+
+## Model interaction
+
+Roles, not brands: **implementer** patches SoT and real files; **mapper** (wide context) returns `CONFLICTS` / `SAFE_FIRST_FIXES` / `DO_NOT_TOUCH` and does not rewrite SoT.
+Current pair: Grok 4.6 groups = implementer; GPT 5.6 Luna (1M Max) = mapper. Protocol: `.cursor/rules/model-pair.mdc`.
+If both would edit one file, implementer writes.
 
 ## Hierarchy
 
 Import only lower → higher. Mapping: `.cursor/rules/project.mdc`.
-
-## Library/UI context
-
-- For current LUR.E / Object / DOM / FL-UI contracts and CWSP shell consumers, read `.cursor/rules/library-contracts.mdc`; durable status and deferred work are in `.memories/CWSP-reborn.md`.
 
 ## Comments
 
@@ -30,4 +44,4 @@ Never quote `private/`. Link the path only.
 
 ## CWSP nodes (names only)
 
-L-110 desk, L-200 gateway, L-196 / L-208 / L-210 phones. Topology lives in `.cursor/rules/network.mdc`.
+L-110 desk, L-200 gateway, L-196 / L-208 / L-210 phones. Topology: `.cursor/rules/network.mdc`.

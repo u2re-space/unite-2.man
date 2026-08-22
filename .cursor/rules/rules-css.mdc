@@ -4,7 +4,7 @@ globs: *.scss,*.css,*.sass
 alwaysApply: false
 ---
 
-> NOTE: Canonical CSS/SCSS rule. Keep this file as the single source of truth for style actions.
+> NOTE: Canonical CSS/SCSS *refactor* rule. Token values and layer order: `.cursor/rules/design-tokens.mdc`.
 
 # CSS/SCSS Canonical Rule
 
