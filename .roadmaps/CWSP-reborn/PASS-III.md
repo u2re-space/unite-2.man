@@ -32,7 +32,7 @@ Align docs/rules/progress with implementation; retire `.acrhive` / `.acrhives` t
 ## Verification matrix (Pass II green — do not re-audit unless code changed)
 
 | Check | Result |
-|---|---|
+| --- | --- |
 | `check:topology` | pass 4/4 |
 | `build:capacitor` / `build:webnative` | pass-with-index-html |
 | cwsp-shared v2 | pass-29 |
@@ -58,11 +58,13 @@ Align docs/rules/progress with implementation; retire `.acrhive` / `.acrhives` t
 Intent: NeutralinoJS + Node extension as an alternate Windows/Linux desktop shell beside WebNative, reusing the same Node backend settings/control surfaces and CWSP v2 protocol facades. Capacitor remains the Android contour.
 
 References:
-- https://github.com/neutralinojs/neutralinojs
-- https://github.com/hschneider/neutralino-ext-node
-- https://neutralino.js.org/
+
+- <https://github.com/neutralinojs/neutralinojs>
+- <https://github.com/hschneider/neutralino-ext-node>
+- <https://neutralino.js.org/>
 
 Scope when started:
+
 - Frontend: same minimal shell / network / settings views, built by Vite into `./dist/<category>/`.
 - Backend: Node extension (`neutralino-ext-node`) hosting the existing Node settings/control backend; optional Java-bridge/IPC unchanged.
 - Platform: Windows, Linux (macOS possible later).

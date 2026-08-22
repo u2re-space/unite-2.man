@@ -1,6 +1,7 @@
 # Recovery Checklist
 
 Status legend:
+
 - [ ] Not started
 - [~] In progress
 - [x] Done

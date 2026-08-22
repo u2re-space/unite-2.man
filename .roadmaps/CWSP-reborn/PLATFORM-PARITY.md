@@ -83,7 +83,7 @@ The following artifacts must be platform-neutral:
 ## Parity acceptance matrix
 
 | Capability | Android | Windows | Linux |
-|---|---:|---:|---:|
+| --- | ---: | ---: | ---: |
 | minimal/network/settings views | target E4 | target E4 | target E4 |
 | AirPad view | target E4 | intentionally absent | intentionally absent |
 | canonical `/ws` envelope | target E4 | target E4 | target E4 |

@@ -6,7 +6,7 @@
 ## Canonical artifacts
 
 | Concern | Canonical path |
-|---|---|
+| --- | --- |
 | Governance | `.memories/Constitution.md` |
 | Planning index | `plans/INDEX.md` |
 | Product concept | `plans/CWSP-reborn.md` |
