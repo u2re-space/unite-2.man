@@ -66,6 +66,19 @@
     ],
     "fl-ui": ["modules/projects/fl.ui"],
     "speed-dial": ["modules/projects/fl.ui/src/ui/speed-dial"],
+    "pin-shortcut": [
+      "modules/projects/fl.ui/src/ui/speed-dial/SpeedDial.ts",
+      "modules/projects/fl.ui/src/ui/speed-dial/action-registry.ts",
+      "modules/projects/fl.ui/src/ui/speed-dial/launcher-state.ts",
+      "modules/projects/fl.ui/src/ui/speed-dial/workspace-pages.ts",
+      "apps/CWSP-shell/src/java/space/u2re/cwsp/MainActivity.java",
+      "apps/CWSP-shell/src/java/space/u2re/cwsp/PinShortcutActivity.java",
+      "apps/CWSP-shell/src/java/space/u2re/cwsp/LauncherCoordinator.java",
+      "apps/CWSP-shell/src/routing/native/launcher-home-lifecycle.ts"
+    ],
+    "workspace-pages": [
+      "modules/projects/fl.ui/src/ui/speed-dial/workspace-pages.ts"
+    ],
     "shapeless": [
       "modules/projects/fl.ui/src/ui/speed-dial/tile-icon.ts",
       "modules/projects/fl.ui/src/ui/speed-dial/SpeedDial.scss",

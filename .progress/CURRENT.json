@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-23T17:50:00+07:00",
-  "thread": "Wallpaper paper and contrast tokens",
-  "intent": "CSS/JS --wallpaper-underlying-color and --wallpaper-contrast-color for labels, rail, widgets.",
+  "updatedAt": "2026-08-23T22:05:00+07:00",
+  "thread": "Capacitor pin-shortcut crash",
+  "intent": "Pin IPC ok but tile never added — applyPinPayload awaited hung OPFS getDirectory().",
   "status": "active",
   "project": "CWSP-shell",
   "mapper": {
     "from": "f540573b-5341-4691-8098-fd52dbb53888",
     "conflicts": [
-      "WallpaperTheme is the only wallpaper paper/ink writer; appearance-base-color stays accent-only",
-      "env-shell root was forcing speed-dial --icon-color from data-theme / --base-color"
+      "CONFIRM_PIN on singleTask HOME was dropped; Files then never re-sends already-pinned ids",
+      "bootWorkspacePages must not splice a stale Side snapshot over a live pin"
     ],
     "doNotTouch": [
       "TaskBar.scss",
@@ -20,33 +20,16 @@
     ]
   },
   "lastDone": [
-    "WallpaperTheme writes paper (achromatic L) + contrast ink; always, even when accents are Material You",
-    "veela defaults + @property; --env-launcher-fg aliases contrast",
-    "Speed-dial labels, rail icons, clock/widgets, shapeless glyphs consume contrast",
-    "env-shell root: home tile glyphs use wallpaper contrast; App Menu stays theme ink",
-    "PWA overlay status aliases --wallpaper-contrast-color; search/clock contrast wins over seed; cache no longer stamps fallback light ink",
-    "Clock/search widgets mix wallpaper contrast with --base-color (Material You tint)",
-    "Figure glyphs use contrast-color(plate); shapeless stays wallpaper ink",
-    "Do not set color on the tile plate; label-layer undoes absolute gutter captions",
-    "Capacitor: dock labels with transform (not CSS translate); no contrast-color() on glyphs",
-    "Tile plates are opaque (surface+paper); WebView/preserve-3d cannot blur wallpaper",
-    "Figure glyph ink from plate luma (on-surface fallback); shapeless stays wallpaper contrast",
-    "Live photo luma locks paper/ink; KMeans/cache cannot revert to white text on light wallpaper",
-    "Figure/widget/label cast shadows stay black (wallpaper halo unused on home)",
-    "Long labels stay below the tile; measured above-flip no longer overlaps Edge/Messages",
-    "Shaped under-glow shares the plate cell (WebView-safe); no more 0×0 CSS-anchor shadows",
-    "Shaped under is a local sibling (no lure observeDisconnect); M() keeps icon+shadow",
-    "Pointer drag copies --drag-x/y + FLIP onto the under sibling"
+    "applyPinPayload no longer awaits hung OPFS getDirectory — tile is addSpeedDialItem'd immediately",
+    "initLinkStore races getDirectory at 800ms so linkStoreReady can resolve on Cap WebView"
   ],
-  "next": "Reload home — Edge/Messages captions stay under their plates",
+  "next": "Reload Home or rebuild APK; already-OS-pinned Files shortcuts should appear via import; logcat [launcher] pinned",
   "blockers": [],
   "paths": [
-    "modules/projects/image.ts/src/engine/WallpaperTheme.ts",
-    "modules/projects/veela.css/src/scss/core/misc/_tokens.scss",
-    "modules/projects/veela.css/src/scss/core/misc/_color-properties.scss",
-    "modules/projects/fl.ui/src/ui/speed-dial/SpeedDial.scss",
-    "modules/projects/fl.ui/src/ui/navigation/statusbar/statusbar.ts",
-    "modules/shells/environment-shell/src/scss/root.scss"
+    "apps/CWSP-shell/src/java/space/u2re/cwsp/PinShortcutActivity.java",
+    "apps/CWSP-shell/src/java/space/u2re/cwsp/LauncherCoordinator.java",
+    "apps/CWSP-shell/platforms/android/AndroidManifest.xml",
+    "apps/CWSP-shell/src/routing/native/launcher-home-lifecycle.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",
