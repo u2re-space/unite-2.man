@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-23T22:05:00+07:00",
+  "updatedAt": "2026-08-23T22:36:00+07:00",
   "thread": "Capacitor pin-shortcut crash",
-  "intent": "Pin IPC ok but tile never added — applyPinPayload awaited hung OPFS getDirectory().",
+  "intent": "Shortcut appearance reset on Side switch / launcher reload.",
   "status": "active",
   "project": "CWSP-shell",
   "mapper": {
@@ -20,16 +20,18 @@
     ]
   },
   "lastDone": [
-    "applyPinPayload no longer awaits hung OPFS getDirectory — tile is addSpeedDialItem'd immediately",
-    "initLinkStore races getDirectory at 800ms so linkStoreReady can resolve on Cap WebView"
+    "applySpeedDialSnapshot no longer deletes other-Side metas (appearance vault)",
+    "data: icons persist as sd-icon: pointers; OPFS hydrate does not splice over a live LS grid"
   ],
-  "next": "Reload Home or rebuild APK; already-OS-pinned Files shortcuts should appear via import; logcat [launcher] pinned",
+  "next": "Reload Home; set tile appearance, switch Side and back, reload launcher — design must stay",
   "blockers": [],
   "paths": [
     "apps/CWSP-shell/src/java/space/u2re/cwsp/PinShortcutActivity.java",
     "apps/CWSP-shell/src/java/space/u2re/cwsp/LauncherCoordinator.java",
     "apps/CWSP-shell/platforms/android/AndroidManifest.xml",
-    "apps/CWSP-shell/src/routing/native/launcher-home-lifecycle.ts"
+    "apps/CWSP-shell/src/routing/native/launcher-home-lifecycle.ts",
+    "modules/projects/fl.ui/src/ui/speed-dial/launcher-state.ts",
+    "modules/projects/fl.ui/src/ui/speed-dial/workspace-pages.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",
