@@ -32,9 +32,12 @@
     "Tile plates are opaque (surface+paper); WebView/preserve-3d cannot blur wallpaper",
     "Figure glyph ink from plate luma (on-surface fallback); shapeless stays wallpaper contrast",
     "Live photo luma locks paper/ink; KMeans/cache cannot revert to white text on light wallpaper",
-    "Figure/widget/label cast shadows stay black (wallpaper halo unused on home)"
+    "Figure/widget/label cast shadows stay black (wallpaper halo unused on home)",
+    "Long labels stay below the tile; measured above-flip no longer overlaps Edge/Messages",
+    "Shaped under-glow shares the plate cell (WebView-safe); no more 0×0 CSS-anchor shadows",
+    "Shaped under is a local sibling (no lure observeDisconnect); M() keeps icon+shadow"
   ],
-  "next": "Reload — light wallpaper labels/clock/rail must stay dark after theme extract",
+  "next": "Reload home — Edge/Messages captions stay under their plates",
   "blockers": [],
   "paths": [
     "modules/projects/image.ts/src/engine/WallpaperTheme.ts",
