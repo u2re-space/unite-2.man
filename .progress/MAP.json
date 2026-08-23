@@ -32,6 +32,8 @@
     "безфигур": "shapeless",
     "иконки": "icon-picker",
     "лаунчер": "speed-dial",
+    "wallpaper": "wallpaper-ink",
+    "обои": "wallpaper-ink",
     "веела": "veela",
     "cwsp": "network"
   },
@@ -54,6 +56,14 @@
     "lure": ["modules/projects/lur.e"],
     "icon": ["modules/projects/icon.ts"],
     "image": ["modules/projects/image.ts"],
+    "wallpaper-ink": [
+      "modules/projects/image.ts/src/engine/WallpaperTheme.ts",
+      "modules/projects/veela.css/src/scss/core/misc/_tokens.scss",
+      "modules/projects/veela.css/src/scss/core/misc/_color-properties.scss",
+      "modules/projects/fl.ui/src/ui/speed-dial/SpeedDial.scss",
+      "modules/projects/fl.ui/src/ui/navigation/statusbar/statusbar.ts",
+      "modules/shells/environment-shell/src/scss/root.scss"
+    ],
     "fl-ui": ["modules/projects/fl.ui"],
     "speed-dial": ["modules/projects/fl.ui/src/ui/speed-dial"],
     "shapeless": [

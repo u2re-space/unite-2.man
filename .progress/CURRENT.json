@@ -1,26 +1,50 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-23T10:20:00+07:00",
-  "thread": "Neutralino native titlebar color",
-  "intent": "Paint Win32 caption (DWM) to the same hex as minimal-shell nav.",
+  "updatedAt": "2026-08-23T15:50:00+07:00",
+  "thread": "Wallpaper paper and contrast tokens",
+  "intent": "CSS/JS --wallpaper-underlying-color and --wallpaper-contrast-color for labels, rail, widgets.",
   "status": "active",
-  "project": "CWSP-transfer",
+  "project": "CWSP-shell",
+  "mapper": {
+    "from": "f540573b-5341-4691-8098-fd52dbb53888",
+    "conflicts": [
+      "WallpaperTheme is the only wallpaper paper/ink writer; appearance-base-color stays accent-only",
+      "env-shell root was forcing speed-dial --icon-color from data-theme / --base-color"
+    ],
+    "doNotTouch": [
+      "TaskBar.scss",
+      "AppMenu.scss surface ink",
+      "appearance-base-color native lookup",
+      "fl.ui Canvas-2 stale copies",
+      "KMean cluster-size rewrite (least-chroma paper is enough)"
+    ]
+  },
   "lastDone": [
-    "extNode window.setCaptionColor applies DWMWA_CAPTION_COLOR on the Neutralino HWND",
-    "cwsp-window-chrome samples .app-shell__nav / theme-color and retries after boot",
-    "Theme.ts always writes meta[theme-color] so caption has a hex to follow"
+    "WallpaperTheme writes paper (achromatic L) + contrast ink; always, even when accents are Material You",
+    "veela defaults + @property; --env-launcher-fg aliases contrast",
+    "Speed-dial labels, rail icons, clock/widgets, shapeless glyphs consume contrast",
+    "env-shell root: home tile glyphs use wallpaper contrast; App Menu stays theme ink",
+    "PWA overlay status aliases --wallpaper-contrast-color; search/clock contrast wins over seed; cache no longer stamps fallback light ink",
+    "Clock/search widgets mix wallpaper contrast with --base-color (Material You tint)",
+    "Figure glyphs use contrast-color(plate); shapeless stays wallpaper ink",
+    "Do not set color on the tile plate; label-layer undoes absolute gutter captions",
+    "Capacitor: dock labels with transform (not CSS translate); no contrast-color() on glyphs",
+    "Tile plates are opaque (surface+paper); WebView/preserve-3d cannot blur wallpaper",
+    "Figure glyph ink from plate luma (on-surface fallback); shapeless stays wallpaper contrast"
   ],
-  "next": "Relaunch Neutralino on Windows — native titlebar should match Network/Settings nav, including theme toggle",
+  "next": "Reload PWA — white wallpaper must yield dark status glyphs, labels, clock, search",
   "blockers": [],
   "paths": [
-    "apps/CWSP-transfer/resources/js/cwsp-window-chrome.js",
-    "apps/CWSP-transfer/extensions/node/caption-color-win.js",
-    "apps/CWSP-transfer/extensions/node/main.js",
-    "modules/projects/subsystem/src/other/utils/Theme.ts"
+    "modules/projects/image.ts/src/engine/WallpaperTheme.ts",
+    "modules/projects/veela.css/src/scss/core/misc/_tokens.scss",
+    "modules/projects/veela.css/src/scss/core/misc/_color-properties.scss",
+    "modules/projects/fl.ui/src/ui/speed-dial/SpeedDial.scss",
+    "modules/projects/fl.ui/src/ui/navigation/statusbar/statusbar.ts",
+    "modules/shells/environment-shell/src/scss/root.scss"
   ],
   "models": {
     "implementer": "Grok 4.6",
-    "mapper": "GPT 5.6 Luna 1M Max",
+    "mapper": "GPT 5.6 Terra",
     "last": "implementer"
   },
   "passState": ".progress/CWSP-reborn/STATE.json"
