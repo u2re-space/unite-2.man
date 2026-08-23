@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-23T15:50:00+07:00",
+  "updatedAt": "2026-08-23T17:50:00+07:00",
   "thread": "Wallpaper paper and contrast tokens",
   "intent": "CSS/JS --wallpaper-underlying-color and --wallpaper-contrast-color for labels, rail, widgets.",
   "status": "active",
@@ -30,9 +30,11 @@
     "Do not set color on the tile plate; label-layer undoes absolute gutter captions",
     "Capacitor: dock labels with transform (not CSS translate); no contrast-color() on glyphs",
     "Tile plates are opaque (surface+paper); WebView/preserve-3d cannot blur wallpaper",
-    "Figure glyph ink from plate luma (on-surface fallback); shapeless stays wallpaper contrast"
+    "Figure glyph ink from plate luma (on-surface fallback); shapeless stays wallpaper contrast",
+    "Live photo luma locks paper/ink; KMeans/cache cannot revert to white text on light wallpaper",
+    "Figure/widget/label cast shadows stay black (wallpaper halo unused on home)"
   ],
-  "next": "Reload PWA — white wallpaper must yield dark status glyphs, labels, clock, search",
+  "next": "Reload — light wallpaper labels/clock/rail must stay dark after theme extract",
   "blockers": [],
   "paths": [
     "modules/projects/image.ts/src/engine/WallpaperTheme.ts",
