@@ -35,7 +35,8 @@
     "Figure/widget/label cast shadows stay black (wallpaper halo unused on home)",
     "Long labels stay below the tile; measured above-flip no longer overlaps Edge/Messages",
     "Shaped under-glow shares the plate cell (WebView-safe); no more 0×0 CSS-anchor shadows",
-    "Shaped under is a local sibling (no lure observeDisconnect); M() keeps icon+shadow"
+    "Shaped under is a local sibling (no lure observeDisconnect); M() keeps icon+shadow",
+    "Pointer drag copies --drag-x/y + FLIP onto the under sibling"
   ],
   "next": "Reload home — Edge/Messages captions stay under their plates",
   "blockers": [],
