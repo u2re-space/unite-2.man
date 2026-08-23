@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-22T22:50:00+07:00",
+  "updatedAt": "2026-08-23T10:05:00+07:00",
   "how": "Resolve tag or synonym → Read only those paths. If missing: one Grep for FIND:<tag>. Never walk skip.",
   "skip": [
     ".archives",
@@ -61,6 +61,11 @@
       "modules/projects/fl.ui/src/ui/speed-dial/SpeedDial.scss",
       "apps/CWSP-shell/src/frontend/views/home/navigation/app-menu/AppMenu.ts"
     ],
+    "tile-shape": [
+      "modules/projects/fl.ui/src/ui/speed-dial/SpeedDial.scss",
+      "modules/projects/fl.ui/src/ui/navigation/app-menu/AppMenu.scss",
+      "modules/projects/fl.ui/src/ui/speed-dial/tile-icon.ts"
+    ],
     "icon-picker": ["modules/projects/fl.ui/src/ui/speed-dial/icon-resource-picker.ts"],
     "high-refresh": [
       "apps/CWSP-shell/src/java/space/u2re/cwsp/DisplayRefreshUnlock.java",
@@ -71,10 +76,38 @@
       ".cursor/skills/cwsp-reborn-pass/SKILL.md"
     ],
     "trunk": [".trunk"],
+    "apk-update": [
+      "apps/CWSP-shell/src/java/space/u2re/cwsp/AppUpdateHelper.java",
+      "apps/CWSP-shell/src/java/space/u2re/cwsp/CwsLauncherBridgePlugin.java",
+      "apps/CWSP-shell/scripts/publish-android-apk.mjs",
+      "apps/CWSP-transfer/src/backend/java/space/u2re/cwsp/AppUpdateHelper.java",
+      "apps/CWSP-transfer/scripts/publish-android-apk.mjs"
+    ],
     "navbar": [
       "apps/CWSP-transfer/src/backend/java/space/u2re/cwsp/MainActivity.java",
       "apps/CWSP-shell/src/java/space/u2re/cwsp/MainActivity.java",
-      "apps/CWSP-transfer/src/frontend/web/capacitor/capacitor.config.json"
+      "modules/projects/fl.ui/src/ui/navigation/statusbar/capacitor-native-safe-area.ts",
+      "modules/shells/environment-shell/src/scss/capacitor-native.scss"
+    ],
+    "hang-open": [
+      "modules/projects/fl.ui/src/ui/containers/window/native-theme-color.ts",
+      "modules/projects/fl.ui/src/ui/containers/window/mount-ui-window.ts",
+      "modules/shells/environment-shell/src/workspace-window-layer.ts",
+      "modules/shells/environment-shell/src/window/views/view-mount.ts",
+      "modules/views/settings-view/src/ts/Settings.ts"
+    ],
+    "theme-color": [
+      "modules/projects/fl.ui/src/ui/containers/window/native-theme-color.ts",
+      "modules/shells/environment-shell/src/scss/capacitor-native.scss"
+    ],
+    "win-footer": [
+      "modules/projects/fl.ui/src/ui/containers/window/Windows2.ts",
+      "modules/projects/fl.ui/src/ui/containers/window/Windows2.scss"
+    ],
+    "mobile-dock": [
+      "modules/projects/fl.ui/src/ui/containers/window/mount-ui-window.ts",
+      "modules/projects/fl.ui/src/ui/containers/window/Windows2.scss",
+      "modules/projects/fl.ui/src/ui/navigation/taskbar/scss/TaskBar.scss"
     ],
     "taskbar-under": [
       "modules/projects/fl.ui/src/ui/navigation/taskbar/element/TaskBar.ts",
