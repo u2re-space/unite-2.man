@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-23T10:05:00+07:00",
+  "updatedAt": "2026-08-23T10:20:00+07:00",
   "how": "Resolve tag or synonym → Read only those paths. If missing: one Grep for FIND:<tag>. Never walk skip.",
   "skip": [
     ".archives",
@@ -95,6 +95,10 @@
       "modules/shells/environment-shell/src/workspace-window-layer.ts",
       "modules/shells/environment-shell/src/window/views/view-mount.ts",
       "modules/views/settings-view/src/ts/Settings.ts"
+    ],
+    "neutralino-titlebar": [
+      "apps/CWSP-transfer/resources/js/cwsp-window-chrome.js",
+      "apps/CWSP-transfer/extensions/node/caption-color-win.js"
     ],
     "theme-color": [
       "modules/projects/fl.ui/src/ui/containers/window/native-theme-color.ts",

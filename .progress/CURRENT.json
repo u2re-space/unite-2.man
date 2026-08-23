@@ -1,23 +1,22 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-23T10:05:00+07:00",
-  "thread": "Launcher hang on Settings open",
-  "intent": "Keep click/open off forced reflow — idle theme-color, cached z-boost, reuse Settings tree.",
+  "updatedAt": "2026-08-23T10:20:00+07:00",
+  "thread": "Neutralino native titlebar color",
+  "intent": "Paint Win32 caption (DWM) to the same hex as minimal-shell nav.",
   "status": "active",
-  "project": "CWSP-shell",
+  "project": "CWSP-transfer",
   "lastDone": [
-    "Theme-color samples idle; no getBoundingClientRect / 400ms resample",
-    "One applyChrome on mount; taskbar rebuild on rAF; Settings CSS once + tree reuse",
-    "Skip 404 wallpaper fetch/decode"
+    "extNode window.setCaptionColor applies DWMWA_CAPTION_COLOR on the Neutralino HWND",
+    "cwsp-window-chrome samples .app-shell__nav / theme-color and retries after boot",
+    "Theme.ts always writes meta[theme-color] so caption has a hex to follow"
   ],
-  "next": "Rebuild CRX/PWA — first open should paint Loading then the view without a 600ms click freeze; second open should be instant",
+  "next": "Relaunch Neutralino on Windows — native titlebar should match Network/Settings nav, including theme toggle",
   "blockers": [],
   "paths": [
-    "modules/projects/fl.ui/src/ui/containers/window/native-theme-color.ts",
-    "modules/projects/fl.ui/src/ui/containers/window/mount-ui-window.ts",
-    "modules/shells/environment-shell/src/workspace-window-layer.ts",
-    "modules/views/settings-view/src/ts/Settings.ts",
-    "modules/projects/image.ts/src/canvas/Canvas.ts"
+    "apps/CWSP-transfer/resources/js/cwsp-window-chrome.js",
+    "apps/CWSP-transfer/extensions/node/caption-color-win.js",
+    "apps/CWSP-transfer/extensions/node/main.js",
+    "modules/projects/subsystem/src/other/utils/Theme.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",
