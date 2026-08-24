@@ -158,6 +158,12 @@
       "runtime/fastify/apps/workcenter",
       "apps/CWSP-process/scripts/stage-cw-workcenter.mjs"
     ],
+    "markdown-assets": [
+      "modules/projects/lur.e/src/utils/opfs/markdown-assets.ts",
+      "modules/views/markdown-view/src/needs-to-API.ts",
+      "modules/projects/subsystem/src/routing/pwa/sw-handling.ts",
+      "modules/projects/subsystem/src/routing/channel/ViewTransferRouting.ts"
+    ],
     "sku": [
       "modules/projects/subsystem/src/other/config/ecosystem-skus.ts",
       "modules/projects/subsystem/src/other/config/settings/settings-shell-profile.ts",

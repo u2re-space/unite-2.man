@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-24T15:10:00+07:00",
-  "thread": "Android SKU split",
-  "intent": "CWSP-shell Appearance shows the launcher self-APK Updates block.",
+  "updatedAt": "2026-08-24T15:30:00+07:00",
+  "thread": "Markdown asset bind",
+  "intent": "Launch Queue / Share Target markdown can bind a sibling folder and resolve relative assets.",
   "status": "active",
-  "project": "CWSP-shell",
+  "project": "CWSP-document",
   "mapper": {
     "from": "android_sku_split_cc8bcd74",
     "conflicts": [
@@ -20,16 +20,17 @@
     ]
   },
   "lastDone": [
-    "Launcher settings embed apk-update into Appearance",
-    "Launcher on Capacitor reports capacitor surface so Updates is visible",
-    "settings-view contracts 63 pass"
+    "lure pickAssetDirectory / FileSystemObserver / mountPickedDirectory",
+    "Viewer Assets button + sidecar File map; transfer hint.source is a virtual path",
+    "Launch Queue offers directory picker only when relative refs are missing"
   ],
-  "next": "Build/install document + process APKs when asked",
+  "next": "Rebuild document/crx PWAs when you want the staged runtime bundles to pick this up",
   "blockers": [],
   "paths": [
-    "modules/views/settings-view/src/ts/settings-contributions.ts",
-    "modules/projects/subsystem/src/other/config/settings/contributions/apk-update.ts",
-    "modules/projects/subsystem/src/other/config/settings/settings-shell-profile.ts"
+    "modules/projects/lur.e/src/utils/opfs/markdown-assets.ts",
+    "modules/views/markdown-view/src/needs-to-API.ts",
+    "modules/projects/subsystem/src/routing/pwa/sw-handling.ts",
+    "modules/projects/subsystem/src/routing/channel/ViewTransferRouting.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",
