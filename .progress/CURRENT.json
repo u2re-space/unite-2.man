@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-24T08:48:00+07:00",
-  "thread": "Capacitor pin-shortcut crash",
-  "intent": "Tile chrome + ui-icon resource must stamp at create; no light-DOM img on shortcuts.",
+  "updatedAt": "2026-08-24T14:45:00+07:00",
+  "thread": "Android SKU split",
+  "intent": "Document and process are separate Capacitor APKs; neither builds the other.",
   "status": "active",
-  "project": "CWSP-shell",
+  "project": "CWSP-document",
   "mapper": {
-    "from": "f540573b-5341-4691-8098-fd52dbb53888",
+    "from": "android_sku_split_cc8bcd74",
     "conflicts": [
-      "CONFIRM_PIN on singleTask HOME was dropped; Files then never re-sends already-pinned ids",
-      "bootWorkspacePages must not splice a stale Side snapshot over a live pin"
+      "Do not emit process from CWSP-document vite",
+      "Do not open workcenter inside the document APK"
     ],
     "doNotTouch": [
       "TaskBar.scss",
@@ -20,22 +20,23 @@
     ]
   },
   "lastDone": [
-    "ui-icon observes resource= so bitmaps paint on create/upgrade; Speed Dial no longer makes light-DOM img",
-    "stampTileHostAttrs writes data-shape / data-icon-display from meta before first paint"
+    "Process Capacitor builds from apps/CWSP-process vite --mode capacitor",
+    "Document vite refuses capacitor-process",
+    "Process index.html stamped process/workcenter (was document/viewer)",
+    "View transfer hands off to the sibling APK when the view belongs elsewhere"
   ],
-  "next": "Reload Home; new/edited tiles should have shape+icon attrs immediately, no stray img in the figure",
+  "next": "Build/install document + process APKs when asked",
   "blockers": [],
   "paths": [
-    "apps/CWSP-shell/src/java/space/u2re/cwsp/PinShortcutActivity.java",
-    "apps/CWSP-shell/src/java/space/u2re/cwsp/LauncherCoordinator.java",
-    "apps/CWSP-shell/platforms/android/AndroidManifest.xml",
-    "apps/CWSP-shell/src/routing/native/launcher-home-lifecycle.ts",
-    "modules/projects/fl.ui/src/ui/speed-dial/launcher-state.ts",
-    "modules/projects/fl.ui/src/ui/speed-dial/workspace-pages.ts"
+    "apps/CWSP-document/vite.config.js",
+    "apps/CWSP-process/vite.config.js",
+    "apps/CWSP-process/src/frontend/web/capacitor/index.html",
+    "apps/CWSP-process/scripts/build-capacitor.mjs",
+    "modules/projects/subsystem/src/routing/channel/ViewTransferRouting.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",
-    "mapper": "GPT 5.6 Terra",
+    "mapper": "GPT 5.6 Luna",
     "last": "implementer"
   },
   "passState": ".progress/CWSP-reborn/STATE.json"

@@ -7,7 +7,7 @@ alwaysApply: true
 
 Chromium-first. Imports only lower → higher (same-level imports are discouraged).
 
-| Level | Library | Path |
+| Level | Package | Path |
 |---|---|---|
 | 0.5 | `fest/core` | `modules/projects/core.ts` |
 | 1 | `fest/dom` | `modules/projects/dom.ts` |
@@ -16,8 +16,16 @@ Chromium-first. Imports only lower → higher (same-level imports are discourage
 | 2 | `fest/lure` | `modules/projects/lur.e` |
 | 2 | `fest/icon` | `modules/projects/icon.ts` |
 | 3 | `fest/fl-ui` | `modules/projects/fl.ui` |
+| 3 | shared / subsystem | `modules/projects/subsystem` (`modules/shared`, `modules/subsystem` aliases) |
+| 3.5 | views | `modules/views/*-view` |
+| 3.6 | shells | `modules/shells/*-shell` |
 | 4 | apps | `apps/*` |
 
 Example: `fest/lure` may import `fest/object` / `fest/dom`. `fest/object` must not import `fest/lure` or `fest/fl-ui`.
+Views import libraries + shared. Shells import views. Apps import shells. Same-level imports are discouraged.
+
+SoT is the package root (`settings-view`, `environment-shell`, `projects/subsystem`). Do not edit consumer copies under `*/fest`, `*/shells`, `*/views` as SoT.
+
+Public PWA/Web host (`runtime/fastify/layers.ts`): **app** staged under `fastify/apps/` · **api** `/process` · **service** `routers/assistant` on CWSP core `:8434`.
 
 Prefer symlinks over copied trees. CWSP topology is in `.cursor/rules/network.mdc`, not here.

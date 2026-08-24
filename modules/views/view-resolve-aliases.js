@@ -30,6 +30,10 @@ const SETTINGS_CONTRIBUTIONS = resolve(
     workspaceRoot,
     "modules/projects/subsystem/src/other/config/SettingsContributions.ts"
 );
+const ECOSYSTEM_SKUS = resolve(
+    workspaceRoot,
+    "modules/projects/subsystem/src/other/config/ecosystem-skus.ts"
+);
 const SETTINGS_CONFIG = resolve(workspaceRoot, "modules/projects/subsystem/src/other/config/Settings.ts");
 const CAPACITOR_SHARE_INTENT = resolve(
     workspaceRoot,
@@ -54,6 +58,7 @@ const viewSharedAliases = [
     { find: "views/network", replacement: NETWORK_VIEW_ENTRY },
     { find: "com/config/Settings", replacement: SETTINGS_CONFIG },
     { find: "com/config/SettingsContributions", replacement: SETTINGS_CONTRIBUTIONS },
+    { find: "com/config/ecosystem-skus", replacement: ECOSYSTEM_SKUS },
     { find: "boot/capacitor-share-intent", replacement: CAPACITOR_SHARE_INTENT },
     { find: "core/pwa/pwa-handling", replacement: PWA_HANDLING }
 ];
