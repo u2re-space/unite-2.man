@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-23T22:36:00+07:00",
+  "updatedAt": "2026-08-24T08:48:00+07:00",
   "thread": "Capacitor pin-shortcut crash",
-  "intent": "Shortcut appearance reset on Side switch / launcher reload.",
+  "intent": "Tile chrome + ui-icon resource must stamp at create; no light-DOM img on shortcuts.",
   "status": "active",
   "project": "CWSP-shell",
   "mapper": {
@@ -20,10 +20,10 @@
     ]
   },
   "lastDone": [
-    "applySpeedDialSnapshot no longer deletes other-Side metas (appearance vault)",
-    "data: icons persist as sd-icon: pointers; OPFS hydrate does not splice over a live LS grid"
+    "ui-icon observes resource= so bitmaps paint on create/upgrade; Speed Dial no longer makes light-DOM img",
+    "stampTileHostAttrs writes data-shape / data-icon-display from meta before first paint"
   ],
-  "next": "Reload Home; set tile appearance, switch Side and back, reload launcher — design must stay",
+  "next": "Reload Home; new/edited tiles should have shape+icon attrs immediately, no stray img in the figure",
   "blockers": [],
   "paths": [
     "apps/CWSP-shell/src/java/space/u2re/cwsp/PinShortcutActivity.java",
