@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-24T14:45:00+07:00",
+  "updatedAt": "2026-08-24T15:10:00+07:00",
   "thread": "Android SKU split",
-  "intent": "Document and process are separate Capacitor APKs; neither builds the other.",
+  "intent": "CWSP-shell Appearance shows the launcher self-APK Updates block.",
   "status": "active",
-  "project": "CWSP-document",
+  "project": "CWSP-shell",
   "mapper": {
     "from": "android_sku_split_cc8bcd74",
     "conflicts": [
-      "Do not emit process from CWSP-document vite",
-      "Do not open workcenter inside the document APK"
+      "Do not bring the CWSP Control tab back onto the launcher",
+      "VDS desktop environment must not show APK install"
     ],
     "doNotTouch": [
       "TaskBar.scss",
@@ -20,19 +20,16 @@
     ]
   },
   "lastDone": [
-    "Process Capacitor builds from apps/CWSP-process vite --mode capacitor",
-    "Document vite refuses capacitor-process",
-    "Process index.html stamped process/workcenter (was document/viewer)",
-    "View transfer hands off to the sibling APK when the view belongs elsewhere"
+    "Launcher settings embed apk-update into Appearance",
+    "Launcher on Capacitor reports capacitor surface so Updates is visible",
+    "settings-view contracts 63 pass"
   ],
   "next": "Build/install document + process APKs when asked",
   "blockers": [],
   "paths": [
-    "apps/CWSP-document/vite.config.js",
-    "apps/CWSP-process/vite.config.js",
-    "apps/CWSP-process/src/frontend/web/capacitor/index.html",
-    "apps/CWSP-process/scripts/build-capacitor.mjs",
-    "modules/projects/subsystem/src/routing/channel/ViewTransferRouting.ts"
+    "modules/views/settings-view/src/ts/settings-contributions.ts",
+    "modules/projects/subsystem/src/other/config/settings/contributions/apk-update.ts",
+    "modules/projects/subsystem/src/other/config/settings/settings-shell-profile.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",
