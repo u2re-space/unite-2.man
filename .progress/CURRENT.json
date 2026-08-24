@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-25T00:22:00+07:00",
-  "thread": "markdown assets after bind",
-  "intent": "Bind/OPEN/drop must index the picked folder into sidecar files and rewrite img.src to blob. New SW must install (exclude nested pwa/screenshots/pwa).",
+  "updatedAt": "2026-08-25T00:42:00+07:00",
+  "thread": "markdown provide blob rewrite",
+  "intent": "After bind, rewrite img + relative .md links from original relative URL via main-thread provide() → blob. Strip src before attach so JXL/SW never fetch the PWA origin.",
   "status": "active",
   "project": "CWSP-document",
   "mapper": {
@@ -20,17 +20,13 @@
     ]
   },
   "lastDone": [
-    "SW precache skips nested pwa/screenshots/pwa (install was aborting)",
-    "Bind walks the folder into sidecarAssets and forces img.src = blob",
-    "Drop of a folder mounts + indexes; OPEN indexes before parse"
+    "data-md-rel keeps the markdown token; media src stripped before attach",
+    "provideBoundRelative → blob for img and .md links (no OPFS worker, no HTTP)",
+    "Click on bound .md uses /mounts/… provide, not the JXL/network worker"
   ],
-  "next": "Rebuild+redeploy cw-markdown. OPEN lur.e then README, or drop the lur.e folder. Toast should show Bound/Opened with blob images.",
-  "blockers": [
-    "Until this SW ships, install still dies on wide.png 404"
-  ],
+  "next": "Rebuild cw-markdown. OPEN lur.e + README or ASSETS after open. Logo should be blob: with no /assets/logo 404.",
+  "blockers": [],
   "paths": [
-    "apps/CWSP-document/src/pwa/sw.ts",
-    "apps/CWSP-document/vite.config.js",
     "modules/projects/lur.e/src/utils/opfs/markdown-assets.ts",
     "modules/views/markdown-view/src/needs-to-API.ts"
   ],
