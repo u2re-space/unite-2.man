@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-24T15:30:00+07:00",
-  "thread": "Markdown asset bind",
-  "intent": "Launch Queue / Share Target markdown can bind a sibling folder and resolve relative assets.",
+  "updatedAt": "2026-08-24T23:28:00+07:00",
+  "thread": "md.u2re.space In export",
+  "intent": "Stop SW precache of unhashed com/app.js desyncing hashed index (missing export In).",
   "status": "active",
   "project": "CWSP-document",
   "mapper": {
@@ -20,17 +20,19 @@
     ]
   },
   "lastDone": [
-    "lure pickAssetDirectory / FileSystemObserver / mountPickedDirectory",
-    "Viewer Assets button + sidecar File map; transfer hint.source is a virtual path",
-    "Launch Queue offers directory picker only when relative refs are missing"
+    "Exclude com/app.js from document SW precache; NetworkOnly for unhashed barrels",
+    "HTML recovery unregisters SW on missing export In"
   ],
-  "next": "Rebuild document/crx PWAs when you want the staged runtime bundles to pick this up",
-  "blockers": [],
+  "next": "Reload Fastify so staged index.html ships. Rebuild cw-markdown to bake new SW.",
+  "blockers": [
+    "Live md.u2re.space still runs the old SW until unregister or rebuild",
+    "process/workcenter staged UI is still the placeholder until CWSP-process is rebuilt"
+  ],
   "paths": [
-    "modules/projects/lur.e/src/utils/opfs/markdown-assets.ts",
-    "modules/views/markdown-view/src/needs-to-API.ts",
-    "modules/projects/subsystem/src/routing/pwa/sw-handling.ts",
-    "modules/projects/subsystem/src/routing/channel/ViewTransferRouting.ts"
+    "apps/CWSP-document/src/pwa/sw.ts",
+    "apps/CWSP-document/vite.config.js",
+    "apps/CWSP-document/src/frontend/web/cw-markdown/index.html",
+    "runtime/fastify/apps/cw-markdown/index.html"
   ],
   "models": {
     "implementer": "Grok 4.6",

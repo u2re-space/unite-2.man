@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-24T14:40:00+07:00",
+  "updatedAt": "2026-08-24T23:22:00+07:00",
   "how": "Resolve tag or synonym → Read only those paths. If missing: one Grep for FIND:<tag>. Never walk skip.",
   "skip": [
     ".archives",
@@ -141,10 +141,18 @@
       "modules/projects/fl.ui/src/ui/navigation/taskbar/scss/TaskBar.scss",
       "modules/projects/lur.e/src/design/layers/UnderlyingShadow.ts"
     ],
+    "history-base": [
+      "modules/projects/subsystem/src/boot/history-base.ts",
+      "modules/projects/subsystem/src/boot/shells.ts",
+      "runtime/fastify/plugins/host-apps.ts",
+      "runtime/fastify/apps/host-apps.ts"
+    ],
     "layers": [
       "runtime/fastify/layers.ts",
       "runtime/fastify/plugins/api.ts",
+      "runtime/fastify/plugins/host-apps.ts",
       "runtime/fastify/apps/manifest.json",
+      "runtime/fastify/apps/host-apps.ts",
       ".cursor/rules/project.mdc"
     ],
     "process": [
@@ -177,7 +185,11 @@
     ],
     "settings-profile": [
       "modules/projects/subsystem/src/other/config/settings/settings-shell-profile.ts",
-      "modules/views/settings-view/src/ts/settings-contributions.ts"
+      "modules/views/settings-view/src/ts/settings-contributions.ts",
+      "modules/views/settings-view/src/ts/settings-sibling-presence.ts",
+      "modules/views/settings-view/src/ts/Settings.ts",
+      "apps/CWSP-shell/src/routing/native/launcher-bridge.ts",
+      "apps/CWSP-shell/src/java/space/u2re/cwsp/LauncherCoordinator.java"
     ],
     "light-theme": [
       "modules/projects/veela.css/src/scss/core/misc/_tokens.scss",

@@ -26,6 +26,6 @@ Views import libraries + shared. Shells import views. Apps import shells. Same-l
 
 SoT is the package root (`settings-view`, `environment-shell`, `projects/subsystem`). Do not edit consumer copies under `*/fest`, `*/shells`, `*/views` as SoT.
 
-Public PWA/Web host (`runtime/fastify/layers.ts`): **app** staged under `fastify/apps/` · **api** `/process` · **service** `routers/assistant` on CWSP core `:8434`.
+Public PWA/Web host (`runtime/fastify/layers.ts`): **app** staged under `fastify/apps/` · **api** `/api/process` · **service** `routers/assistant` on CWSP core `:8434`.
 
 Prefer symlinks over copied trees. CWSP topology is in `.cursor/rules/network.mdc`, not here.
