@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-24T23:28:00+07:00",
-  "thread": "md.u2re.space In export",
-  "intent": "Stop SW precache of unhashed com/app.js desyncing hashed index (missing export In).",
+  "updatedAt": "2026-08-25T00:22:00+07:00",
+  "thread": "markdown assets after bind",
+  "intent": "Bind/OPEN/drop must index the picked folder into sidecar files and rewrite img.src to blob. New SW must install (exclude nested pwa/screenshots/pwa).",
   "status": "active",
   "project": "CWSP-document",
   "mapper": {
@@ -20,19 +20,19 @@
     ]
   },
   "lastDone": [
-    "Exclude com/app.js from document SW precache; NetworkOnly for unhashed barrels",
-    "HTML recovery unregisters SW on missing export In"
+    "SW precache skips nested pwa/screenshots/pwa (install was aborting)",
+    "Bind walks the folder into sidecarAssets and forces img.src = blob",
+    "Drop of a folder mounts + indexes; OPEN indexes before parse"
   ],
-  "next": "Reload Fastify so staged index.html ships. Rebuild cw-markdown to bake new SW.",
+  "next": "Rebuild+redeploy cw-markdown. OPEN lur.e then README, or drop the lur.e folder. Toast should show Bound/Opened with blob images.",
   "blockers": [
-    "Live md.u2re.space still runs the old SW until unregister or rebuild",
-    "process/workcenter staged UI is still the placeholder until CWSP-process is rebuilt"
+    "Until this SW ships, install still dies on wide.png 404"
   ],
   "paths": [
     "apps/CWSP-document/src/pwa/sw.ts",
     "apps/CWSP-document/vite.config.js",
-    "apps/CWSP-document/src/frontend/web/cw-markdown/index.html",
-    "runtime/fastify/apps/cw-markdown/index.html"
+    "modules/projects/lur.e/src/utils/opfs/markdown-assets.ts",
+    "modules/views/markdown-view/src/needs-to-API.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",

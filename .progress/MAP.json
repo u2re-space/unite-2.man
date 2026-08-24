@@ -169,6 +169,7 @@
     "markdown-assets": [
       "modules/projects/lur.e/src/utils/opfs/markdown-assets.ts",
       "modules/views/markdown-view/src/needs-to-API.ts",
+      "modules/views/markdown-view/src/ts/Markdown.ts",
       "modules/projects/subsystem/src/routing/pwa/sw-handling.ts",
       "modules/projects/subsystem/src/routing/channel/ViewTransferRouting.ts"
     ],
