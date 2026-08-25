@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-25T09:25:00+07:00",
-  "thread": "sku surface chrome",
-  "intent": "Specialized hosts hide sibling tabs; attach/open hands off to SKU URLs. Only u2re.space keeps /viewer /explorer /process in-process. No nested /viewer/explorer.",
+  "updatedAt": "2026-08-25T09:55:00+07:00",
+  "thread": "minimal print pagination",
+  "intent": "Minimal shell + markdown/viewer print must paginate past page 1.",
   "status": "active",
   "project": "CWSP-reborn",
   "mapper": {
@@ -20,16 +20,15 @@
     ]
   },
   "lastDone": [
-    "Share/launch-queue hard-nav uses pathForSkuHostView — no / ↔ /viewer bootloop on md"
+    "Print unwrap: contain/overflow/abspos viewport clip on :host, html/#app, shell layer; markdown min-block-size no longer 100cqb"
   ],
-  "next": "Rebuild cw-markdown (and vds-main if hub share is used)",
+  "next": "Rebuild cw-markdown; print-preview a long markdown in minimal (md.u2re.space)",
   "blockers": [],
   "paths": [
-    "modules/projects/subsystem/src/other/config/ecosystem-skus.ts",
-    "modules/projects/subsystem/src/boot/history-base.ts",
-    "modules/projects/subsystem/src/boot/shells.ts",
-    "modules/views/explorer-view/src/runtime.ts",
-    "runtime/fastify/plugins/host-apps.ts"
+    "modules/shells/minimal-shell/src/minimal.scss",
+    "modules/views/markdown-view/src/index.scss",
+    "modules/views/markdown-view/src/scss/_markdown.scss",
+    "modules/projects/subsystem/src/boot/views.scss"
   ],
   "models": {
     "implementer": "Grok 4.6",
