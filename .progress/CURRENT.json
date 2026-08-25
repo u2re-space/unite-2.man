@@ -20,9 +20,10 @@
     ]
   },
   "lastDone": [
-    "history-base / shell-preference import com/config/ecosystem-skus (copies are not under src/boot/)"
+    "Web hub sidebar: skip APK launch (in-process windows)",
+    "Web hub settings: area nav Explorer/Document/Process/Transfer"
   ],
-  "next": "Re-run build:vds-apps",
+  "next": "Rebuild vds-main so u2re.space picks up sidebar + settings areas",
   "blockers": [],
   "paths": [
     "modules/projects/subsystem/src/other/config/ecosystem-skus.ts",
