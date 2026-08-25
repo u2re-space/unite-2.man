@@ -20,10 +20,9 @@
     ]
   },
   "lastDone": [
-    "Web hub sidebar: skip APK launch (in-process windows)",
-    "Web hub settings: area nav Explorer/Document/Process/Transfer"
+    "Share/launch-queue hard-nav uses pathForSkuHostView — no / ↔ /viewer bootloop on md"
   ],
-  "next": "Rebuild vds-main so u2re.space picks up sidebar + settings areas",
+  "next": "Rebuild cw-markdown (and vds-main if hub share is used)",
   "blockers": [],
   "paths": [
     "modules/projects/subsystem/src/other/config/ecosystem-skus.ts",
