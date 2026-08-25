@@ -168,9 +168,13 @@
     ],
     "print": [
       "modules/shells/minimal-shell/src/minimal.scss",
+      "modules/shells/immersive-shell/src/base.scss",
       "modules/views/markdown-view/src/index.scss",
       "modules/views/markdown-view/src/scss/_markdown.scss",
-      "modules/projects/subsystem/src/boot/views.scss"
+      "modules/projects/subsystem/src/boot/views.scss",
+      "apps/CWSP-crx/src/crx/fix.scss",
+      "apps/CWSP-crx/index.html",
+      "apps/CWSP-document/index.html"
     ],
     "markdown-assets": [
       "modules/projects/lur.e/src/utils/opfs/markdown-assets.ts",

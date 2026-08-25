@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-25T09:55:00+07:00",
-  "thread": "minimal print pagination",
-  "intent": "Minimal shell + markdown/viewer print must paginate past page 1.",
+  "updatedAt": "2026-08-25T10:20:00+07:00",
+  "thread": "crx immersive print pagination",
+  "intent": "CRX markdown (immersive) and document HTML print must paginate past page 1.",
   "status": "active",
   "project": "CWSP-reborn",
   "mapper": {
@@ -20,15 +20,18 @@
     ]
   },
   "lastDone": [
-    "Print unwrap: contain/overflow/abspos viewport clip on :host, html/#app, shell layer; markdown min-block-size no longer 100cqb"
+    "CRX markdown uses immersive: unwrap :host/#app; remove break-avoid on print wrappers in fix.scss and index.html"
   ],
-  "next": "Rebuild cw-markdown; print-preview a long markdown in minimal (md.u2re.space)",
+  "next": "Rebuild cw-markdown / CRX; print-preview a long .md from the extension viewer",
   "blockers": [],
   "paths": [
-    "modules/shells/minimal-shell/src/minimal.scss",
+    "modules/shells/immersive-shell/src/base.scss",
     "modules/views/markdown-view/src/index.scss",
-    "modules/views/markdown-view/src/scss/_markdown.scss",
-    "modules/projects/subsystem/src/boot/views.scss"
+    "apps/CWSP-crx/src/crx/fix.scss",
+    "apps/CWSP-crx/index.html",
+    "apps/CWSP-document/index.html",
+    "apps/CWSP-crx/src/frontend/web/cw-markdown/index.html",
+    "apps/CWSP-document/src/frontend/web/cw-markdown/index.html"
   ],
   "models": {
     "implementer": "Grok 4.6",
