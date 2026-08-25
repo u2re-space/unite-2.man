@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-25T00:42:00+07:00",
-  "thread": "markdown provide blob rewrite",
-  "intent": "After bind, rewrite img + relative .md links from original relative URL via main-thread provide() → blob. Strip src before attach so JXL/SW never fetch the PWA origin.",
+  "updatedAt": "2026-08-25T09:25:00+07:00",
+  "thread": "sku surface chrome",
+  "intent": "Specialized hosts hide sibling tabs; attach/open hands off to SKU URLs. Only u2re.space keeps /viewer /explorer /process in-process. No nested /viewer/explorer.",
   "status": "active",
-  "project": "CWSP-document",
+  "project": "CWSP-reborn",
   "mapper": {
     "from": "android_sku_split_cc8bcd74",
     "conflicts": [
@@ -20,15 +20,16 @@
     ]
   },
   "lastDone": [
-    "data-md-rel keeps the markdown token; media src stripped before attach",
-    "provideBoundRelative → blob for img and .md links (no OPFS worker, no HTTP)",
-    "Click on bound .md uses /mounts/… provide, not the JXL/network worker"
+    "history-base / shell-preference import com/config/ecosystem-skus (copies are not under src/boot/)"
   ],
-  "next": "Rebuild cw-markdown. OPEN lur.e + README or ASSETS after open. Logo should be blob: with no /assets/logo 404.",
+  "next": "Re-run build:vds-apps",
   "blockers": [],
   "paths": [
-    "modules/projects/lur.e/src/utils/opfs/markdown-assets.ts",
-    "modules/views/markdown-view/src/needs-to-API.ts"
+    "modules/projects/subsystem/src/other/config/ecosystem-skus.ts",
+    "modules/projects/subsystem/src/boot/history-base.ts",
+    "modules/projects/subsystem/src/boot/shells.ts",
+    "modules/views/explorer-view/src/runtime.ts",
+    "runtime/fastify/plugins/host-apps.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",
