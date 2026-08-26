@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-25T10:20:00+07:00",
-  "thread": "crx immersive print pagination",
-  "intent": "CRX markdown (immersive) and document HTML print must paginate past page 1.",
+  "updatedAt": "2026-08-26T13:56:00+07:00",
+  "thread": "settings sku nav icons",
+  "intent": "Hub settings area tabs (settings-sku-nav) show Phosphor icons on each SKU button.",
   "status": "active",
   "project": "CWSP-reborn",
   "mapper": {
@@ -20,18 +20,13 @@
     ]
   },
   "lastDone": [
-    "CRX markdown uses immersive: unwrap :host/#app; remove break-avoid on print wrappers in fix.scss and index.html"
+    "settings-sku-nav buttons include duotone ui-icon + label (Shell/Explorer/Document/Process/Transfer)"
   ],
-  "next": "Rebuild cw-markdown / CRX; print-preview a long .md from the extension viewer",
+  "next": "Reload settings on hub; confirm sku-nav icons paint",
   "blockers": [],
   "paths": [
-    "modules/shells/immersive-shell/src/base.scss",
-    "modules/views/markdown-view/src/index.scss",
-    "apps/CWSP-crx/src/crx/fix.scss",
-    "apps/CWSP-crx/index.html",
-    "apps/CWSP-document/index.html",
-    "apps/CWSP-crx/src/frontend/web/cw-markdown/index.html",
-    "apps/CWSP-document/src/frontend/web/cw-markdown/index.html"
+    "modules/views/settings-view/src/ts/Settings.ts",
+    "modules/views/settings-view/src/scss/Settings.scss"
   ],
   "models": {
     "implementer": "Grok 4.6",
