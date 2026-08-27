@@ -1,37 +1,21 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-27T16:40:00+07:00",
-  "thread": "launcher fleet apk updates",
-  "intent": "CWSP-shell Android launcher Updates tab can check/install explorer, document, process, and transfer APKs.",
-  "status": "active",
-  "project": "CWSP-shell",
-  "mapper": {
-    "from": "android_sku_split_cc8bcd74",
-    "conflicts": [
-      "Do not bring the CWSP Control tab back onto the launcher",
-      "VDS desktop environment must not show APK install",
-      "Do not remove hub /explorer /viewer /process from CWSP-shell",
-      "CRX keeps process in-process — dedicated page is OK, no second extension"
-    ],
-    "doNotTouch": [
-      "TaskBar.scss",
-      "AppMenu.scss surface ink",
-      "appearance-base-color native lookup",
-      "fl.ui Canvas-2 stale copies",
-      "KMean cluster-size rewrite (least-chroma paper is enough)"
-    ]
-  },
+  "updatedAt": "2026-08-27T19:10:00+07:00",
+  "thread": "sibling build:capacitor publish",
+  "intent": "After npm run build:capacitor, Check must see the new sibling APK versionCode.",
+  "status": "done",
+  "project": "CWSP-process",
   "lastDone": [
-    "Adaptive launcher fg inset to 72/108 keyline so OEM shapes do not clip sibling icons"
+    "Sibling build:capacitor now stages latest-{process,document,explorer}.json like shell",
+    "Local 0.0.4 APKs exist; gateway manifests were still 0.0.3"
   ],
-  "next": "Rebuild document/explorer/process Capacitor APKs to ship inset icons",
+  "next": "On device Check — should show 0.0.3 → 0.0.4 if the phone is still on 0.0.3",
   "blockers": [],
   "paths": [
-    "apps/CWSP-shell/scripts/bump-capacitor-version.mjs",
-    "apps/CWSP-shell/scripts/sync-capacitor-android-icons.mjs",
-    "apps/CWSP-document/scripts/sync-capacitor-android-icons.mjs",
-    "apps/CWSP-explorer/scripts/sync-capacitor-android-icons.mjs",
-    "apps/CWSP-process/scripts/sync-capacitor-android-icons.mjs"
+    "apps/CWSP-process/scripts/build-capacitor.mjs",
+    "apps/CWSP-document/scripts/build-capacitor.mjs",
+    "apps/CWSP-explorer/scripts/build-capacitor.mjs",
+    "apps/CWSP-shell/scripts/publish-sibling-apk.mjs"
   ],
   "models": {
     "implementer": "Grok 4.6",

@@ -111,8 +111,12 @@
     "apk-update": [
       "apps/CWSP-shell/src/java/space/u2re/cwsp/AppUpdateHelper.java",
       "apps/CWSP-shell/src/java/space/u2re/cwsp/CwsLauncherBridgePlugin.java",
+      "apps/CWSP-shell/scripts/apk-release-version.mjs",
       "apps/CWSP-shell/scripts/publish-android-apk.mjs",
       "apps/CWSP-shell/scripts/publish-sibling-apk.mjs",
+      "apps/CWSP-process/scripts/build-capacitor.mjs",
+      "apps/CWSP-document/scripts/build-capacitor.mjs",
+      "apps/CWSP-explorer/scripts/build-capacitor.mjs",
       "runtime/cwsp/endpoint/server/routing/android-releases.ts",
       "apps/CWSP-transfer/src/backend/java/space/u2re/cwsp/AppUpdateHelper.java",
       "apps/CWSP-transfer/scripts/publish-android-apk.mjs",
@@ -207,7 +211,19 @@
       "modules/views/editor-view/src/index.ts",
       "apps/CWSP-crx/src/crx/markdown/viewer.ts"
     ],
+    "vite-preload": [
+      "apps/CWSP-shared/shared/vite-chunk-placement.mjs",
+      "apps/CWSP-document/src/frontend/web/cw-markdown/index.html",
+      "apps/CWSP-document/src/pwa/sw.ts"
+    ],
+    "sw-warmup": [
+      "apps/CWSP-document/src/pwa/sw.ts",
+      "apps/CWSP-process/src/pwa/sw.ts",
+      "apps/CWSP-shell/src/pwa/sw.ts"
+    ],
     "sku": [
+      "runtime/fastify/apps/share-ingress.ts",
+      "modules/projects/subsystem/src/routing/channel/sku-ingress.ts",
       "modules/projects/subsystem/src/other/config/ecosystem-skus.ts",
       "modules/projects/subsystem/src/other/config/settings/settings-shell-profile.ts",
       "modules/projects/subsystem/src/other/config/settings/contributions/apk-update.ts",
