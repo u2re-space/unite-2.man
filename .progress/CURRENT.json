@@ -1,15 +1,17 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-26T13:56:00+07:00",
-  "thread": "settings sku nav icons",
-  "intent": "Hub settings area tabs (settings-sku-nav) show Phosphor icons on each SKU button.",
+  "updatedAt": "2026-08-27T15:40:00+07:00",
+  "thread": "launcher fleet apk updates",
+  "intent": "CWSP-shell Android launcher Updates tab can check/install explorer, document, process, and transfer APKs.",
   "status": "active",
-  "project": "CWSP-reborn",
+  "project": "CWSP-shell",
   "mapper": {
     "from": "android_sku_split_cc8bcd74",
     "conflicts": [
       "Do not bring the CWSP Control tab back onto the launcher",
-      "VDS desktop environment must not show APK install"
+      "VDS desktop environment must not show APK install",
+      "Do not remove hub /explorer /viewer /process from CWSP-shell",
+      "CRX keeps process in-process — dedicated page is OK, no second extension"
     ],
     "doNotTouch": [
       "TaskBar.scss",
@@ -20,13 +22,17 @@
     ]
   },
   "lastDone": [
-    "settings-sku-nav buttons include duotone ui-icon + label (Shell/Explorer/Document/Process/Transfer)"
+    "Sibling build:capacitor now bumps version.properties (same as launcher)",
+    "Sibling APK mipmaps come from src/pwa/icons"
   ],
-  "next": "Reload settings on hub; confirm sku-nav icons paint",
+  "next": "Rebuild document/explorer/process Capacitor APKs — next assemble is 0.0.2 (2)",
   "blockers": [],
   "paths": [
-    "modules/views/settings-view/src/ts/Settings.ts",
-    "modules/views/settings-view/src/scss/Settings.scss"
+    "apps/CWSP-shell/scripts/bump-capacitor-version.mjs",
+    "apps/CWSP-shell/scripts/sync-capacitor-android-icons.mjs",
+    "apps/CWSP-document/scripts/sync-capacitor-android-icons.mjs",
+    "apps/CWSP-explorer/scripts/sync-capacitor-android-icons.mjs",
+    "apps/CWSP-process/scripts/sync-capacitor-android-icons.mjs"
   ],
   "models": {
     "implementer": "Grok 4.6",

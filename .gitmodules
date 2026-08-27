@@ -94,3 +94,6 @@
 [submodule "apps/CWSP-process"]
 	path = apps/CWSP-process
 	url = https://github.com/u2re-space/CWSP-process.git
+[submodule "apps/--force"]
+	path = apps/--force
+	url = https://github.com/u2re-space/CWSP-explorer.git

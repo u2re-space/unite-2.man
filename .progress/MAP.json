@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-24T23:22:00+07:00",
+  "updatedAt": "2026-08-27T14:25:00+07:00",
   "how": "Resolve tag or synonym → Read only those paths. If missing: one Grep for FIND:<tag>. Never walk skip.",
   "skip": [
     ".archives",
@@ -35,7 +35,9 @@
     "wallpaper": "wallpaper-ink",
     "обои": "wallpaper-ink",
     "веела": "veela",
-    "cwsp": "network"
+    "cwsp": "network",
+    "cw-explorer": "explorer",
+    "file-manager": "explorer"
   },
   "tags": {
     "thread": [".progress/CURRENT.json"],
@@ -63,6 +65,13 @@
       "modules/projects/fl.ui/src/ui/speed-dial/SpeedDial.scss",
       "modules/projects/fl.ui/src/ui/navigation/statusbar/statusbar.ts",
       "modules/shells/environment-shell/src/scss/root.scss"
+    ],
+    "explorer": [
+      "modules/projects/fl.ui/src/ui/explorer",
+      "apps/CWSP-explorer/src/web/sku-boot.ts",
+      "apps/CWSP-explorer/vite.config.js",
+      "apps/CWSP-explorer/scripts/stage-cw-explorer.mjs",
+      "runtime/fastify/apps/manifest.json"
     ],
     "fl-ui": ["modules/projects/fl.ui"],
     "speed-dial": ["modules/projects/fl.ui/src/ui/speed-dial"],
@@ -103,8 +112,13 @@
       "apps/CWSP-shell/src/java/space/u2re/cwsp/AppUpdateHelper.java",
       "apps/CWSP-shell/src/java/space/u2re/cwsp/CwsLauncherBridgePlugin.java",
       "apps/CWSP-shell/scripts/publish-android-apk.mjs",
+      "apps/CWSP-shell/scripts/publish-sibling-apk.mjs",
+      "runtime/cwsp/endpoint/server/routing/android-releases.ts",
       "apps/CWSP-transfer/src/backend/java/space/u2re/cwsp/AppUpdateHelper.java",
-      "apps/CWSP-transfer/scripts/publish-android-apk.mjs"
+      "apps/CWSP-transfer/scripts/publish-android-apk.mjs",
+      "modules/projects/subsystem/src/other/config/settings/contributions/apk-update.ts",
+      "modules/views/settings-view/src/ts/settings-contributions.ts",
+      "modules/views/settings-view/src/ts/Settings.ts"
     ],
     "navbar": [
       "apps/CWSP-transfer/src/backend/java/space/u2re/cwsp/MainActivity.java",
@@ -157,14 +171,21 @@
     ],
     "process": [
       "runtime/fastify/routers/process/index.ts",
+      "runtime/fastify/layers.ts",
+      "runtime/fastify/plugins/api.ts",
       "runtime/fastify/apps/manifest.json",
       "runtime/fastify/apps/host-apps.ts",
       "runtime/fastify/plugins/host-apps.ts",
-      "apps/CWSP-process"
+      "modules/projects/subsystem/src/routing/api/process-api.ts",
+      "apps/CWSP-process",
+      "apps/CWSP-process/src/frontend/web/sku-boot.ts"
     ],
     "workcenter": [
       "runtime/fastify/apps/workcenter",
-      "apps/CWSP-process/scripts/stage-cw-workcenter.mjs"
+      "apps/CWSP-process/scripts/stage-cw-workcenter.mjs",
+      "modules/views/workcenter-view/src/index.ts",
+      "modules/views/workcenter-view/src/scss/_base.scss",
+      "apps/CWSP-crx/src/crx/workcenter/main.ts"
     ],
     "print": [
       "modules/shells/minimal-shell/src/minimal.scss",
@@ -181,7 +202,10 @@
       "modules/views/markdown-view/src/needs-to-API.ts",
       "modules/views/markdown-view/src/ts/Markdown.ts",
       "modules/projects/subsystem/src/routing/pwa/sw-handling.ts",
-      "modules/projects/subsystem/src/routing/channel/ViewTransferRouting.ts"
+      "modules/projects/subsystem/src/routing/channel/ViewTransferRouting.ts",
+      "apps/CWSP-document/src/frontend/web/sku-boot.ts",
+      "modules/views/editor-view/src/index.ts",
+      "apps/CWSP-crx/src/crx/markdown/viewer.ts"
     ],
     "sku": [
       "modules/projects/subsystem/src/other/config/ecosystem-skus.ts",
@@ -189,8 +213,18 @@
       "modules/projects/subsystem/src/other/config/settings/contributions/apk-update.ts",
       "apps/CWSP-shell/src/frontend/web/capacitor-launcher/entry.ts",
       "apps/CWSP-explorer/src/frontend/web/capacitor/entry.ts",
+      "apps/CWSP-explorer/src/web/sku-boot.ts",
+      "apps/CWSP-explorer/vite.config.js",
+      "apps/CWSP-explorer/scripts/stage-cw-explorer.mjs",
+      "apps/CWSP-crx/src/crx/explorer/main.ts",
+      "modules/projects/fl.ui/src/ui/explorer/backends/neutralino-fs-backend.ts",
+      "modules/projects/fl.ui/src/ui/explorer/backends/chrome-downloads-backend.ts",
+      "modules/projects/fl.ui/src/ui/explorer/path-router.ts",
+      "runtime/fastify/apps/manifest.json",
       "apps/CWSP-document/src/frontend/web/capacitor/entry.ts",
+      "apps/CWSP-process/src/frontend/web/sku-boot.ts",
       "apps/CWSP-process/src/frontend/web/capacitor/entry.ts",
+      "apps/CWSP-crx/src/crx/workcenter/main.ts",
       "apps/CWSP-shell/scripts/project-sibling-sku-android.mjs",
       "apps/CWSP-shell/scripts/adb-install-apks.mjs",
       "modules/projects/subsystem/src/boot/history-base.ts",
