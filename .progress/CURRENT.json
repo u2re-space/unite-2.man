@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-27T15:40:00+07:00",
+  "updatedAt": "2026-08-27T16:40:00+07:00",
   "thread": "launcher fleet apk updates",
   "intent": "CWSP-shell Android launcher Updates tab can check/install explorer, document, process, and transfer APKs.",
   "status": "active",
@@ -22,10 +22,9 @@
     ]
   },
   "lastDone": [
-    "Sibling build:capacitor now bumps version.properties (same as launcher)",
-    "Sibling APK mipmaps come from src/pwa/icons"
+    "Adaptive launcher fg inset to 72/108 keyline so OEM shapes do not clip sibling icons"
   ],
-  "next": "Rebuild document/explorer/process Capacitor APKs — next assemble is 0.0.2 (2)",
+  "next": "Rebuild document/explorer/process Capacitor APKs to ship inset icons",
   "blockers": [],
   "paths": [
     "apps/CWSP-shell/scripts/bump-capacitor-version.mjs",
