@@ -1,23 +1,20 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-28T12:28:00+07:00",
-  "thread": "App Menu info / uninstall / edit launch",
-  "intent": "App Menu can show app info, uninstall, and edit launch (action/data/extras/flags) on Android/Capacitor; CRX bookmarks get info/edit/delete.",
+  "updatedAt": "2026-08-28T13:22:00+07:00",
+  "thread": "fest publish patch bump",
+  "intent": "npm run publish on fest projects bumps package.json patch (+1) before release.",
   "status": "done",
-  "project": "CWSP-shell",
+  "project": "modules/projects",
   "lastDone": [
-    "Context menu: App info, Edit launch, Uninstall (Android) + bookmark Info/Edit/Delete (CRX)",
-    "Native launcher:app-info / open-app-info / uninstall + custom Intent spec",
-    "Uninstall uses PackageInstaller.uninstall + ACTION_UNINSTALL_PACKAGE, not ACTION_DELETE"
+    "Shared bump-patch-version.mjs: x.y.Z+1 from max(local, npm view)",
+    "Wired into publish (not release) on core/dom/object/uniform/lure/fl.ui/veela/icon/image"
   ],
-  "next": "Rebuild Capacitor launcher APK and long-press an app tile to verify the new actions",
+  "next": "Use npm run publish in a fest package to cut the next patch; npm run release still publishes the current version",
   "blockers": [],
   "paths": [
-    "modules/projects/fl.ui/src/ui/navigation/app-menu/AppMenu.ts",
-    "modules/projects/fl.ui/src/ui/navigation/app-menu/app-actions.ts",
-    "modules/projects/fl.ui/src/ui/speed-dial/app-launch.ts",
-    "apps/CWSP-shell/src/routing/native/launcher-bridge.ts",
-    "apps/CWSP-shell/src/java/space/u2re/cwsp/LauncherCoordinator.java"
+    "modules/projects/scripts/bump-patch-version.mjs",
+    "modules/projects/core.ts/package.json",
+    "modules/projects/lur.e/package.json"
   ],
   "models": {
     "implementer": "Grok 4.6",

@@ -99,6 +99,7 @@
       "modules/projects/fl.ui/src/ui/speed-dial/tile-icon.ts"
     ],
     "icon-picker": ["modules/projects/fl.ui/src/ui/speed-dial/icon-resource-picker.ts"],
+    "publish": ["modules/projects/scripts/bump-patch-version.mjs"],
     "app-menu": [
       "modules/projects/fl.ui/src/ui/navigation/app-menu/AppMenu.ts",
       "modules/projects/fl.ui/src/ui/navigation/app-menu/app-actions.ts",
