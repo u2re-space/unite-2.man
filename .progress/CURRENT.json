@@ -1,21 +1,23 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-27T19:10:00+07:00",
-  "thread": "sibling build:capacitor publish",
-  "intent": "After npm run build:capacitor, Check must see the new sibling APK versionCode.",
+  "updatedAt": "2026-08-28T12:21:00+07:00",
+  "thread": "App Menu info / uninstall / edit launch",
+  "intent": "App Menu can show app info, uninstall, and edit launch (action/data/extras/flags) on Android/Capacitor; CRX bookmarks get info/edit/delete.",
   "status": "done",
-  "project": "CWSP-process",
+  "project": "CWSP-shell",
   "lastDone": [
-    "Sibling build:capacitor now stages latest-{process,document,explorer}.json like shell",
-    "Local 0.0.4 APKs exist; gateway manifests were still 0.0.3"
+    "Context menu: App info, Edit launch, Uninstall (Android) + bookmark Info/Edit/Delete (CRX)",
+    "Native launcher:app-info / open-app-info / uninstall + custom Intent spec",
+    "App Menu: Android settings item opens native app details (Capacitor only)"
   ],
-  "next": "On device Check — should show 0.0.3 → 0.0.4 if the phone is still on 0.0.3",
+  "next": "Rebuild Capacitor launcher APK and long-press an app tile to verify the new actions",
   "blockers": [],
   "paths": [
-    "apps/CWSP-process/scripts/build-capacitor.mjs",
-    "apps/CWSP-document/scripts/build-capacitor.mjs",
-    "apps/CWSP-explorer/scripts/build-capacitor.mjs",
-    "apps/CWSP-shell/scripts/publish-sibling-apk.mjs"
+    "modules/projects/fl.ui/src/ui/navigation/app-menu/AppMenu.ts",
+    "modules/projects/fl.ui/src/ui/navigation/app-menu/app-actions.ts",
+    "modules/projects/fl.ui/src/ui/speed-dial/app-launch.ts",
+    "apps/CWSP-shell/src/routing/native/launcher-bridge.ts",
+    "apps/CWSP-shell/src/java/space/u2re/cwsp/LauncherCoordinator.java"
   ],
   "models": {
     "implementer": "Grok 4.6",

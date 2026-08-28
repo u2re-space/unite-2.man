@@ -99,6 +99,13 @@
       "modules/projects/fl.ui/src/ui/speed-dial/tile-icon.ts"
     ],
     "icon-picker": ["modules/projects/fl.ui/src/ui/speed-dial/icon-resource-picker.ts"],
+    "app-menu": [
+      "modules/projects/fl.ui/src/ui/navigation/app-menu/AppMenu.ts",
+      "modules/projects/fl.ui/src/ui/navigation/app-menu/app-actions.ts",
+      "modules/projects/fl.ui/src/ui/speed-dial/app-launch.ts",
+      "apps/CWSP-shell/src/routing/native/launcher-bridge.ts",
+      "apps/CWSP-shell/src/java/space/u2re/cwsp/LauncherCoordinator.java"
+    ],
     "high-refresh": [
       "apps/CWSP-shell/src/java/space/u2re/cwsp/DisplayRefreshUnlock.java",
       "apps/CWSP-shell/src/java/space/u2re/cwsp/MainActivity.java"
