@@ -100,6 +100,7 @@
     ],
     "icon-picker": ["modules/projects/fl.ui/src/ui/speed-dial/icon-resource-picker.ts"],
     "publish": ["modules/projects/scripts/bump-patch-version.mjs"],
+    "readme": ["README.md", "apps/README.md", "modules/projects/README.md"],
     "app-menu": [
       "modules/projects/fl.ui/src/ui/navigation/app-menu/AppMenu.ts",
       "modules/projects/fl.ui/src/ui/navigation/app-menu/app-actions.ts",

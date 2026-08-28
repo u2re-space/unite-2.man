@@ -1,60 +1,61 @@
-# U2RE.space Workspace
+# U2RE.space
 
-**unite-2.man** — общий engineering workspace для проектов U2RE.space.
+**unite-2.man** — общий engineering workspace экосистемы U2RE. Это не один продукт и не шаблон приложения: здесь собираются библиотеки, оболочки, представления и конечные приложения (PWA, Chrome-расширение, Capacitor, desktop).
 
-Это не один продукт и не шаблон приложения. Здесь разрабатываются, собираются и связываются все основные части экосистемы: приложения, общие библиотеки, UI-системы, runtime-интеграции, инструменты сборки и документация.
+Изменение в общем модуле сразу доступно нескольким поверхностям. Один source of truth, без копирования деревьев в потребителей.
 
 ## Назначение
 
-Workspace служит единым рабочим полем для создания продуктов U2RE:
+- браузерные приложения и PWA;
+- Chrome / Chromium-расширение (Manifest V3);
+- Android-приложения на Capacitor (launcher и sibling SKU);
+- desktop / Neutralino / WebNative;
+- общие UI-библиотеки (Fest), views и shells;
+- runtime, endpoint и platform-интеграции.
 
-- браузерных приложений и PWA;
-- Chrome/Chromium-расширений;
-- Android-приложений на Capacitor;
-- desktop/WebNative-поверхностей;
-- общих UI-компонентов, document-инструментов и shell-окружений;
-- runtime-, endpoint- и platform-интеграций.
+## Каталоги
 
-Изменение в общем модуле может быть использовано сразу несколькими приложениями. Это позволяет сохранять единую модель интерфейса, настроек, роутинга и платформенных возможностей.
-
-## Что находится в репозитории
-
-| Каталог | Роль |
+| Путь | Роль |
 | --- | --- |
-| `apps/` | Конечные приложения и продуктовые поверхности U2RE. |
-| `modules/projects/` | Общие библиотеки: core, DOM, реактивность, UI, иконки, стили, subsystem и shared-логика. |
-| `modules/shells/` | Shell-окружения: content, minimal, environment, immersive и window-frame. |
-| `modules/views/` | Переиспользуемые представления: Home, Viewer, Editor, Explorer, Settings, Work Center и другие. |
-| `runtime/` | Runtime-интеграции и сервисы; подключается как отдельный репозиторий/submodule. |
+| [`apps/`](apps/README.md) | Конечные приложения CWSP. |
+| [`modules/projects/`](modules/projects/README.md) | Fest npm-библиотеки (`@fest-lib/*`): установка, слои, publish. |
+| `modules/views/` | Переиспользуемые представления (home, viewer, explorer, settings, workcenter, …). |
+| `modules/shells/` | Оболочки: content, minimal, environment, immersive, window-frame. |
+| `runtime/` | Хост, Fastify-слои, endpoint (отдельный репозиторий / submodule). |
 | `assets/` | Общие визуальные ресурсы. |
-| `scripts/` | Сборка, синхронизация, публикация и служебные инструменты. |
-| `docs/` | Документация по разработке и рабочим процессам. |
+| `scripts/` | Сборка, синхронизация, публикация. |
 
-## Продукты и направления
+Импорты только снизу вверх: `fest/core` → `dom` / `object` / `veela` → `lure` / `icon` → `fl-ui` → views → shells → apps. Source of truth — корень пакета, не копии под `*/fest`, `*/views`, `*/shells`.
 
-В workspace развиваются несколько связанных направлений:
+## Приложения
 
-- **CWSP-shell** — Android Launcher и Speed Dial / New Tab Page для Chromium.
-- **CWSP-document** — Markdown-документы, печать, DOCX-экспорт и browser-assisted распознавание.
-- **CWSP-transfer** — передача и обработка контента между поверхностями.
-- **CrossWord** — документные и рабочие представления U2RE.
-- **CWSP-crx** — Manifest V3-расширение Chrome с New Tab, context menu и CRX Snip.
-- **Fest** — набор библиотек, на которых строится интерфейс и runtime-слой.
+Подробная матрица и команды — в [`apps/README.md`](apps/README.md).
+
+| Приложение | Роль |
+| --- | --- |
+| **CWSP-shell** | Android Launcher и Speed Dial / New Tab. |
+| **CWSP-document** | Markdown, печать, DOCX. Синоним: `apps/CrossWord`. |
+| **CWSP-explorer** | Файловый менеджер (OPFS, mounts, native storage). |
+| **CWSP-process** | Work Center и AI-обработка. |
+| **CWSP-transfer** | Буфер обмена и передача между устройствами. Синоним: `apps/CWSP-reborn`. |
+| **CWSP-crx** | Единственный владелец Chrome-расширения. |
+| **CWSP-shared** | Общие extras для приложений (не SPA). |
+| **CWSP-direct** | Задел под AirPad / remote. |
 
 ## Архитектура
 
 ```text
 fest/core
-├── fest/dom + fest/object
-├── fest/veela + fest/icon + fest/lure
-└── fest/fl-ui
-    └── shells, views и apps
-        └── продукты U2RE.space
+├── fest/dom + fest/object + fest/veela
+├── fest/lure + fest/icon + fest/image
+└── fest/fl-ui + subsystem
+    └── views → shells → apps
+        └── runtime / PWA / CRX / Capacitor
 ```
 
-Нижние уровни не зависят от верхних: приложения используют библиотеки, но базовые библиотеки не импортируют приложения. Это помогает держать общий код переносимым между PWA, CRX, Capacitor и desktop-поверхностями.
-
 ## Начало работы
+
+Нужен Node.js **24+**.
 
 ```bash
 git clone --recurse-submodules https://github.com/u2re-space/unite-2.man.git
@@ -62,22 +63,12 @@ cd unite-2.man
 npm install
 ```
 
-Если репозиторий уже клонирован без submodule:
+Если клонировали без submodule:
 
 ```bash
 git submodule update --init --recursive
 ```
 
-Далее выберите нужное приложение в `apps/` и используйте его локальные scripts для development, build или platform sync.
+Дальше — скрипты нужного пакета в `apps/` или `modules/projects/`. Fest-библиотеки: `npm run publish` поднимает patch и публикует в npm; `npm run release` публикует текущую версию без bump.
 
-## Принципы workspace
-
-- Один source of truth для общей логики и UI.
-- Переиспользуемые модули вместо копирования кода между приложениями.
-- Chromium-first разработка с отдельными адаптерами для Android, CRX и desktop.
-- Локально-ориентированное хранение и platform-specific возможности только там, где они действительно доступны.
-- Небольшие приложения могут использовать общие views и shells без повторной реализации интерфейса.
-
-## Статус
-
-U2RE.space — активный экспериментальный workspace. Здесь создаются и развиваются новые приложения, shell-окружения, UI-библиотеки и платформенные интеграции экосистемы.
+Контракт для агентов: [`AGENTS.md`](AGENTS.md).

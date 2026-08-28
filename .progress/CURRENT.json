@@ -1,19 +1,20 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-28T16:46:00+07:00",
-  "thread": "Remove apps/--force git ghost",
-  "intent": "Stop Cursor/git detecting a phantom apps/--force submodule.",
+  "updatedAt": "2026-08-28T17:07:00+07:00",
+  "thread": "Fest npm README pass",
+  "intent": "modules/projects library READMEs: install, layer, real APIs, publish.",
   "status": "done",
-  "project": "apps",
+  "project": "modules/projects",
   "lastDone": [
-    "Removed leftover submodule.apps/--force (CWSP-explorer) from .git/config",
-    "Deleted .git/modules/apps/--force; CWSP-explorer repo untouched"
+    "Added modules/projects/README.md index for @fest-lib/*",
+    "Rewrote core/dom/object/veela/uniform/lure/icon/image/fl-ui/subsystem/cwsp-shared READMEs"
   ],
-  "next": "Reload SCM if apps/--force still listed; optional: same ghost at modules/views/--recursive",
+  "next": "Optional: typedoc pages and npm publish of the next patches",
   "blockers": [],
   "paths": [
-    ".git/config",
-    "apps/CWSP-explorer"
+    "modules/projects/README.md",
+    "modules/projects/lur.e/README.md",
+    "modules/projects/fl.ui/README.md"
   ],
   "models": {
     "implementer": "Grok 4.6",
