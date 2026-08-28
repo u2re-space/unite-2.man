@@ -156,3 +156,9 @@ bun.lockb
 ./bun.lock.json.timestamp-*
 ./pantry/*
 ./pantry/**/*
+
+# don't ghost anoything
+./apps/--*
+./apps/--force
+./--force
+./--*

@@ -250,3 +250,9 @@ src/**/*.map
 ./pantry/*
 ./pantry/**/*
 .worktrees/
+
+# don't ghost anoything
+./apps/--*
+./apps/--force
+./--force
+./--*
