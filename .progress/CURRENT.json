@@ -1,20 +1,20 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-28T17:07:00+07:00",
-  "thread": "Fest npm README pass",
-  "intent": "modules/projects library READMEs: install, layer, real APIs, publish.",
+  "updatedAt": "2026-08-28T17:16:00+07:00",
+  "thread": "Views and shells READMEs",
+  "intent": "Package-root READMEs for modules/views and modules/shells.",
   "status": "done",
-  "project": "modules/projects",
+  "project": "modules/views",
   "lastDone": [
-    "Added modules/projects/README.md index for @fest-lib/*",
-    "Rewrote core/dom/object/veela/uniform/lure/icon/image/fl-ui/subsystem/cwsp-shared READMEs"
+    "Index READMEs: modules/views/README.md, modules/shells/README.md",
+    "View + shell package READMEs; skipped shared/ copies and viewer-view / views/window-frame symlinks"
   ],
-  "next": "Optional: typedoc pages and npm publish of the next patches",
+  "next": null,
   "blockers": [],
   "paths": [
-    "modules/projects/README.md",
-    "modules/projects/lur.e/README.md",
-    "modules/projects/fl.ui/README.md"
+    "modules/views/README.md",
+    "modules/shells/README.md",
+    "modules/shells/environment-shell/README.md"
   ],
   "models": {
     "implementer": "Grok 4.6",

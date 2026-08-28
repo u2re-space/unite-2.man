@@ -19,8 +19,8 @@
 | --- | --- |
 | [`apps/`](apps/README.md) | Конечные приложения CWSP. |
 | [`modules/projects/`](modules/projects/README.md) | Fest npm-библиотеки (`@fest-lib/*`): установка, слои, publish. |
-| `modules/views/` | Переиспользуемые представления (home, viewer, explorer, settings, workcenter, …). |
-| `modules/shells/` | Оболочки: content, minimal, environment, immersive, window-frame. |
+| [`modules/views/`](modules/views/README.md) | Представления: home, viewer, explorer, settings, workcenter, … |
+| [`modules/shells/`](modules/shells/README.md) | Оболочки: environment, window-frame, minimal, content, immersive. |
 | `runtime/` | Хост, Fastify-слои, endpoint (отдельный репозиторий / submodule). |
 | `assets/` | Общие визуальные ресурсы. |
 | `scripts/` | Сборка, синхронизация, публикация. |
