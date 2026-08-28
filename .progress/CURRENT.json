@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-28T12:21:00+07:00",
+  "updatedAt": "2026-08-28T12:28:00+07:00",
   "thread": "App Menu info / uninstall / edit launch",
   "intent": "App Menu can show app info, uninstall, and edit launch (action/data/extras/flags) on Android/Capacitor; CRX bookmarks get info/edit/delete.",
   "status": "done",
@@ -8,7 +8,7 @@
   "lastDone": [
     "Context menu: App info, Edit launch, Uninstall (Android) + bookmark Info/Edit/Delete (CRX)",
     "Native launcher:app-info / open-app-info / uninstall + custom Intent spec",
-    "App Menu: Android settings item opens native app details (Capacitor only)"
+    "Uninstall uses PackageInstaller.uninstall + ACTION_UNINSTALL_PACKAGE, not ACTION_DELETE"
   ],
   "next": "Rebuild Capacitor launcher APK and long-press an app tile to verify the new actions",
   "blockers": [],
