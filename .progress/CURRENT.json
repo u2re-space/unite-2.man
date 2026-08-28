@@ -1,20 +1,19 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-28T13:22:00+07:00",
-  "thread": "fest publish patch bump",
-  "intent": "npm run publish on fest projects bumps package.json patch (+1) before release.",
+  "updatedAt": "2026-08-28T16:46:00+07:00",
+  "thread": "Remove apps/--force git ghost",
+  "intent": "Stop Cursor/git detecting a phantom apps/--force submodule.",
   "status": "done",
-  "project": "modules/projects",
+  "project": "apps",
   "lastDone": [
-    "Shared bump-patch-version.mjs: x.y.Z+1 from max(local, npm view)",
-    "Wired into publish (not release) on core/dom/object/uniform/lure/fl.ui/veela/icon/image"
+    "Removed leftover submodule.apps/--force (CWSP-explorer) from .git/config",
+    "Deleted .git/modules/apps/--force; CWSP-explorer repo untouched"
   ],
-  "next": "Use npm run publish in a fest package to cut the next patch; npm run release still publishes the current version",
+  "next": "Reload SCM if apps/--force still listed; optional: same ghost at modules/views/--recursive",
   "blockers": [],
   "paths": [
-    "modules/projects/scripts/bump-patch-version.mjs",
-    "modules/projects/core.ts/package.json",
-    "modules/projects/lur.e/package.json"
+    ".git/config",
+    "apps/CWSP-explorer"
   ],
   "models": {
     "implementer": "Grok 4.6",
