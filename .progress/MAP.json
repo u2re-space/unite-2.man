@@ -37,7 +37,12 @@
     "веела": "veela",
     "cwsp": "network",
     "cw-explorer": "explorer",
-    "file-manager": "explorer"
+    "file-manager": "explorer",
+    "favorites": "bookmarks",
+    "закладки": "bookmarks",
+    "открытие": "open-policy",
+    "share-target": "open-policy",
+    "fest-lib": "fest-shared"
   },
   "tags": {
     "thread": [".progress/CURRENT.json"],
@@ -51,6 +56,15 @@
     "overlays": [".cursor/rules/library-contracts.mdc"],
     "network": [".cursor/rules/network.mdc"],
     "debug": [".cursor/rules/debugging.mdc"],
+    "fest-shared": [
+      "modules/shared/fest-web-libs.mjs",
+      "modules/projects/scripts/stage-fest-libs.mjs",
+      "runtime/fastify/apps/hoist-shared-slices.mjs",
+      "runtime/fastify/apps/host-apps.ts",
+      "runtime/fastify/plugins/host-apps.ts",
+      "apps/CWSP-shell/shared/vite.config.js",
+      "apps/CWSP-shell/shared/vite-chunk-placement.mjs"
+    ],
     "core": ["modules/projects/core.ts"],
     "dom": ["modules/projects/dom.ts"],
     "object": ["modules/projects/object.ts"],
@@ -59,6 +73,7 @@
     "icon": ["modules/projects/icon.ts"],
     "image": ["modules/projects/image.ts"],
     "wallpaper-ink": [
+      "modules/projects/image.ts/src/canvas/Canvas-2.ts",
       "modules/projects/image.ts/src/engine/WallpaperTheme.ts",
       "modules/projects/veela.css/src/scss/core/misc/_tokens.scss",
       "modules/projects/veela.css/src/scss/core/misc/_color-properties.scss",
@@ -107,8 +122,31 @@
       "modules/views/README.md",
       "modules/shells/README.md"
     ],
+    "open-policy": [
+      "modules/projects/subsystem/src/other/config/open-policy.ts",
+      "modules/projects/subsystem/src/other/config/settings/contributions/open-files.ts",
+      "modules/projects/subsystem/src/routing/channel/sku-ingress.ts",
+      "modules/projects/subsystem/src/routing/channel/ViewTransferRouting.ts",
+      "modules/projects/subsystem/src/routing/native/launcher-bridge.ts",
+      "modules/views/explorer-view/src/runtime.ts",
+      "modules/projects/fl.ui/src/ui/speed-dial/action-registry.ts",
+      "modules/views/markdown-view/src/needs-to-API.ts",
+      "apps/CWSP-shell/src/java/space/u2re/cwsp/LauncherCoordinator.java",
+      "apps/CWSP-explorer/platforms/android/AndroidManifest.xml",
+      "apps/CWSP-document/platforms/android/AndroidManifest.xml"
+    ],
+    "bookmarks": [
+      "modules/projects/fl.ui/src/ui/navigation/app-menu/bookmarks-menu.ts",
+      "modules/projects/fl.ui/src/ui/navigation/app-menu/app-actions.ts",
+      "modules/projects/fl.ui/src/ui/navigation/app-menu/AppMenu.ts",
+      "modules/projects/fl.ui/src/ui/explorer/backends/chrome-bookmarks-backend.ts",
+      "modules/projects/fl.ui/src/ui/explorer/ContextMenu.ts",
+      "modules/projects/fl.ui/src/ui/explorer/Operative.ts"
+    ],
     "app-menu": [
       "modules/projects/fl.ui/src/ui/navigation/app-menu/AppMenu.ts",
+      "modules/projects/fl.ui/src/ui/navigation/app-menu/bookmarks-menu.ts",
+      "modules/projects/fl.ui/src/ui/navigation/app-menu/app-sort.ts",
       "modules/projects/fl.ui/src/ui/navigation/app-menu/app-actions.ts",
       "modules/projects/fl.ui/src/ui/speed-dial/app-launch.ts",
       "apps/CWSP-shell/src/routing/native/launcher-bridge.ts",
@@ -230,6 +268,10 @@
       "apps/CWSP-shared/shared/vite-chunk-placement.mjs",
       "apps/CWSP-document/src/frontend/web/cw-markdown/index.html",
       "apps/CWSP-document/src/pwa/sw.ts"
+    ],
+    "sw-url": [
+      "modules/projects/subsystem/src/routing/pwa/sw-url.ts",
+      "modules/projects/subsystem/src/routing/pwa/sw-handling.ts"
     ],
     "sw-warmup": [
       "apps/CWSP-document/src/pwa/sw.ts",

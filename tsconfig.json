@@ -64,6 +64,15 @@
             "@fl-ui/*": [
                 "./modules/projects/fl.ui/src/ui/*"
             ],
+            "fl-ui/*": [
+                "./modules/projects/fl.ui/src/ui/*"
+            ],
+            "cwsp-shared/*": [
+                "./modules/projects/cwsp-shared/src/*"
+            ],
+            "@fest-lib/cwsp-shared": [
+                "./modules/projects/cwsp-shared/src/index.ts"
+            ],
             "@rs-com/*": [
                 "apps/CWSP-document/src/com/*"
             ],

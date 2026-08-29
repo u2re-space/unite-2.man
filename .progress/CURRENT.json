@@ -1,20 +1,22 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-28T17:16:00+07:00",
-  "thread": "Views and shells READMEs",
-  "intent": "Package-root READMEs for modules/views and modules/shells.",
+  "updatedAt": "2026-08-30T00:50:00+07:00",
+  "thread": "explorer/document capacitor open",
+  "intent": "Capacitor Explorer SEND+FileProvider; Document viewer pulls pending-share itself.",
   "status": "done",
-  "project": "modules/views",
+  "project": "CWSP-explorer",
   "lastDone": [
-    "Index READMEs: modules/views/README.md, modules/shells/README.md",
-    "View + shell package READMEs; skipped shared/ copies and viewer-view / views/window-frame symlinks"
+    "Explorer: no WebView jump to md.u2re.space; SEND to Document",
+    "Document viewer pullCapacitorPendingOpen on mount/show",
+    "MainActivity no longer stamps CATEGORY_HOME on sibling SKUs"
   ],
-  "next": null,
+  "next": "Rebuild BOTH CWSP-explorer and CWSP-document APKs and install both",
   "blockers": [],
   "paths": [
-    "modules/views/README.md",
-    "modules/shells/README.md",
-    "modules/shells/environment-shell/README.md"
+    "apps/CWSP-shell/src/java/space/u2re/cwsp/LauncherCoordinator.java",
+    "apps/CWSP-shell/src/java/space/u2re/cwsp/MainActivity.java",
+    "modules/views/markdown-view/src/needs-to-API.ts",
+    "modules/views/explorer-view/src/runtime.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",
