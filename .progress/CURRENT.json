@@ -1,22 +1,20 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-30T00:50:00+07:00",
-  "thread": "explorer/document capacitor open",
-  "intent": "Capacitor Explorer SEND+FileProvider; Document viewer pulls pending-share itself.",
+  "updatedAt": "2026-08-30T01:42:00+07:00",
+  "thread": "viewer image open",
+  "intent": "Viewer must preview images without crashing showMessage or repainting the last markdown.",
   "status": "done",
-  "project": "CWSP-explorer",
+  "project": "CWSP-document",
   "lastDone": [
-    "Explorer: no WebView jump to md.u2re.space; SEND to Document",
-    "Document viewer pullCapacitorPendingOpen on mount/show",
-    "MainActivity no longer stamps CATEGORY_HOME on sibling SKUs"
+    "showMessage no longer assumes shellContext.showMessage exists",
+    "Image/PDF preview is deferred until the slot exists and blocks markdown repaint",
+    "Capacitor pending-share does not save/repaint markdown over a binary preview"
   ],
-  "next": "Rebuild BOTH CWSP-explorer and CWSP-document APKs and install both",
+  "next": "Rebuild Web/PWA and CWSP-document APK; current VDS deploy will not include this",
   "blockers": [],
   "paths": [
-    "apps/CWSP-shell/src/java/space/u2re/cwsp/LauncherCoordinator.java",
-    "apps/CWSP-shell/src/java/space/u2re/cwsp/MainActivity.java",
     "modules/views/markdown-view/src/needs-to-API.ts",
-    "modules/views/explorer-view/src/runtime.ts"
+    "modules/shells/environment-shell/src/workspace-window-layer.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",

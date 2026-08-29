@@ -42,6 +42,10 @@
     "закладки": "bookmarks",
     "открытие": "open-policy",
     "share-target": "open-policy",
+    "settings-host": "settings-host",
+    "хост-настройки": "settings-host",
+    "explorer-adapters": "explorer-adapters",
+    "адаптеры": "explorer-adapters",
     "fest-lib": "fest-shared"
   },
   "tags": {
@@ -122,16 +126,33 @@
       "modules/views/README.md",
       "modules/shells/README.md"
     ],
+    "settings-host": [
+      "modules/projects/subsystem/src/other/config/settings-host.ts",
+      "modules/projects/subsystem/src/other/config/open-policy.ts",
+      "modules/projects/subsystem/src/other/config/SettingsTypes.ts"
+    ],
+    "explorer-adapters": [
+      "modules/projects/fl.ui/src/ui/explorer/explorer-adapters.ts",
+      "modules/projects/fl.ui/src/ui/explorer/path-router.ts",
+      "modules/projects/fl.ui/src/ui/explorer/fs-backend.ts"
+    ],
     "open-policy": [
+      "modules/projects/subsystem/src/other/config/settings-host.ts",
       "modules/projects/subsystem/src/other/config/open-policy.ts",
       "modules/projects/subsystem/src/other/config/settings/contributions/open-files.ts",
       "modules/projects/subsystem/src/routing/channel/sku-ingress.ts",
       "modules/projects/subsystem/src/routing/channel/ViewTransferRouting.ts",
       "modules/projects/subsystem/src/routing/native/launcher-bridge.ts",
       "modules/views/explorer-view/src/runtime.ts",
+      "modules/projects/fl.ui/src/ui/explorer/storage-bridge.ts",
+      "modules/projects/subsystem/src/boot/capacitor-share-intent.ts",
       "modules/projects/fl.ui/src/ui/speed-dial/action-registry.ts",
       "modules/views/markdown-view/src/needs-to-API.ts",
+      "modules/projects/fl.ui/src/ui/explorer/path-router.ts",
+      "modules/shells/environment-shell/src/workspace-window-layer.ts",
+      "apps/CWSP-crx/src/frontend/ai-slop/window/environment-shell.ts",
       "apps/CWSP-shell/src/java/space/u2re/cwsp/LauncherCoordinator.java",
+      "apps/CWSP-shell/src/java/space/u2re/cwsp/CwsStorageHost.java",
       "apps/CWSP-explorer/platforms/android/AndroidManifest.xml",
       "apps/CWSP-document/platforms/android/AndroidManifest.xml"
     ],
