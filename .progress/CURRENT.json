@@ -1,20 +1,22 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-30T01:42:00+07:00",
-  "thread": "viewer image open",
-  "intent": "Viewer must preview images without crashing showMessage or repainting the last markdown.",
+  "updatedAt": "2026-08-30T09:10:00+07:00",
+  "thread": "vite-preload-catch",
+  "intent": "Explain and harden __vitePreload(...).catch on PWA open.",
   "status": "done",
   "project": "CWSP-document",
   "lastDone": [
-    "showMessage no longer assumes shellContext.showMessage exists",
-    "Image/PDF preview is deferred until the slot exists and blocks markdown repaint",
-    "Capacitor pending-share does not save/repaint markdown over a binary preview"
+    "Warm-viewer import no longer puts .catch on Vite preload return",
+    "rewriteVitePreloadBinding now strips mixed com/app.js __vitePreload imports"
   ],
-  "next": "Rebuild Web/PWA and CWSP-document APK; current VDS deploy will not include this",
+  "next": "Rebuild/redeploy VDS after the in-flight build:vds-apps finishes",
   "blockers": [],
   "paths": [
-    "modules/views/markdown-view/src/needs-to-API.ts",
-    "modules/shells/environment-shell/src/workspace-window-layer.ts"
+    "apps/CWSP-document/src/index.ts",
+    "apps/CWSP-shell/src/index.ts",
+    "apps/CWSP-document/shared/vite-chunk-placement.mjs",
+    "apps/CWSP-shared/shared/vite-chunk-placement.mjs",
+    "apps/CWSP-shell/shared/vite-chunk-placement.mjs"
   ],
   "models": {
     "implementer": "Grok 4.6",

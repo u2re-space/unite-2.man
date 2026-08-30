@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-27T14:25:00+07:00",
+  "updatedAt": "2026-08-30T08:40:00+07:00",
   "how": "Resolve tag or synonym → Read only those paths. If missing: one Grep for FIND:<tag>. Never walk skip.",
   "skip": [
     ".archives",
@@ -45,6 +45,8 @@
     "settings-host": "settings-host",
     "хост-настройки": "settings-host",
     "explorer-adapters": "explorer-adapters",
+    "open-in-folder": "transfer-folder",
+    "send-transfer": "transfer-folder",
     "адаптеры": "explorer-adapters",
     "fest-lib": "fest-shared"
   },
@@ -84,6 +86,16 @@
       "modules/projects/fl.ui/src/ui/speed-dial/SpeedDial.scss",
       "modules/projects/fl.ui/src/ui/navigation/statusbar/statusbar.ts",
       "modules/shells/environment-shell/src/scss/root.scss"
+    ],
+    "explorer-layout": [
+      "modules/projects/fl.ui/src/styles/ui/_explorer-content.scss",
+      "modules/projects/fl.ui/src/styles/ui/_explorer.scss",
+      "modules/projects/fl.ui/src/ui/navigation/overlay-back.ts"
+    ],
+    "explorer-settings": [
+      "modules/projects/fl.ui/src/ui/explorer/ExplorerSettings.ts",
+      "modules/projects/fl.ui/src/ui/explorer/ExplorerSettings.scss",
+      "modules/projects/fl.ui/src/styles/ui/_explorer.scss"
     ],
     "explorer": [
       "modules/projects/fl.ui/src/ui/explorer",
@@ -135,6 +147,13 @@
       "modules/projects/fl.ui/src/ui/explorer/explorer-adapters.ts",
       "modules/projects/fl.ui/src/ui/explorer/path-router.ts",
       "modules/projects/fl.ui/src/ui/explorer/fs-backend.ts"
+    ],
+    "transfer-folder": [
+      "modules/projects/fl.ui/src/ui/explorer/Operative.ts",
+      "modules/views/explorer-view/src/runtime.ts",
+      "apps/CWSP-transfer/src/backend/java/android/emission/FilesStorage.java",
+      "apps/CWSP-transfer/app/android/AndroidManifest.xml",
+      "apps/CWSP-explorer/platforms/android/AndroidManifest.xml"
     ],
     "open-policy": [
       "modules/projects/subsystem/src/other/config/settings-host.ts",
