@@ -38,6 +38,8 @@
     "cwsp": "network",
     "cw-explorer": "explorer",
     "file-manager": "explorer",
+    "explorer-styles": "explorer-theme",
+    "серый-explorer": "explorer-theme",
     "favorites": "bookmarks",
     "закладки": "bookmarks",
     "открытие": "open-policy",
@@ -91,6 +93,22 @@
       "modules/projects/fl.ui/src/styles/ui/_explorer-content.scss",
       "modules/projects/fl.ui/src/styles/ui/_explorer.scss",
       "modules/projects/fl.ui/src/ui/navigation/overlay-back.ts"
+    ],
+    "explorer-theme": [
+      "modules/projects/fl.ui/src/styles/ui/_color-mod.scss",
+      "modules/projects/fl.ui/src/styles/ui/_variables.scss",
+      "modules/projects/fl.ui/src/styles/ui/_explorer.scss",
+      "modules/views/explorer-view/src/theme.ts",
+      "apps/CWSP-explorer/src/theme.ts",
+      "modules/views/explorer-view/src/index.scss",
+      "apps/CWSP-explorer/src/index.scss"
+    ],
+    "explorer-share": [
+      "modules/projects/fl.ui/src/ui/explorer/share-copy.ts",
+      "modules/projects/fl.ui/src/ui/explorer/ContextMenu.ts",
+      "modules/projects/fl.ui/src/ui/explorer/Operative.ts",
+      "modules/projects/fl.ui/src/ui/explorer/storage-bridge.ts",
+      "apps/CWSP-shell/src/java/space/u2re/cwsp/CwsStorageHost.java"
     ],
     "explorer-settings": [
       "modules/projects/fl.ui/src/ui/explorer/ExplorerSettings.ts",

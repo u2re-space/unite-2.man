@@ -1,22 +1,24 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-30T09:10:00+07:00",
-  "thread": "vite-preload-catch",
-  "intent": "Explain and harden __vitePreload(...).catch on PWA open.",
+  "updatedAt": "2026-08-30T11:48:00+07:00",
+  "thread": "explorer-theme",
+  "intent": "Stop Capacitor Explorer chrome from going gray / losing text.",
   "status": "done",
-  "project": "CWSP-document",
+  "project": "CWSP-explorer",
   "lastDone": [
-    "Warm-viewer import no longer puts .catch on Vite preload return",
-    "rewriteVitePreloadBinding now strips mixed com/app.js __vitePreload imports"
+    "Removed .view-explorer --color-* remap (gray mix + --u2-color-mod)",
+    "Dropped contrast-color override on explorer shell",
+    "FileManager adopted sheet no longer writes :root --color-*",
+    "Host color-scheme inherit + light-dark hex fallbacks"
   ],
-  "next": "Rebuild/redeploy VDS after the in-flight build:vds-apps finishes",
+  "next": "Rebuild CWSP-explorer APK so Capacitor picks up the CSS",
   "blockers": [],
   "paths": [
-    "apps/CWSP-document/src/index.ts",
-    "apps/CWSP-shell/src/index.ts",
-    "apps/CWSP-document/shared/vite-chunk-placement.mjs",
-    "apps/CWSP-shared/shared/vite-chunk-placement.mjs",
-    "apps/CWSP-shell/shared/vite-chunk-placement.mjs"
+    "modules/projects/fl.ui/src/styles/ui/_explorer.scss",
+    "modules/projects/fl.ui/src/styles/ui/_variables.scss",
+    "modules/views/explorer-view/src/index.scss",
+    "apps/CWSP-explorer/src/index.scss",
+    "apps/CWSP-explorer/src/theme.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",
