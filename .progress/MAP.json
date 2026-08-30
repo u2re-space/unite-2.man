@@ -40,6 +40,7 @@
     "file-manager": "explorer",
     "explorer-styles": "explorer-theme",
     "серый-explorer": "explorer-theme",
+    "theme-resume": "theme-resume",
     "favorites": "bookmarks",
     "закладки": "bookmarks",
     "открытие": "open-policy",
@@ -94,6 +95,12 @@
       "modules/projects/fl.ui/src/styles/ui/_explorer.scss",
       "modules/projects/fl.ui/src/ui/navigation/overlay-back.ts"
     ],
+    "theme-resume": [
+      "modules/projects/subsystem/src/other/utils/Theme.ts",
+      "modules/projects/dom.ts/src/mixin/Style.ts",
+      "modules/projects/lur.e/src/lure/misc/Glit.ts",
+      "apps/CWSP-shell/src/java/space/u2re/cwsp/MainActivity.java"
+    ],
     "explorer-theme": [
       "modules/projects/fl.ui/src/styles/ui/_color-mod.scss",
       "modules/projects/fl.ui/src/styles/ui/_variables.scss",
@@ -102,6 +109,12 @@
       "apps/CWSP-explorer/src/theme.ts",
       "modules/views/explorer-view/src/index.scss",
       "apps/CWSP-explorer/src/index.scss"
+    ],
+    "explorer-delete": [
+      "modules/projects/fl.ui/src/ui/explorer/storage-bridge.ts",
+      "modules/projects/fl.ui/src/ui/explorer/backends/native-fs-backend.ts",
+      "modules/projects/fl.ui/src/ui/explorer/Operative.ts",
+      "apps/CWSP-shell/src/java/space/u2re/cwsp/CwsStorageHost.java"
     ],
     "explorer-share": [
       "modules/projects/fl.ui/src/ui/explorer/share-copy.ts",

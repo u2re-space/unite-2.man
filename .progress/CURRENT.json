@@ -1,24 +1,21 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-30T11:48:00+07:00",
-  "thread": "explorer-theme",
-  "intent": "Stop Capacitor Explorer chrome from going gray / losing text.",
+  "updatedAt": "2026-08-30T12:45:00+07:00",
+  "thread": "explorer-delete",
+  "intent": "Capacitor Explorer must delete /sdcard/ and /saf/ files and folders.",
   "status": "done",
   "project": "CWSP-explorer",
   "lastDone": [
-    "Removed .view-explorer --color-* remap (gray mix + --u2-color-mod)",
-    "Dropped contrast-color override on explorer shell",
-    "FileManager adopted sheet no longer writes :root --color-*",
-    "Host color-scheme inherit + light-dark hex fallbacks"
+    "Added storage:delete (recursive File + DocumentsContract)",
+    "Native FsBackend.remove + Operative no longer uses OPFS remove for /sdcard/ /saf/"
   ],
-  "next": "Rebuild CWSP-explorer APK so Capacitor picks up the CSS",
+  "next": "Rebuild Explorer APK; grant All-files for /sdcard/, write SAF tree for /saf/",
   "blockers": [],
   "paths": [
-    "modules/projects/fl.ui/src/styles/ui/_explorer.scss",
-    "modules/projects/fl.ui/src/styles/ui/_variables.scss",
-    "modules/views/explorer-view/src/index.scss",
-    "apps/CWSP-explorer/src/index.scss",
-    "apps/CWSP-explorer/src/theme.ts"
+    "apps/CWSP-shell/src/java/space/u2re/cwsp/CwsStorageHost.java",
+    "modules/projects/fl.ui/src/ui/explorer/storage-bridge.ts",
+    "modules/projects/fl.ui/src/ui/explorer/backends/native-fs-backend.ts",
+    "modules/projects/fl.ui/src/ui/explorer/Operative.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",
