@@ -1,22 +1,20 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-30T17:08:00+07:00",
-  "thread": "style-tree",
-  "intent": "Returning to Explorer from recents restored the gray/no-text effect.",
+  "updatedAt": "2026-08-30T21:22:00+07:00",
+  "thread": "style-lib",
+  "intent": "Explorer toast: onMount/construct must not drop the view; stop FileManager letter imports from com/app.js.",
   "status": "done",
-  "project": "CWSP-explorer",
+  "project": "CWSP-shell",
   "lastDone": [
-    "Resume no longer applyTheme/replaceSync after recents",
-    "Shadow fallback + row paint kick on cwsp:theme-resume",
-    "Installed 0.0.30 on .196 — names still paint after simulated resume"
+    "shells.ts keeps rendered view if onMount throws; explorer side-effect FileManager import; localStorage path; construct fallback"
   ],
-  "next": "User should Home then return once to confirm on device",
+  "next": "Re-run npm run build:vds-apps && npm run deploy:vds, then hard-refresh so the new SW activates",
   "blockers": [],
   "paths": [
-    "modules/projects/subsystem/src/other/utils/Theme.ts",
-    "modules/projects/lur.e/src/lure/misc/Glit.ts",
-    "modules/projects/fl.ui/src/ui/explorer/FileManagerContent.ts",
-    "modules/views/explorer-view/src/theme.ts"
+    "modules/projects/subsystem/src/boot/shells.ts",
+    "modules/views/explorer-view/src/index.ts",
+    "modules/views/explorer-view/src/runtime.ts",
+    "apps/CWSP-shell/src/pwa/sw.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",

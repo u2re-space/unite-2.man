@@ -15,6 +15,7 @@ Chromium-first. Imports only lower → higher (same-level imports are discourage
 | 1 | `fest/veela` | `modules/projects/veela.css` |
 | 2 | `fest/lure` | `modules/projects/lur.e` |
 | 2 | `fest/icon` | `modules/projects/icon.ts` |
+| 2.5 | `fest/style` | `modules/projects/style.ts` (`@fest-lib/style-lib`) |
 | 3 | `fest/fl-ui` | `modules/projects/fl.ui` |
 | 3 | shared / subsystem | `modules/projects/subsystem` (`modules/shared`, `modules/subsystem` aliases) |
 | 3.5 | views | `modules/views/*-view` |

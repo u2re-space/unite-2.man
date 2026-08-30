@@ -46,6 +46,9 @@
             "@fest-lib/dom": [
                 "./modules/projects/dom.ts/src/index.ts"
             ],
+            "@fest-lib/style-lib": [
+                "./modules/projects/style.ts/src/index.ts"
+            ],
             "@fest-lib/core": [
                 "./modules/projects/core.ts/src/index.ts"
             ],

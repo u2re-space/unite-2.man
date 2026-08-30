@@ -42,6 +42,9 @@
     "серый-explorer": "explorer-theme",
     "анти-отвал": "glit-styles",
     "style-tree": "style-tree",
+    "style-lib": "style-lib",
+    "css-in-js": "style-lib",
+    "view-resolve": "view-resolve",
     "adopted": "adopted-sheets",
     "theme-resume": "theme-resume",
     "favorites": "bookmarks",
@@ -83,6 +86,21 @@
     "uniform": ["modules/projects/uniform.ts"],
     "lure": ["modules/projects/lur.e"],
     "icon": ["modules/projects/icon.ts"],
+    "style-lib": [
+      "modules/projects/style.ts/src/index.ts",
+      "modules/projects/style.ts/src/component.ts",
+      "modules/projects/style.ts/src/Styles.ts",
+      "modules/projects/style.ts/src/sheets.ts",
+      "modules/projects/style.ts/src/cssom.ts",
+      "modules/projects/lur.e/src/index.ts",
+      "modules/projects/lur.e/src/lure/node/Queried.ts",
+      "modules/projects/lur.e/src/lure/misc/Glit.ts",
+      "modules/projects/fl.ui/src/index.ts",
+      "modules/projects/fl.ui/src/styles/index.ts",
+      "modules/projects/icon.ts/src/loader/CSSIconRegistry.ts",
+      "modules/projects/image.ts/src/engine/WallpaperTheme.ts",
+      "modules/projects/dom.ts/src/index.ts"
+    ],
     "image": ["modules/projects/image.ts"],
     "wallpaper-ink": [
       "modules/projects/image.ts/src/canvas/Canvas-2.ts",
@@ -105,12 +123,15 @@
       "apps/CWSP-shell/src/java/space/u2re/cwsp/MainActivity.java"
     ],
     "glit-styles": [
+      "modules/projects/style.ts/src/component.ts",
       "modules/projects/lur.e/src/lure/misc/Glit.ts",
       "modules/projects/dom.ts/src/mixin/Style.ts",
       "modules/projects/dom.ts/src/mixin/Mixins.ts",
       "modules/projects/fl.ui/src/ui/base/UIElement.ts"
     ],
     "style-tree": [
+      "modules/projects/style.ts/src/component.ts",
+      "modules/projects/style.ts/src/sheets.ts",
       "modules/projects/dom.ts/src/mixin/Style.ts",
       "modules/projects/dom.ts/src/mixin/Mixins.ts",
       "modules/projects/lur.e/src/lure/misc/Glit.ts"
@@ -155,8 +176,14 @@
       "modules/projects/fl.ui/src/ui/explorer",
       "apps/CWSP-explorer/src/web/sku-boot.ts",
       "apps/CWSP-explorer/vite.config.js",
+      "modules/projects/subsystem/vite.view.config.js",
       "apps/CWSP-explorer/scripts/stage-cw-explorer.mjs",
       "runtime/fastify/apps/manifest.json"
+    ],
+    "view-resolve": [
+      "modules/views/view-resolve-aliases.js",
+      "modules/projects/subsystem/view-resolve-aliases.js",
+      "modules/projects/subsystem/vite.view.config.js"
     ],
     "fl-ui": ["modules/projects/fl.ui"],
     "speed-dial": ["modules/projects/fl.ui/src/ui/speed-dial"],
@@ -360,7 +387,8 @@
     ],
     "vite-preload": [
       "apps/CWSP-shared/shared/vite-chunk-placement.mjs",
-      "apps/CWSP-document/src/frontend/web/cw-markdown/index.html",
+      "apps/CWSP-shell/shared/vite-chunk-placement.mjs",
+      "apps/CWSP-shell/src/pwa/sw.ts",
       "apps/CWSP-document/src/pwa/sw.ts"
     ],
     "sw-url": [
