@@ -40,6 +40,9 @@
     "file-manager": "explorer",
     "explorer-styles": "explorer-theme",
     "серый-explorer": "explorer-theme",
+    "анти-отвал": "glit-styles",
+    "style-tree": "style-tree",
+    "adopted": "adopted-sheets",
     "theme-resume": "theme-resume",
     "favorites": "bookmarks",
     "закладки": "bookmarks",
@@ -101,14 +104,34 @@
       "modules/projects/lur.e/src/lure/misc/Glit.ts",
       "apps/CWSP-shell/src/java/space/u2re/cwsp/MainActivity.java"
     ],
+    "glit-styles": [
+      "modules/projects/lur.e/src/lure/misc/Glit.ts",
+      "modules/projects/dom.ts/src/mixin/Style.ts",
+      "modules/projects/dom.ts/src/mixin/Mixins.ts",
+      "modules/projects/fl.ui/src/ui/base/UIElement.ts"
+    ],
+    "style-tree": [
+      "modules/projects/dom.ts/src/mixin/Style.ts",
+      "modules/projects/dom.ts/src/mixin/Mixins.ts",
+      "modules/projects/lur.e/src/lure/misc/Glit.ts"
+    ],
+    "adopted-sheets": [
+      "modules/projects/dom.ts/src/mixin/Style.ts",
+      "modules/projects/lur.e/src/lure/misc/Glit.ts"
+    ],
     "explorer-theme": [
       "modules/projects/fl.ui/src/styles/ui/_color-mod.scss",
       "modules/projects/fl.ui/src/styles/ui/_variables.scss",
       "modules/projects/fl.ui/src/styles/ui/_explorer.scss",
+      "modules/projects/fl.ui/src/styles/ui/_explorer-content.scss",
+      "modules/projects/fl.ui/src/ui/explorer/FileManager.ts",
+      "modules/projects/fl.ui/src/ui/explorer/FileManagerContent.ts",
       "modules/views/explorer-view/src/theme.ts",
       "apps/CWSP-explorer/src/theme.ts",
       "modules/views/explorer-view/src/index.scss",
-      "apps/CWSP-explorer/src/index.scss"
+      "apps/CWSP-explorer/src/index.scss",
+      "modules/views/settings-view/src/scss/Settings.scss",
+      "modules/shells/minimal-shell/src/index.ts"
     ],
     "explorer-delete": [
       "modules/projects/fl.ui/src/ui/explorer/storage-bridge.ts",

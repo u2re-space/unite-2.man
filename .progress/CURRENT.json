@@ -1,21 +1,22 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-30T12:45:00+07:00",
-  "thread": "explorer-delete",
-  "intent": "Capacitor Explorer must delete /sdcard/ and /saf/ files and folders.",
+  "updatedAt": "2026-08-30T17:08:00+07:00",
+  "thread": "style-tree",
+  "intent": "Returning to Explorer from recents restored the gray/no-text effect.",
   "status": "done",
   "project": "CWSP-explorer",
   "lastDone": [
-    "Added storage:delete (recursive File + DocumentsContract)",
-    "Native FsBackend.remove + Operative no longer uses OPFS remove for /sdcard/ /saf/"
+    "Resume no longer applyTheme/replaceSync after recents",
+    "Shadow fallback + row paint kick on cwsp:theme-resume",
+    "Installed 0.0.30 on .196 — names still paint after simulated resume"
   ],
-  "next": "Rebuild Explorer APK; grant All-files for /sdcard/, write SAF tree for /saf/",
+  "next": "User should Home then return once to confirm on device",
   "blockers": [],
   "paths": [
-    "apps/CWSP-shell/src/java/space/u2re/cwsp/CwsStorageHost.java",
-    "modules/projects/fl.ui/src/ui/explorer/storage-bridge.ts",
-    "modules/projects/fl.ui/src/ui/explorer/backends/native-fs-backend.ts",
-    "modules/projects/fl.ui/src/ui/explorer/Operative.ts"
+    "modules/projects/subsystem/src/other/utils/Theme.ts",
+    "modules/projects/lur.e/src/lure/misc/Glit.ts",
+    "modules/projects/fl.ui/src/ui/explorer/FileManagerContent.ts",
+    "modules/views/explorer-view/src/theme.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",
