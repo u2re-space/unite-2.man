@@ -1,22 +1,26 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-01T02:20:00+07:00",
-  "thread": "style-constants",
-  "intent": "Move leftover style-lib scalars into constants.ts.",
+  "updatedAt": "2026-09-01T02:45:00+07:00",
+  "thread": "style-baker",
+  "intent": "Bake explorer row colors and settings field colors (one sample → class).",
   "status": "done",
   "project": "style.ts",
   "lastDone": [
-    "OWNER, HOST_CSS_FALLBACK, BAKE_LAYER, DEFAULT_CATEGORIES, DEFAULT_CACHE_MS, ANIMATABLE_BRAND, hasTypedOM live in constants.ts.",
-    "Feature files import them; barrel re-exports constants.ts once."
+    "bakeScreenColors also snapshots explorer .row.c2-surface (pierce FileManager shadow) and settings .field / .form-input.",
+    "Repeated items use a class selector, not a unique id per file.",
+    "Explorer rebakes on entries-updated; settings bakes on attach/show and unbakes on hide."
   ],
-  "next": "Add new style-lib scalars in constants.ts only.",
+  "next": "Watch explorer rows and settings fields on screen; print should still use the live cascade.",
   "blockers": [],
   "paths": [
+    "modules/projects/style.ts/src/baker.ts",
+    "modules/projects/style.ts/src/types.ts",
+    "modules/projects/style.ts/src/constants.ts",
     "modules/projects/style.ts/src/utils.ts",
-    "modules/projects/style.ts/src/index.ts",
-    "modules/projects/style.ts/src/Styles.ts",
-    "modules/projects/style.ts/src/property.ts",
-    "modules/projects/style.ts/src/cssom.ts"
+    "modules/projects/style.ts/src/maps.ts",
+    "modules/views/explorer-view/src/runtime.ts",
+    "modules/views/settings-view/src/ts/settings-styles-attach.ts",
+    "modules/views/settings-view/src/index.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",

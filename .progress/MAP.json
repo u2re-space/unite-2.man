@@ -113,7 +113,13 @@
     "style-baker": [
       "modules/projects/style.ts/src/baker.ts",
       "modules/projects/style.ts/src/cssom.ts",
-      "modules/projects/lur.e/src/lure/node/Queried.ts"
+      "modules/projects/lur.e/src/lure/node/Queried.ts",
+      "modules/views/explorer-view/src/theme.ts",
+      "modules/views/explorer-view/src/index.ts",
+      "modules/views/explorer-view/src/runtime.ts",
+      "modules/views/markdown-view/src/needs-to-API.ts",
+      "modules/views/settings-view/src/ts/settings-styles-attach.ts",
+      "modules/views/settings-view/src/index.ts"
     ],
     "style-types": [
       "modules/projects/style.ts/src/types.ts"
