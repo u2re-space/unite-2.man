@@ -108,6 +108,7 @@
       "modules/projects/ssr.e",
       "modules/projects/ssr.e/src/index.ts",
       "modules/projects/ssr.e/src/node.ts",
+      "modules/projects/ssr.e/src/ssre/core/namespace.ts",
       "modules/projects/ssr.e/src/ssre/css/vars.ts",
       "modules/projects/ssr.e/src/ssre/fs/backend.ts",
       "modules/projects/ssr.e/src/ssre/node/html-parse.ts",

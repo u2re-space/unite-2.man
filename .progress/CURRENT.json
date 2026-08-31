@@ -1,22 +1,23 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-01T05:35:00+07:00",
-  "thread": "ssre-git-lfs-reject",
-  "intent": "Unblock fest-live/ssr.e push (GitHub 100MB limit).",
+  "updatedAt": "2026-09-01T05:58:00+07:00",
+  "thread": "ssre-shared-namespace",
+  "intent": "Shared ssre.client / ssre.server namespace between HTML and client scripts.",
   "status": "done",
   "project": "ssr.e",
   "lastDone": [
-    "SSE hello no longer wipes hydrate bindings.",
-    "Hub keeps lastScenario from render; attachSse sends it.",
-    "24 node tests green; live /ssre/channel hello has n0/n1/n3."
+    "ssre.client.get/set reserves HTML slots; client.set binds via object.ts or ssre.use({ bindWith }).",
+    "ssre.server.set/get share hub stores; client server.get is a live observe() ref.",
+    "27 node tests green."
   ],
-  "next": "Optional: wire listenWithWs or socket.io onto runtime Fastify.",
+  "next": "App can ssre.use({ bindWith }) from LUR.E; do not import lure inside ssr.e.",
   "blockers": [],
   "paths": [
+    "modules/projects/ssr.e/src/ssre/core/namespace.ts",
+    "modules/projects/ssr.e/src/ssre/node/E.ts",
     "modules/projects/ssr.e/src/ssre/client/hydrate.ts",
-    "modules/projects/ssr.e/src/ssre/core/store.ts",
-    "modules/projects/ssr.e/src/ssre/node/context.ts",
-    "modules/projects/ssr.e/src/ssre/server/channel.ts"
+    "modules/projects/ssr.e/test/demo/page.ts",
+    "modules/projects/ssr.e/test/demo/client.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",
