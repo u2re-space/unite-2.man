@@ -51,6 +51,8 @@
     "закладки": "bookmarks",
     "открытие": "open-policy",
     "share-target": "open-policy",
+    "process-share": "process-ingress",
+    "launch-queue": "process-ingress",
     "settings-host": "settings-host",
     "хост-настройки": "settings-host",
     "explorer-adapters": "explorer-adapters",
@@ -361,8 +363,11 @@
       "runtime/fastify/apps/host-apps.ts",
       "runtime/fastify/plugins/host-apps.ts",
       "modules/projects/subsystem/src/routing/api/process-api.ts",
+      "runtime/fastify/routers/process/index.ts",
+      "runtime/fastify/layers.ts",
       "apps/CWSP-process",
       "apps/CWSP-process/src/frontend/web/sku-boot.ts",
+      "apps/CWSP-process/src/index.ts",
       "apps/CWSP-process/src/service/service/RecognizeData.ts",
       "apps/CWSP-process/src/pwa/routers/shared.ts"
     ],
@@ -371,6 +376,19 @@
     ],
     "ai-routers": [
       "apps/CWSP-process/src/pwa/routers/shared.ts"
+    ],
+    "process-ingress": [
+      "modules/projects/subsystem/src/other/config/process-ingress.ts",
+      "modules/projects/subsystem/src/other/config/settings/contributions/workcenter.ts",
+      "modules/projects/subsystem/src/routing/pwa/sw-handling.ts",
+      "modules/projects/subsystem/src/boot/capacitor-share-intent.ts"
+    ],
+    "process-boot": [
+      "apps/CWSP-process/src/index.ts",
+      "apps/CWSP-process/src/frontend/web/sku-boot.ts",
+      "apps/CWSP-process/src/frontend/web/capacitor/entry.ts",
+      "modules/shells/minimal-shell/src/index.ts",
+      "modules/views/workcenter-view/src/index.ts"
     ],
     "workcenter": [
       "runtime/fastify/apps/workcenter",

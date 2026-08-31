@@ -75,18 +75,6 @@
             ],
             "@fest-lib/cwsp-shared": [
                 "./modules/projects/cwsp-shared/src/index.ts"
-            ],
-            "@rs-com/*": [
-                "apps/CWSP-document/src/com/*"
-            ],
-            "@rs-core/*": [
-                "apps/CWSP-document/src/core/*"
-            ],
-            "@rs-frontend/*": [
-                "apps/CWSP-document/src/frontend/*"
-            ],
-            "@rs-shared/*": [
-                "apps/CWSP-document/shared/*"
             ]
         },
         "lib": [

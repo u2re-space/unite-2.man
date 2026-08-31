@@ -1,18 +1,23 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-31T17:44:00+07:00",
-  "thread": "service-settings-alias",
-  "intent": "Fix Vite resolve of Settings from process service when compiled via src/shared symlink.",
+  "updatedAt": "2026-08-31T18:40:00+07:00",
+  "thread": "process-ingress",
+  "intent": "Work Center template/instruction picker and right options rail clickable.",
   "status": "done",
   "project": "CWSP-process",
   "lastDone": [
-    "CustomInstructions and unified.ts import com/config/Settings instead of ../../shared/other/config."
+    "Request-options `[hidden]` no longer loses to `display: grid`; rail sits above the transcript.",
+    "Instruction select is populated and wired; template cards have Use.",
+    "Share Files are held in memory so content-attach still gets real blobs.",
+    "AI/share results appear as assistant notes in the transcript."
   ],
-  "next": null,
+  "next": "Reload Work Center and attach a file — chip should appear above the composer.",
   "blockers": [],
   "paths": [
-    "apps/CWSP-process/src/service/instructions/CustomInstructions.ts",
-    "apps/CWSP-process/src/service/processing/unified.ts"
+    "modules/views/workcenter-view/src/ts/WorkCenter.ts",
+    "modules/views/workcenter-view/src/index.ts",
+    "modules/views/workcenter-view/src/ts/WorkCenterEvents.ts",
+    "modules/projects/subsystem/src/routing/channel/sku-ingress.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",
