@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-31T15:10:46+07:00",
+  "updatedAt": "2026-09-01T01:58:00+07:00",
   "how": "Resolve tag or synonym → Read only those paths. If missing: one Grep for FIND:<tag>. Never walk skip.",
   "skip": [
     ".archives",
@@ -44,6 +44,13 @@
     "style-tree": "style-tree",
     "style-lib": "style-lib",
     "css-in-js": "style-lib",
+    "units": "style-constants",
+    "реестры": "style-constants",
+    "регистры": "style-maps",
+    "baker": "style-baker",
+    "выварка": "style-baker",
+    "слои": "css-layers",
+    "@layer": "css-layers",
     "view-resolve": "view-resolve",
     "adopted": "adopted-sheets",
     "theme-resume": "theme-resume",
@@ -94,8 +101,40 @@
     "uniform": ["modules/projects/uniform.ts"],
     "lure": ["modules/projects/lur.e"],
     "icon": ["modules/projects/icon.ts"],
+    "css-layers": [
+      "modules/projects/style.ts/src/layers.ts",
+      "modules/projects/style.ts/src/cssom.ts",
+      "modules/projects/style.ts/src/sheets.ts",
+      "modules/projects/lur.e/src/lure/misc/Glit.ts",
+      "modules/projects/veela.css/src/scss/_layers.scss",
+      "modules/views/markdown-view/src/needs-to-API.ts",
+      "modules/views/settings-view/src/ts/settings-styles-attach.ts"
+    ],
+    "style-baker": [
+      "modules/projects/style.ts/src/baker.ts",
+      "modules/projects/style.ts/src/cssom.ts",
+      "modules/projects/lur.e/src/lure/node/Queried.ts"
+    ],
+    "style-types": [
+      "modules/projects/style.ts/src/types.ts"
+    ],
+    "style-constants": [
+      "modules/projects/style.ts/src/constants.ts"
+    ],
+    "style-maps": [
+      "modules/projects/style.ts/src/maps.ts"
+    ],
+    "style-utils": [
+      "modules/projects/style.ts/src/utils.ts"
+    ],
     "style-lib": [
       "modules/projects/style.ts/src/index.ts",
+      "modules/projects/style.ts/src/types.ts",
+      "modules/projects/style.ts/src/maps.ts",
+      "modules/projects/style.ts/src/constants.ts",
+      "modules/projects/style.ts/src/utils.ts",
+      "modules/projects/style.ts/src/baker.ts",
+      "modules/projects/style.ts/src/layers.ts",
       "modules/projects/style.ts/src/component.ts",
       "modules/projects/style.ts/src/Styles.ts",
       "modules/projects/style.ts/src/sheets.ts",

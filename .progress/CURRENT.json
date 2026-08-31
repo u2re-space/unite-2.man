@@ -1,23 +1,22 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-31T18:40:00+07:00",
-  "thread": "process-ingress",
-  "intent": "Work Center template/instruction picker and right options rail clickable.",
+  "updatedAt": "2026-09-01T02:20:00+07:00",
+  "thread": "style-constants",
+  "intent": "Move leftover style-lib scalars into constants.ts.",
   "status": "done",
-  "project": "CWSP-process",
+  "project": "style.ts",
   "lastDone": [
-    "Request-options `[hidden]` no longer loses to `display: grid`; rail sits above the transcript.",
-    "Instruction select is populated and wired; template cards have Use.",
-    "Share Files are held in memory so content-attach still gets real blobs.",
-    "AI/share results appear as assistant notes in the transcript."
+    "OWNER, HOST_CSS_FALLBACK, BAKE_LAYER, DEFAULT_CATEGORIES, DEFAULT_CACHE_MS, ANIMATABLE_BRAND, hasTypedOM live in constants.ts.",
+    "Feature files import them; barrel re-exports constants.ts once."
   ],
-  "next": "Reload Work Center and attach a file — chip should appear above the composer.",
+  "next": "Add new style-lib scalars in constants.ts only.",
   "blockers": [],
   "paths": [
-    "modules/views/workcenter-view/src/ts/WorkCenter.ts",
-    "modules/views/workcenter-view/src/index.ts",
-    "modules/views/workcenter-view/src/ts/WorkCenterEvents.ts",
-    "modules/projects/subsystem/src/routing/channel/sku-ingress.ts"
+    "modules/projects/style.ts/src/utils.ts",
+    "modules/projects/style.ts/src/index.ts",
+    "modules/projects/style.ts/src/Styles.ts",
+    "modules/projects/style.ts/src/property.ts",
+    "modules/projects/style.ts/src/cssom.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",
