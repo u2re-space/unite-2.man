@@ -14,6 +14,7 @@ Chromium-first. Imports only lower → higher (same-level imports are discourage
 | 1 | `fest/object` | `modules/projects/object.ts` |
 | 1 | `fest/veela` | `modules/projects/veela.css` |
 | 2 | `fest/lure` | `modules/projects/lur.e` |
+| 2 | `fest/ssre` | `modules/projects/ssr.e` |
 | 2 | `fest/icon` | `modules/projects/icon.ts` |
 | 2.5 | `fest/style` | `modules/projects/style.ts` (`@fest-lib/style-lib`) |
 | 3 | `fest/fl-ui` | `modules/projects/fl.ui` |
@@ -22,7 +23,7 @@ Chromium-first. Imports only lower → higher (same-level imports are discourage
 | 3.6 | shells | `modules/shells/*-shell` |
 | 4 | apps | `apps/*` |
 
-Example: `fest/lure` may import `fest/object` / `fest/dom`. `fest/object` must not import `fest/lure` or `fest/fl-ui`.
+Example: `fest/lure` may import `fest/object` / `fest/dom`. `fest/ssre` may import `fest/object` / `fest/uniform`, not `fest/lure`. `fest/object` must not import `fest/lure` or `fest/fl-ui`.
 Views import libraries + shared. Shells import views. Apps import shells. Same-level imports are discouraged.
 
 SoT is the package root (`settings-view`, `environment-shell`, `projects/subsystem`). Do not edit consumer copies under `*/fest`, `*/shells`, `*/views` as SoT.

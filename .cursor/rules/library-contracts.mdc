@@ -1,12 +1,12 @@
 ---
 description: Current LUR.E and FL-UI contracts for library and CWSP shell work
-globs: "{modules/projects/{lur.e,fl.ui,dom.ts,object.ts,core.ts,veela.css,icon.ts,image.ts,uniform.ts,style.ts}/**,apps/CWSP-reborn/{src,app}/**}"
+globs: "{modules/projects/{lur.e,ssr.e,fl.ui,dom.ts,object.ts,core.ts,veela.css,icon.ts,image.ts,uniform.ts,style.ts}/**,apps/CWSP-reborn/{src,app}/**}"
 alwaysApply: false
 ---
 
 # Library/UI contracts
 
-- Imports follow `core → dom/object/veela → lure → style-lib → fl.ui/apps`; lower layers never import higher ones.
+- Imports follow `core → dom/object/veela/uniform → lure|ssre → style-lib → fl.ui/apps`; lower layers never import higher ones. `ssre` is backend HTML and must not import `lure` or `dom`.
 - Token defaults emit only from veela `core/misc/_tokens.scss`. Consumers override context or use `var(--token, fallback)`. Contract: `.cursor/rules/design-tokens.mdc`. Implementer/mapper: `.cursor/rules/model-pair.mdc`.
 - Reuse LUR.E `TriggerCore`: `once`/`debounce`/`prevent`/`stop`/`capture`/`passive`, `withTriggerModifiers`, `refTrigger`, and `E({ on })` handler-modifier tuples; preserve `EventListenerObject` handlers.
 - Use `bindOutsideDismiss` for transient surfaces: composed paths, panel roots, exception nodes/selectors/predicates, Escape, and idempotent cleanup. Keep `makeClickOutsideTrigger` and `makeInterruptTrigger` compatible.

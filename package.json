@@ -20,6 +20,7 @@
         "modules/projects/image.ts",
         "modules/projects/lur.e",
         "modules/projects/object.ts",
+        "modules/projects/ssr.e",
         "modules/projects/subsystem",
         "modules/projects/uniform.ts",
         "modules/projects/veela.css",

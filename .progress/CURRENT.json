@@ -1,19 +1,22 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-01T03:32:00+07:00",
-  "thread": "crx-wallpaper-scrim",
-  "intent": "Stop wf-demo radial scrim from covering CRX wallpaper.",
+  "updatedAt": "2026-09-01T05:35:00+07:00",
+  "thread": "ssre-git-lfs-reject",
+  "intent": "Unblock fest-live/ssr.e push (GitHub 100MB limit).",
   "status": "done",
-  "project": "environment-shell",
+  "project": "ssr.e",
   "lastDone": [
-    "wf-demo desk scrim only on `.wf-demo-root:not(.env-shell-root)`.",
-    "Unlayered kill in root.scss so `@layer layout` no longer loses to the gradient."
+    "SSE hello no longer wipes hydrate bindings.",
+    "Hub keeps lastScenario from render; attachSse sends it.",
+    "24 node tests green; live /ssre/channel hello has n0/n1/n3."
   ],
-  "next": "Reload CWSP-shell CRX after rebuild.",
+  "next": "Optional: wire listenWithWs or socket.io onto runtime Fastify.",
   "blockers": [],
   "paths": [
-    "modules/shells/window-frame/public/demo/wf-demo.css",
-    "modules/shells/environment-shell/src/scss/root.scss"
+    "modules/projects/ssr.e/src/ssre/client/hydrate.ts",
+    "modules/projects/ssr.e/src/ssre/core/store.ts",
+    "modules/projects/ssr.e/src/ssre/node/context.ts",
+    "modules/projects/ssr.e/src/ssre/server/channel.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",

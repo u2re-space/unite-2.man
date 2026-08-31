@@ -97,3 +97,6 @@
 [submodule "modules/projects/style.ts"]
 	path = modules/projects/style.ts
 	url = https://github.com/fest-live/style.ts.git
+[submodule "modules/projects/ssr.e"]
+	path = modules/projects/ssr.e
+	url = https://github.com/fest-live/ssr.e.git

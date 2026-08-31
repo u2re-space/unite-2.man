@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-01T02:54:00+07:00",
+  "updatedAt": "2026-09-01T04:55:00+07:00",
   "how": "Resolve tag or synonym → Read only those paths. If missing: one Grep for FIND:<tag>. Never walk skip.",
   "skip": [
     ".archives",
@@ -35,6 +35,8 @@
     "wallpaper": "wallpaper-ink",
     "обои": "wallpaper-ink",
     "веела": "veela",
+    "ssr": "ssre",
+    "ssre": "ssre",
     "cwsp": "network",
     "cw-explorer": "explorer",
     "file-manager": "explorer",
@@ -102,6 +104,19 @@
     "object": ["modules/projects/object.ts"],
     "uniform": ["modules/projects/uniform.ts"],
     "lure": ["modules/projects/lur.e"],
+    "ssre": [
+      "modules/projects/ssr.e",
+      "modules/projects/ssr.e/src/index.ts",
+      "modules/projects/ssr.e/src/node.ts",
+      "modules/projects/ssr.e/src/ssre/css/vars.ts",
+      "modules/projects/ssr.e/src/ssre/fs/backend.ts",
+      "modules/projects/ssr.e/src/ssre/node/html-parse.ts",
+      "modules/projects/ssr.e/src/ssre/node/html-dom.ts",
+      "modules/projects/ssr.e/src/ssre/server/protocol.ts",
+      "modules/projects/ssr.e/src/ssre/server/fastify.ts",
+      "modules/projects/ssr.e/src/ssre/server/sockets.ts",
+      "modules/projects/ssr.e/src/ssre/vite/plugin.ts"
+    ],
     "icon": ["modules/projects/icon.ts"],
     "css-layers": [
       "modules/projects/style.ts/src/layers.ts",
