@@ -1,23 +1,20 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-01T05:58:00+07:00",
+  "updatedAt": "2026-09-01T06:14:00+07:00",
   "thread": "ssre-shared-namespace",
-  "intent": "Shared ssre.client / ssre.server namespace between HTML and client scripts.",
+  "intent": "ssre.client.get(name, fallback) paints HTML until client.set.",
   "status": "done",
   "project": "ssr.e",
   "lastDone": [
-    "ssre.client.get/set reserves HTML slots; client.set binds via object.ts or ssre.use({ bindWith }).",
-    "ssre.server.set/get share hub stores; client server.get is a live observe() ref.",
-    "27 node tests green."
+    "ssre.client.get(name, fallback) writes the fallback into the reserved slot.",
+    "Demo accent slot defaults to pending."
   ],
   "next": "App can ssre.use({ bindWith }) from LUR.E; do not import lure inside ssr.e.",
   "blockers": [],
   "paths": [
     "modules/projects/ssr.e/src/ssre/core/namespace.ts",
     "modules/projects/ssr.e/src/ssre/node/E.ts",
-    "modules/projects/ssr.e/src/ssre/client/hydrate.ts",
-    "modules/projects/ssr.e/test/demo/page.ts",
-    "modules/projects/ssr.e/test/demo/client.ts"
+    "modules/projects/ssr.e/test/demo/page.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",
