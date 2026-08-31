@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-01T01:58:00+07:00",
+  "updatedAt": "2026-09-01T02:54:00+07:00",
   "how": "Resolve tag or synonym → Read only those paths. If missing: one Grep for FIND:<tag>. Never walk skip.",
   "skip": [
     ".archives",
@@ -81,6 +81,8 @@
     "comments": [".cursor/rules/comments-special-comments.mdc"],
     "hierarchy": [".cursor/rules/project.mdc"],
     "veela": [".cursor/rules/design-tokens.mdc", "modules/projects/veela.css/src/scss/core/_tokens.scss"],
+    "veela-resolve": ["modules/projects/veela.css/package.json", "apps/CWSP-transfer/vite.config.ts"],
+    "image-process": ["modules/projects/subsystem/src/routing/workers/ImageProcess.ts", "modules/projects/subsystem/src/service/processing/adapters.ts"],
     "veela-ui": ["modules/projects/veela.css/src/scss/ui/index.scss", "modules/projects/veela.css/src/scss/ui/components"],
     "veela-layers": ["modules/projects/veela.css/src/scss/_layers.scss"],
     "overlays": [".cursor/rules/library-contracts.mdc"],
@@ -134,6 +136,7 @@
       "modules/projects/style.ts/src/utils.ts"
     ],
     "style-lib": [
+      "modules/projects/style.ts/src/bind.ts",
       "modules/projects/style.ts/src/index.ts",
       "modules/projects/style.ts/src/types.ts",
       "modules/projects/style.ts/src/maps.ts",
@@ -162,7 +165,8 @@
       "modules/projects/veela.css/src/scss/core/misc/_color-properties.scss",
       "modules/projects/fl.ui/src/ui/speed-dial/SpeedDial.scss",
       "modules/projects/fl.ui/src/ui/navigation/statusbar/statusbar.ts",
-      "modules/shells/environment-shell/src/scss/root.scss"
+      "modules/shells/environment-shell/src/scss/root.scss",
+      "modules/shells/window-frame/public/demo/wf-demo.css"
     ],
     "explorer-layout": [
       "modules/projects/fl.ui/src/styles/ui/_explorer-content.scss",

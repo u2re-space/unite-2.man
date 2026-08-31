@@ -1,26 +1,19 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-01T02:45:00+07:00",
-  "thread": "style-baker",
-  "intent": "Bake explorer row colors and settings field colors (one sample → class).",
+  "updatedAt": "2026-09-01T03:32:00+07:00",
+  "thread": "crx-wallpaper-scrim",
+  "intent": "Stop wf-demo radial scrim from covering CRX wallpaper.",
   "status": "done",
-  "project": "style.ts",
+  "project": "environment-shell",
   "lastDone": [
-    "bakeScreenColors also snapshots explorer .row.c2-surface (pierce FileManager shadow) and settings .field / .form-input.",
-    "Repeated items use a class selector, not a unique id per file.",
-    "Explorer rebakes on entries-updated; settings bakes on attach/show and unbakes on hide."
+    "wf-demo desk scrim only on `.wf-demo-root:not(.env-shell-root)`.",
+    "Unlayered kill in root.scss so `@layer layout` no longer loses to the gradient."
   ],
-  "next": "Watch explorer rows and settings fields on screen; print should still use the live cascade.",
+  "next": "Reload CWSP-shell CRX after rebuild.",
   "blockers": [],
   "paths": [
-    "modules/projects/style.ts/src/baker.ts",
-    "modules/projects/style.ts/src/types.ts",
-    "modules/projects/style.ts/src/constants.ts",
-    "modules/projects/style.ts/src/utils.ts",
-    "modules/projects/style.ts/src/maps.ts",
-    "modules/views/explorer-view/src/runtime.ts",
-    "modules/views/settings-view/src/ts/settings-styles-attach.ts",
-    "modules/views/settings-view/src/index.ts"
+    "modules/shells/window-frame/public/demo/wf-demo.css",
+    "modules/shells/environment-shell/src/scss/root.scss"
   ],
   "models": {
     "implementer": "Grok 4.6",
