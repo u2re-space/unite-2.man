@@ -8,7 +8,8 @@ alwaysApply: false
 
 SoT values: `modules/projects/veela.css/src/scss/core/misc/_tokens.scss` (`@layer tokens` on `:root, :host, :scope`).
 Layer order SoT: `modules/projects/veela.css/src/scss/_layers.scss`.
-fl.ui `src/styles/ui/_variables.scss` is standalone fallback only.
+UI chrome SoT: `modules/projects/veela.css/src/scss/ui/` (fl.ui `src/styles/ui` is a symlink).
+fl.ui `src/styles/ui/_variables.scss` is standalone alias fallback only.
 
 ## Emit vs consume
 

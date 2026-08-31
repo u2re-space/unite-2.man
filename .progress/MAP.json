@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-30T08:40:00+07:00",
+  "updatedAt": "2026-08-31T15:10:46+07:00",
   "how": "Resolve tag or synonym → Read only those paths. If missing: one Grep for FIND:<tag>. Never walk skip.",
   "skip": [
     ".archives",
@@ -57,7 +57,11 @@
     "open-in-folder": "transfer-folder",
     "send-transfer": "transfer-folder",
     "адаптеры": "explorer-adapters",
-    "fest-lib": "fest-shared"
+    "fest-lib": "fest-shared",
+    "gpt": "ai-service",
+    "recognize": "ai-service",
+    "ai-ops": "ai-service",
+    "ai-routers": "ai-routers"
   },
   "tags": {
     "thread": [".progress/CURRENT.json"],
@@ -67,7 +71,9 @@
     "constitution": [".memories/Constitution.md"],
     "comments": [".cursor/rules/comments-special-comments.mdc"],
     "hierarchy": [".cursor/rules/project.mdc"],
-    "veela": [".cursor/rules/design-tokens.mdc", "modules/projects/veela.css"],
+    "veela": [".cursor/rules/design-tokens.mdc", "modules/projects/veela.css/src/scss/core/_tokens.scss"],
+    "veela-ui": ["modules/projects/veela.css/src/scss/ui/index.scss", "modules/projects/veela.css/src/scss/ui/components"],
+    "veela-layers": ["modules/projects/veela.css/src/scss/_layers.scss"],
     "overlays": [".cursor/rules/library-contracts.mdc"],
     "network": [".cursor/rules/network.mdc"],
     "debug": [".cursor/rules/debugging.mdc"],
@@ -103,7 +109,7 @@
     ],
     "image": ["modules/projects/image.ts"],
     "wallpaper-ink": [
-      "modules/projects/image.ts/src/canvas/Canvas-2.ts",
+      "modules/projects/image.ts/src/canvas/Canvas.ts",
       "modules/projects/image.ts/src/engine/WallpaperTheme.ts",
       "modules/projects/veela.css/src/scss/core/misc/_tokens.scss",
       "modules/projects/veela.css/src/scss/core/misc/_color-properties.scss",
@@ -356,14 +362,42 @@
       "runtime/fastify/plugins/host-apps.ts",
       "modules/projects/subsystem/src/routing/api/process-api.ts",
       "apps/CWSP-process",
-      "apps/CWSP-process/src/frontend/web/sku-boot.ts"
+      "apps/CWSP-process/src/frontend/web/sku-boot.ts",
+      "apps/CWSP-process/src/service/service/RecognizeData.ts",
+      "apps/CWSP-process/src/pwa/routers/shared.ts"
+    ],
+    "ai-service": [
+      "apps/CWSP-process/src/service/service/RecognizeData.ts"
+    ],
+    "ai-routers": [
+      "apps/CWSP-process/src/pwa/routers/shared.ts"
     ],
     "workcenter": [
       "runtime/fastify/apps/workcenter",
       "apps/CWSP-process/scripts/stage-cw-workcenter.mjs",
       "modules/views/workcenter-view/src/index.ts",
-      "modules/views/workcenter-view/src/scss/_base.scss",
-      "apps/CWSP-crx/src/crx/workcenter/main.ts"
+      "modules/views/workcenter-view/src/ts/WorkCenter.ts",
+      "modules/views/workcenter-view/src/ts/WorkCenterUI.ts",
+      "modules/views/workcenter-view/src/scss/_conversation.scss"
+    ],
+    "workcenter-chat": [
+      "modules/views/workcenter-view/src/ts/WorkCenterSession.ts",
+      "modules/views/workcenter-view/src/ts/WorkCenterAttachmentIngress.ts",
+      "modules/views/workcenter-view/src/ts/WorkCenterEvents.ts",
+      "modules/views/workcenter-view/test/run-contract-tests.mjs"
+    ],
+    "opfs-content-store": [
+      "modules/projects/lur.e/src/utils/opfs/content-addressed-store.ts",
+      "modules/projects/lur.e/test/opfs-content-store.node.test.ts"
+    ],
+    "attachment-sources": [
+      "modules/projects/fl.ui/src/ui/inputs/attachments/AttachmentSources.ts",
+      "modules/projects/fl.ui/src/ui/markdown/render.ts"
+    ],
+    "workcenter-turn": [
+      "apps/CWSP-process/src/service/service/WorkCenterTurn.ts",
+      "apps/CWSP-process/src/service/service/WorkCenterTurnInput.ts",
+      "apps/CWSP-process/src/service/service/WorkCenterTurnPolicy.ts"
     ],
     "print": [
       "modules/shells/minimal-shell/src/minimal.scss",

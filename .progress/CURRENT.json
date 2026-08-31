@@ -1,25 +1,22 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-30T21:22:00+07:00",
-  "thread": "style-lib",
-  "intent": "Explorer toast: onMount/construct must not drop the view; stop FileManager letter imports from com/app.js.",
+  "updatedAt": "2026-08-31T17:44:00+07:00",
+  "thread": "service-settings-alias",
+  "intent": "Fix Vite resolve of Settings from process service when compiled via src/shared symlink.",
   "status": "done",
-  "project": "CWSP-shell",
+  "project": "CWSP-process",
   "lastDone": [
-    "shells.ts keeps rendered view if onMount throws; explorer side-effect FileManager import; localStorage path; construct fallback"
+    "CustomInstructions and unified.ts import com/config/Settings instead of ../../shared/other/config."
   ],
-  "next": "Re-run npm run build:vds-apps && npm run deploy:vds, then hard-refresh so the new SW activates",
+  "next": null,
   "blockers": [],
   "paths": [
-    "modules/projects/subsystem/src/boot/shells.ts",
-    "modules/views/explorer-view/src/index.ts",
-    "modules/views/explorer-view/src/runtime.ts",
-    "apps/CWSP-shell/src/pwa/sw.ts"
+    "apps/CWSP-process/src/service/instructions/CustomInstructions.ts",
+    "apps/CWSP-process/src/service/processing/unified.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",
     "mapper": "GPT 5.6 Luna",
     "last": "implementer"
-  },
-  "passState": ".progress/CWSP-reborn/STATE.json"
+  }
 }
