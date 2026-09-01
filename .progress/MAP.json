@@ -437,6 +437,8 @@
       "runtime/fastify/routers/process/index.ts",
       "runtime/fastify/layers.ts",
       "runtime/fastify/plugins/api.ts",
+      "runtime/fastify/plugins/core-fetch.ts",
+      "runtime/fastify/plugins/process-local.ts",
       "runtime/fastify/apps/manifest.json",
       "runtime/fastify/apps/host-apps.ts",
       "runtime/fastify/plugins/host-apps.ts",

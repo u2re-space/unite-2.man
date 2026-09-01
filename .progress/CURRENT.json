@@ -1,22 +1,20 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-01T12:50:00+07:00",
-  "thread": "process-ingress",
-  "intent": "Process Web/PWA opens files via Launch Queue like document/explorer; Share Target stays off.",
+  "updatedAt": "2026-09-01T15:20:00+07:00",
+  "thread": "process",
+  "intent": "Stop 502 on POST /api/process/processing — VDS has no :8434, do not proxy there.",
   "status": "done",
   "project": "CWSP-process",
   "lastDone": [
-    "Process PWA manifest again advertises file_handlers for Open with / Launch Queue.",
-    "Launch Queue consumer is on for Process Web/PWA; OS Share Target stays off.",
-    "Staged launch-queue files still replay through the share pipeline if Work Center is not mounted yet."
+    "Live POST without key: 502 ECONNREFUSED 127.0.0.1:8434 (cert and healthz are fine).",
+    "Docker loopback core is skipped. With apiKey the request runs in-process; without key the API returns 200 Missing credentials so Chrome stays quiet and Work Center continues in-browser."
   ],
-  "next": "Rebuild/stage Process and reinstall the PWA so Chrome picks up file_handlers. Open a file with Process.",
+  "next": "From runtime/: npm run deploy:vds. No app rebuild needed.",
   "blockers": [],
   "paths": [
-    "modules/projects/subsystem/src/other/config/process-ingress.ts",
-    "modules/projects/subsystem/src/routing/pwa/sw-handling.ts",
-    "apps/CWSP-process/src/pwa/manifest.json",
-    "modules/projects/subsystem/src/other/config/settings/contributions/workcenter.ts"
+    "runtime/fastify/plugins/api.ts",
+    "runtime/fastify/plugins/core-fetch.ts",
+    "runtime/scripts/vds-webapp-compose.sh"
   ],
   "models": {
     "implementer": "Grok 4.6",
