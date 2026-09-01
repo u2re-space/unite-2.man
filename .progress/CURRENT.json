@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-01T06:14:00+07:00",
-  "thread": "ssre-shared-namespace",
-  "intent": "ssre.client.get(name, fallback) paints HTML until client.set.",
+  "updatedAt": "2026-09-01T08:50:00+07:00",
+  "thread": "ssre-ts-core-exports",
+  "intent": "Resolve @fest-lib/core types from source, not minified dist.",
   "status": "done",
   "project": "ssr.e",
   "lastDone": [
