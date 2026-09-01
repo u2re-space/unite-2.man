@@ -1,18 +1,20 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-01T20:25:00+07:00",
-  "thread": "process",
-  "intent": "Register Vite dev SW as module; drop leftover viteEnv.",
+  "updatedAt": "2026-09-01T20:36:00+07:00",
+  "thread": "fastify",
+  "intent": "VDS Fastify must resolve sku-ports / process-local without package subsystem.",
   "status": "done",
-  "project": "CWSP-process",
+  "project": "fastify",
   "lastDone": [
-    "dev-sw.js registers with type:module. sw-handling uses import.meta.env.DEV only."
+    "layers.ts and process-local plugin import relative Fastify leaves (symlinks to subsystem SoT).",
+    "deploy-vds-webapp.sh copies those files and excludes the subsystem symlink tree."
   ],
-  "next": "Hard-reload https://localhost:443/ (unregister stale classic SW if it still errors).",
+  "next": "Redeploy VDS webapp so /app/fastify gets sku-ports.ts.",
   "blockers": [],
   "paths": [
-    "modules/projects/subsystem/src/routing/pwa/sw-url.ts",
-    "modules/projects/subsystem/src/routing/pwa/sw-handling.ts"
+    "runtime/fastify/layers.ts",
+    "runtime/fastify/plugins/process-local.ts",
+    "runtime/scripts/deploy-vds-webapp.sh"
   ],
   "models": {
     "implementer": "Grok 4.6",
