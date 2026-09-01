@@ -114,11 +114,13 @@
       "modules/projects/ssr.e/src/ssre/css/vars.ts",
       "modules/projects/ssr.e/src/ssre/fs/backend.ts",
       "modules/projects/ssr.e/src/ssre/node/html-parse.ts",
+      "modules/projects/ssr.e/src/ssre/node/html-document.ts",
       "modules/projects/ssr.e/src/ssre/node/html-dom.ts",
       "modules/projects/ssr.e/src/ssre/server/protocol.ts",
       "modules/projects/ssr.e/src/ssre/server/fastify.ts",
       "modules/projects/ssr.e/src/ssre/server/sockets.ts",
-      "modules/projects/ssr.e/src/ssre/vite/plugin.ts"
+      "modules/projects/ssr.e/src/ssre/vite/plugin.ts",
+      "modules/projects/subsystem/vite-ssre.mjs"
     ],
     "icon": ["modules/projects/icon.ts"],
     "css-layers": [
@@ -425,6 +427,7 @@
       "runtime/fastify/plugins/host-apps.ts",
       "runtime/fastify/apps/host-apps.ts"
     ],
+    "fastify-tsconfig": ["runtime/fastify/tsconfig.json"],
     "layers": [
       "runtime/fastify/layers.ts",
       "runtime/fastify/plugins/api.ts",
@@ -443,6 +446,13 @@
       "runtime/fastify/apps/host-apps.ts",
       "runtime/fastify/plugins/host-apps.ts",
       "modules/projects/subsystem/src/routing/api/process-api.ts",
+      "modules/projects/subsystem/src/routing/api/process-local.ts",
+      "modules/projects/subsystem/src/routing/api/process-api-sw.ts",
+      "modules/projects/subsystem/src/routing/api/process-api-vite.ts",
+      "apps/CWSP-shell/src/java/space/u2re/cwsp/CwsProcessApi.java",
+      "modules/projects/subsystem/src/routing/api/sku-ports.ts",
+      "runtime/fastify/scripts/start-sku-channels.mjs",
+      ".progress/process/CAPABILITIES.md",
       "modules/projects/subsystem/src/boot/history-base.ts",
       "apps/CWSP-process",
       "apps/CWSP-process/src/frontend/web/sku-boot.ts",
@@ -481,8 +491,19 @@
       "modules/views/workcenter-view/src/ts/WorkCenterUI.ts",
       "modules/views/workcenter-view/src/scss/_conversation.scss"
     ],
+    "workcenter-commands": [
+      "modules/views/workcenter-view/src/ts/WorkCenterCommands.ts",
+      "modules/views/workcenter-view/src/ts/WorkCenterCommandBus.ts",
+      "modules/projects/subsystem/src/routing/channel/workcenter-command-wire.ts"
+    ],
+    "sku-ports": [
+      "modules/projects/subsystem/src/routing/api/sku-ports.ts",
+      "runtime/fastify/layers.ts",
+      "runtime/fastify/scripts/start-sku-channels.mjs"
+    ],
     "workcenter-chat": [
       "modules/views/workcenter-view/src/ts/WorkCenterSession.ts",
+      "modules/views/workcenter-view/src/ts/WorkCenterCommands.ts",
       "modules/views/workcenter-view/src/ts/WorkCenterAttachmentIngress.ts",
       "modules/views/workcenter-view/src/ts/WorkCenterEvents.ts",
       "modules/views/workcenter-view/src/ts/WorkCenterAttachmentViewer.ts",

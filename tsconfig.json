@@ -15,7 +15,10 @@
         "cache/**",
         "temp/**",
         "tmp/**",
-        "runtime/**"
+        "runtime/**",
+        "**/vite.config.js",
+        "**/vite.config.ts",
+        "**/vite.config.mjs"
     ],
     "compilerOptions": {
         "outDir": "./dist/",
@@ -91,8 +94,6 @@
         "moduleDetection": "auto",
         "moduleResolution": "bundler",
         "pretty": true,
-        "emitDeclarationOnly": true,
-        "composite": true,
         "allowSyntheticDefaultImports": true,
         "allowArbitraryExtensions": true,
         "allowImportingTsExtensions": true,
