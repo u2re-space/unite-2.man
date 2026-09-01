@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-01T04:55:00+07:00",
+  "updatedAt": "2026-09-01T12:40:00+07:00",
   "how": "Resolve tag or synonym → Read only those paths. If missing: one Grep for FIND:<tag>. Never walk skip.",
   "skip": [
     ".archives",
@@ -31,6 +31,8 @@
     "fps": "high-refresh",
     "безфигур": "shapeless",
     "иконки": "icon-picker",
+    "pwa-icon": "pwa-icons",
+    "favicon": "pwa-icons",
     "лаунчер": "speed-dial",
     "wallpaper": "wallpaper-ink",
     "обои": "wallpaper-ink",
@@ -284,6 +286,17 @@
       "modules/projects/fl.ui/src/ui/speed-dial/tile-icon.ts"
     ],
     "icon-picker": ["modules/projects/fl.ui/src/ui/speed-dial/icon-resource-picker.ts"],
+    "pwa-icons": [
+      "apps/CWSP-document/src/pwa/icons",
+      "apps/CWSP-process/src/pwa/icons",
+      "apps/CWSP-explorer/src/pwa/icons",
+      "apps/CWSP-shell/src/pwa/icons",
+      "apps/CWSP-transfer/src/pwa/icons",
+      "apps/CWSP-shell/src/pwa/manifest.json",
+      "apps/CWSP-document/src/pwa/manifest.json",
+      "runtime/fastify/apps/host-apps.ts",
+      "runtime/fastify/plugins/host-apps.ts"
+    ],
     "publish": ["modules/projects/scripts/bump-patch-version.mjs"],
     "readme": [
       "README.md",
@@ -428,13 +441,14 @@
       "runtime/fastify/apps/host-apps.ts",
       "runtime/fastify/plugins/host-apps.ts",
       "modules/projects/subsystem/src/routing/api/process-api.ts",
-      "runtime/fastify/routers/process/index.ts",
-      "runtime/fastify/layers.ts",
+      "modules/projects/subsystem/src/boot/history-base.ts",
       "apps/CWSP-process",
       "apps/CWSP-process/src/frontend/web/sku-boot.ts",
       "apps/CWSP-process/src/index.ts",
       "apps/CWSP-process/src/service/service/RecognizeData.ts",
-      "apps/CWSP-process/src/pwa/routers/shared.ts"
+      "apps/CWSP-process/src/service/service/WorkCenterTurn.ts",
+      "apps/CWSP-process/src/pwa/routers/shared.ts",
+      "apps/CWSP-process/src/pwa/sw.ts"
     ],
     "ai-service": [
       "apps/CWSP-process/src/service/service/RecognizeData.ts"
@@ -446,7 +460,9 @@
       "modules/projects/subsystem/src/other/config/process-ingress.ts",
       "modules/projects/subsystem/src/other/config/settings/contributions/workcenter.ts",
       "modules/projects/subsystem/src/routing/pwa/sw-handling.ts",
-      "modules/projects/subsystem/src/boot/capacitor-share-intent.ts"
+      "modules/projects/subsystem/src/boot/capacitor-share-intent.ts",
+      "apps/CWSP-process/platforms/android/AndroidManifest.xml",
+      "apps/CWSP-process/src/pwa/manifest.json"
     ],
     "process-boot": [
       "apps/CWSP-process/src/index.ts",

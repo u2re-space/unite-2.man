@@ -1,19 +1,22 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-01T10:28:00+07:00",
-  "thread": "workcenter-chat",
-  "intent": "Grow the Work Center composer when attachments are added.",
+  "updatedAt": "2026-09-01T12:50:00+07:00",
+  "thread": "process-ingress",
+  "intent": "Process Web/PWA opens files via Launch Queue like document/explorer; Share Target stays off.",
   "status": "done",
-  "project": "workcenter-view",
+  "project": "CWSP-process",
   "lastDone": [
-    "Composer min-height grows to fit the attachment rail.",
-    "Floating ui-window gains the rail height when present."
+    "Process PWA manifest again advertises file_handlers for Open with / Launch Queue.",
+    "Launch Queue consumer is on for Process Web/PWA; OS Share Target stays off.",
+    "Staged launch-queue files still replay through the share pipeline if Work Center is not mounted yet."
   ],
-  "next": "Reload Work Center and attach a file — composer should expand.",
+  "next": "Rebuild/stage Process and reinstall the PWA so Chrome picks up file_handlers. Open a file with Process.",
   "blockers": [],
   "paths": [
-    "modules/views/workcenter-view/src/ts/WorkCenterUI.ts",
-    "modules/views/workcenter-view/src/scss/_conversation.scss"
+    "modules/projects/subsystem/src/other/config/process-ingress.ts",
+    "modules/projects/subsystem/src/routing/pwa/sw-handling.ts",
+    "apps/CWSP-process/src/pwa/manifest.json",
+    "modules/projects/subsystem/src/other/config/settings/contributions/workcenter.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",
