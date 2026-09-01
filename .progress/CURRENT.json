@@ -1,20 +1,19 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-01T08:50:00+07:00",
-  "thread": "ssre-ts-core-exports",
-  "intent": "Resolve @fest-lib/core types from source, not minified dist.",
+  "updatedAt": "2026-09-01T10:28:00+07:00",
+  "thread": "workcenter-chat",
+  "intent": "Grow the Work Center composer when attachments are added.",
   "status": "done",
-  "project": "ssr.e",
+  "project": "workcenter-view",
   "lastDone": [
-    "ssre.client.get(name, fallback) writes the fallback into the reserved slot.",
-    "Demo accent slot defaults to pending."
+    "Composer min-height grows to fit the attachment rail.",
+    "Floating ui-window gains the rail height when present."
   ],
-  "next": "App can ssre.use({ bindWith }) from LUR.E; do not import lure inside ssr.e.",
+  "next": "Reload Work Center and attach a file — composer should expand.",
   "blockers": [],
   "paths": [
-    "modules/projects/ssr.e/src/ssre/core/namespace.ts",
-    "modules/projects/ssr.e/src/ssre/node/E.ts",
-    "modules/projects/ssr.e/test/demo/page.ts"
+    "modules/views/workcenter-view/src/ts/WorkCenterUI.ts",
+    "modules/views/workcenter-view/src/scss/_conversation.scss"
   ],
   "models": {
     "implementer": "Grok 4.6",

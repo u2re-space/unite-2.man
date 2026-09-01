@@ -467,7 +467,13 @@
       "modules/views/workcenter-view/src/ts/WorkCenterSession.ts",
       "modules/views/workcenter-view/src/ts/WorkCenterAttachmentIngress.ts",
       "modules/views/workcenter-view/src/ts/WorkCenterEvents.ts",
+      "modules/views/workcenter-view/src/ts/WorkCenterAttachmentViewer.ts",
       "modules/views/workcenter-view/test/run-contract-tests.mjs"
+    ],
+    "workcenter-attachment-view": [
+      "modules/views/workcenter-view/src/ts/WorkCenterAttachmentViewer.ts",
+      "modules/views/workcenter-view/src/ts/WorkCenterAttachmentIngress.ts",
+      "modules/views/workcenter-view/src/ts/WorkCenterUI.ts"
     ],
     "opfs-content-store": [
       "modules/projects/lur.e/src/utils/opfs/content-addressed-store.ts",
