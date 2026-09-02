@@ -626,6 +626,7 @@
       "apps/CWSP-process/src/frontend/web/capacitor/entry.ts",
       "apps/CWSP-crx/src/crx/workcenter/main.ts",
       "apps/CWSP-shell/scripts/sync-capacitor-android-icons.mjs",
+      "apps/CWSP-shell/scripts/sync-capacitor-app-identity.mjs",
       "apps/CWSP-shell/scripts/project-sibling-sku-android.mjs",
       "apps/CWSP-shell/scripts/adb-install-apks.mjs",
       "modules/projects/subsystem/src/boot/history-base.ts",

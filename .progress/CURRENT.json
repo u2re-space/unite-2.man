@@ -1,21 +1,17 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-02T11:45:00+07:00",
-  "thread": "process",
-  "intent": "Unstick Work Center Thinking… after GPT already extracted text.",
+  "updatedAt": "2026-09-02T11:50:00+07:00",
+  "thread": "shell",
+  "intent": "Unblock build:capacitor after PWA name became CWSP-shell.",
   "status": "done",
-  "project": "CWSP-process",
+  "project": "CWSP-shell",
   "lastDone": [
-    "Paint assistant completion before OPFS persist; hydrate cannot clobber a live turn.",
-    "Image turns skip /api/process flatten (12s cap) and go to in-page GPT."
+    "loadPwaIdentity keeps space.u2re.cw / CW-i1 from capacitor.config.json when manifest.name is a display label."
   ],
-  "next": "Reload Process PWA, send the image again; the answer should replace Thinking… when GPT logs Extracted text.",
+  "next": "Re-run npm run build:capacitor in CWSP-shell (version already bumped 0.0.112).",
   "blockers": [],
   "paths": [
-    "modules/views/workcenter-view/src/ts/WorkCenterSession.ts",
-    "modules/views/workcenter-view/src/ts/WorkCenterActions.ts",
-    "modules/views/workcenter-view/src/ts/WorkCenter.ts",
-    "modules/projects/subsystem/src/service/service/WorkCenterTurn.ts"
+    "apps/CWSP-shell/scripts/sync-capacitor-app-identity.mjs"
   ],
   "models": {
     "implementer": "Grok 4.6",
