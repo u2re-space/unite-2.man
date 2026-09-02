@@ -1,18 +1,17 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-02T19:55:00+07:00",
+  "updatedAt": "2026-09-02T20:05:00+07:00",
   "thread": "mounted-fs",
-  "intent": "Fix POST /ssre/fs 404 on Vite :443 (same-origin remote-fs).",
+  "intent": "Unblock deploy:vds — dangling sku-ports.ts symlink aborted staging; SW /com/app.js Failed to fetch.",
   "status": "done",
-  "project": "runtime/fastify",
+  "project": "runtime",
   "lastDone": [
-    "Self-contained /ssre/fs handler; Vite plugin on shell/document/process/reborn; Fastify always registers before SPA."
+    "deploy-vds-webapp.sh copies real sku-ports.ts / process-local.ts instead of writing through dangling rsync symlinks."
   ],
-  "next": "Restart CWSP-shell Vite on :443 so the new middleware is live.",
+  "next": "Re-run npm run deploy:vds from runtime.",
   "blockers": [],
   "paths": [
-    "runtime/fastify/plugins/mounted-fs.ts",
-    "modules/projects/lur.e/src/utils/opfs/remote-fs.ts"
+    "runtime/scripts/deploy-vds-webapp.sh"
   ],
   "models": {
     "implementer": "Grok 4.6",
