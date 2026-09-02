@@ -1,20 +1,18 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-02T12:05:00+07:00",
-  "thread": "transfer",
-  "intent": "Stop Transfer Capacitor share from routing into a missing viewer.",
+  "updatedAt": "2026-09-02T15:25:00+07:00",
+  "thread": "core-polyfill",
+  "intent": "Treat Map.getOrInsert / getOrInsertComputed as reactive Map writes.",
   "status": "done",
-  "project": "CWSP-transfer",
+  "project": "fest/object",
   "lastDone": [
-    "Transfer APK share stays on ShareActivity + files-hub; JS no longer stashes viewer/workcenter.",
-    "sku-ingress for transfer now hints network, not viewer."
+    "Reactive Map getOrInsert / getOrInsertComputed insert only on miss and emit add like set().",
+    "Existing keys return the current value and skip triggers / compute."
   ],
-  "next": "Rebuild Transfer Capacitor APK and share a file/text into space.u2re.cwsp — overlay should offer/fan without opening a blank view.",
+  "next": "Rebuild staged fest/core.js and fest/object when a host still serves old bundles.",
   "blockers": [],
   "paths": [
-    "modules/projects/subsystem/src/boot/capacitor-share-intent.ts",
-    "modules/projects/subsystem/src/routing/pwa/sw-handling.ts",
-    "modules/projects/subsystem/src/routing/channel/sku-ingress.ts"
+    "modules/projects/object.ts/src/core/Specific.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",

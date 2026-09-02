@@ -107,6 +107,14 @@
       "apps/CWSP-shell/shared/vite-chunk-placement.mjs"
     ],
     "core": ["modules/projects/core.ts"],
+    "promise-keyed": [
+      "modules/projects/core.ts/src/utils/PromiseTry.ts",
+      "modules/projects/core.ts/src/utils/Resolved.ts",
+      "modules/projects/core.ts/src/utils/Promised.ts",
+      "modules/projects/core.ts/src/utils/PromiseUtils.ts",
+      "modules/projects/object.ts/src/core/Resolved.ts",
+      "modules/projects/object.ts/src/core/Specific.ts"
+    ],
     "dom": ["modules/projects/dom.ts"],
     "object": ["modules/projects/object.ts"],
     "uniform": ["modules/projects/uniform.ts"],
