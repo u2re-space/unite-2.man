@@ -1,17 +1,20 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-02T11:50:00+07:00",
-  "thread": "shell",
-  "intent": "Unblock build:capacitor after PWA name became CWSP-shell.",
+  "updatedAt": "2026-09-02T12:05:00+07:00",
+  "thread": "transfer",
+  "intent": "Stop Transfer Capacitor share from routing into a missing viewer.",
   "status": "done",
-  "project": "CWSP-shell",
+  "project": "CWSP-transfer",
   "lastDone": [
-    "loadPwaIdentity keeps space.u2re.cw / CW-i1 from capacitor.config.json when manifest.name is a display label."
+    "Transfer APK share stays on ShareActivity + files-hub; JS no longer stashes viewer/workcenter.",
+    "sku-ingress for transfer now hints network, not viewer."
   ],
-  "next": "Re-run npm run build:capacitor in CWSP-shell (version already bumped 0.0.112).",
+  "next": "Rebuild Transfer Capacitor APK and share a file/text into space.u2re.cwsp — overlay should offer/fan without opening a blank view.",
   "blockers": [],
   "paths": [
-    "apps/CWSP-shell/scripts/sync-capacitor-app-identity.mjs"
+    "modules/projects/subsystem/src/boot/capacitor-share-intent.ts",
+    "modules/projects/subsystem/src/routing/pwa/sw-handling.ts",
+    "modules/projects/subsystem/src/routing/channel/sku-ingress.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",
