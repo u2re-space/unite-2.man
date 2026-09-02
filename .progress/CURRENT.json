@@ -1,17 +1,23 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-02T20:05:00+07:00",
-  "thread": "mounted-fs",
-  "intent": "Unblock deploy:vds — dangling sku-ports.ts symlink aborted staging; SW /com/app.js Failed to fetch.",
-  "status": "done",
-  "project": "runtime",
+  "updatedAt": "2026-09-03T01:20:00+07:00",
+  "thread": "process-ingress",
+  "intent": "Work Center chat + attachments persist across reloads until New chat.",
+  "status": "in-progress",
+  "project": "CWSP-process",
   "lastDone": [
-    "deploy-vds-webapp.sh copies real sku-ports.ts / process-local.ts instead of writing through dangling rsync symlinks."
+    "Session manifest now mirrors to localStorage + IndexedDB; OPFS is no longer the only copy.",
+    "New chat writes a higher-epoch empty snapshot so a stale OPFS transcript cannot return.",
+    "pagehide/visibility flush + rAF paint after hydrate; ActionHistory add/update now save."
   ],
-  "next": "Re-run npm run deploy:vds from runtime.",
+  "next": "Rebuild+redeploy Process PWA. Reload after a turn: transcript and chips stay. New chat clears until the next conversation.",
   "blockers": [],
   "paths": [
-    "runtime/scripts/deploy-vds-webapp.sh"
+    "modules/views/workcenter-view/src/ts/WorkCenterSessionPersistence.ts",
+    "modules/views/workcenter-view/src/ts/WorkCenterSession.ts",
+    "modules/views/workcenter-view/src/ts/WorkCenter.ts",
+    "modules/views/workcenter-view/src/ts/WorkCenterState.ts",
+    "modules/projects/subsystem/src/service/misc/ActionHistory.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-02T18:50:00+07:00",
+  "updatedAt": "2026-09-03T01:15:00+07:00",
   "how": "Resolve tag or synonym → Read only those paths. If missing: one Grep for FIND:<tag>. Never walk skip.",
   "skip": [
     ".archives",
@@ -502,6 +502,12 @@
     "ai-routers": [
       "apps/CWSP-process/src/pwa/routers/shared.ts"
     ],
+    "held-ingress": [
+      "modules/projects/subsystem/src/routing/channel/sku-ingress.ts",
+      "modules/projects/subsystem/src/routing/pwa/sw-handling.ts",
+      "modules/views/workcenter-view/src/ts/WorkCenter.ts",
+      "modules/views/workcenter-view/src/index.ts"
+    ],
     "process-ingress": [
       "modules/projects/subsystem/src/other/config/process-ingress.ts",
       "modules/projects/subsystem/src/other/config/settings/contributions/workcenter.ts",
@@ -588,8 +594,13 @@
     ],
     "workcenter-session": [
       "modules/views/workcenter-view/src/ts/WorkCenterSession.ts",
+      "modules/views/workcenter-view/src/ts/WorkCenterSessionPersistence.ts",
       "modules/views/workcenter-view/src/ts/WorkCenterActions.ts",
       "modules/views/workcenter-view/src/ts/WorkCenter.ts"
+    ],
+    "workcenter-session-persistence": [
+      "modules/views/workcenter-view/src/ts/WorkCenterSessionPersistence.ts",
+      "modules/views/workcenter-view/src/ts/WorkCenterSession.ts"
     ],
     "workcenter-turn": [
       "modules/projects/subsystem/src/service/service/WorkCenterTurn.ts",
@@ -661,6 +672,14 @@
       "apps/CWSP-document/src/pwa/sw.ts",
       "apps/CWSP-process/src/pwa/sw.ts",
       "apps/CWSP-shell/src/pwa/sw.ts"
+    ],
+    "markdown-boot": [
+      "apps/CWSP-document/src/frontend/web/cw-markdown/index.html",
+      "apps/CWSP-document/src/pwa/sw.ts",
+      "modules/shells/minimal-shell/src/index.ts",
+      "modules/projects/subsystem/src/routing/pwa/sw-handling.ts",
+      "modules/projects/subsystem/src/routing/core/views.ts",
+      "modules/projects/subsystem/src/routing/channel/ShareTargetGateway.ts"
     ],
     "sku": [
       "runtime/fastify/apps/share-ingress.ts",
