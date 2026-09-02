@@ -1,20 +1,21 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-01T20:36:00+07:00",
-  "thread": "fastify",
-  "intent": "VDS Fastify must resolve sku-ports / process-local without package subsystem.",
+  "updatedAt": "2026-09-02T11:45:00+07:00",
+  "thread": "process",
+  "intent": "Unstick Work Center Thinking… after GPT already extracted text.",
   "status": "done",
-  "project": "fastify",
+  "project": "CWSP-process",
   "lastDone": [
-    "layers.ts and process-local plugin import relative Fastify leaves (symlinks to subsystem SoT).",
-    "deploy-vds-webapp.sh copies those files and excludes the subsystem symlink tree."
+    "Paint assistant completion before OPFS persist; hydrate cannot clobber a live turn.",
+    "Image turns skip /api/process flatten (12s cap) and go to in-page GPT."
   ],
-  "next": "Redeploy VDS webapp so /app/fastify gets sku-ports.ts.",
+  "next": "Reload Process PWA, send the image again; the answer should replace Thinking… when GPT logs Extracted text.",
   "blockers": [],
   "paths": [
-    "runtime/fastify/layers.ts",
-    "runtime/fastify/plugins/process-local.ts",
-    "runtime/scripts/deploy-vds-webapp.sh"
+    "modules/views/workcenter-view/src/ts/WorkCenterSession.ts",
+    "modules/views/workcenter-view/src/ts/WorkCenterActions.ts",
+    "modules/views/workcenter-view/src/ts/WorkCenter.ts",
+    "modules/projects/subsystem/src/service/service/WorkCenterTurn.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",

@@ -74,7 +74,12 @@
     "gpt": "ai-service",
     "recognize": "ai-service",
     "ai-ops": "ai-service",
-    "ai-routers": "ai-routers"
+    "ai-routers": "ai-routers",
+    "sw-page": "sw-page",
+    "pending-sw": "sw-result",
+    "sw-cache": "sw-cache",
+    "cache-match": "sw-cache",
+    "ingress-host": "ingress-host"
   },
   "tags": {
     "thread": [".progress/CURRENT.json"],
@@ -120,7 +125,8 @@
       "modules/projects/ssr.e/src/ssre/server/fastify.ts",
       "modules/projects/ssr.e/src/ssre/server/sockets.ts",
       "modules/projects/ssr.e/src/ssre/vite/plugin.ts",
-      "modules/projects/subsystem/vite-ssre.mjs"
+      "modules/projects/subsystem/vite-ssre.mjs",
+      "modules/projects/ssr.e/src/ssre/vite/plugin.ts"
     ],
     "icon": ["modules/projects/icon.ts"],
     "css-layers": [
@@ -446,6 +452,7 @@
       "runtime/fastify/apps/host-apps.ts",
       "runtime/fastify/plugins/host-apps.ts",
       "modules/projects/subsystem/src/routing/api/process-api.ts",
+      "modules/projects/subsystem/src/routing/api/process-api-result.ts",
       "modules/projects/subsystem/src/routing/api/process-local.ts",
       "modules/projects/subsystem/src/routing/api/process-api-sw.ts",
       "modules/projects/subsystem/src/routing/api/process-api-vite.ts",
@@ -522,10 +529,15 @@
       "modules/projects/fl.ui/src/ui/inputs/attachments/AttachmentSources.ts",
       "modules/projects/fl.ui/src/ui/markdown/render.ts"
     ],
+    "workcenter-session": [
+      "modules/views/workcenter-view/src/ts/WorkCenterSession.ts",
+      "modules/views/workcenter-view/src/ts/WorkCenterActions.ts",
+      "modules/views/workcenter-view/src/ts/WorkCenter.ts"
+    ],
     "workcenter-turn": [
-      "apps/CWSP-process/src/service/service/WorkCenterTurn.ts",
-      "apps/CWSP-process/src/service/service/WorkCenterTurnInput.ts",
-      "apps/CWSP-process/src/service/service/WorkCenterTurnPolicy.ts"
+      "modules/projects/subsystem/src/service/service/WorkCenterTurn.ts",
+      "modules/projects/subsystem/src/service/service/WorkCenterTurnInput.ts",
+      "modules/projects/subsystem/src/service/service/WorkCenterTurnPolicy.ts"
     ],
     "print": [
       "modules/shells/minimal-shell/src/minimal.scss",
@@ -553,9 +565,40 @@
       "apps/CWSP-shell/src/pwa/sw.ts",
       "apps/CWSP-document/src/pwa/sw.ts"
     ],
+    "names": [
+      "modules/projects/subsystem/src/other/config/Names.ts",
+      "modules/projects/subsystem/runtime/names.ts",
+      "apps/CWSP-document/src/pwa/tsconfig.json",
+      "apps/CWSP-process/src/pwa/tsconfig.json"
+    ],
     "sw-url": [
       "modules/projects/subsystem/src/routing/pwa/sw-url.ts",
-      "modules/projects/subsystem/src/routing/pwa/sw-handling.ts"
+      "modules/projects/subsystem/src/routing/pwa/sw-handling.ts",
+      "modules/projects/subsystem/src/routing/pwa/sw-lifecycle.ts"
+    ],
+    "sw-page": [
+      "modules/projects/subsystem/src/routing/pwa/sw-page-bridge.ts",
+      "modules/projects/subsystem/src/routing/pwa/ingress-host.ts",
+      "modules/projects/subsystem/src/routing/pwa/pwa-copy.ts",
+      "modules/projects/subsystem/src/routing/channel/UniformInterop.ts",
+      "modules/projects/subsystem/src/routing/channel/sw-unwrap.ts"
+    ],
+    "ingress-host": [
+      "modules/projects/subsystem/src/routing/pwa/ingress-host.ts",
+      "modules/projects/subsystem/src/boot/capacitor-share-intent.ts",
+      "modules/projects/subsystem/src/boot/BootLoader.ts",
+      "apps/CWSP-shell/src/java/space/u2re/cwsp/MainActivity.java"
+    ],
+    "sw-result": [
+      "modules/projects/subsystem/src/routing/pwa/sw-result-wire.ts",
+      "modules/projects/subsystem/src/routing/api/process-api-sw.ts",
+      "apps/CWSP-process/src/pwa/sw.ts"
+    ],
+    "sw-cache": [
+      "modules/projects/subsystem/src/routing/pwa/sw-cache.ts",
+      "modules/projects/subsystem/src/routing/pwa/sw-sku-landing.ts",
+      "modules/projects/subsystem/src/routing/pwa/sw-result-wire.ts",
+      "modules/projects/subsystem/src/routing/channel/ShareTargetGateway.ts"
     ],
     "sw-warmup": [
       "apps/CWSP-document/src/pwa/sw.ts",

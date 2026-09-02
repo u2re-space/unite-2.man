@@ -78,6 +78,21 @@
             ],
             "@fest-lib/cwsp-shared": [
                 "./modules/projects/cwsp-shared/src/index.ts"
+            ],
+            "com/config/Names": [
+                "./modules/projects/subsystem/runtime/names.ts"
+            ],
+            "com/config/*": [
+                "./modules/projects/subsystem/src/other/config/*"
+            ],
+            "com/core/LogSanitizer": [
+                "./modules/projects/subsystem/runtime/log-sanitizer.ts"
+            ],
+            "com/core/*": [
+                "./modules/projects/subsystem/src/routing/channel/*"
+            ],
+            "com/routing/*": [
+                "./modules/projects/subsystem/src/routing/*"
             ]
         },
         "lib": [
