@@ -1,0 +1,275 @@
+### status
+ M package.json
+ M src/Animate.ts
+ M src/constants.ts
+ M src/index.ts
+ M src/maps.ts
+ M src/types.ts
+?? scripts/
+?? src/css-animation.ts
+?? test/css-animation.node.test.ts
+### tracked diffs
+diff --git a/src/Animate.ts b/src/Animate.ts
+index 1309fd1..b9f12aa 100644
+--- a/src/Animate.ts
++++ b/src/Animate.ts
+@@ -286,17 +286,23 @@ export const A = (strings: TemplateStringsArray, ...values: any[]): AnimationKey
+  *   iterationCount: -1,
+  *   fillMode: "forwards"
+  * });
+  * 
+  * // Later: animation.pause(), animation.play(), animation.cleanup()
+  * ```
+  */
+ export const doAnimation = (element: HTMLElement, config: AnimationOptions, keyframes?: Map<string, PropertyAnimation>): { animation: Animation; cleanup: Cleanup } => {
+-    
++    if (typeof Element !== "undefined" && !(element instanceof Element)) {
++        throw new TypeError("doAnimation requires an Element");
++    }
++    if (typeof Element === "undefined" && (element == null || typeof (element as any).animate !== "function")) {
++        throw new TypeError("doAnimation requires an Element");
++    }
++
+     // Check if any values are reactive
+     const propertyList = parsePropertyList(config);
+     const hasAnyReactive = propertyList.some(prop => {
+         const { hasReactive } = processAnimationValues(prop.values);
+         return hasReactive;
+     });
+     
+     if (hasAnyReactive) {
+diff --git a/src/maps.ts b/src/maps.ts
+index 323137b..e2b6567 100644
+--- a/src/maps.ts
++++ b/src/maps.ts
+@@ -125,8 +125,14 @@ export const styleFlushPending = shared(
+     () => new WeakSet<Element>(),
+ );
+ 
+ // --- Styles @property ---
+ export const registeredProperties = shared(
+     "style-lib@registeredProperties",
+     () => new Set<string>(),
+ );
++
++// --- CSSOM animation keyframes ---
++export const animKeyframeRefs = shared(
++    "style.ts@animKeyframeRefs",
++    () => new Map<string, { name: string; count: number; keyframesRule: any; hosts: Set<any> }>(),
++);
+### css-animation.ts current (untracked or tracked)
+213 src/css-animation.ts
+=== UNTRACKED src/css-animation.ts ===
+/*
+ * FIND:style-anim
+ * TAG:style-lib,style-anim
+ * WHY: CSSOM animation writer. INVARIANT: never call element.animate().
+ */
+import { camelToKebab } from "@fest-lib/core";
+import { ANIM_LAYER, ANIM_TRIGGER_NAME } from "./constants";
+import { getOrCreateLayerRule } from "./layers";
+import { animKeyframeRefs } from "./maps";
+import type { Cleanup, CssAnimationOptions, PropertyAnimation } from "./types";
+import {
+    isScrollDriven,
+    isViewDriven,
+    normalizeIterationCount,
+    parseTime,
+} from "./utils";
+
+export const isReactiveTrigger = (t: unknown): boolean =>
+    t != null && typeof t === "object" && !isScrollDriven(t) && !isViewDriven(t) && "value" in (t as object);
+
+const asPropertyList = (options: CssAnimationOptions): PropertyAnimation[] => {
+    const kf = options.keyframes?.properties;
+    if (kf instanceof Map) {
+        return Array.from(kf.values());
+    }
+    const props = options.properties;
+    if (typeof props === "string") {
+        throw new TypeError("string properties are not used on the CSS compile path");
+    }
+    if (Array.isArray(props)) {
+        return props.map((item: any, i) => {
+            if (item && Array.isArray(item.values) && item.property) return item as PropertyAnimation;
+            const entries = Object.entries(item || {}).filter(([k]) => k !== "offset" && k !== "easing");
+            return {
+                property: entries[0]?.[0] ?? `p${i}`,
+                values: entries[0] ? [entries[0][1]] : [],
+            };
+        });
+    }
+    if (props && typeof props === "object") {
+        return Object.entries(props).map(([property, values]) => ({
+            property,
+            values: Array.isArray(values) ? values : [values],
+        }));
+    }
+    throw new TypeError("No animatable properties");
+};
+
+const serializeValue = (value: any): string => {
+    if (value == null) return "";
+    if (typeof value === "object" && "value" in value && !(value instanceof Element)) {
+        return String(value.value ?? "");
+    }
+    return String(value);
+};
+
+export const compileKeyframesCss = (options: CssAnimationOptions) => {
+    const list = asPropertyList(options);
+    const maxLength = Math.max(2, ...list.map((p) => p.values.length));
+    const offsets = options.offsets ?? Array.from({ length: maxLength }, (_, i) => i / (maxLength - 1));
+    const frames: string[] = [];
+    for (let i = 0; i < maxLength; i++) {
+        const decls: string[] = [];
+        for (const prop of list) {
+            const raw = prop.values[Math.min(i, prop.values.length - 1)];
+            decls.push(`${camelToKebab(prop.property)}: ${serializeValue(raw)}`);
+        }
+        const pct = Math.round((offsets[i] ?? i / (maxLength - 1)) * 100);
+        frames.push(`${pct}% { ${decls.join("; ")}; }`);
+    }
+    const fingerprint = frames.join("|");
+    let hash = 0;
+    for (let i = 0; i < fingerprint.length; i++) hash = (hash * 31 + fingerprint.charCodeAt(i)) | 0;
+    const name = `fest-anim-${(hash >>> 0).toString(36)}`;
+    const cssText = `@keyframes ${name} {\n${frames.join("\n")}\n}`;
+    return { name, cssText, fingerprint };
+};
+
+export const compileTriggerCss = (selector: string, options: CssAnimationOptions) => {
+    const trigger = options.trigger ?? "mount";
+    if (isReactiveTrigger(trigger)) {
+        throw new TypeError("reactive { value } trigger is not valid on the CSS path");
+    }
+    const compiled = compileKeyframesCss(options);
+    const duration = `${parseTime(options.duration, 300)}ms`;
+    const delay = `${parseTime(options.delay, 0)}ms`;
+    const iterations = normalizeIterationCount(options.iterationCount);
+    const properties: Record<string, string> = {
+        "animation-name": compiled.name,
+        "animation-duration": duration,
+        "animation-delay": delay,
+        "animation-iteration-count": iterations === "Infinity" || iterations === Infinity ? "infinite" : String(iterations),
+        "animation-direction": options.direction ?? "normal",
+        "animation-fill-mode": options.fillMode ?? "none",
+        "animation-timing-function": typeof options.easing === "string" ? options.easing : "linear",
+    };
+
+    if (trigger === "hover") {
+        if (options.reverseOnExit) {
+            properties["animation-trigger"] = `${ANIM_TRIGGER_NAME} play-backwards`;
+        }
+        return { selector: `${selector}:hover`, properties };
+    }
+    if (trigger === "focus") {
+        return { selector: `${selector}:focus`, properties };
+    }
+    if (trigger === "show") return { selector: `${selector}:not([data-hidden])`, properties };
+    if (trigger === "hide") return { selector: `${selector}[data-hidden]`, properties };
+    if (trigger === "remove") return { selector: `${selector}[data-removing]`, properties };
+    if (trigger === "manual") {
+        properties["animation-play-state"] = "paused";
+        return { selector, properties };
+    }
+    if (trigger === "click") {
+        properties["event-trigger"] = `${ANIM_TRIGGER_NAME} click`;
+        properties["animation-trigger"] = `${ANIM_TRIGGER_NAME} play`;
+        return { selector, properties };
+    }
+    if (trigger === "visible") {
+        properties["timeline-trigger"] = `${ANIM_TRIGGER_NAME} view contain`;
+        properties["animation-trigger"] = `${ANIM_TRIGGER_NAME} play`;
+        return { selector, properties };
+    }
+    if (isScrollDriven(trigger) || isViewDriven(trigger)) {
+        const kind = isViewDriven(trigger) ? "view" : "scroll";
+        properties["timeline-trigger"] = `${ANIM_TRIGGER_NAME} ${kind}`;
+        if (trigger.rangeStart) properties["animation-range-start"] = trigger.rangeStart;
+        if (trigger.rangeEnd) properties["animation-range-end"] = trigger.rangeEnd;
+        return { selector, properties };
+    }
+    return { selector, properties };
+};
+
+export const resolveCssAnimationTarget = (target: any, options: CssAnimationOptions) => {
+    if (typeof Element !== "undefined" && target instanceof Element) {
+        throw new TypeError("bindCssAnimation does not accept Element");
+    }
+    if (typeof CSSStyleDeclaration !== "undefined" && target instanceof CSSStyleDeclaration) {
+        const rule = (target as any).parentRule;
+        if (!rule) throw new TypeError("CSSStyleDeclaration has no parentRule");
+        return resolveCssAnimationTarget(rule, options);
+    }
+    if (typeof CSSStyleRule !== "undefined" && target instanceof CSSStyleRule) {
+        const sheet = target.parentStyleSheet;
+        if (!sheet) throw new TypeError("CSSStyleRule has no parentStyleSheet");
+        return { sheet, rule: target, selector: target.selectorText };
+    }
+    if (typeof CSSStyleSheet !== "undefined" && target instanceof CSSStyleSheet) {
+        const selector = options.selector;
+        if (!selector) throw new TypeError("CSSStyleSheet bind requires options.selector");
+        return { sheet: target, rule: null, selector };
+    }
+    throw new TypeError("bindCssAnimation target must be a CSSStyleRule, CSSStyleSheet, or CSSStyleDeclaration");
+};
+
+const declarationsToText = (properties: Record<string, string>) =>
+    Object.entries(properties).map(([k, v]) => `${k}: ${v};`).join(" ");
+
+/**
+ * Write `@keyframes` + companion rule into a stylesheet. Never calls `element.animate()`.
+ * WHY: duck-type `insertRule`+`cssRules`+`selector` before `instanceof` so Node tests work.
+ */
+export const bindCssAnimation = (target: any, options: CssAnimationOptions): Cleanup => {
+    const compiled = compileKeyframesCss(options);
+    let sheet: any;
+    let selector: string;
+    if (target && typeof target.insertRule === "function" && target.cssRules && options.selector) {
+        sheet = target;
+        selector = options.selector;
+    } else {
+        const resolved = resolveCssAnimationTarget(target, options);
+        sheet = resolved.sheet;
+        selector = resolved.selector;
+    }
+
+    const trigger = compileTriggerCss(selector, options);
+    const layer = getOrCreateLayerRule(sheet, ANIM_LAYER) ?? sheet;
+    const host = layer.insertRule ? layer : sheet;
+
+    let entry = animKeyframeRefs.get(compiled.fingerprint);
+    if (!entry) {
+        host.insertRule(compiled.cssText, host.cssRules?.length ?? 0);
+        const keyframesRule = host.cssRules?.[host.cssRules.length - 1];
+        entry = { name: compiled.name, count: 0, keyframesRule, hosts: new Set() };
+        animKeyframeRefs.set(compiled.fingerprint, entry);
+    }
+    entry.count += 1;
+    entry.hosts.add(host);
+
+    const companionText = `${trigger.selector} { ${declarationsToText(trigger.properties)} }`;
+    const companionIndex = host.insertRule(companionText, host.cssRules?.length ?? 0);
+    const companionRule = host.cssRules?.[companionIndex];
+
+    let dead = false;
+    return () => {
+        if (dead) return;
+        dead = true;
+        try {
+            const rules = Array.from(host.cssRules || []);
+            const idx = rules.indexOf(companionRule);
+            if (idx >= 0) host.deleteRule(idx);
+        } catch { /* already gone */ }
+        entry!.count -= 1;
+        if (entry!.count <= 0) {
+            try {
+                const rules = Array.from(host.cssRules || []);
+                const idx = rules.indexOf(entry!.keyframesRule);
+                if (idx >= 0) host.deleteRule(idx);
+            } catch { /* already gone */ }
+            animKeyframeRefs.delete(compiled.fingerprint);
+        }
+    };
+};

@@ -54,6 +54,18 @@ const cwspAirpadParityAliases = [
     { find: "@cwsp/shared/airpad-cwsp-client-parity", replacement: CWSP_AIRPAD_CLIENT_PARITY }
 ];
 
+const lureSrc = resolve(workspaceRoot, "modules/projects/lur.e/src");
+const lureSubpathAliases = [
+    { find: "@fest-lib/lure/provide", replacement: resolve(lureSrc, "utils/opfs/provide.ts") },
+    { find: "@fest-lib/lure/idb-fs", replacement: resolve(lureSrc, "utils/opfs/IdbFs.ts") },
+    { find: "@fest-lib/lure/remote-fs", replacement: resolve(lureSrc, "utils/opfs/remote-fs.ts") },
+    { find: "@fest-lib/lure/markdown-assets", replacement: resolve(lureSrc, "utils/opfs/markdown-assets.ts") },
+    {
+        find: "@fest-lib/uniform/mounted-fs",
+        replacement: resolve(workspaceRoot, "modules/projects/uniform.ts/src/newer/messaging/MountedFs.ts")
+    }
+];
+
 const viewSharedAliases = [
     { find: "views/network", replacement: NETWORK_VIEW_ENTRY },
     { find: "com/config/Settings", replacement: SETTINGS_CONFIG },
@@ -103,7 +115,7 @@ export function getViewResolveAliases(projectRoot, prepend = []) {
     const merged = mergeAliasLists(baseAliases, localAliases).filter(
         (a) => !cwspAirpadParityFinds.has(String(a.find))
     );
-    return [...prepend, ...viewSharedAliases, ...cwspAirpadParityAliases, ...merged];
+    return [...prepend, ...lureSubpathAliases, ...viewSharedAliases, ...cwspAirpadParityAliases, ...merged];
 }
 
 export { workspaceRoot, viewsRoot, sharedRoot, subsystemRoot };

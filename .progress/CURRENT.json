@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-02T15:25:00+07:00",
-  "thread": "core-polyfill",
-  "intent": "Treat Map.getOrInsert / getOrInsertComputed as reactive Map writes.",
+  "updatedAt": "2026-09-02T19:55:00+07:00",
+  "thread": "mounted-fs",
+  "intent": "Fix POST /ssre/fs 404 on Vite :443 (same-origin remote-fs).",
   "status": "done",
-  "project": "fest/object",
+  "project": "runtime/fastify",
   "lastDone": [
-    "Reactive Map getOrInsert / getOrInsertComputed insert only on miss and emit add like set().",
-    "Existing keys return the current value and skip triggers / compute."
+    "Self-contained /ssre/fs handler; Vite plugin on shell/document/process/reborn; Fastify always registers before SPA."
   ],
-  "next": "Rebuild staged fest/core.js and fest/object when a host still serves old bundles.",
+  "next": "Restart CWSP-shell Vite on :443 so the new middleware is live.",
   "blockers": [],
   "paths": [
-    "modules/projects/object.ts/src/core/Specific.ts"
+    "runtime/fastify/plugins/mounted-fs.ts",
+    "modules/projects/lur.e/src/utils/opfs/remote-fs.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",

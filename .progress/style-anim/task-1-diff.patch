@@ -1,0 +1,418 @@
+### status
+ M package.json
+ M src/constants.ts
+ M src/index.ts
+ M src/types.ts
+?? scripts/run-animation-tests.mjs
+?? src/css-animation.ts
+?? test/css-animation.node.test.ts
+### diff tracked
+diff --git a/package.json b/package.json
+index 0bbd6bf..af3da31 100755
+--- a/package.json
++++ b/package.json
+@@ -60,20 +60,21 @@
+         "watch": "vite build --watch",
+         "build": "vite build --config vite.config.js",
+         "build:publish": "FEST_NPM_IMPORTS=1 vite build --config vite.config.js",
+         "prepack": "npm run build:publish",
+         "preview": "vite preview",
+         "docs": "typedoc ./src/index.ts --options ./typedoc.json --out ./docs --tsconfig ./tsconfig.json --excludeExternals --excludePrivate --excludeProtected --skipErrorChecking",
+         "docs:clean": "rm -rf ./docs && typedoc --options ./typedoc.json",
+         "docs:md": "typedoc --options ./typedoc.md.json",
+         "docs:md:clean": "rm -rf ./docs-md && typedoc --options ./typedoc.md.json",
+         "release": "PUPPETEER_SKIP_DOWNLOAD=1 npm run build:publish && npm publish --access public --ignore-scripts",
+-        "publish": "node ../scripts/bump-patch-version.mjs && npm run release"
++        "publish": "node ../scripts/bump-patch-version.mjs && npm run release",
++        "test:animation": "node ./scripts/run-animation-tests.mjs"
+     },
+     "devDependencies": {
+         "@types/node": ">=22.8.1",
+         "sass": ">=1.93.3",
+         "typescript": ">=6.0.0-beta",
+         "vite": "^8.0.7",
+         "vite-plugin-external": ">=6.2.2"
+     }
+ }
+diff --git a/src/constants.ts b/src/constants.ts
+index 4ce66ab..757d88c 100644
+--- a/src/constants.ts
++++ b/src/constants.ts
+@@ -157,14 +157,16 @@ export const BAKE_SCREEN_ALSO_SETTINGS = [
+     ".field",
+     ".form-input",
+     ".form-select",
+     ".field-control",
+ ] as const;
+ export const BAKE_SCREEN_ALSO = [
+     ...BAKE_SCREEN_ALSO_EXPLORER,
+     ...BAKE_SCREEN_ALSO_SETTINGS,
+ ] as const;
+ export const ANIMATABLE_BRAND = Symbol.for("fest.animatable");
++export const ANIM_LAYER = "ux-anim";
++export const ANIM_TRIGGER_NAME = "--fest-t";
+ 
+ export const hasTypedOM =
+     typeof CSSStyleValue !== "undefined" &&
+     typeof CSSUnitValue !== "undefined";
+diff --git a/src/index.ts b/src/index.ts
+index 1ea2b70..45e9172 100755
+--- a/src/index.ts
++++ b/src/index.ts
+@@ -18,10 +18,11 @@ export {
+     setStylePropertyTyped,
+     setStylePropertyFallback,
+ } from "./property";
+ /* WHY: do not re-export handleStyleChange / bindWith — dom and lure already own those names.
+  * Internal copies in property.ts / bind.ts stay private so Rolldown does not see two bindings. */
+ export * from "./sheets";
+ export * from "./component";
+ export * from "./Styles";
+ export * from "./Animate";
+ export * from "./Animatable";
++export * from "./css-animation";
+diff --git a/src/types.ts b/src/types.ts
+index 213e7d2..e1dc8a1 100644
+--- a/src/types.ts
++++ b/src/types.ts
+@@ -152,21 +152,21 @@ export interface PropertyAnimation {
+ }
+ 
+ export interface AnimationKeyframes {
+     properties: Map<string, PropertyAnimation>;
+     offsets?: number[];
+     timing?: TimingFunction[];
+ }
+ 
+ export interface AnimationOptions {
+     keyframes?: AnimationKeyframes;
+-    properties: Record<string, any>[] | string;
++    properties?: Record<string, any>[] | string;
+     offsets?: number[];
+     /** Duration in milliseconds or CSS time string */
+     duration?: number | string;
+     /** Delay before animation starts */
+     delay?: number | string;
+     /** Iteration count (-1 for infinite) */
+     iterationCount?: number;
+     fillMode?: FillMode;
+     direction?: PlaybackDirection;
+     /** Global easing (overridden by property-specific easing) */
+@@ -202,24 +202,33 @@ export interface ViewDrivenOptions {
+     rangeEnd?: string;
+ }
+ 
+ export type AnimatableTrigger =
+     | "mount"
+     | "hover"
+     | "focus"
+     | "click"
+     | "visible"
+     | "manual"
++    | "show"
++    | "hide"
++    | "remove"
+     | { value: any }
+     | ScrollDrivenOptions
+     | ViewDrivenOptions;
+ 
++export type CssAnimationOptions = AnimationOptions & {
++    trigger?: AnimatableTrigger;
++    selector?: string;
++    reverseOnExit?: boolean;
++};
++
+ export interface AnimatableOptions {
+     duration?: number | string;
+     delay?: number | string;
+     endDelay?: number;
+     /** Проценты 0..1 для каждого шага (как percentageSteps). */
+     offsets?: number[];
+     /** Общий easing или easing per-segment. */
+     easing?: string | string[];
+     /** -1 => Infinity */
+     iterations?: number;
+### new css-animation.ts
+--- a/src/css-animation.ts
++++ b/src/css-animation.ts
+/*
+ * FIND:style-anim
+ * TAG:style-lib,style-anim
+ * WHY: CSSOM animation writer. INVARIANT: never call element.animate().
+ */
+import { camelToKebab } from "@fest-lib/core";
+import { ANIM_LAYER, ANIM_TRIGGER_NAME } from "./constants";
+import type { CssAnimationOptions, PropertyAnimation } from "./types";
+import {
+    isScrollDriven,
+    isViewDriven,
+    normalizeIterationCount,
+    parseTime,
+} from "./utils";
+
+export const isReactiveTrigger = (t: unknown): boolean =>
+    t != null && typeof t === "object" && !isScrollDriven(t) && !isViewDriven(t) && "value" in (t as object);
+
+const asPropertyList = (options: CssAnimationOptions): PropertyAnimation[] => {
+    const kf = options.keyframes?.properties;
+    if (kf instanceof Map) {
+        return Array.from(kf.values());
+    }
+    const props = options.properties;
+    if (typeof props === "string") {
+        throw new TypeError("string properties are not used on the CSS compile path");
+    }
+    if (Array.isArray(props)) {
+        return props.map((item: any, i) => {
+            if (item && Array.isArray(item.values) && item.property) return item as PropertyAnimation;
+            const entries = Object.entries(item || {}).filter(([k]) => k !== "offset" && k !== "easing");
+            return {
+                property: entries[0]?.[0] ?? `p${i}`,
+                values: entries[0] ? [entries[0][1]] : [],
+            };
+        });
+    }
+    if (props && typeof props === "object") {
+        return Object.entries(props).map(([property, values]) => ({
+            property,
+            values: Array.isArray(values) ? values : [values],
+        }));
+    }
+    throw new TypeError("No animatable properties");
+};
+
+const serializeValue = (value: any): string => {
+    if (value == null) return "";
+    if (typeof value === "object" && "value" in value && !(value instanceof Element)) {
+        return String(value.value ?? "");
+    }
+    return String(value);
+};
+
+export const compileKeyframesCss = (options: CssAnimationOptions) => {
+    const list = asPropertyList(options);
+    const maxLength = Math.max(2, ...list.map((p) => p.values.length));
+    const offsets = options.offsets ?? Array.from({ length: maxLength }, (_, i) => i / (maxLength - 1));
+    const frames: string[] = [];
+    for (let i = 0; i < maxLength; i++) {
+        const decls: string[] = [];
+        for (const prop of list) {
+            const raw = prop.values[Math.min(i, prop.values.length - 1)];
+            decls.push(`${camelToKebab(prop.property)}: ${serializeValue(raw)}`);
+        }
+        const pct = Math.round((offsets[i] ?? i / (maxLength - 1)) * 100);
+        frames.push(`${pct}% { ${decls.join("; ")}; }`);
+    }
+    const fingerprint = frames.join("|");
+    let hash = 0;
+    for (let i = 0; i < fingerprint.length; i++) hash = (hash * 31 + fingerprint.charCodeAt(i)) | 0;
+    const name = `fest-anim-${(hash >>> 0).toString(36)}`;
+    const cssText = `@keyframes ${name} {\n${frames.join("\n")}\n}`;
+    return { name, cssText, fingerprint };
+};
+
+export const compileTriggerCss = (selector: string, options: CssAnimationOptions) => {
+    const trigger = options.trigger ?? "mount";
+    if (isReactiveTrigger(trigger)) {
+        throw new TypeError("reactive { value } trigger is not valid on the CSS path");
+    }
+    const compiled = compileKeyframesCss(options);
+    const duration = `${parseTime(options.duration, 300)}ms`;
+    const delay = `${parseTime(options.delay, 0)}ms`;
+    const iterations = normalizeIterationCount(options.iterationCount);
+    const properties: Record<string, string> = {
+        "animation-name": compiled.name,
+        "animation-duration": duration,
+        "animation-delay": delay,
+        "animation-iteration-count": iterations === "Infinity" || iterations === Infinity ? "infinite" : String(iterations),
+        "animation-direction": options.direction ?? "normal",
+        "animation-fill-mode": options.fillMode ?? "none",
+        "animation-timing-function": typeof options.easing === "string" ? options.easing : "linear",
+    };
+
+    if (trigger === "hover") {
+        if (options.reverseOnExit) {
+            properties["animation-trigger"] = `${ANIM_TRIGGER_NAME} play-backwards`;
+        }
+        return { selector: `${selector}:hover`, properties };
+    }
+    if (trigger === "focus") {
+        return { selector: `${selector}:focus`, properties };
+    }
+    if (trigger === "show") return { selector: `${selector}:not([data-hidden])`, properties };
+    if (trigger === "hide") return { selector: `${selector}[data-hidden]`, properties };
+    if (trigger === "remove") return { selector: `${selector}[data-removing]`, properties };
+    if (trigger === "manual") {
+        properties["animation-play-state"] = "paused";
+        return { selector, properties };
+    }
+    if (trigger === "click") {
+        properties["event-trigger"] = `${ANIM_TRIGGER_NAME} click`;
+        properties["animation-trigger"] = `${ANIM_TRIGGER_NAME} play`;
+        return { selector, properties };
+    }
+    if (trigger === "visible") {
+        properties["timeline-trigger"] = `${ANIM_TRIGGER_NAME} view contain`;
+        properties["animation-trigger"] = `${ANIM_TRIGGER_NAME} play`;
+        return { selector, properties };
+    }
+    if (isScrollDriven(trigger) || isViewDriven(trigger)) {
+        const kind = isViewDriven(trigger) ? "view" : "scroll";
+        properties["timeline-trigger"] = `${ANIM_TRIGGER_NAME} ${kind}`;
+        if (trigger.rangeStart) properties["animation-range-start"] = trigger.rangeStart;
+        if (trigger.rangeEnd) properties["animation-range-end"] = trigger.rangeEnd;
+        return { selector, properties };
+    }
+    return { selector, properties };
+};
+
+export const resolveCssAnimationTarget = (target: any, options: CssAnimationOptions) => {
+    if (target instanceof Element) {
+        throw new TypeError("bindCssAnimation does not accept Element");
+    }
+    if (typeof CSSStyleDeclaration !== "undefined" && target instanceof CSSStyleDeclaration) {
+        const rule = (target as any).parentRule;
+        if (!rule) throw new TypeError("CSSStyleDeclaration has no parentRule");
+        return resolveCssAnimationTarget(rule, options);
+    }
+    if (typeof CSSStyleRule !== "undefined" && target instanceof CSSStyleRule) {
+        const sheet = target.parentStyleSheet;
+        if (!sheet) throw new TypeError("CSSStyleRule has no parentStyleSheet");
+        return { sheet, rule: target, selector: target.selectorText };
+    }
+    if (typeof CSSStyleSheet !== "undefined" && target instanceof CSSStyleSheet) {
+        const selector = options.selector;
+        if (!selector) throw new TypeError("CSSStyleSheet bind requires options.selector");
+        return { sheet: target, rule: null, selector };
+    }
+    throw new TypeError("bindCssAnimation target must be a CSSStyleRule, CSSStyleSheet, or CSSStyleDeclaration");
+};
+
+export { ANIM_LAYER };
+### new test
+import assert from "node:assert/strict";
+import test from "node:test";
+import {
+    compileKeyframesCss,
+    compileTriggerCss,
+    isReactiveTrigger,
+} from "../src/css-animation.ts";
+
+test("compileKeyframesCss emits @keyframes from property arrays", () => {
+    const out = compileKeyframesCss({
+        properties: { opacity: [0, 1] },
+        duration: 300,
+    });
+    assert.match(out.name, /^fest-anim-/);
+    assert.match(out.cssText, /@keyframes fest-anim-/);
+    assert.match(out.cssText, /opacity:\s*0/);
+    assert.match(out.cssText, /opacity:\s*1/);
+    assert.ok(out.fingerprint.length > 0);
+});
+
+test("same payload shares fingerprint", () => {
+    const a = compileKeyframesCss({ properties: { opacity: [0, 1] } });
+    const b = compileKeyframesCss({ properties: { opacity: [0, 1] } });
+    assert.equal(a.fingerprint, b.fingerprint);
+    assert.equal(a.name, b.name);
+});
+
+test("compileTriggerCss maps lifecycle and interaction triggers", () => {
+    assert.equal(compileTriggerCss(".x", { properties: { opacity: [0, 1] } }).selector, ".x");
+    assert.equal(compileTriggerCss(".x", { properties: { opacity: [0, 1] }, trigger: "hover" }).selector, ".x:hover");
+    assert.equal(compileTriggerCss(".x", { properties: { opacity: [0, 1] }, trigger: "focus" }).selector, ".x:focus");
+    assert.equal(compileTriggerCss(".x", { properties: { opacity: [0, 1] }, trigger: "show" }).selector, ".x:not([data-hidden])");
+    assert.equal(compileTriggerCss(".x", { properties: { opacity: [0, 1] }, trigger: "hide" }).selector, ".x[data-hidden]");
+    assert.equal(compileTriggerCss(".x", { properties: { opacity: [0, 1] }, trigger: "remove" }).selector, ".x[data-removing]");
+    const click = compileTriggerCss(".x", { properties: { opacity: [0, 1] }, trigger: "click" });
+    assert.equal(click.properties["event-trigger"], "--fest-t click");
+    assert.equal(click.properties["animation-trigger"], "--fest-t play");
+    const vis = compileTriggerCss(".x", { properties: { opacity: [0, 1] }, trigger: "visible" });
+    assert.equal(vis.properties["timeline-trigger"], "--fest-t view contain");
+    const manual = compileTriggerCss(".x", { properties: { opacity: [0, 1] }, trigger: "manual" });
+    assert.equal(manual.properties["animation-play-state"], "paused");
+});
+
+test("reactive trigger is detected and compileTriggerCss throws", () => {
+    assert.equal(isReactiveTrigger({ value: true }), true);
+    assert.throws(
+        () => compileTriggerCss(".x", { properties: { opacity: [0, 1] }, trigger: { value: true } }),
+        TypeError,
+    );
+});
+### new runner
+import { access } from "node:fs/promises";
+import { rm } from "node:fs/promises";
+import { resolve } from "node:path";
+import { spawn } from "node:child_process";
+import { build } from "vite";
+
+const root = resolve(import.meta.dirname, "..");
+const outDir = resolve(root, ".tmp-tests/animation");
+
+const testFiles = [
+    resolve(root, "test/css-animation.node.test.ts"),
+    resolve(root, "test/lifecycle.node.test.ts"),
+];
+
+const existing = [];
+for (const file of testFiles) {
+    try {
+        await access(file);
+        existing.push(file);
+    } catch {
+        // skip missing lifecycle test until later tasks
+    }
+}
+
+if (existing.length === 0) {
+    console.error("No animation test files found");
+    process.exit(1);
+}
+
+await rm(outDir, { recursive: true, force: true });
+
+const bundled = [];
+for (const entry of existing) {
+    const base = entry.split("/").pop().replace(/\.ts$/, ".mjs");
+    const output = resolve(outDir, base);
+    await build({
+        root,
+        configFile: false,
+        logLevel: "warn",
+        resolve: {
+            alias: [
+                { find: "@fest-lib/core", replacement: resolve(root, "../core.ts/src/index.ts") },
+                { find: "@fest-lib/dom", replacement: resolve(root, "../dom.ts/src/index.ts") },
+                { find: "@fest-lib/style-lib", replacement: resolve(root, "src/index.ts") },
+                { find: "@fest-lib/object", replacement: resolve(root, "../object.ts/src/index.ts") },
+            ],
+        },
+        build: {
+            emptyOutDir: false,
+            target: "esnext",
+            minify: false,
+            sourcemap: "inline",
+            outDir,
+            lib: {
+                entry,
+                formats: ["es"],
+                fileName: () => base,
+            },
+            rollupOptions: {
+                external: [/^node:/],
+                treeshake: {
+                    moduleSideEffects: true,
+                },
+            },
+        },
+    });
+    bundled.push(output);
+}
+
+const child = spawn(process.execPath, ["--test", "--test-force-exit", ...bundled], {
+    cwd: root,
+    stdio: "inherit",
+});
+
+child.once("exit", (code) => process.exit(code ?? 1));

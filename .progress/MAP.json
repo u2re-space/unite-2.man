@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-01T12:40:00+07:00",
+  "updatedAt": "2026-09-02T18:50:00+07:00",
   "how": "Resolve tag or synonym → Read only those paths. If missing: one Grep for FIND:<tag>. Never walk skip.",
   "skip": [
     ".archives",
@@ -47,6 +47,9 @@
     "анти-отвал": "glit-styles",
     "style-tree": "style-tree",
     "style-lib": "style-lib",
+    "анимация": "style-anim",
+    "appear": "style-anim",
+    "bindCssAnimation": "style-anim",
     "css-in-js": "style-lib",
     "units": "style-constants",
     "реестры": "style-constants",
@@ -190,6 +193,22 @@
       "modules/projects/icon.ts/src/loader/CSSIconRegistry.ts",
       "modules/projects/image.ts/src/engine/WallpaperTheme.ts",
       "modules/projects/dom.ts/src/index.ts"
+    ],
+    "style-anim": [
+      "docs/superpowers/specs/2026-09-02-style-lib-animation-design.md",
+      "docs/superpowers/plans/2026-09-02-style-lib-animation.md",
+      "modules/projects/style.ts/src/css-animation.ts",
+      "modules/projects/style.ts/src/lifecycle.ts",
+      "modules/projects/style.ts/src/maps.ts",
+      "modules/projects/style.ts/src/Animate.ts",
+      "modules/projects/style.ts/src/Animatable.ts",
+      "modules/projects/style.ts/src/types.ts",
+      "modules/projects/lur.e/src/lure/node/Mapped.ts",
+      "modules/projects/lur.e/src/lure/context/Utils.ts",
+      "modules/projects/lur.e/src/lure/context/ReflectChildren.ts",
+      "modules/projects/lur.e/test/mapped-lifecycle.node.test.ts",
+      "modules/projects/dom.ts/src/decor/Animation.ts",
+      "modules/projects/dom.ts/src/decor/Appear.ts"
     ],
     "image": ["modules/projects/image.ts"],
     "wallpaper-ink": [
@@ -532,6 +551,36 @@
     "opfs-content-store": [
       "modules/projects/lur.e/src/utils/opfs/content-addressed-store.ts",
       "modules/projects/lur.e/test/opfs-content-store.node.test.ts"
+    ],
+    "opfs": [
+      "modules/projects/lur.e/src/utils/opfs/OPFS.ts",
+      "modules/projects/lur.e/src/utils/opfs/IdbFs.ts",
+      "modules/projects/lur.e/src/utils/opfs/provide.ts",
+      "modules/projects/lur.e/src/utils/opfs/remote-fs.ts"
+    ],
+    "mounted-fs": [
+      "modules/projects/core.ts/src/utils/MountedFs.ts",
+      "modules/projects/uniform.ts/src/newer/messaging/MountedFs.ts",
+      "modules/projects/ssr.e/src/ssre/fs/mounts.ts",
+      "modules/projects/ssr.e/src/ssre/server/mounted-fs.ts",
+      "modules/projects/lur.e/src/utils/opfs/remote-fs.ts",
+      "runtime/fastify/plugins/mounted-fs.ts",
+      "modules/projects/fl.ui/src/ui/explorer/path-router.ts"
+    ],
+    "idb-fs": [
+      "modules/projects/lur.e/src/utils/opfs/IdbFs.ts",
+      "modules/projects/lur.e/src/utils/opfs/OPFS.ts",
+      "modules/projects/lur.e/src/utils/opfs/provide.ts",
+      "modules/projects/core.ts/src/utils/UserPath.ts",
+      "modules/projects/fl.ui/src/ui/explorer/path-router.ts",
+      "modules/projects/fl.ui/src/ui/explorer/explorer-adapters.ts",
+      "modules/projects/fl.ui/src/ui/explorer/Operative.ts",
+      "modules/projects/subsystem/src/store/OPFSStorage.ts"
+    ],
+    "provide": [
+      "modules/projects/lur.e/src/utils/opfs/provide.ts",
+      "modules/projects/lur.e/src/utils/opfs/OPFS.ts",
+      "modules/projects/lur.e/src/utils/opfs/remote-fs.ts"
     ],
     "attachment-sources": [
       "modules/projects/fl.ui/src/ui/inputs/attachments/AttachmentSources.ts",
