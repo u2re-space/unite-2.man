@@ -1,19 +1,18 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-03T19:30:00+07:00",
-  "thread": "speed-dial-widgets",
-  "intent": "Wide widget drag pivot is the grab point; drop samples the live translated rect.",
+  "updatedAt": "2026-09-03T20:00:00+07:00",
+  "thread": "chrome-rail",
+  "intent": "Left Speed Dial sidebar plus QS styles that work on Capacitor WebView without experimental CSS flags.",
   "status": "in-progress",
   "project": "CWSP-shell",
   "lastDone": [
-    "pointerup no longer clears grab before drop. Cell comes from the visible box, not cursor−offset.",
-    "Widget transform-origin follows --sd-grab-*; no :active 0.94 scale from center."
+    "QS SCSS: removed contrast-color() and inherit() so WebView no longer drops sliders/footer after .qs-tile."
   ],
-  "next": "Reload home and drag a wide search bar — it should stay under the pointer and land on the ghost.",
+  "next": "Rebuild Capacitor and reopen Quick settings — Theme/Dark stacked, custom sliders, icon footer.",
   "blockers": [],
   "paths": [
-    "modules/projects/fl.ui/src/ui/speed-dial/pointer-interaction.ts",
-    "modules/projects/veela.css/src/scss/ui/components/speed-dial.scss"
+    "modules/projects/veela.css/src/scss/ui/components/quick-settings.scss",
+    "modules/projects/fl.ui/src/ui/speed-dial/chrome-rail.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",

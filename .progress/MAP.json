@@ -36,6 +36,11 @@
     "лаунчер": "speed-dial",
     "виджеты": "speed-dial-widgets",
     "widgets": "speed-dial-widgets",
+    "сайдбар": "chrome-rail",
+    "sidebar": "chrome-rail",
+    "левый-сайдбар": "chrome-rail",
+    "tiles-lock": "chrome-rail",
+    "закрепление": "chrome-rail",
     "wallpaper": "wallpaper-ink",
     "обои": "wallpaper-ink",
     "веела": "veela",
@@ -305,6 +310,14 @@
       "modules/projects/fl.ui/src/ui/speed-dial/launcher-state.ts",
       "modules/projects/fl.ui/src/ui/speed-dial/SpeedDial.ts",
       "modules/projects/veela.css/src/scss/ui/components/speed-dial.scss"
+    ],
+    "chrome-rail": [
+      "modules/projects/fl.ui/src/ui/speed-dial/chrome-rail.ts",
+      "modules/projects/fl.ui/src/ui/speed-dial/tiles-lock.ts",
+      "modules/projects/fl.ui/src/ui/speed-dial/SpeedDial.ts",
+      "modules/projects/veela.css/src/scss/ui/components/speed-dial.scss",
+      "modules/projects/veela.css/src/scss/ui/components/quick-settings.scss",
+      "modules/projects/fl.ui/src/ui/navigation/flyout/ChromeFlyout.ts"
     ],
     "pin-shortcut": [
       "modules/projects/fl.ui/src/ui/speed-dial/SpeedDial.ts",
