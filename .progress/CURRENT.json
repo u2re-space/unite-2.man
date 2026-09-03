@@ -1,19 +1,22 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-03T13:15:00+07:00",
+  "updatedAt": "2026-09-03T13:55:00+07:00",
   "thread": "process-ingress",
-  "intent": "md.u2re.space HTML5 file drop must open the file in the live viewer.",
+  "intent": "Capacitor CWSP-shell Speed Dial must open /sdcard/ files via Android VIEW/SEND (Document, Process, chooser).",
   "status": "in-progress",
-  "project": "CWSP-document",
+  "project": "CWSP-shell",
   "lastDone": [
-    "Stop calling getAsFileSystemHandle before getAsFile — Chromium then leaves dt.files empty so drop is a no-op.",
-    "Window drop no longer throws on a Text target.closest.",
-    "Document SKU still owns drop if nav id is a stale home placeholder."
+    "CWSP-shell again declares MANAGE_EXTERNAL_STORAGE; /sdcard/ open copies into cache FileProvider.",
+    "Missing all-files opens the system grant page instead of handing QuickEdit a dead URI."
   ],
-  "next": "Redeploy cw-markdown. Drop a .md onto the open md.u2re.space viewer — it must replace the painted document.",
+  "next": "Rebuild/install CWSP-shell. Grant All files access, then open a /sdcard/ tile into QuickEdit.",
   "blockers": [],
   "paths": [
-    "modules/views/markdown-view/src/needs-to-API.ts"
+    "modules/projects/fl.ui/src/ui/speed-dial/action-registry.ts",
+    "modules/projects/fl.ui/src/ui/speed-dial/SpeedDial.ts",
+    "modules/projects/fl.ui/src/ui/explorer/storage-bridge.ts",
+    "modules/views/markdown-view/src/needs-to-API.ts",
+    "modules/projects/subsystem/src/boot/BootLoader.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",
