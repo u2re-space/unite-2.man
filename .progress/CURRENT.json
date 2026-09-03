@@ -1,22 +1,19 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-03T13:55:00+07:00",
-  "thread": "process-ingress",
-  "intent": "Capacitor CWSP-shell Speed Dial must open /sdcard/ files via Android VIEW/SEND (Document, Process, chooser).",
+  "updatedAt": "2026-09-03T19:30:00+07:00",
+  "thread": "speed-dial-widgets",
+  "intent": "Wide widget drag pivot is the grab point; drop samples the live translated rect.",
   "status": "in-progress",
   "project": "CWSP-shell",
   "lastDone": [
-    "CWSP-shell again declares MANAGE_EXTERNAL_STORAGE; /sdcard/ open copies into cache FileProvider.",
-    "Missing all-files opens the system grant page instead of handing QuickEdit a dead URI."
+    "pointerup no longer clears grab before drop. Cell comes from the visible box, not cursor−offset.",
+    "Widget transform-origin follows --sd-grab-*; no :active 0.94 scale from center."
   ],
-  "next": "Rebuild/install CWSP-shell. Grant All files access, then open a /sdcard/ tile into QuickEdit.",
+  "next": "Reload home and drag a wide search bar — it should stay under the pointer and land on the ghost.",
   "blockers": [],
   "paths": [
-    "modules/projects/fl.ui/src/ui/speed-dial/action-registry.ts",
-    "modules/projects/fl.ui/src/ui/speed-dial/SpeedDial.ts",
-    "modules/projects/fl.ui/src/ui/explorer/storage-bridge.ts",
-    "modules/views/markdown-view/src/needs-to-API.ts",
-    "modules/projects/subsystem/src/boot/BootLoader.ts"
+    "modules/projects/fl.ui/src/ui/speed-dial/pointer-interaction.ts",
+    "modules/projects/veela.css/src/scss/ui/components/speed-dial.scss"
   ],
   "models": {
     "implementer": "Grok 4.6",

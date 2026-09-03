@@ -34,6 +34,8 @@
     "pwa-icon": "pwa-icons",
     "favicon": "pwa-icons",
     "лаунчер": "speed-dial",
+    "виджеты": "speed-dial-widgets",
+    "widgets": "speed-dial-widgets",
     "wallpaper": "wallpaper-ink",
     "обои": "wallpaper-ink",
     "веела": "veela",
@@ -298,10 +300,17 @@
     ],
     "fl-ui": ["modules/projects/fl.ui"],
     "speed-dial": ["modules/projects/fl.ui/src/ui/speed-dial"],
+    "speed-dial-widgets": [
+      "modules/projects/fl.ui/src/ui/speed-dial/widgets.ts",
+      "modules/projects/fl.ui/src/ui/speed-dial/launcher-state.ts",
+      "modules/projects/fl.ui/src/ui/speed-dial/SpeedDial.ts",
+      "modules/projects/veela.css/src/scss/ui/components/speed-dial.scss"
+    ],
     "pin-shortcut": [
       "modules/projects/fl.ui/src/ui/speed-dial/SpeedDial.ts",
       "modules/projects/fl.ui/src/ui/speed-dial/action-registry.ts",
       "modules/projects/fl.ui/src/ui/speed-dial/launcher-state.ts",
+      "modules/projects/fl.ui/src/ui/speed-dial/widgets.ts",
       "modules/projects/fl.ui/src/ui/speed-dial/workspace-pages.ts",
       "apps/CWSP-shell/src/java/space/u2re/cwsp/MainActivity.java",
       "apps/CWSP-shell/src/java/space/u2re/cwsp/PinShortcutActivity.java",
