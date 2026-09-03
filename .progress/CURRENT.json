@@ -1,25 +1,19 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-03T10:45:00+07:00",
+  "updatedAt": "2026-09-03T13:15:00+07:00",
   "thread": "process-ingress",
-  "intent": "Warm-start Share/Open-with must deliver again while Document/Process (Capacitor + PWA) stay open.",
+  "intent": "md.u2re.space HTML5 file drop must open the file in the live viewer.",
   "status": "in-progress",
   "project": "CWSP-document",
   "lastDone": [
-    "PWA: keep BroadcastChannel after ?shared=1; Document SW mail paints the viewer instead of AI/WC.",
-    "PWA: share dedupe is per timestamp so a second share is not dropped as a replay.",
-    "Capacitor: ack only the painted stash generation; resume re-pings attach shares; FGS can chain a newer process job."
+    "Stop calling getAsFileSystemHandle before getAsFile — Chromium then leaves dt.files empty so drop is a no-op.",
+    "Window drop no longer throws on a Text target.closest.",
+    "Document SKU still owns drop if nav id is a stale home placeholder."
   ],
-  "next": "Rebuild Document + Process APKs (and hard-reload PWA SW). Second Open-with/Share in an already-open app must paint or attach.",
+  "next": "Redeploy cw-markdown. Drop a .md onto the open md.u2re.space viewer — it must replace the painted document.",
   "blockers": [],
   "paths": [
-    "modules/projects/subsystem/src/routing/pwa/sw-handling.ts",
-    "modules/projects/subsystem/src/routing/pwa/sw-page-bridge.ts",
-    "modules/projects/subsystem/src/boot/capacitor-share-intent.ts",
-    "modules/views/markdown-view/src/needs-to-API.ts",
-    "apps/CWSP-shell/src/java/space/u2re/cwsp/MainActivity.java",
-    "apps/CWSP-shell/src/java/space/u2re/cwsp/LauncherCoordinator.java",
-    "apps/CWSP-shell/src/java/space/u2re/cwsp/ProcessIngressService.java"
+    "modules/views/markdown-view/src/needs-to-API.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",

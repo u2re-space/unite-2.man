@@ -513,7 +513,9 @@
       "modules/projects/subsystem/src/other/config/process-ingress.ts",
       "modules/projects/subsystem/src/other/config/settings/contributions/workcenter.ts",
       "modules/projects/subsystem/src/routing/pwa/sw-handling.ts",
+      "modules/projects/subsystem/src/routing/pwa/sw-sku-landing.ts",
       "modules/projects/subsystem/src/routing/channel/sku-ingress.ts",
+      "modules/views/markdown-view/src/needs-to-API.ts",
       "modules/views/settings-view/src/sections/SettingsAI.ts",
       "modules/views/settings-view/src/ts/Settings.ts",
       "modules/projects/subsystem/src/boot/capacitor-share-intent.ts",
@@ -696,6 +698,7 @@
       "apps/CWSP-document/src/pwa/sw.ts",
       "modules/shells/minimal-shell/src/index.ts",
       "modules/projects/subsystem/src/routing/pwa/sw-handling.ts",
+      "modules/views/markdown-view/src/needs-to-API.ts",
       "modules/projects/subsystem/src/routing/core/views.ts",
       "modules/projects/subsystem/src/routing/channel/ShareTargetGateway.ts"
     ],
