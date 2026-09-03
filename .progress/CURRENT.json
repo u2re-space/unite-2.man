@@ -1,21 +1,25 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-03T08:48:00+07:00",
+  "updatedAt": "2026-09-03T10:45:00+07:00",
   "thread": "process-ingress",
-  "intent": "Chat on process.u2re.space must survive reload; OPFS must not block hydrate.",
+  "intent": "Warm-start Share/Open-with must deliver again while Document/Process (Capacitor + PWA) stay open.",
   "status": "in-progress",
-  "project": "CWSP-process",
+  "project": "CWSP-document",
   "lastDone": [
-    "Hydrate no longer awaits hanging OPFS save.",
-    "LS/IDB transcript wins over stale empty OPFS.",
-    "Staged and deployed Process PWA to VDS."
+    "PWA: keep BroadcastChannel after ?shared=1; Document SW mail paints the viewer instead of AI/WC.",
+    "PWA: share dedupe is per timestamp so a second share is not dropped as a replay.",
+    "Capacitor: ack only the painted stash generation; resume re-pings attach shares; FGS can chain a newer process job."
   ],
-  "next": "Hard-reload process.u2re.space so SW picks the new WorkCenter chunk. Chat should remain after reload.",
+  "next": "Rebuild Document + Process APKs (and hard-reload PWA SW). Second Open-with/Share in an already-open app must paint or attach.",
   "blockers": [],
   "paths": [
-    "modules/views/workcenter-view/src/ts/WorkCenterSession.ts",
-    "modules/views/workcenter-view/src/ts/WorkCenterSessionPersistence.ts",
-    "runtime/fastify/apps/workcenter"
+    "modules/projects/subsystem/src/routing/pwa/sw-handling.ts",
+    "modules/projects/subsystem/src/routing/pwa/sw-page-bridge.ts",
+    "modules/projects/subsystem/src/boot/capacitor-share-intent.ts",
+    "modules/views/markdown-view/src/needs-to-API.ts",
+    "apps/CWSP-shell/src/java/space/u2re/cwsp/MainActivity.java",
+    "apps/CWSP-shell/src/java/space/u2re/cwsp/LauncherCoordinator.java",
+    "apps/CWSP-shell/src/java/space/u2re/cwsp/ProcessIngressService.java"
   ],
   "models": {
     "implementer": "Grok 4.6",

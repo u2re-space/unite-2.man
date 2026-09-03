@@ -66,6 +66,7 @@
     "открытие": "open-policy",
     "share-target": "open-policy",
     "process-share": "process-ingress",
+    "warm-share": "process-ingress",
     "launch-queue": "process-ingress",
     "settings-host": "settings-host",
     "хост-настройки": "settings-host",
@@ -516,8 +517,22 @@
       "modules/views/settings-view/src/sections/SettingsAI.ts",
       "modules/views/settings-view/src/ts/Settings.ts",
       "modules/projects/subsystem/src/boot/capacitor-share-intent.ts",
+      "apps/CWSP-process/src/frontend/web/sku-boot.ts",
+      "apps/CWSP-shell/src/java/space/u2re/cwsp/MainActivity.java",
+      "apps/CWSP-shell/src/java/space/u2re/cwsp/CwsLauncherBridgePlugin.java",
+      "apps/CWSP-shell/src/java/space/u2re/cwsp/ProcessShareActivity.java",
+      "apps/CWSP-shell/src/java/space/u2re/cwsp/ProcessIngressService.java",
+      "apps/CWSP-shell/src/java/space/u2re/cwsp/ProcessIngressSnapshot.java",
+      "modules/projects/subsystem/src/routing/channel/ViewTransferRouting.ts",
+      "modules/views/workcenter-view/src/index.ts",
+      "modules/projects/subsystem/src/routing/native/clipboard-device.ts",
       "apps/CWSP-process/platforms/android/AndroidManifest.xml",
       "apps/CWSP-process/src/pwa/manifest.json"
+    ],
+    "clipboard-device": [
+      "modules/projects/subsystem/src/routing/native/clipboard-device.ts",
+      "modules/projects/subsystem/src/routing/native/capacitor-clipboard.ts",
+      "apps/CWSP-shell/src/java/space/u2re/cwsp/CwsLauncherBridgePlugin.java"
     ],
     "process-boot": [
       "apps/CWSP-process/src/index.ts",
