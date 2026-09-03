@@ -1,23 +1,21 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-03T01:20:00+07:00",
+  "updatedAt": "2026-09-03T08:48:00+07:00",
   "thread": "process-ingress",
-  "intent": "Work Center chat + attachments persist across reloads until New chat.",
+  "intent": "Chat on process.u2re.space must survive reload; OPFS must not block hydrate.",
   "status": "in-progress",
   "project": "CWSP-process",
   "lastDone": [
-    "Session manifest now mirrors to localStorage + IndexedDB; OPFS is no longer the only copy.",
-    "New chat writes a higher-epoch empty snapshot so a stale OPFS transcript cannot return.",
-    "pagehide/visibility flush + rAF paint after hydrate; ActionHistory add/update now save."
+    "Hydrate no longer awaits hanging OPFS save.",
+    "LS/IDB transcript wins over stale empty OPFS.",
+    "Staged and deployed Process PWA to VDS."
   ],
-  "next": "Rebuild+redeploy Process PWA. Reload after a turn: transcript and chips stay. New chat clears until the next conversation.",
+  "next": "Hard-reload process.u2re.space so SW picks the new WorkCenter chunk. Chat should remain after reload.",
   "blockers": [],
   "paths": [
-    "modules/views/workcenter-view/src/ts/WorkCenterSessionPersistence.ts",
     "modules/views/workcenter-view/src/ts/WorkCenterSession.ts",
-    "modules/views/workcenter-view/src/ts/WorkCenter.ts",
-    "modules/views/workcenter-view/src/ts/WorkCenterState.ts",
-    "modules/projects/subsystem/src/service/misc/ActionHistory.ts"
+    "modules/views/workcenter-view/src/ts/WorkCenterSessionPersistence.ts",
+    "runtime/fastify/apps/workcenter"
   ],
   "models": {
     "implementer": "Grok 4.6",
