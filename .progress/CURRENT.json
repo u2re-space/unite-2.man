@@ -1,20 +1,19 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-04T14:30:00+07:00",
+  "updatedAt": "2026-09-04T18:14:00+07:00",
   "thread": "file-markdown",
-  "intent": "CWSP-document /sdcard/ open must leave Loading document…",
+  "intent": "Raw </> mode must not pump document height every frame.",
   "status": "done",
   "project": "CWSP-document",
   "lastDone": [
-    "Native /sdcard read: text echo, timeout, no Settings mid-await, paint in place."
+    "Raw highlight drops the gutter overlay; overlay metrics freeze after first laid-out frame and no longer observe the parent."
   ],
-  "next": "Rebuild Document APK + hard-refresh. Go /sdcard/<file>.md again.",
+  "next": "Hard-refresh Document, tap </> — height should stay still.",
   "blockers": [],
   "paths": [
     "modules/views/markdown-view/src/needs-to-API.ts",
-    "modules/projects/fl.ui/src/ui/explorer/storage-bridge.ts",
-    "apps/CWSP-shell/src/java/space/u2re/cwsp/CwsStorageHost.java",
-    "apps/CWSP-shell/src/java/space/u2re/cwsp/CwsLauncherBridgePlugin.java"
+    "modules/projects/fl.ui/src/ui/markdown/code-overlay.ts",
+    "modules/projects/lur.e/src/lure/misc/CodeOverlay.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",
