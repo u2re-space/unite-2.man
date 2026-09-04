@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-03T01:15:00+07:00",
+  "updatedAt": "2026-09-04T10:00:00+07:00",
   "how": "Resolve tag or synonym → Read only those paths. If missing: one Grep for FIND:<tag>. Never walk skip.",
   "skip": [
     ".archives",
@@ -90,7 +90,12 @@
     "pending-sw": "sw-result",
     "sw-cache": "sw-cache",
     "cache-match": "sw-cache",
-    "ingress-host": "ingress-host"
+    "ingress-host": "ingress-host",
+    "highlight.js": "code-highlight",
+    "hljs": "code-highlight",
+    "подсветка": "code-highlight",
+    "Invalid frame header": "vite-https1",
+    "vite hmr": "vite-https1"
   },
   "tags": {
     "thread": [".progress/CURRENT.json"],
@@ -758,6 +763,19 @@
       "modules/views/settings-view/src/ts/Settings.ts",
       "apps/CWSP-shell/src/routing/native/launcher-bridge.ts",
       "apps/CWSP-shell/src/java/space/u2re/cwsp/LauncherCoordinator.java"
+    ],
+    "vite-https1": [
+      "apps/CWSP-document/scripts/force-https1.mjs",
+      "apps/CWSP-document/scripts/run-vite.mjs"
+    ],
+    "code-highlight": [
+      "modules/projects/lur.e/src/lure/misc/CodeOverlay.ts",
+      "modules/projects/fl.ui/src/ui/markdown/code-overlay.ts",
+      "modules/projects/fl.ui/src/ui/markdown/highlight.ts",
+      "modules/projects/fl.ui/src/ui/markdown/render.ts",
+      "modules/projects/veela.css/src/scss/ui/_code-highlight.scss",
+      "modules/views/markdown-view/src/needs-to-API.ts",
+      "modules/views/workcenter-view/src/ts/WorkCenterUI.ts"
     ],
     "light-theme": [
       "modules/projects/veela.css/src/scss/core/misc/_tokens.scss",

@@ -1,18 +1,19 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-03T20:00:00+07:00",
-  "thread": "chrome-rail",
-  "intent": "Left Speed Dial sidebar plus QS styles that work on Capacitor WebView without experimental CSS flags.",
+  "updatedAt": "2026-09-04T11:09:00+07:00",
+  "thread": "code-highlight",
+  "intent": "highlight.js overlay for fenced code in markdown-view and workcenter.",
   "status": "in-progress",
-  "project": "CWSP-shell",
+  "project": "fl.ui",
   "lastDone": [
-    "QS SCSS: removed contrast-color() and inherit() so WebView no longer drops sliders/footer after .qs-tile."
+    "Vertical desync: overlay used pre's used line-height (full em); code used 1.75 × 0.92em.",
+    "Freeze host used line-height as --code-line-height on both faces."
   ],
-  "next": "Rebuild Capacitor and reopen Quick settings — Theme/Dark stacked, custom sliders, icon footer.",
+  "next": "Hard refresh; selection on line 2+ should track glyphs.",
   "blockers": [],
   "paths": [
-    "modules/projects/veela.css/src/scss/ui/components/quick-settings.scss",
-    "modules/projects/fl.ui/src/ui/speed-dial/chrome-rail.ts"
+    "modules/projects/lur.e/src/lure/misc/CodeOverlay.ts",
+    "modules/projects/veela.css/src/scss/ui/_code-highlight.scss"
   ],
   "models": {
     "implementer": "Grok 4.6",
