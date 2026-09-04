@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-04T10:00:00+07:00",
+  "updatedAt": "2026-09-04T12:25:00+07:00",
   "how": "Resolve tag or synonym → Read only those paths. If missing: one Grep for FIND:<tag>. Never walk skip.",
   "skip": [
     ".archives",
@@ -767,6 +767,25 @@
     "vite-https1": [
       "apps/CWSP-document/scripts/force-https1.mjs",
       "apps/CWSP-document/scripts/run-vite.mjs"
+    ],
+    "file-markdown": [
+      "modules/projects/fl.ui/src/ui/explorer/storage-bridge.ts",
+      "modules/projects/fl.ui/src/ui/explorer/fs-backend.ts",
+      "apps/CWSP-shell/src/java/space/u2re/cwsp/CwsStorageHost.java",
+      "modules/views/markdown-view/src/ts/Toolbar.ts",
+      "modules/views/markdown-view/src/needs-to-API.ts",
+      "modules/views/markdown-view/src/index.scss",
+      "apps/CWSP-crx/src/crx/sw.ts",
+      "apps/CWSP-crx/src/crx/manifest.json",
+      "apps/CWSP-crx/src/crx/markdown/viewer.ts",
+      "apps/CWSP-crx/src/crx/rules/markdown-raw.json",
+      "apps/CWSP-crx/src/crx/popup/index.ts",
+      "apps/CWSP-crx/src/crx/popup/index.html"
+    ],
+    "font-registry": [
+      "modules/projects/fl.ui/src/styles/font-registry.ts",
+      "modules/projects/fl.ui/src/styles/font-loader.ts",
+      "apps/CWSP-crx/shared/vite-chunk-placement.mjs"
     ],
     "code-highlight": [
       "modules/projects/lur.e/src/lure/misc/CodeOverlay.ts",

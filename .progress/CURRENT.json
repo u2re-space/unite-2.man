@@ -1,19 +1,20 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-04T11:09:00+07:00",
-  "thread": "code-highlight",
-  "intent": "highlight.js overlay for fenced code in markdown-view and workcenter.",
-  "status": "in-progress",
-  "project": "fl.ui",
+  "updatedAt": "2026-09-04T14:30:00+07:00",
+  "thread": "file-markdown",
+  "intent": "CWSP-document /sdcard/ open must leave Loading document…",
+  "status": "done",
+  "project": "CWSP-document",
   "lastDone": [
-    "Vertical desync: overlay used pre's used line-height (full em); code used 1.75 × 0.92em.",
-    "Freeze host used line-height as --code-line-height on both faces."
+    "Native /sdcard read: text echo, timeout, no Settings mid-await, paint in place."
   ],
-  "next": "Hard refresh; selection on line 2+ should track glyphs.",
+  "next": "Rebuild Document APK + hard-refresh. Go /sdcard/<file>.md again.",
   "blockers": [],
   "paths": [
-    "modules/projects/lur.e/src/lure/misc/CodeOverlay.ts",
-    "modules/projects/veela.css/src/scss/ui/_code-highlight.scss"
+    "modules/views/markdown-view/src/needs-to-API.ts",
+    "modules/projects/fl.ui/src/ui/explorer/storage-bridge.ts",
+    "apps/CWSP-shell/src/java/space/u2re/cwsp/CwsStorageHost.java",
+    "apps/CWSP-shell/src/java/space/u2re/cwsp/CwsLauncherBridgePlugin.java"
   ],
   "models": {
     "implementer": "Grok 4.6",

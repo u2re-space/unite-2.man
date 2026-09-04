@@ -61,6 +61,8 @@ const lureSubpathAliases = [
     { find: "@fest-lib/lure/remote-fs", replacement: resolve(lureSrc, "utils/opfs/remote-fs.ts") },
     { find: "@fest-lib/lure/markdown-assets", replacement: resolve(lureSrc, "utils/opfs/markdown-assets.ts") },
     { find: "@fest-lib/lure/code-overlay", replacement: resolve(lureSrc, "lure/misc/CodeOverlay.ts") },
+    { find: /^@fest-lib\/fl-ui\/markdown\/highlight$/, replacement: resolve(workspaceRoot, "modules/projects/fl.ui/src/ui/markdown/highlight.ts") },
+    { find: /^@fest-lib\/fl-ui\/markdown\/render$/, replacement: resolve(workspaceRoot, "modules/projects/fl.ui/src/ui/markdown/render.ts") },
     {
         find: "@fest-lib/uniform/mounted-fs",
         replacement: resolve(workspaceRoot, "modules/projects/uniform.ts/src/newer/messaging/MountedFs.ts")
