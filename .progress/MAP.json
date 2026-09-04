@@ -655,6 +655,8 @@
       "modules/projects/subsystem/src/service/service/WorkCenterTurnPolicy.ts"
     ],
     "print": [
+      "modules/shells/environment-shell/src/scss/print.scss",
+      "modules/projects/veela.css/src/scss/ui/components/window.scss",
       "modules/shells/minimal-shell/src/minimal.scss",
       "modules/shells/immersive-shell/src/base.scss",
       "modules/views/markdown-view/src/index.scss",

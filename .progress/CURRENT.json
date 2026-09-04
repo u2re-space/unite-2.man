@@ -1,19 +1,18 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-04T18:14:00+07:00",
+  "updatedAt": "2026-09-04T19:14:00+07:00",
   "thread": "file-markdown",
-  "intent": "Raw </> mode must not pump document height every frame.",
+  "intent": "CRX markdown Open must pick a file without spending the user gesture on a folder picker.",
   "status": "done",
-  "project": "CWSP-document",
+  "project": "CWSP-shell",
   "lastDone": [
-    "Raw highlight drops the gutter overlay; overlay metrics freeze after first laid-out frame and no longer observe the parent."
+    "Open is file-only; chrome-extension:// uses <input type=file> in the same click turn."
   ],
-  "next": "Hard-refresh Document, tap </> — height should stay still.",
+  "next": "Reload CRX, Markdown → Open — native file dialog, document paints.",
   "blockers": [],
   "paths": [
     "modules/views/markdown-view/src/needs-to-API.ts",
-    "modules/projects/fl.ui/src/ui/markdown/code-overlay.ts",
-    "modules/projects/lur.e/src/lure/misc/CodeOverlay.ts"
+    "modules/projects/lur.e/src/utils/opfs/markdown-assets.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",
