@@ -1,18 +1,19 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-04T19:14:00+07:00",
+  "updatedAt": "2026-09-05T00:12:00+07:00",
   "thread": "file-markdown",
-  "intent": "CRX markdown Open must pick a file without spending the user gesture on a folder picker.",
+  "intent": "CRX SW died (status 15) so snip capture/AI never reached the worker.",
   "status": "done",
-  "project": "CWSP-shell",
+  "project": "CWSP-crx",
   "lastDone": [
-    "Open is file-only; chrome-extension:// uses <input type=file> in the same click turn."
+    "SW static graph no longer includes Theme/StateStorage/fest/dom (FileSystem was importing the utils barrel)."
   ],
-  "next": "Reload CRX, Markdown → Open — native file dialog, document paints.",
+  "next": "Reload the rebuilt unpacked CRX, confirm the worker is green, then Snip and Recognize on http(s).",
   "blockers": [],
   "paths": [
-    "modules/views/markdown-view/src/needs-to-API.ts",
-    "modules/projects/lur.e/src/utils/opfs/markdown-assets.ts"
+    "modules/projects/subsystem/src/store/FileSystem.ts",
+    "apps/CWSP-crx/vite.config.js",
+    "apps/CWSP-crx/shared/vite-chunk-placement.mjs"
   ],
   "models": {
     "implementer": "Grok 4.6",

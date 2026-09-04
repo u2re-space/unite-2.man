@@ -89,6 +89,7 @@
     "sw-page": "sw-page",
     "pending-sw": "sw-result",
     "sw-cache": "sw-cache",
+    "crx-sw-chunk": "sw-cache",
     "cache-match": "sw-cache",
     "ingress-host": "ingress-host",
     "highlight.js": "code-highlight",
@@ -576,6 +577,11 @@
       "modules/views/workcenter-view/src/index.ts",
       "modules/views/workcenter-view/src/ts/WorkCenter.ts",
       "modules/views/workcenter-view/src/ts/WorkCenterUI.ts",
+      "modules/views/workcenter-view/src/scss/_conversation.scss",
+      "modules/projects/dom.ts/src/agate/Viewport.ts"
+    ],
+    "virtual-keyboard": [
+      "modules/projects/dom.ts/src/agate/Viewport.ts",
       "modules/views/workcenter-view/src/scss/_conversation.scss"
     ],
     "workcenter-commands": [
@@ -768,7 +774,11 @@
     ],
     "vite-https1": [
       "apps/CWSP-document/scripts/force-https1.mjs",
-      "apps/CWSP-document/scripts/run-vite.mjs"
+      "apps/CWSP-document/scripts/run-vite.mjs",
+      "apps/CWSP-document/shared/vite-client-stub.js",
+      "apps/CWSP-document/shared/vite.config.js",
+      "apps/CWSP-process/scripts/run-vite.mjs",
+      "apps/CWSP-process/shared/vite.config.js"
     ],
     "file-markdown": [
       "modules/projects/fl.ui/src/ui/explorer/storage-bridge.ts",
@@ -783,6 +793,19 @@
       "apps/CWSP-crx/src/crx/rules/markdown-raw.json",
       "apps/CWSP-crx/src/crx/popup/index.ts",
       "apps/CWSP-crx/src/crx/popup/index.html"
+    ],
+    "crx-snip": [
+      "apps/CWSP-crx/src/crx/sw.ts",
+      "apps/CWSP-crx/src/crx/lib/ShareTargetUtils.ts",
+      "modules/projects/subsystem/src/store/FileSystem.ts",
+      "modules/projects/subsystem/src/other/config/Settings.ts",
+      "modules/projects/subsystem/src/routing/channel/LogSanitizer.ts"
+    ],
+    "workcenter-chat-events": [
+      "modules/views/workcenter-view/src/ts/WorkCenterEvents.ts"
+    ],
+    "workcenter-action-history": [
+      "modules/views/workcenter-view/src/ts/WorkCenterHistory.ts"
     ],
     "font-registry": [
       "modules/projects/fl.ui/src/styles/font-registry.ts",
