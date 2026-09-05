@@ -70,8 +70,8 @@ The canonical logical message is a normalized packet. It may arrive as a websock
   "type": "string",
   "what": "domain:action",
   "purpose": "airpad | clipboard | input | mouse | sms | contact | notification | storage | general",
-  "protocol": "socket | ws | http | worker | chrome | local",
-  "transport": "ws | socketio | bridge | http",
+  "protocol": "socket | ws | http | worker | chrome | local | bluetooth",
+  "transport": "ws | socketio | bridge | http | bluetooth",
   "uuid": "uuid-v4-or-compatible-id",
   "timestamp": 1710000000000,
   "payload": {},
@@ -191,6 +191,9 @@ The coordinator can resolve peers from multiple aliases:
 - `byId`
 - token/account aliases
 - explicit route targets
+- **local device-name map** (`shell.deviceAliases`): `desk` / `ultrabook` → `L-110`, `phone` → `L-196`, `gateway` → `L-200`, plus user overlays (`pixel=L-210`). Optional `shell.deviceBluetooth` binds `L-*` → Classic MAC.
+
+Helper: `resolveDeviceId()` / `displayDeviceLabel()` in `cwsp-shared` `device-aliases.ts`. Destination fields (`routeTarget`, clipboard/files share lists) should resolve names before dial.
 
 ### Routing fields
 
@@ -220,10 +223,13 @@ Transport preference is resolved per source/target pair from endpoint policy.
 
 Current preference order is generally:
 
-1. `ws`
-2. `http`
-3. `tcp`
-4. `socketio`
+1. `ws` (hub, then peer Control `/ws`)
+2. `bluetooth` (Classic RFCOMM, ≤2 MiB clipboard/images/files — gateway bypass)
+3. `http`
+4. `tcp`
+5. `socketio`
+
+`shell.preferBluetooth` tries RFCOMM before hub. Otherwise Bluetooth runs only when hub and peer `/ws` are down. Payload cap: 2 MiB (`BLUETOOTH_MAX_BYTES`). SoT: `cwsp-shared` `device-aliases.ts` + `bluetooth-transport.ts`; Cap radio: `emission/BluetoothTransfer.java`.
 
 Runtime behavior:
 
@@ -302,7 +308,27 @@ Locked policy:
 - Mesh probes continue on network change even if hub is down; announce when any socket opens.
 - File **bytes** stay on Control HTTP blob paths (unchanged Accept order).
 
-### Validation matrix
+## Bluetooth RFCOMM (gateway bypass)
+
+Capacitor Transfer can move clipboard text, images, and files **≤ 2 MiB** over Classic Bluetooth without L-200 / public hub.
+
+- Wire: `CWSB` + version + JSON header + raw payload (`kind`: `hello` | `clipboard-text` | `clipboard-image` | `file` | `packet`).
+- Service UUID: `6e757265-4357-5350-4254-000000000001` (`CWSP`).
+- Auth: hello/header `auth` must match the local fleet token when one is stored; otherwise bonded peers only.
+- Routing: destination names resolve through the device-alias map, then MAC / bonded name (`L-210` in the adapter name).
+- Policy: hub-primary unless `shell.preferBluetooth`; BT is the no-hub / send-fail path (same idea as peer Control `/ws`, but no IP).
+- Neutralino desk: alias resolve only (no in-process RFCOMM). Phone↔phone (and phone↔paired adapter) is the live radio path.
+
+### Validation matrix (bluetooth)
+
+| Scenario | Expect |
+|---|---|
+| Hub up, preferBluetooth off | Unchanged WS path |
+| Hub down, phones paired, dest `desk`/`L-196` | Clipboard/image/file ≤2MiB over RFCOMM |
+| File > 2 MiB | BT refused; existing HTTP blob / offer path |
+| Name `pixel=L-210` in settings | Share to `pixel` dials `L-210` |
+
+### Validation matrix (peer Control `/ws`)
 
 | Scenario | Expect |
 |---|---|

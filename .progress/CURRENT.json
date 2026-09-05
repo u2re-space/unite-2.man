@@ -1,18 +1,22 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-05T16:00:00+07:00",
-  "thread": "file-markdown",
-  "intent": "Capacitor Save keeps .ts as text (not video/mp2t) via octet-stream CREATE_DOCUMENT.",
-  "status": "done",
-  "project": "CWSP-document",
+  "updatedAt": "2026-09-05T17:30:00+07:00",
+  "thread": "transfer-app-name",
+  "intent": "User-visible Transfer identity is CWSP Transfer (not CWSP / CWSP Share).",
+  "status": "in-progress",
+  "project": "CWSP-transfer",
   "lastDone": [
-    "CREATE_DOCUMENT for .ts/.tsx uses application/octet-stream so Android does not treat it as MPEG-TS video."
+    "Launcher / Share / PROCESS_TEXT / FGS / Control pair use CWSP Transfer.",
+    "Explorer context menu: Send to CWSP Transfer.",
+    "PWA + Neutralino window title: CWSP Transfer. BT SERVICE_NAME stays CWSP."
   ],
-  "next": "Rebuild Document APK and Save a .ts file — filename stays .ts, not video.",
+  "next": "Rebuild Transfer APK so the home-screen / share / PROCESS_TEXT labels show CWSP Transfer.",
   "blockers": [],
   "paths": [
-    "modules/projects/fl.ui/src/ui/explorer/storage-bridge.ts",
-    "apps/CWSP-shell/src/java/space/u2re/cwsp/CwsStorageHost.java"
+    "apps/CWSP-transfer/app/android/res/values/strings.xml",
+    "apps/CWSP-transfer/app/android/build.gradle",
+    "apps/CWSP-transfer/src/frontend/web/capacitor/capacitor.config.ts",
+    "modules/projects/fl.ui/src/ui/explorer/ContextMenu.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",

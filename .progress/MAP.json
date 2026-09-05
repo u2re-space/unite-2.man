@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-04T12:25:00+07:00",
+  "updatedAt": "2026-09-05T17:20:00+07:00",
   "how": "Resolve tag or synonym → Read only those paths. If missing: one Grep for FIND:<tag>. Never walk skip.",
   "skip": [
     ".archives",
@@ -96,7 +96,13 @@
     "hljs": "code-highlight",
     "подсветка": "code-highlight",
     "Invalid frame header": "vite-https1",
-    "vite hmr": "vite-https1"
+    "vite hmr": "vite-https1",
+    "bluetooth": "bluetooth",
+    "блютуз": "bluetooth",
+    "device-map": "device-aliases",
+    "имена-устройств": "device-aliases",
+    "cwsp share": "transfer-app-name",
+    "app-name": "transfer-app-name"
   },
   "tags": {
     "thread": [".progress/CURRENT.json"],
@@ -563,6 +569,21 @@
       "modules/projects/subsystem/src/routing/native/clipboard-device.ts",
       "modules/projects/subsystem/src/routing/native/capacitor-clipboard.ts",
       "apps/CWSP-shell/src/java/space/u2re/cwsp/CwsLauncherBridgePlugin.java"
+    ],
+    "bluetooth": [
+      "apps/CWSP-transfer/src/shared/src/v2/bluetooth-transport.ts",
+      "apps/CWSP-transfer/src/backend/java/android/emission/BluetoothTransfer.java",
+      "apps/CWSP-transfer/src/backend/node/shared/neutralino/bluetooth-transfer.ts"
+    ],
+    "device-aliases": [
+      "apps/CWSP-transfer/src/shared/src/v2/device-aliases.ts",
+      "apps/CWSP-transfer/src/backend/java/android/core/DeviceAliases.java"
+    ],
+    "transfer-app-name": [
+      "apps/CWSP-transfer/app/android/res/values/strings.xml",
+      "apps/CWSP-transfer/app/android/build.gradle",
+      "apps/CWSP-transfer/src/frontend/web/capacitor/capacitor.config.ts",
+      "modules/projects/fl.ui/src/ui/explorer/ContextMenu.ts"
     ],
     "process-boot": [
       "apps/CWSP-process/src/index.ts",
