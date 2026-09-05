@@ -785,8 +785,11 @@
       "modules/projects/fl.ui/src/ui/explorer/fs-backend.ts",
       "apps/CWSP-shell/src/java/space/u2re/cwsp/CwsStorageHost.java",
       "modules/views/markdown-view/src/ts/Toolbar.ts",
+      "modules/views/markdown-view/src/ts/Viewer.ts",
       "modules/views/markdown-view/src/needs-to-API.ts",
       "modules/views/markdown-view/src/index.scss",
+      "modules/projects/lur.e/src/utils/opfs/markdown-assets.ts",
+      "apps/CWSP-shell/src/java/space/u2re/cwsp/CwsLauncherBridgePlugin.java",
       "apps/CWSP-crx/src/crx/sw.ts",
       "apps/CWSP-crx/src/crx/manifest.json",
       "apps/CWSP-crx/src/crx/markdown/viewer.ts",
@@ -816,10 +819,15 @@
       "modules/projects/lur.e/src/lure/misc/CodeOverlay.ts",
       "modules/projects/fl.ui/src/ui/markdown/code-overlay.ts",
       "modules/projects/fl.ui/src/ui/markdown/highlight.ts",
+      "modules/projects/fl.ui/src/ui/markdown/code-editor-keys.ts",
       "modules/projects/fl.ui/src/ui/markdown/render.ts",
       "modules/projects/veela.css/src/scss/ui/_code-highlight.scss",
+      "modules/projects/veela.css/src/scss/basic/_normalize.scss",
+      "modules/views/markdown-view/src/index.scss",
       "modules/views/markdown-view/src/needs-to-API.ts",
-      "modules/views/workcenter-view/src/ts/WorkCenterUI.ts"
+      "modules/views/workcenter-view/src/ts/WorkCenterUI.ts",
+      "modules/views/settings-view/src/sections/SettingsMarkdown.ts",
+      "modules/views/settings-view/src/ts/Settings.ts"
     ],
     "light-theme": [
       "modules/projects/veela.css/src/scss/core/misc/_tokens.scss",

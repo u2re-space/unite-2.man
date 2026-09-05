@@ -1,19 +1,18 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-05T00:12:00+07:00",
+  "updatedAt": "2026-09-05T16:00:00+07:00",
   "thread": "file-markdown",
-  "intent": "CRX SW died (status 15) so snip capture/AI never reached the worker.",
+  "intent": "Capacitor Save keeps .ts as text (not video/mp2t) via octet-stream CREATE_DOCUMENT.",
   "status": "done",
-  "project": "CWSP-crx",
+  "project": "CWSP-document",
   "lastDone": [
-    "SW static graph no longer includes Theme/StateStorage/fest/dom (FileSystem was importing the utils barrel)."
+    "CREATE_DOCUMENT for .ts/.tsx uses application/octet-stream so Android does not treat it as MPEG-TS video."
   ],
-  "next": "Reload the rebuilt unpacked CRX, confirm the worker is green, then Snip and Recognize on http(s).",
+  "next": "Rebuild Document APK and Save a .ts file — filename stays .ts, not video.",
   "blockers": [],
   "paths": [
-    "modules/projects/subsystem/src/store/FileSystem.ts",
-    "apps/CWSP-crx/vite.config.js",
-    "apps/CWSP-crx/shared/vite-chunk-placement.mjs"
+    "modules/projects/fl.ui/src/ui/explorer/storage-bridge.ts",
+    "apps/CWSP-shell/src/java/space/u2re/cwsp/CwsStorageHost.java"
   ],
   "models": {
     "implementer": "Grok 4.6",
