@@ -47,6 +47,8 @@
     "ssr": "ssre",
     "ssre": "ssre",
     "cwsp": "network",
+    "pm2-cwsp": "start-endpoint-tls",
+    "gateway-pm2": "start-endpoint-tls",
     "cw-explorer": "explorer",
     "file-manager": "explorer",
     "explorer-styles": "explorer-theme",
@@ -860,6 +862,11 @@
       "modules/views/workcenter-view/src/ts/WorkCenterUI.ts",
       "modules/views/settings-view/src/sections/SettingsMarkdown.ts",
       "modules/views/settings-view/src/ts/Settings.ts"
+    ],
+    "start-endpoint-tls": [
+      "apps/CWSP-transfer/scripts/start-endpoint-tls.mjs",
+      "apps/CWSP-transfer/runtime/endpoint/ecosystem.config.cjs",
+      "apps/CWSP-transfer/scripts/stage-gateway-web.mjs"
     ],
     "light-theme": [
       "modules/projects/veela.css/src/scss/core/misc/_tokens.scss",
