@@ -1,21 +1,22 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-06T15:20:00+07:00",
+  "updatedAt": "2026-09-06T17:35:00+07:00",
   "thread": "publish-push",
-  "intent": "npm publish updated fest libs and git push every repo touched this wave.",
+  "intent": "Publish changed NPM packages and git-push new icon/TaskBar work.",
   "status": "done",
-  "project": "CWSP-document",
+  "project": "U2RE.space",
   "lastDone": [
-    "Published @fest-lib/lure 0.1.67 and @fest-lib/fl-ui 1.0.16.",
-    "Pushed runtime, markdown-view, subsystem, shell, document, explorer, process, transfer."
+    "Published @fest-lib/fl-ui@1.0.17.",
+    "Pushed fl.ui, CWSP-shell, CWSP-crx, CWSP-transfer.",
+    "Parent submodule pointers updated."
   ],
-  "next": "None.",
+  "next": "None for this pass.",
   "blockers": [],
   "paths": [
-    "modules/projects/lur.e/src/utils/opfs/markdown-assets.ts",
-    "modules/projects/fl.ui/src/ui/explorer/storage-bridge.ts",
-    "modules/views/markdown-view/src/needs-to-API.ts",
-    "apps/CWSP-shell/src/java/space/u2re/cwsp/CwsStorageHost.java"
+    "modules/projects/fl.ui",
+    "apps/CWSP-shell",
+    "apps/CWSP-crx",
+    "apps/CWSP-transfer"
   ],
   "models": {
     "implementer": "Grok 4.6",
