@@ -1,23 +1,20 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-06T13:28:00+07:00",
+  "updatedAt": "2026-09-06T13:55:00+07:00",
   "thread": "relink-and-git-slim",
-  "intent": "Commit and push workspace cleanup: SoT links, npm ranges, APK/dist removal.",
-  "status": "done",
+  "intent": "Commit and push HTTPS optional load, JDK 21 resolver, hoisted Capacitor Gradle.",
+  "status": "in-progress",
   "project": "workspace",
   "lastDone": [
-    "Committed and pushed child repos plus unite-2.man (parent 377d9b8).",
-    "Dropped APK/runtime PWA artifacts; bumped npm ranges; flattened SoT links.",
-    "Renamed app submodules; airpad-view recorded; service-subsystem is a symlink."
+    "Vite HTTPS loads from runtime/https when app private/ is missing.",
+    "Capacitor Gradle uses JDK 21 and hoisted @capacitor/android."
   ],
-  "next": "Rebuild VDS apps if a live host is needed. Optional: point fl.ui/veela remotes at u2re-space URLs.",
+  "next": "Push child repos then parent.",
   "blockers": [],
   "paths": [
-    "package.json",
-    ".gitmodules",
-    "apps/CWSP-transfer",
-    "runtime",
-    "apps/CWSP-process"
+    "runtime/https/load-vite-https.mjs",
+    "apps/CWSP-shell/scripts/resolve-java-home.mjs",
+    "apps/CWSP-shell/scripts/project-sibling-sku-android.mjs"
   ],
   "models": {
     "implementer": "Grok 4.6",

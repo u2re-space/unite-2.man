@@ -446,6 +446,7 @@
       "apps/CWSP-shell/scripts/apk-release-version.mjs",
       "apps/CWSP-shell/scripts/publish-android-apk.mjs",
       "apps/CWSP-shell/scripts/publish-sibling-apk.mjs",
+      "apps/CWSP-shell/scripts/resolve-java-home.mjs",
       "apps/CWSP-process/scripts/build-capacitor.mjs",
       "apps/CWSP-document/scripts/build-capacitor.mjs",
       "apps/CWSP-explorer/scripts/build-capacitor.mjs",
@@ -802,6 +803,8 @@
       "apps/CWSP-shell/src/java/space/u2re/cwsp/LauncherCoordinator.java"
     ],
     "vite-https1": [
+      "runtime/https/load-vite-https.mjs",
+      "runtime/https/certificate.mjs",
       "apps/CWSP-document/scripts/force-https1.mjs",
       "apps/CWSP-document/scripts/run-vite.mjs",
       "apps/CWSP-document/shared/vite-client-stub.js",
