@@ -1,20 +1,19 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-06T13:56:00+07:00",
+  "updatedAt": "2026-09-06T14:00:00+07:00",
   "thread": "relink-and-git-slim",
-  "intent": "Commit and push HTTPS optional load, JDK 21 resolver, hoisted Capacitor Gradle.",
-  "status": "done",
+  "intent": "Publish bumped @fest-lib packages to npm and push version commits.",
+  "status": "in-progress",
   "project": "workspace",
   "lastDone": [
-    "Pushed child repos and unite-2.man 580085d.",
-    "Document channel pointer is 0.0.51; Capacitor Gradle uses JDK 21 + hoisted SDK."
+    "Published 11 @fest-lib packages (core 0.1.29 … fl-ui 1.0.15)."
   ],
-  "next": "",
+  "next": "Push fest remotes and parent pointers.",
   "blockers": [],
   "paths": [
-    "apps/CWSP-document",
-    "apps/CWSP-shell",
-    "runtime/https/load-vite-https.mjs"
+    "modules/projects/core.ts",
+    "modules/projects/fl.ui",
+    "modules/projects/lur.e"
   ],
   "models": {
     "implementer": "Grok 4.6",
