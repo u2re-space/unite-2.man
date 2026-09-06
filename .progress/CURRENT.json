@@ -1,21 +1,19 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-06T18:00:00+07:00",
-  "thread": "toast-decode-ship",
-  "intent": "Publish, build, deploy, and push the toast URI-decode work.",
+  "updatedAt": "2026-09-06T18:10:00+07:00",
+  "thread": "apps-git-slim",
+  "intent": "Stop tracking generated runtime/PWA/Capacitor dumps in app git repos.",
   "status": "done",
-  "project": "U2RE.space",
+  "project": "apps",
   "lastDone": [
-    "Published @fest-lib/lure@0.1.68 and @fest-lib/fl-ui@1.0.18.",
-    "Built VDS/PWA/CRX 1.0.1; Capacitor document 0.0.54, explorer/process 0.0.45, launcher 0.0.128, transfer 0.0.211.",
-    "deploy:vds healthy."
+    "Untracked transfer frontend/apps/cw + portable pack; explorer Capacitor public + Gradle locks.",
+    "Ignored the same dumps on document/process so they cannot re-enter git."
   ],
-  "next": "None for this pass.",
+  "next": "History still holds the old blobs unless a filter-repo pass is requested.",
   "blockers": [],
   "paths": [
-    "modules/projects/lur.e/src/utils/text/decodeToastMessage.ts",
-    "modules/projects/fl.ui/src/misc/Toast.ts",
-    "modules/projects/subsystem/src/boot/toast.ts"
+    "apps/CWSP-transfer/.gitignore",
+    "apps/CWSP-explorer/.gitignore"
   ],
   "models": {
     "implementer": "Grok 4.6",
