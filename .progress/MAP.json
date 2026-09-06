@@ -31,6 +31,10 @@
     "fps": "high-refresh",
     "безфигур": "shapeless",
     "иконки": "icon-picker",
+    "write-back": "capacitor-write-back",
+    "sdcard-save": "capacitor-write-back",
+    "stale-entry": "stale-index",
+    "BHEMU": "stale-index",
     "pwa-icon": "pwa-icons",
     "favicon": "pwa-icons",
     "лаунчер": "speed-dial",
@@ -442,6 +446,11 @@
       ".cursor/skills/cwsp-reborn-pass/SKILL.md"
     ],
     "trunk": [".trunk"],
+    "gradle-wrapper": [
+      "apps/CWSP-shell/scripts/project-sibling-sku-android.mjs",
+      "apps/CWSP-transfer/scripts/build-capacitor.mjs",
+      "apps/CWSP-document/platforms/android/gradle/wrapper/gradle-wrapper.jar"
+    ],
     "apk-update": [
       "apps/CWSP-shell/src/java/space/u2re/cwsp/AppUpdateHelper.java",
       "apps/CWSP-shell/src/java/space/u2re/cwsp/CwsLauncherBridgePlugin.java",
@@ -862,6 +871,20 @@
       "modules/views/workcenter-view/src/ts/WorkCenterUI.ts",
       "modules/views/settings-view/src/sections/SettingsMarkdown.ts",
       "modules/views/settings-view/src/ts/Settings.ts"
+    ],
+    "capacitor-write-back": [
+      "modules/projects/lur.e/src/utils/opfs/markdown-assets.ts",
+      "modules/projects/fl.ui/src/ui/explorer/storage-bridge.ts",
+      "modules/views/markdown-view/src/needs-to-API.ts",
+      "apps/CWSP-shell/src/java/space/u2re/cwsp/CwsStorageHost.java",
+      "apps/CWSP-shell/src/java/space/u2re/cwsp/CwsLauncherBridgePlugin.java"
+    ],
+    "stale-index": [
+      "runtime/fastify/plugins/host-apps.ts",
+      "apps/CWSP-shell/scripts/stage-vds-main.mjs",
+      "apps/CWSP-shell/src/frontend/web/vds-main/index.html",
+      "modules/projects/subsystem/src/routing/pwa/pwa-handling.ts",
+      "apps/CWSP-shell/src/pwa/sw.ts"
     ],
     "start-endpoint-tls": [
       "apps/CWSP-transfer/scripts/start-endpoint-tls.mjs",

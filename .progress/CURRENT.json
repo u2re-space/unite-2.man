@@ -1,18 +1,21 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-06T14:00:00+07:00",
-  "thread": "relink-and-git-slim",
-  "intent": "Push remotes after gateway restage.",
+  "updatedAt": "2026-09-06T15:20:00+07:00",
+  "thread": "publish-push",
+  "intent": "npm publish updated fest libs and git push every repo touched this wave.",
   "status": "done",
-  "project": "workspace",
+  "project": "CWSP-document",
   "lastDone": [
-    "Pushed CWSP-transfer 5a6d584 (portable gateway/web) and parent gitlink."
+    "Published @fest-lib/lure 0.1.67 and @fest-lib/fl-ui 1.0.16.",
+    "Pushed runtime, markdown-view, subsystem, shell, document, explorer, process, transfer."
   ],
-  "next": "",
+  "next": "Parent unite-2.man records the new submodule SHAs.",
   "blockers": [],
   "paths": [
-    "apps/CWSP-transfer",
-    ".progress/MAP.json"
+    "modules/projects/lur.e/src/utils/opfs/markdown-assets.ts",
+    "modules/projects/fl.ui/src/ui/explorer/storage-bridge.ts",
+    "modules/views/markdown-view/src/needs-to-API.ts",
+    "apps/CWSP-shell/src/java/space/u2re/cwsp/CwsStorageHost.java"
   ],
   "models": {
     "implementer": "Grok 4.6",
