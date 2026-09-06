@@ -1,20 +1,20 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-06T13:55:00+07:00",
+  "updatedAt": "2026-09-06T13:56:00+07:00",
   "thread": "relink-and-git-slim",
   "intent": "Commit and push HTTPS optional load, JDK 21 resolver, hoisted Capacitor Gradle.",
-  "status": "in-progress",
+  "status": "done",
   "project": "workspace",
   "lastDone": [
-    "Vite HTTPS loads from runtime/https when app private/ is missing.",
-    "Capacitor Gradle uses JDK 21 and hoisted @capacitor/android."
+    "Pushed child repos and unite-2.man 580085d.",
+    "Document channel pointer is 0.0.51; Capacitor Gradle uses JDK 21 + hoisted SDK."
   ],
-  "next": "Push child repos then parent.",
+  "next": "",
   "blockers": [],
   "paths": [
-    "runtime/https/load-vite-https.mjs",
-    "apps/CWSP-shell/scripts/resolve-java-home.mjs",
-    "apps/CWSP-shell/scripts/project-sibling-sku-android.mjs"
+    "apps/CWSP-document",
+    "apps/CWSP-shell",
+    "runtime/https/load-vite-https.mjs"
   ],
   "models": {
     "implementer": "Grok 4.6",
