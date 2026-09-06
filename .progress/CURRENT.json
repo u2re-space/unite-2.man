@@ -1,18 +1,21 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-06T17:37:00+07:00",
-  "thread": "toon-cve",
-  "intent": "Clear GHSA-p95v-992w-h6c3 on CWSP-document without enabling git npm fetches.",
+  "updatedAt": "2026-09-06T18:00:00+07:00",
+  "thread": "toast-decode-ship",
+  "intent": "Publish, build, deploy, and push the toast URI-decode work.",
   "status": "done",
-  "project": "CWSP-document",
+  "project": "U2RE.space",
   "lastDone": [
-    "Pinned @toon-format/toon to ^4.1.1 (CVE-2026-82404 patched since 2.3.1).",
-    "Installed with --no-workspaces so github:fest-lib/core does not fetch."
+    "Published @fest-lib/lure@0.1.68 and @fest-lib/fl-ui@1.0.18.",
+    "Built VDS/PWA/CRX 1.0.1; Capacitor document 0.0.54, explorer/process 0.0.45, launcher 0.0.128, transfer 0.0.211.",
+    "deploy:vds healthy."
   ],
-  "next": "Dependabot should close alert 12 after GitHub rescan.",
+  "next": "None for this pass.",
   "blockers": [],
   "paths": [
-    "apps/CWSP-document/package.json"
+    "modules/projects/lur.e/src/utils/text/decodeToastMessage.ts",
+    "modules/projects/fl.ui/src/misc/Toast.ts",
+    "modules/projects/subsystem/src/boot/toast.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",

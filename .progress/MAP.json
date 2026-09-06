@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-06T17:35:00+07:00",
+  "updatedAt": "2026-09-06T17:48:00+07:00",
   "how": "Resolve tag or synonym → Read only those paths. If missing: one Grep for FIND:<tag>. Never walk skip.",
   "skip": [
     ".archives",
@@ -110,7 +110,9 @@
     "cwsp share": "transfer-app-name",
     "app-name": "transfer-app-name",
     "симлинки": "symlinks",
-    "relink": "symlinks"
+    "relink": "symlinks",
+    "тост": "toast",
+    "toast": "toast"
   },
   "tags": {
     "thread": [".progress/CURRENT.json"],
@@ -357,6 +359,11 @@
       "modules/projects/fl.ui/src/ui/speed-dial/tile-icon.ts",
       "modules/projects/fl.ui/src/ui/speed-dial/SpeedDial.scss",
       "apps/CWSP-shell/src/frontend/views/home/navigation/app-menu/AppMenu.ts"
+    ],
+    "toast": [
+      "modules/projects/lur.e/src/utils/text/decodeToastMessage.ts",
+      "modules/projects/fl.ui/src/misc/Toast.ts",
+      "modules/projects/subsystem/src/boot/toast.ts"
     ],
     "tile-shape": [
       "modules/projects/fl.ui/src/ui/speed-dial/SpeedDial.scss",
