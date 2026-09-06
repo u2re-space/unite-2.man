@@ -9,7 +9,7 @@
     "Published @fest-lib/lure 0.1.67 and @fest-lib/fl-ui 1.0.16.",
     "Pushed runtime, markdown-view, subsystem, shell, document, explorer, process, transfer."
   ],
-  "next": "Parent unite-2.man records the new submodule SHAs.",
+  "next": "None.",
   "blockers": [],
   "paths": [
     "modules/projects/lur.e/src/utils/opfs/markdown-assets.ts",
