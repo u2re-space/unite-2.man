@@ -102,7 +102,9 @@
     "device-map": "device-aliases",
     "имена-устройств": "device-aliases",
     "cwsp share": "transfer-app-name",
-    "app-name": "transfer-app-name"
+    "app-name": "transfer-app-name",
+    "симлинки": "symlinks",
+    "relink": "symlinks"
   },
   "tags": {
     "thread": [".progress/CURRENT.json"],
@@ -578,6 +580,12 @@
     "device-aliases": [
       "apps/CWSP-transfer/src/shared/src/v2/device-aliases.ts",
       "apps/CWSP-transfer/src/backend/java/android/core/DeviceAliases.java"
+    ],
+    "symlinks": [
+      ".gitmodules",
+      "package.json",
+      "apps/README.md",
+      "plans/Work-tree.md"
     ],
     "transfer-app-name": [
       "apps/CWSP-transfer/app/android/res/values/strings.xml",

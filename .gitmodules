@@ -1,6 +1,12 @@
-[submodule "apps/CrossWord"]
-	path = apps/CrossWord
-	url = https://github.com/u2re-space/crossword
+[submodule "apps/CWSP-document"]
+	path = apps/CWSP-document
+	url = https://github.com/u2re-space/CWSP-document
+[submodule "apps/CWSP-explorer"]
+	path = apps/CWSP-explorer
+	url = https://github.com/u2re-space/CWSP-explorer
+[submodule "apps/CWSP-transfer"]
+	path = apps/CWSP-transfer
+	url = https://github.com/u2re-space/CWSP-transfer
 [submodule "runtime"]
 	path = runtime
 	url = https://github.com/u2re-space/webapp.runtime
@@ -31,9 +37,6 @@
 [submodule "modules/views/markdown-view"]
 	path = modules/views/markdown-view
 	url = https://github.com/u2re-space/markdown-view
-[submodule "modules/views/explorer-view"]
-	path = modules/views/explorer-view
-	url = https://github.com/u2re-space/explorer-view
 [submodule "modules/views/airpad-view"]
 	path = modules/views/airpad-view
 	url = https://github.com/u2re-space/airpad-view
@@ -58,9 +61,6 @@
 [submodule "modules/shells/minimal-shell"]
 	path = modules/shells/minimal-shell
 	url = https://github.com/u2re-space/minimal-shell
-[submodule "modules/service-subsystem"]
-	path = modules/service-subsystem
-	url = https://github.com/u2re-space/service-subsystem.git
 [submodule "modules/shells/content-shell"]
 	path = modules/shells/content-shell
 	url = https://github.com/u2re-space/content-shell.git
@@ -76,9 +76,6 @@
 [submodule "modules/shells/window-frame"]
 	path = modules/shells/window-frame
 	url = https://github.com/u2re-space/window-frame
-[submodule "apps/CWSP-reborn"]
-	path = apps/CWSP-reborn
-	url = https://github.com/u2re-space/CWSP-reborn
 [submodule "apps/CWSP-direct"]
 	path = apps/CWSP-direct
 	url = https://github.com/u2re-space/CWSP-direct.git
