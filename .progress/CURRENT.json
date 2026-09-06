@@ -1,22 +1,18 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-06T17:35:00+07:00",
-  "thread": "publish-push",
-  "intent": "Publish changed NPM packages and git-push new icon/TaskBar work.",
+  "updatedAt": "2026-09-06T17:37:00+07:00",
+  "thread": "toon-cve",
+  "intent": "Clear GHSA-p95v-992w-h6c3 on CWSP-document without enabling git npm fetches.",
   "status": "done",
-  "project": "U2RE.space",
+  "project": "CWSP-document",
   "lastDone": [
-    "Published @fest-lib/fl-ui@1.0.17.",
-    "Pushed fl.ui, CWSP-shell, CWSP-crx, CWSP-transfer.",
-    "Parent submodule pointers updated."
+    "Pinned @toon-format/toon to ^4.1.1 (CVE-2026-82404 patched since 2.3.1).",
+    "Installed with --no-workspaces so github:fest-lib/core does not fetch."
   ],
-  "next": "None for this pass.",
+  "next": "Dependabot should close alert 12 after GitHub rescan.",
   "blockers": [],
   "paths": [
-    "modules/projects/fl.ui",
-    "apps/CWSP-shell",
-    "apps/CWSP-crx",
-    "apps/CWSP-transfer"
+    "apps/CWSP-document/package.json"
   ],
   "models": {
     "implementer": "Grok 4.6",
