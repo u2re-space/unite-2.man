@@ -1,22 +1,19 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-06T19:25:00+07:00",
+  "updatedAt": "2026-09-06T19:28:00+07:00",
   "thread": "ime-chrome-lock",
-  "intent": "Keep shell/viewer toolbars still when the IME opens; only the inner scrollport moves.",
+  "intent": "Redeploy CWSP-process after workcenter composer IME pad fix.",
   "status": "done",
-  "project": "virtual-keyboard",
+  "project": "CWSP-process",
   "lastDone": [
-    "Published @fest-lib/dom@0.1.40 and @fest-lib/veela@1.0.18.",
-    "Pushed IME chrome-lock SoTs, document 0.0.61, and parent submodule pointers."
+    "Rebuilt cw-workcenter with composer inset-block-end without --virtual-keyboard-height.",
+    "deploy:vds healthy."
   ],
-  "next": "Hard-refresh PWA/Web. Capacitor APKs still need a rebuild for on-device assets.",
+  "next": "Hard-refresh process.u2re.space / Work Center.",
   "blockers": [],
   "paths": [
-    "modules/projects/dom.ts/src/agate/Viewport.ts",
-    "modules/projects/veela.css/src/scss/basic/_core-layout.scss",
-    "modules/shells/minimal-shell/src/minimal.scss",
-    "modules/shells/environment-shell/src/scss/root.scss",
-    "modules/views/markdown-view/src/index.scss"
+    "modules/views/workcenter-view/src/scss/_conversation.scss",
+    "runtime/fastify/apps/workcenter"
   ],
   "models": {
     "implementer": "Grok 4.6",
