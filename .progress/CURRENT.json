@@ -1,24 +1,23 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-06T13:25:00+07:00",
+  "updatedAt": "2026-09-06T13:28:00+07:00",
   "thread": "relink-and-git-slim",
   "intent": "Commit and push workspace cleanup: SoT links, npm ranges, APK/dist removal.",
-  "status": "in-progress",
+  "status": "done",
   "project": "workspace",
   "lastDone": [
-    "Removed staged runtime PWA hosts and project build/APK trees.",
-    "Expanded workspaces; ncu to latest; TypeScript pinned ^6.0.3.",
-    "Flattened symlink chains; transfer moved onto origin/main."
+    "Committed and pushed child repos plus unite-2.man (parent 377d9b8).",
+    "Dropped APK/runtime PWA artifacts; bumped npm ranges; flattened SoT links.",
+    "Renamed app submodules; airpad-view recorded; service-subsystem is a symlink."
   ],
-  "next": "Push child repos then parent; rebuild VDS apps if a live host is needed.",
+  "next": "Rebuild VDS apps if a live host is needed. Optional: point fl.ui/veela remotes at u2re-space URLs.",
   "blockers": [],
   "paths": [
     "package.json",
-    ".npmrc",
     ".gitmodules",
-    "runtime/.gitignore",
-    "apps/CWSP-explorer/.gitignore",
-    "apps/CWSP-process/.gitignore"
+    "apps/CWSP-transfer",
+    "runtime",
+    "apps/CWSP-process"
   ],
   "models": {
     "implementer": "Grok 4.6",
