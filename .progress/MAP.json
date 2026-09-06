@@ -632,6 +632,10 @@
     ],
     "virtual-keyboard": [
       "modules/projects/dom.ts/src/agate/Viewport.ts",
+      "modules/projects/veela.css/src/scss/basic/_core-layout.scss",
+      "modules/shells/minimal-shell/src/minimal.scss",
+      "modules/shells/environment-shell/src/scss/root.scss",
+      "modules/views/markdown-view/src/index.scss",
       "modules/views/workcenter-view/src/scss/_conversation.scss"
     ],
     "workcenter-commands": [

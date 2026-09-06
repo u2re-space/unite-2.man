@@ -1,19 +1,22 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-06T18:10:00+07:00",
-  "thread": "apps-git-slim",
-  "intent": "Stop tracking generated runtime/PWA/Capacitor dumps in app git repos.",
+  "updatedAt": "2026-09-06T19:25:00+07:00",
+  "thread": "ime-chrome-lock",
+  "intent": "Keep shell/viewer toolbars still when the IME opens; only the inner scrollport moves.",
   "status": "done",
-  "project": "apps",
+  "project": "virtual-keyboard",
   "lastDone": [
-    "Untracked transfer frontend/apps/cw + portable pack; explorer Capacitor public + Gradle locks.",
-    "Ignored the same dumps on document/process so they cannot re-enter git."
+    "Published @fest-lib/dom@0.1.40 and @fest-lib/veela@1.0.18.",
+    "Pushed IME chrome-lock SoTs, document 0.0.61, and parent submodule pointers."
   ],
-  "next": "History still holds the old blobs unless a filter-repo pass is requested.",
+  "next": "Hard-refresh PWA/Web. Capacitor APKs still need a rebuild for on-device assets.",
   "blockers": [],
   "paths": [
-    "apps/CWSP-transfer/.gitignore",
-    "apps/CWSP-explorer/.gitignore"
+    "modules/projects/dom.ts/src/agate/Viewport.ts",
+    "modules/projects/veela.css/src/scss/basic/_core-layout.scss",
+    "modules/shells/minimal-shell/src/minimal.scss",
+    "modules/shells/environment-shell/src/scss/root.scss",
+    "modules/views/markdown-view/src/index.scss"
   ],
   "models": {
     "implementer": "Grok 4.6",
