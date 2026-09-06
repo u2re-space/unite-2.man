@@ -1,19 +1,20 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-06T19:28:00+07:00",
+  "updatedAt": "2026-09-06T19:36:00+07:00",
   "thread": "ime-chrome-lock",
-  "intent": "Redeploy CWSP-process after workcenter composer IME pad fix.",
+  "intent": "Keep environment wallpaper on --lv-height when the IME opens.",
   "status": "done",
-  "project": "CWSP-process",
+  "project": "environment-shell",
   "lastDone": [
-    "Rebuilt cw-workcenter with composer inset-block-end without --virtual-keyboard-height.",
-    "deploy:vds healthy."
+    "Published @fest-lib/veela@1.0.19.",
+    "Pushed wallpaper IME pin, launcher 0.0.130, and channel pointers."
   ],
-  "next": "Hard-refresh process.u2re.space / Work Center.",
+  "next": "Hard-refresh u2re.space if wallpaper still looks stale.",
   "blockers": [],
   "paths": [
-    "modules/views/workcenter-view/src/scss/_conversation.scss",
-    "runtime/fastify/apps/workcenter"
+    "modules/projects/veela.css/src/scss/basic/_core-layout.scss",
+    "modules/shells/environment-shell/src/scss/root.scss",
+    "modules/shells/environment-shell/src/scss/container.scss"
   ],
   "models": {
     "implementer": "Grok 4.6",
