@@ -647,6 +647,9 @@
       "modules/projects/fl.ui/src/ui/markdown/raw-editor/host.ts",
       "modules/views/markdown-view/src/ts/Viewer.ts"
     ],
+    "veela-scrollbar": [
+      "modules/projects/veela.css/src/scss/ui/_scrollbar.scss"
+    ],
     "virtual-keyboard": [
       "modules/projects/dom.ts/src/agate/Viewport.ts",
       "modules/projects/veela.css/src/scss/basic/_core-layout.scss",

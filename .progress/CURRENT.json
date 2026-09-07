@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-07T14:38:00+07:00",
-  "thread": "capacitor-markdown-ime",
-  "intent": "cw-raw-editor shadow carries chrome, IME pad, and highlight tokens.",
+  "updatedAt": "2026-09-07T15:55:00+07:00",
+  "thread": "veela-scrollbar-sass-if",
+  "intent": "Use Sass 1.104 if(sass($cond): …) without wrapping the whole if() in sass().",
   "status": "patched",
-  "project": "fl.ui",
+  "project": "veela.css",
   "lastDone": [
-    "cw-raw-editor shadow CSS: chrome + IME pad + flattened highlight tokens (veela does not pierce)"
+    "inner-property / with-timeline: if(sass($is-custom): $prop; else: --#{$strip-prop})",
+    "Compile emits --percent-x/--percent-y; no if-function deprecation"
   ],
-  "next": "Rebuild when asked — raw chrome, hljs overlay, IME pad inside cw-raw-editor shadow.",
+  "next": "Rebuild veela/ui if the deploy is still on the old compile.",
   "blockers": [],
   "paths": [
-    "modules/projects/fl.ui/src/ui/markdown/raw-editor/host.ts",
-    "modules/projects/fl.ui/src/ui/markdown/raw-editor/styles.ts"
+    "modules/projects/veela.css/src/scss/ui/_scrollbar.scss"
   ],
   "models": {
     "implementer": "Grok 4.6",
