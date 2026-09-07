@@ -909,6 +909,11 @@
       "modules/projects/fl.ui/src/ui/navigation/taskbar/scss/TaskBar.scss",
       "modules/projects/fl.ui/src/ui/navigation/app-menu/AppMenu.scss",
       "modules/projects/fl.ui/src/ui/speed-dial/SpeedDial.scss"
+    ],
+    "gpt-selection": [
+      "modules/projects/subsystem/src/other/config/SettingsTypes.ts",
+      "apps/CWSP-transfer/runtime/endpoint/server-v2/protocol/http/routers/assistant/Orchestrator.ts",
+      "runtime/fastify/routers/assistant/Orchestrator.ts"
     ]
   }
 }

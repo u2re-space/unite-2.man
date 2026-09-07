@@ -1,20 +1,24 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-06T19:36:00+07:00",
-  "thread": "ime-chrome-lock",
-  "intent": "Keep environment wallpaper on --lv-height when the IME opens.",
-  "status": "done",
-  "project": "environment-shell",
+  "updatedAt": "2026-09-07T09:15:00+07:00",
+  "thread": "gpt-selection-ship",
+  "intent": "Ship GPT model list/default (gpt-5.6-luna + terra/sol/astra) across CRX, PWA/Web, Capacitor, backends, then publish/push.",
+  "status": "in-progress",
+  "project": "subsystem",
   "lastDone": [
-    "Published @fest-lib/veela@1.0.19.",
-    "Pushed wallpaper IME pin, launcher 0.0.130, and channel pointers."
+    "Built CRX 1.0.2, PWA/Web hosts, Capacitor document 0.0.62 / process 0.0.48 / explorer 0.0.46 / launcher 0.0.131 / hub 0.0.212",
+    "deploy:vds OK (/healthz 200); deploy:200:node OK after refreshing this host key",
+    "PM2 cwsp watches transfer/runtime/endpoint"
   ],
-  "next": "Hard-refresh u2re.space if wallpaper still looks stale.",
-  "blockers": [],
+  "next": "Commit and push dirty SoTs; L-110 rsync still flaky; @fest-lib/subsystem first publish blocked on vite library build.",
+  "blockers": [
+    "deploy:110:node rsync EAGAIN on desk",
+    "@fest-lib/subsystem build:publish cannot resolve monorepo aliases (never on npm)"
+  ],
   "paths": [
-    "modules/projects/veela.css/src/scss/basic/_core-layout.scss",
-    "modules/shells/environment-shell/src/scss/root.scss",
-    "modules/shells/environment-shell/src/scss/container.scss"
+    "modules/projects/subsystem/src/other/config/SettingsTypes.ts",
+    "apps/CWSP-transfer/runtime/endpoint/server-v2/protocol/http/routers/assistant/Orchestrator.ts",
+    "runtime/fastify/routers/assistant/Orchestrator.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",
