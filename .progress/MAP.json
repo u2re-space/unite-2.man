@@ -494,6 +494,10 @@
       "apps/CWSP-transfer/resources/js/cwsp-window-chrome.js",
       "apps/CWSP-transfer/extensions/node/caption-color-win.js"
     ],
+    "neutralino-windows-exe": [
+      "apps/CWSP-transfer/scripts/build-neutralino.mjs",
+      "apps/CWSP-transfer/scripts/deploy-runtime.mjs"
+    ],
     "theme-color": [
       "modules/projects/fl.ui/src/ui/containers/window/native-theme-color.ts",
       "modules/shells/environment-shell/src/scss/capacitor-native.scss"

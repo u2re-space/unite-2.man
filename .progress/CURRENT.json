@@ -1,19 +1,20 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-07T09:26:00+07:00",
-  "thread": "process-composer-keyboard",
-  "intent": "Restore workcenter composer keyboard inset and redeploy process-related PWA/Web/VDS, Capacitor, CRX, then push.",
+  "updatedAt": "2026-09-07T09:42:00+07:00",
+  "thread": "neutralino-windows-exe",
+  "intent": "Fix Windows Neutralino package (missing .exe) and expose mingw/neu on the Linux shell PATH.",
   "status": "done",
-  "project": "workcenter-view",
+  "project": "CWSP-transfer",
   "lastDone": [
-    "Restored --virtual-keyboard-height on .workcenter-composer",
-    "Rebuilt process/document/shell/control VDS hosts + CRX 1.0.3 + process Capacitor 0.0.49",
-    "VDS /healthz 200; live process.u2re.space serves the restored inset rule"
+    "neu update fetched bin/neutralino-win_x64.exe; windows package is PE32+ cwsp-neutralino-win_x64.exe",
+    "deploy:110:neutralino OK from build/neutralino/windows",
+    "Shell: ~/.local/bin/{neu,windres} + MINGW64_* in ~/.bashrc"
   ],
-  "next": "No npm: workcenter-view is not a published package.",
+  "next": "New terminal to pick up bashrc. Script guards uncommitted in CWSP-transfer.",
   "blockers": [],
   "paths": [
-    "modules/views/workcenter-view/src/scss/_conversation.scss"
+    "apps/CWSP-transfer/scripts/build-neutralino.mjs",
+    "apps/CWSP-transfer/scripts/deploy-runtime.mjs"
   ],
   "models": {
     "implementer": "Grok 4.6",
