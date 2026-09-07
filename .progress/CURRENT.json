@@ -1,20 +1,18 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-07T09:42:00+07:00",
-  "thread": "neutralino-windows-exe",
-  "intent": "Fix Windows Neutralino package (missing .exe) and expose mingw/neu on the Linux shell PATH.",
-  "status": "done",
-  "project": "CWSP-transfer",
+  "updatedAt": "2026-09-07T14:38:00+07:00",
+  "thread": "capacitor-markdown-ime",
+  "intent": "cw-raw-editor shadow carries chrome, IME pad, and highlight tokens.",
+  "status": "patched",
+  "project": "fl.ui",
   "lastDone": [
-    "neu update fetched bin/neutralino-win_x64.exe; windows package is PE32+ cwsp-neutralino-win_x64.exe",
-    "deploy:110:neutralino OK from build/neutralino/windows",
-    "Shell: ~/.local/bin/{neu,windres} + MINGW64_* in ~/.bashrc"
+    "cw-raw-editor shadow CSS: chrome + IME pad + flattened highlight tokens (veela does not pierce)"
   ],
-  "next": "New terminal to pick up bashrc. Script guards uncommitted in CWSP-transfer.",
+  "next": "Rebuild when asked — raw chrome, hljs overlay, IME pad inside cw-raw-editor shadow.",
   "blockers": [],
   "paths": [
-    "apps/CWSP-transfer/scripts/build-neutralino.mjs",
-    "apps/CWSP-transfer/scripts/deploy-runtime.mjs"
+    "modules/projects/fl.ui/src/ui/markdown/raw-editor/host.ts",
+    "modules/projects/fl.ui/src/ui/markdown/raw-editor/styles.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",

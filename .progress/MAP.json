@@ -112,7 +112,8 @@
     "симлинки": "symlinks",
     "relink": "symlinks",
     "тост": "toast",
-    "toast": "toast"
+    "toast": "toast",
+    "cw-raw-editor": "raw-editor"
   },
   "tags": {
     "thread": [".progress/CURRENT.json"],
@@ -450,6 +451,10 @@
       "apps/CWSP-shell/src/java/space/u2re/cwsp/DisplayRefreshUnlock.java",
       "apps/CWSP-shell/src/java/space/u2re/cwsp/MainActivity.java"
     ],
+    "webview-flags": [
+      "apps/CWSP-shell/src/java/space/u2re/cwsp/WebViewPlatformFlags.java",
+      "apps/CWSP-shell/src/java/space/u2re/cwsp/CwspCapacitorApp.java"
+    ],
     "cwsp-reborn": [
       ".progress/CWSP-reborn/STATE.json",
       ".cursor/skills/cwsp-reborn-pass/SKILL.md"
@@ -634,13 +639,24 @@
       "modules/views/workcenter-view/src/scss/_conversation.scss",
       "modules/projects/dom.ts/src/agate/Viewport.ts"
     ],
+    "raw-editor": [
+      "modules/projects/fl.ui/src/ui/markdown/raw-editor/host.ts",
+      "modules/projects/fl.ui/src/ui/markdown/raw-editor/styles.ts"
+    ],
+    "raw-editor-layout": [
+      "modules/projects/fl.ui/src/ui/markdown/raw-editor/host.ts",
+      "modules/views/markdown-view/src/ts/Viewer.ts"
+    ],
     "virtual-keyboard": [
       "modules/projects/dom.ts/src/agate/Viewport.ts",
       "modules/projects/veela.css/src/scss/basic/_core-layout.scss",
       "modules/shells/minimal-shell/src/minimal.scss",
       "modules/shells/environment-shell/src/scss/root.scss",
       "modules/views/markdown-view/src/index.scss",
-      "modules/views/workcenter-view/src/scss/_conversation.scss"
+      "modules/views/markdown-view/src/ts/Viewer.ts",
+      "modules/views/workcenter-view/src/scss/_conversation.scss",
+      "apps/CWSP-shell/src/java/space/u2re/cwsp/CwspKeyboardPlugin.java",
+      "apps/CWSP-shell/src/java/space/u2re/cwsp/WebViewPlatformFlags.java"
     ],
     "workcenter-commands": [
       "modules/views/workcenter-view/src/ts/WorkCenterCommands.ts",
