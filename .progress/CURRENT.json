@@ -1,19 +1,22 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-07T18:04:00+07:00",
+  "updatedAt": "2026-09-07T18:28:00+07:00",
   "thread": "screen-viewport-cap",
-  "intent": "Fill the WebView; do not clamp to availHeight (black strip).",
+  "intent": "Capacitor screen sizes + DPI/PPI from native DisplayMetrics / WindowMetrics.",
   "status": "patched",
   "project": "dom.ts",
   "lastDone": [
-    "Physical cap is max(screen, avail, innerHeight) — never shrink below the window",
-    "--screen-fit-* is max(screen, lv, 100lv*) so html fills 100lvb"
+    "CwsBridge getDisplayMetrics + getShellInfo expose window/display CSS-px, density, DPI, PPI",
+    "Viewport prefers native metrics for --screen-* / --pixel-ratio and stamps --native-*",
+    "fest/dom does not import subsystem; Capacitor.Plugins.CwsBridge only"
   ],
-  "next": "Rebuild — bottom strip should be gone; height still cannot run away above the window.",
+  "next": "Rebuild Capacitor APK — --screen-* / --pixel-ratio should match DisplayMetrics, not screen.availHeight.",
   "blockers": [],
   "paths": [
+    "apps/CWSP-shell/src/java/space/u2re/cwsp/CwspDisplayMetrics.java",
+    "apps/CWSP-shell/src/java/space/u2re/cwsp/CwsLauncherBridgePlugin.java",
     "modules/projects/dom.ts/src/agate/Viewport.ts",
-    "modules/projects/veela.css/src/scss/basic/_core-layout.scss"
+    "modules/projects/subsystem/src/routing/native/cws-bridge.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",

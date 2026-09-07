@@ -654,6 +654,12 @@
       "modules/projects/dom.ts/src/agate/Viewport.ts",
       "modules/projects/veela.css/src/scss/basic/_core-layout.scss"
     ],
+    "native-display": [
+      "apps/CWSP-shell/src/java/space/u2re/cwsp/CwspDisplayMetrics.java",
+      "apps/CWSP-shell/src/java/space/u2re/cwsp/CwsLauncherBridgePlugin.java",
+      "modules/projects/dom.ts/src/agate/Viewport.ts",
+      "modules/projects/subsystem/src/routing/native/cws-bridge.ts"
+    ],
     "virtual-keyboard": [
       "modules/projects/dom.ts/src/agate/Viewport.ts",
       "modules/projects/veela.css/src/scss/basic/_core-layout.scss",
