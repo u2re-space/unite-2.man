@@ -1,22 +1,23 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-07T18:28:00+07:00",
+  "updatedAt": "2026-09-07T19:50:00+07:00",
   "thread": "screen-viewport-cap",
-  "intent": "Capacitor screen sizes + DPI/PPI from native DisplayMetrics / WindowMetrics.",
+  "intent": "Capacitor raw-editor scroll must not drag toolbars / chrome.",
   "status": "patched",
-  "project": "dom.ts",
+  "project": "fl.ui",
   "lastDone": [
-    "CwsBridge getDisplayMetrics + getShellInfo expose window/display CSS-px, density, DPI, PPI",
-    "Viewport prefers native metrics for --screen-* / --pixel-ratio and stamps --native-*",
-    "fest/dom does not import subsystem; Capacitor.Plugins.CwsBridge only"
+    "Viewport finds .cw-raw-editor__scroll through shadow; Capacitor pins chrome on scroll",
+    "Capacitor raw-editor scroll is absolute + overscroll-behavior: none",
+    "Viewer slot-raw flex 0% + html/body overflow hidden; WebView OVER_SCROLL_NEVER"
   ],
-  "next": "Rebuild Capacitor APK — --screen-* / --pixel-ratio should match DisplayMetrics, not screen.availHeight.",
+  "next": "Rebuild Capacitor APK — scrolling the raw field to the end must leave toolbars pinned.",
   "blockers": [],
   "paths": [
-    "apps/CWSP-shell/src/java/space/u2re/cwsp/CwspDisplayMetrics.java",
-    "apps/CWSP-shell/src/java/space/u2re/cwsp/CwsLauncherBridgePlugin.java",
     "modules/projects/dom.ts/src/agate/Viewport.ts",
-    "modules/projects/subsystem/src/routing/native/cws-bridge.ts"
+    "modules/projects/fl.ui/src/ui/markdown/raw-editor/styles.ts",
+    "modules/views/markdown-view/src/ts/Viewer.ts",
+    "modules/shells/environment-shell/src/scss/capacitor-native.scss",
+    "apps/CWSP-shell/src/java/space/u2re/cwsp/WebViewPlatformFlags.java"
   ],
   "models": {
     "implementer": "Grok 4.6",
