@@ -639,6 +639,9 @@
       "modules/views/workcenter-view/src/scss/_conversation.scss",
       "modules/projects/dom.ts/src/agate/Viewport.ts"
     ],
+    "safe-markdown-render": [
+      "modules/projects/fl.ui/src/ui/markdown/render.ts"
+    ],
     "raw-editor": [
       "modules/projects/fl.ui/src/ui/markdown/raw-editor/host.ts",
       "modules/projects/fl.ui/src/ui/markdown/raw-editor/styles.ts"
@@ -680,6 +683,9 @@
       "modules/projects/subsystem/src/routing/api/sku-ports.ts",
       "runtime/fastify/layers.ts",
       "runtime/fastify/scripts/start-sku-channels.mjs"
+    ],
+    "workcenter-document-preparation": [
+      "modules/views/workcenter-view/src/ts/WorkCenterDocumentPreparation.ts"
     ],
     "workcenter-chat": [
       "modules/views/workcenter-view/src/ts/WorkCenterSession.ts",

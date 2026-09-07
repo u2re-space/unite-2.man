@@ -51,7 +51,9 @@
         "runtime/fastify"
     ],
     "overrides": {
-        "@vitejs/devtools": ">=0.0.0-alpha.32"
+        "@vitejs/devtools": ">=0.0.0-alpha.32",
+        "@capacitor/core": "8.5.2-nightly-20260904T151235.0",
+        "@capacitor/android": "8.5.2-nightly-20260904T151235.0"
     },
     "optionalDependencies": {
         "@rolldown/binding-darwin-arm64": "1.2.7",
@@ -62,10 +64,23 @@
         "@rolldown/binding-win32-x64-msvc": "1.2.7"
     },
     "devDependencies": {
-        "@phosphor-icons/core": "^2.1.1",
+        "@capacitor/app-launcher": "^8.0.1",
+        "@capacitor/browser": "^8.0.4",
+        "@capacitor/clipboard": "^8.0.1",
+        "@capacitor/device": "^8.0.3",
+        "@capacitor/file-transfer": "^2.0.5",
+        "@capacitor/filesystem": "^8.1.3",
+        "@capacitor/inappbrowser": "^4.0.3",
+        "@capacitor/keyboard": "^8.0.5",
+        "@capacitor/screen-orientation": "^8.0.1",
+        "@capacitor/share": "^8.0.1",
+        "@capacitor/splash-screen": "^8.0.2",
+        "@capacitor/status-bar": "^8.0.3",
+        "@capacitor/text-zoom": "^8.0.1",
         "@crxjs/vite-plugin": "^2.7.1",
         "@esbuild/linux-x64": "^0.28.2",
         "@mindw1n/webnative": "^4.0.0",
+        "@phosphor-icons/core": "^2.1.1",
         "@rolldown/binding-linux-x64-gnu": "^1.2.7",
         "@rollup/rollup-linux-x64-gnu": "^4.63.1",
         "@vitejs/plugin-basic-ssl": "^2.3.0",

@@ -1,23 +1,18 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-07T19:50:00+07:00",
+  "updatedAt": "2026-09-07T20:40:00+07:00",
   "thread": "screen-viewport-cap",
-  "intent": "Capacitor raw-editor scroll must not drag toolbars / chrome.",
+  "intent": "Unbreak viewer load: stop importing a name that dist/dom.js does not export.",
   "status": "patched",
   "project": "fl.ui",
   "lastDone": [
-    "Viewport finds .cw-raw-editor__scroll through shadow; Capacitor pins chrome on scroll",
-    "Capacitor raw-editor scroll is absolute + overscroll-behavior: none",
-    "Viewer slot-raw flex 0% + html/body overflow hidden; WebView OVER_SCROLL_NEVER"
+    "cw-raw-editor no longer imports readVirtualKeyboardHeightPx / whenAnyScreenChanges from @fest-lib/dom",
+    "IME pad copies --virtual-keyboard-height from html; mount errors no longer fail the view"
   ],
-  "next": "Rebuild Capacitor APK — scrolling the raw field to the end must leave toolbars pinned.",
+  "next": "Reload / rebuild — viewer should open again.",
   "blockers": [],
   "paths": [
-    "modules/projects/dom.ts/src/agate/Viewport.ts",
-    "modules/projects/fl.ui/src/ui/markdown/raw-editor/styles.ts",
-    "modules/views/markdown-view/src/ts/Viewer.ts",
-    "modules/shells/environment-shell/src/scss/capacitor-native.scss",
-    "apps/CWSP-shell/src/java/space/u2re/cwsp/WebViewPlatformFlags.java"
+    "modules/projects/fl.ui/src/ui/markdown/raw-editor/host.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",
