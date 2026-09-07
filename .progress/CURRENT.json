@@ -1,18 +1,17 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-07T20:40:00+07:00",
-  "thread": "screen-viewport-cap",
-  "intent": "Unbreak viewer load: stop importing a name that dist/dom.js does not export.",
+  "updatedAt": "2026-09-08T02:07:00+07:00",
+  "thread": "raw-editor-ime-pad",
+  "intent": "Short content must still scroll above an open keyboard.",
   "status": "patched",
   "project": "fl.ui",
   "lastDone": [
-    "cw-raw-editor no longer imports readVirtualKeyboardHeightPx / whenAnyScreenChanges from @fest-lib/dom",
-    "IME pad copies --virtual-keyboard-height from html; mount errors no longer fail the view"
+    "calc-size is max(size + K, 100cqh) so extra can exceed the box"
   ],
-  "next": "Reload / rebuild — viewer should open again.",
+  "next": "IME: size < box but last lines under KB → can scroll by (I+K-box).",
   "blockers": [],
   "paths": [
-    "modules/projects/fl.ui/src/ui/markdown/raw-editor/host.ts"
+    "modules/projects/fl.ui/src/ui/markdown/raw-editor/styles.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",

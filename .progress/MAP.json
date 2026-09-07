@@ -941,7 +941,8 @@
     "start-endpoint-tls": [
       "apps/CWSP-transfer/scripts/start-endpoint-tls.mjs",
       "apps/CWSP-transfer/runtime/endpoint/ecosystem.config.cjs",
-      "apps/CWSP-transfer/scripts/stage-gateway-web.mjs"
+      "apps/CWSP-transfer/scripts/stage-gateway-web.mjs",
+      "/home/u2re-dev/.config/systemd/user/cwsp-gateway.service"
     ],
     "light-theme": [
       "modules/projects/veela.css/src/scss/core/misc/_tokens.scss",
