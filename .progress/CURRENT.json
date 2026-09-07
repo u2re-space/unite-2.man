@@ -1,18 +1,17 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-07T15:55:00+07:00",
-  "thread": "veela-scrollbar-sass-if",
-  "intent": "Use Sass 1.104 if(sass($cond): …) without wrapping the whole if() in sass().",
+  "updatedAt": "2026-09-07T16:28:00+07:00",
+  "thread": "ssre-typedoc",
+  "intent": "Stop TypeDoc copying lur.e (broken chrome-headless-shell symlink).",
   "status": "patched",
-  "project": "veela.css",
+  "project": "ssr.e",
   "lastDone": [
-    "inner-property / with-timeline: if(sass($is-custom): $prop; else: --#{$strip-prop})",
-    "Compile emits --percent-x/--percent-y; no if-function deprecation"
+    "README LUR.E link is GitHub, not ../lur.e — npm run docs exits 0"
   ],
-  "next": "Rebuild veela/ui if the deploy is still on the old compile.",
+  "next": "Retry ssr.e build if you still need docs:md after vite.",
   "blockers": [],
   "paths": [
-    "modules/projects/veela.css/src/scss/ui/_scrollbar.scss"
+    "modules/projects/ssr.e/README.md"
   ],
   "models": {
     "implementer": "Grok 4.6",
