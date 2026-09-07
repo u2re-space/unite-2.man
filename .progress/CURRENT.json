@@ -1,24 +1,19 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-07T09:20:00+07:00",
-  "thread": "gpt-selection-ship",
-  "intent": "Ship GPT model list/default (gpt-5.6-luna + terra/sol/astra) across CRX, PWA/Web, Capacitor, backends, then publish/push.",
+  "updatedAt": "2026-09-07T09:26:00+07:00",
+  "thread": "process-composer-keyboard",
+  "intent": "Restore workcenter composer keyboard inset and redeploy process-related PWA/Web/VDS, Capacitor, CRX, then push.",
   "status": "done",
-  "project": "subsystem",
+  "project": "workcenter-view",
   "lastDone": [
-    "Shipped CRX 1.0.2, PWA/Web, Capacitor document 0.0.62 / process 0.0.48 / explorer 0.0.46 / launcher 0.0.131 / hub 0.0.212",
-    "VDS /healthz 200; L-200 node deploy OK; PM2 cwsp watches transfer/runtime/endpoint",
-    "Pushed child repos + unite-2.man 89fe517"
+    "Restored --virtual-keyboard-height on .workcenter-composer",
+    "Rebuilt process/document/shell/control VDS hosts + CRX 1.0.3 + process Capacitor 0.0.49",
+    "VDS /healthz 200; live process.u2re.space serves the restored inset rule"
   ],
-  "next": "L-110 rsync still flaky; @fest-lib/subsystem first publish blocked on vite library build.",
-  "blockers": [
-    "deploy:110:node rsync EAGAIN on desk",
-    "@fest-lib/subsystem build:publish cannot resolve monorepo aliases (never on npm)"
-  ],
+  "next": "No npm: workcenter-view is not a published package.",
+  "blockers": [],
   "paths": [
-    "modules/projects/subsystem/src/other/config/SettingsTypes.ts",
-    "apps/CWSP-transfer/runtime/endpoint/server-v2/protocol/http/routers/assistant/Orchestrator.ts",
-    "runtime/fastify/routers/assistant/Orchestrator.ts"
+    "modules/views/workcenter-view/src/scss/_conversation.scss"
   ],
   "models": {
     "implementer": "Grok 4.6",
