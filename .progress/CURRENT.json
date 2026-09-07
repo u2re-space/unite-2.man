@@ -1,17 +1,19 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-07T16:28:00+07:00",
-  "thread": "ssre-typedoc",
-  "intent": "Stop TypeDoc copying lur.e (broken chrome-headless-shell symlink).",
+  "updatedAt": "2026-09-07T18:04:00+07:00",
+  "thread": "screen-viewport-cap",
+  "intent": "Fill the WebView; do not clamp to availHeight (black strip).",
   "status": "patched",
-  "project": "ssr.e",
+  "project": "dom.ts",
   "lastDone": [
-    "README LUR.E link is GitHub, not ../lur.e — npm run docs exits 0"
+    "Physical cap is max(screen, avail, innerHeight) — never shrink below the window",
+    "--screen-fit-* is max(screen, lv, 100lv*) so html fills 100lvb"
   ],
-  "next": "Retry ssr.e build if you still need docs:md after vite.",
+  "next": "Rebuild — bottom strip should be gone; height still cannot run away above the window.",
   "blockers": [],
   "paths": [
-    "modules/projects/ssr.e/README.md"
+    "modules/projects/dom.ts/src/agate/Viewport.ts",
+    "modules/projects/veela.css/src/scss/basic/_core-layout.scss"
   ],
   "models": {
     "implementer": "Grok 4.6",

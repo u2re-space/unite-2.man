@@ -650,6 +650,10 @@
     "veela-scrollbar": [
       "modules/projects/veela.css/src/scss/ui/_scrollbar.scss"
     ],
+    "screen-viewport": [
+      "modules/projects/dom.ts/src/agate/Viewport.ts",
+      "modules/projects/veela.css/src/scss/basic/_core-layout.scss"
+    ],
     "virtual-keyboard": [
       "modules/projects/dom.ts/src/agate/Viewport.ts",
       "modules/projects/veela.css/src/scss/basic/_core-layout.scss",
