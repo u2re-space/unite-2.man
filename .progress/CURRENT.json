@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-07T09:15:00+07:00",
+  "updatedAt": "2026-09-07T09:20:00+07:00",
   "thread": "gpt-selection-ship",
   "intent": "Ship GPT model list/default (gpt-5.6-luna + terra/sol/astra) across CRX, PWA/Web, Capacitor, backends, then publish/push.",
-  "status": "in-progress",
+  "status": "done",
   "project": "subsystem",
   "lastDone": [
-    "Built CRX 1.0.2, PWA/Web hosts, Capacitor document 0.0.62 / process 0.0.48 / explorer 0.0.46 / launcher 0.0.131 / hub 0.0.212",
-    "deploy:vds OK (/healthz 200); deploy:200:node OK after refreshing this host key",
-    "PM2 cwsp watches transfer/runtime/endpoint"
+    "Shipped CRX 1.0.2, PWA/Web, Capacitor document 0.0.62 / process 0.0.48 / explorer 0.0.46 / launcher 0.0.131 / hub 0.0.212",
+    "VDS /healthz 200; L-200 node deploy OK; PM2 cwsp watches transfer/runtime/endpoint",
+    "Pushed child repos + unite-2.man 89fe517"
   ],
-  "next": "Commit and push dirty SoTs; L-110 rsync still flaky; @fest-lib/subsystem first publish blocked on vite library build.",
+  "next": "L-110 rsync still flaky; @fest-lib/subsystem first publish blocked on vite library build.",
   "blockers": [
     "deploy:110:node rsync EAGAIN on desk",
     "@fest-lib/subsystem build:publish cannot resolve monorepo aliases (never on npm)"
