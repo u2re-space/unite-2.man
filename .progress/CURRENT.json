@@ -1,17 +1,19 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-08T02:07:00+07:00",
-  "thread": "raw-editor-ime-pad",
-  "intent": "Short content must still scroll above an open keyboard.",
+  "updatedAt": "2026-09-08T11:26:00+07:00",
+  "thread": "viewer-path-persist",
+  "intent": "Persist markdown viewer path across restart; add New (file-plus).",
   "status": "patched",
-  "project": "fl.ui",
+  "project": "markdown-view",
   "lastDone": [
-    "calc-size is max(size + K, 100cqh) so extra can exceed the box"
+    "rs-viewer-state now stores source; restore unless route/handoff wins",
+    "persist on path change / Go / Save; New clears content+path"
   ],
-  "next": "IME: size < box but last lines under KB → can scroll by (I+K-box).",
+  "next": "Reload document viewer — path should survive restart; New then Save opens picker.",
   "blockers": [],
   "paths": [
-    "modules/projects/fl.ui/src/ui/markdown/raw-editor/styles.ts"
+    "modules/views/markdown-view/src/needs-to-API.ts",
+    "modules/views/markdown-view/src/ts/Toolbar.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",

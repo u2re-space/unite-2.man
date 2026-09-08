@@ -113,7 +113,8 @@
     "relink": "symlinks",
     "тост": "toast",
     "toast": "toast",
-    "cw-raw-editor": "raw-editor"
+    "cw-raw-editor": "raw-editor",
+    "viewer-path": "file-markdown"
   },
   "tags": {
     "thread": [".progress/CURRENT.json"],
