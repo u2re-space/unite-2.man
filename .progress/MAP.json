@@ -103,6 +103,8 @@
     "подсветка": "code-highlight",
     "Invalid frame header": "vite-https1",
     "vite hmr": "vite-https1",
+    "remote-connection-runtime": "cwsp-shared-exports",
+    "cwsp-shared exports": "cwsp-shared-exports",
     "bluetooth": "bluetooth",
     "блютуз": "bluetooth",
     "device-map": "device-aliases",
@@ -955,6 +957,11 @@
       "modules/projects/subsystem/src/other/config/SettingsTypes.ts",
       "apps/CWSP-transfer/runtime/endpoint/server-v2/protocol/http/routers/assistant/Orchestrator.ts",
       "runtime/fastify/routers/assistant/Orchestrator.ts"
+    ],
+    "cwsp-shared-exports": [
+      "apps/CWSP-shared/package.json",
+      "modules/projects/subsystem/tsconfig.vite-base.json",
+      "modules/projects/cwsp-shared/src/remote-connection-runtime.ts"
     ]
   }
 }

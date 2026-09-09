@@ -1,10 +1,11 @@
 /**
+ * FIND:view-resolve
  * Vite `resolve.alias` from package `tsconfig.json` + subsystem `tsconfig.vite-base.json`
  * (view dev stubs, fest, veela). Local paths override base; longer `find` wins over prefix keys.
  *
  * Lives under real `modules/views/` because `modules/views/shared` → `modules/shared` → subsystem.
  */
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, realpathSync } from "node:fs";
 import { resolve } from "node:path";
 import { importFromTSConfig } from "../shared/vite.config.js";
 
@@ -54,7 +55,54 @@ const cwspAirpadParityAliases = [
     { find: "@cwsp/shared/airpad-cwsp-client-parity", replacement: CWSP_AIRPAD_CLIENT_PARITY }
 ];
 
+const flUiSrc = resolve(workspaceRoot, "modules/projects/fl.ui/src/ui");
+const veelaScss = resolve(workspaceRoot, "modules/projects/veela.css/src/scss");
+const OPEN_POLICY = resolve(workspaceRoot, "modules/projects/subsystem/src/other/config/open-policy.ts");
+const SW_CACHE = resolve(workspaceRoot, "modules/projects/subsystem/src/routing/pwa/sw-cache.ts");
+const CWS_BRIDGE = resolve(workspaceRoot, "modules/projects/subsystem/src/routing/native/cws-bridge.ts");
+
+/**
+ * WHY: view tsconfigs are written for `modules/views/<name>` (`../../projects`, `../shared`).
+ * App packages are the realpath (`apps/CWSP-explorer`); resolving those relatives from the
+ * app root points at missing `projects/` / `apps/shared`.
+ * @param {string} projectRoot
+ */
+function viewsLayoutRoot(projectRoot) {
+    const root = resolve(projectRoot);
+    let real;
+    try {
+        real = realpathSync(root);
+    } catch {
+        return root;
+    }
+    try {
+        for (const ent of readdirSync(viewsRoot, { withFileTypes: true })) {
+            if (ent.name.startsWith(".")) continue;
+            const candidate = resolve(viewsRoot, ent.name);
+            try {
+                if (realpathSync(candidate) === real) return candidate;
+            } catch {
+                /* dangling view link */
+            }
+        }
+    } catch {
+        /* viewsRoot unreadable */
+    }
+    return root;
+}
+
+function aliasReplacementExists(replacement) {
+    if (typeof replacement !== "string" || !replacement) return true;
+    if (existsSync(replacement)) return true;
+    return [".ts", ".js", ".mjs", ".scss", ".css"].some((ext) => existsSync(`${replacement}${ext}`));
+}
+
 const lureSrc = resolve(workspaceRoot, "modules/projects/lur.e/src");
+const workspaceLibAliases = [
+    { find: /^veela-lib\/ui\/explorer$/, replacement: resolve(veelaScss, "ui/_explorer.scss") },
+    { find: /^fl-ui\//, replacement: `${flUiSrc}/` },
+    { find: /^veela-lib\//, replacement: `${veelaScss}/` }
+];
 const lureSubpathAliases = [
     { find: "@fest-lib/lure/provide", replacement: resolve(lureSrc, "utils/opfs/provide.ts") },
     { find: "@fest-lib/lure/idb-fs", replacement: resolve(lureSrc, "utils/opfs/IdbFs.ts") },
@@ -74,6 +122,9 @@ const viewSharedAliases = [
     { find: "com/config/Settings", replacement: SETTINGS_CONFIG },
     { find: "com/config/SettingsContributions", replacement: SETTINGS_CONTRIBUTIONS },
     { find: "com/config/ecosystem-skus", replacement: ECOSYSTEM_SKUS },
+    { find: "com/config/open-policy", replacement: OPEN_POLICY },
+    { find: "com/routing/pwa/sw-cache", replacement: SW_CACHE },
+    { find: "com/routing/native/cws-bridge", replacement: CWS_BRIDGE },
     { find: "boot/capacitor-share-intent", replacement: CAPACITOR_SHARE_INTENT },
     { find: "core/pwa/pwa-handling", replacement: PWA_HANDLING }
 ];
@@ -104,6 +155,7 @@ function mergeAliasLists(baseList, localList) {
  */
 export function getViewResolveAliases(projectRoot, prepend = []) {
     const root = resolve(projectRoot);
+    const layoutRoot = viewsLayoutRoot(root);
     const base = existsSync(VITE_BASE)
         ? JSON.parse(readFileSync(VITE_BASE, "utf8"))
         : { compilerOptions: {} };
@@ -114,11 +166,20 @@ export function getViewResolveAliases(projectRoot, prepend = []) {
         : { compilerOptions: {} };
     const localPaths = local.compilerOptions?.paths || {};
     const baseAliases = importFromTSConfig({ compilerOptions: { paths: basePaths } }, subsystemPkgRoot);
-    const localAliases = importFromTSConfig({ compilerOptions: { paths: localPaths } }, root);
+    const localAliases = importFromTSConfig({ compilerOptions: { paths: localPaths } }, layoutRoot).filter(
+        (a) => aliasReplacementExists(a.replacement)
+    );
     const merged = mergeAliasLists(baseAliases, localAliases).filter(
         (a) => !cwspAirpadParityFinds.has(String(a.find))
     );
-    return [...prepend, ...lureSubpathAliases, ...viewSharedAliases, ...cwspAirpadParityAliases, ...merged];
+    return [
+        ...prepend,
+        ...workspaceLibAliases,
+        ...lureSubpathAliases,
+        ...viewSharedAliases,
+        ...cwspAirpadParityAliases,
+        ...merged
+    ];
 }
 
 export { workspaceRoot, viewsRoot, sharedRoot, subsystemRoot };

@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-08T20:37:00+07:00",
-  "thread": "raw-editor-enter",
-  "intent": "Capacitor Enter and trailing blank lines must land in the raw editor.",
+  "updatedAt": "2026-09-09T14:13:00+07:00",
+  "thread": "explorer-vite-config",
+  "intent": "CWSP-explorer npm run dev must resolve fl-ui, veela-lib, and com/* from the views layout.",
   "status": "patched",
-  "project": "fl.ui",
+  "project": "CWSP-explorer",
   "lastDone": [
-    "Stop stealing Enter when typing in code; insert \\n; keep a trailing LF pad"
+    "Resolve view tsconfig paths from modules/views/* when the app is the realpath; pin fl-ui, veela-lib, sw-cache, cws-bridge"
   ],
-  "next": "Type Enter and trailing empty lines in Capacitor raw — they should stay.",
+  "next": "Restart npm run dev in apps/CWSP-explorer and load the page.",
   "blockers": [],
   "paths": [
-    "modules/projects/fl.ui/src/ui/markdown/raw-editor/host.ts",
-    "modules/projects/fl.ui/src/ui/markdown/code-editor-keys.ts"
+    "modules/views/view-resolve-aliases.js",
+    "modules/projects/subsystem/tsconfig.vite-base.json"
   ],
   "models": {
     "implementer": "Grok 4.6",
