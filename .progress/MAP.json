@@ -33,6 +33,7 @@
     "иконки": "icon-picker",
     "write-back": "capacitor-write-back",
     "sdcard-save": "capacitor-write-back",
+    "document-load": "capacitor-write-back",
     "stale-entry": "stale-index",
     "BHEMU": "stale-index",
     "pwa-icon": "pwa-icons",
@@ -930,9 +931,13 @@
     "capacitor-write-back": [
       "modules/projects/lur.e/src/utils/opfs/markdown-assets.ts",
       "modules/projects/fl.ui/src/ui/explorer/storage-bridge.ts",
+      "modules/projects/fl.ui/src/ui/explorer/fs-backend.ts",
       "modules/views/markdown-view/src/needs-to-API.ts",
+      "modules/views/editor-view/src/index.ts",
       "apps/CWSP-shell/src/java/space/u2re/cwsp/CwsStorageHost.java",
-      "apps/CWSP-shell/src/java/space/u2re/cwsp/CwsLauncherBridgePlugin.java"
+      "apps/CWSP-shell/src/java/space/u2re/cwsp/CwsLauncherBridgePlugin.java",
+      "apps/CWSP-shell/src/java/space/u2re/cwsp/LauncherCoordinator.java",
+      "apps/CWSP-shell/src/java/space/u2re/cwsp/CwsDocumentLoad.java"
     ],
     "stale-index": [
       "runtime/fastify/plugins/host-apps.ts",
@@ -962,6 +967,13 @@
       "apps/CWSP-shared/package.json",
       "modules/projects/subsystem/tsconfig.vite-base.json",
       "modules/projects/cwsp-shared/src/remote-connection-runtime.ts"
+    ],
+    "object-deno": [
+      "modules/projects/object.ts/package.json",
+      "modules/projects/object.ts/scripts/run-browser-tests.mjs",
+      "modules/projects/object.ts/src/core/Mainline.ts",
+      "modules/projects/core.ts/src/utils/Mapped.ts",
+      "modules/projects/core.ts/src/utils/GridItemUtils.ts"
     ]
   }
 }

@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-09T14:13:00+07:00",
-  "thread": "explorer-vite-config",
-  "intent": "CWSP-explorer npm run dev must resolve fl-ui, veela-lib, and com/* from the views layout.",
+  "updatedAt": "2026-09-09T17:42:00+07:00",
+  "thread": "capacitor-write-back",
+  "intent": "CWSP-document Capacitor: never paint Empty document from a blank contentRef.",
   "status": "patched",
-  "project": "CWSP-explorer",
+  "project": "CWSP-document",
   "lastDone": [
-    "Resolve view tsconfig paths from modules/views/* when the app is the realpath; pin fl-ui, veela-lib, sw-cache, cws-bridge"
+    "Paint from lastGoodBody plain string — contentRef.value can read back empty on Capacitor CE",
+    "Empty-document branch falls back to lastGoodBody / DEFAULT; native goes raw instead of that label"
   ],
-  "next": "Restart npm run dev in apps/CWSP-explorer and load the page.",
+  "next": "Rebuild CWSP-document APK (web). Should show # This is content or the file, not Empty document.",
   "blockers": [],
   "paths": [
-    "modules/views/view-resolve-aliases.js",
-    "modules/projects/subsystem/tsconfig.vite-base.json"
+    "modules/views/markdown-view/src/needs-to-API.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",
