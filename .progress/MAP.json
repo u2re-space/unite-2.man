@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-06T17:48:00+07:00",
+  "updatedAt": "2026-09-12T15:30:00+07:00",
   "how": "Resolve tag or synonym → Read only those paths. If missing: one Grep for FIND:<tag>. Never walk skip.",
   "skip": [
     ".archives",
@@ -117,6 +117,8 @@
     "тост": "toast",
     "toast": "toast",
     "cw-raw-editor": "raw-editor",
+    "progressive-hex": "paint-yield",
+    "hex-chunks": "paint-yield",
     "viewer-path": "file-markdown"
   },
   "tags": {
@@ -649,6 +651,21 @@
     "raw-editor": [
       "modules/projects/fl.ui/src/ui/markdown/raw-editor/host.ts",
       "modules/projects/fl.ui/src/ui/markdown/raw-editor/styles.ts"
+    ],
+    "hex-editor": [
+      "modules/projects/fl.ui/src/ui/markdown/hex-editor/host.ts",
+      "modules/projects/fl.ui/src/ui/markdown/hex-editor/hex.ts",
+      "modules/projects/fl.ui/src/ui/markdown/hex-editor/styles.ts",
+      "modules/projects/fl.ui/src/ui/markdown/yield-main.ts"
+    ],
+    "paint-yield": [
+      "modules/projects/fl.ui/src/ui/markdown/yield-main.ts",
+      "modules/projects/fl.ui/src/ui/markdown/hex-editor/host.ts",
+      "modules/projects/fl.ui/src/ui/markdown/raw-editor/host.ts"
+    ],
+    "viewer-tabs": [
+      "modules/views/markdown-view/src/ts/Toolbar.ts",
+      "modules/views/markdown-view/src/needs-to-API.ts"
     ],
     "raw-editor-layout": [
       "modules/projects/fl.ui/src/ui/markdown/raw-editor/host.ts",

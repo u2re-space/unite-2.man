@@ -1,18 +1,23 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-09T17:42:00+07:00",
-  "thread": "capacitor-write-back",
-  "intent": "CWSP-document Capacitor: never paint Empty document from a blank contentRef.",
+  "updatedAt": "2026-09-12T15:30:00+07:00",
+  "thread": "viewer-tabs-hex",
+  "intent": "Phase A: document view tabs raw/hex/interpret, fl.ui hex editor, hide settings-sku-nav.",
   "status": "patched",
   "project": "CWSP-document",
   "lastDone": [
-    "Paint from lastGoodBody plain string — contentRef.value can read back empty on Capacitor CE",
-    "Empty-document branch falls back to lastGoodBody / DEFAULT; native goes raw instead of that label"
+    "HEX → raw keeps UTF-8 text (Cyrillic); Latin1 only for binary buffers"
   ],
-  "next": "Rebuild CWSP-document APK (web). Should show # This is content or the file, not Empty document.",
+  "next": "Rebuild CWSP-document web. HEX horizontal scroll should drag the Latin1 mirror.",
   "blockers": [],
   "paths": [
-    "modules/views/markdown-view/src/needs-to-API.ts"
+    "modules/projects/fl.ui/src/ui/markdown/hex-editor/",
+    "modules/projects/fl.ui/src/ui/markdown/raw-editor/",
+    "modules/projects/fl.ui/src/ui/markdown/yield-main.ts",
+    "modules/views/markdown-view/src/needs-to-API.ts",
+    "modules/views/markdown-view/src/ts/Toolbar.ts",
+    "modules/views/settings-view/src/ts/Settings.ts",
+    "apps/CWSP-shell/src/java/space/u2re/cwsp/CwsStorageHost.java"
   ],
   "models": {
     "implementer": "Grok 4.6",
