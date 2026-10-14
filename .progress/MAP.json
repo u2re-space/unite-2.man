@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-12T15:30:00+07:00",
+  "updatedAt": "2026-10-14T13:30:00+07:00",
   "how": "Resolve tag or synonym → Read only those paths. If missing: one Grep for FIND:<tag>. Never walk skip.",
   "skip": [
     ".archives",
@@ -107,6 +107,7 @@
     "remote-connection-runtime": "cwsp-shared-exports",
     "cwsp-shared exports": "cwsp-shared-exports",
     "bluetooth": "bluetooth",
+    "share-to-target": "share-to-target",
     "блютуз": "bluetooth",
     "device-map": "device-aliases",
     "имена-устройств": "device-aliases",
@@ -177,6 +178,16 @@
       "modules/projects/ssr.e/src/ssre/vite/plugin.ts"
     ],
     "icon": ["modules/projects/icon.ts"],
+    "icon-hydrate": [
+      "modules/projects/icon.ts/src/loader/Loader.ts",
+      "modules/projects/icon.ts/src/loader/OPFSCache.ts",
+      "modules/projects/fl.ui/src/ui/speed-dial/action-registry.ts",
+      "apps/CWSP-shell/src/java/space/u2re/cwsp/LauncherCoordinator.java"
+    ],
+    "shell-boot": [
+      "modules/projects/subsystem/src/boot/BootLoader.ts",
+      "apps/CWSP-shell/src/frontend/web/capacitor-launcher/entry.ts"
+    ],
     "css-layers": [
       "modules/projects/style.ts/src/layers.ts",
       "modules/projects/style.ts/src/cssom.ts",
@@ -248,6 +259,13 @@
       "modules/projects/dom.ts/src/decor/Appear.ts"
     ],
     "image": ["modules/projects/image.ts"],
+    "wallpaper-boot": [
+      "modules/projects/image.ts/src/canvas/Canvas.ts",
+      "modules/projects/subsystem/src/routing/pwa/sw-lifecycle.ts",
+      "apps/CWSP-shell/src/frontend/web/vds-main/index.html",
+      "apps/CWSP-shell/src/frontend/web/capacitor-launcher/index.html",
+      "apps/CWSP-shell/src/index.ts"
+    ],
     "wallpaper-ink": [
       "modules/projects/image.ts/src/canvas/Canvas.ts",
       "modules/projects/image.ts/src/engine/WallpaperTheme.ts",
@@ -611,7 +629,15 @@
     "bluetooth": [
       "apps/CWSP-transfer/src/shared/src/v2/bluetooth-transport.ts",
       "apps/CWSP-transfer/src/backend/java/android/emission/BluetoothTransfer.java",
+      "apps/CWSP-transfer/src/backend/java/space/u2re/cwsp/CwsBridgePlugin.java",
       "apps/CWSP-transfer/src/backend/node/shared/neutralino/bluetooth-transfer.ts"
+    ],
+    "share-to-target": [
+      "modules/projects/fl.ui/src/ui/explorer/share-copy.ts",
+      "apps/CWSP-shell/src/java/space/u2re/cwsp/CwsStorageHost.java",
+      "apps/CWSP-document/src/frontend/web/sku-boot.ts",
+      "apps/CWSP-process/src/frontend/web/sku-boot.ts",
+      "modules/projects/subsystem/src/routing/pwa/sw-lifecycle.ts"
     ],
     "device-aliases": [
       "apps/CWSP-transfer/src/shared/src/v2/device-aliases.ts",
@@ -837,6 +863,11 @@
       "modules/projects/subsystem/src/routing/pwa/sw-result-wire.ts",
       "modules/projects/subsystem/src/routing/channel/ShareTargetGateway.ts"
     ],
+    "share-static-route": [
+      "modules/projects/subsystem/src/routing/pwa/sw-lifecycle.ts",
+      "runtime/fastify/apps/share-ingress.ts",
+      "modules/projects/subsystem/src/routing/pwa/sw-handling.ts"
+    ],
     "sw-warmup": [
       "apps/CWSP-document/src/pwa/sw.ts",
       "apps/CWSP-process/src/pwa/sw.ts",
@@ -991,6 +1022,11 @@
       "modules/projects/object.ts/src/core/Mainline.ts",
       "modules/projects/core.ts/src/utils/Mapped.ts",
       "modules/projects/core.ts/src/utils/GridItemUtils.ts"
+    ],
+    "narrow-pane": [
+      "modules/projects/dom.ts/src/agate/Viewport.ts",
+      "modules/projects/veela.css/src/scss/ui/components/window.scss",
+      "modules/projects/fl.ui/src/ui/containers/window/window-shell.ts"
     ]
   }
 }

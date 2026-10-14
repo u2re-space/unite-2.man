@@ -104,6 +104,8 @@ const workspaceLibAliases = [
     { find: /^veela-lib\//, replacement: `${veelaScss}/` }
 ];
 const lureSubpathAliases = [
+    // WHY: `@fest-lib/*` in view tsconfigs points at modules/shared/fest and hides package exports.
+    { find: "@fest-lib/lure/base64-data", replacement: resolve(lureSrc, "utils/opfs/Base64Data.ts") },
     { find: "@fest-lib/lure/provide", replacement: resolve(lureSrc, "utils/opfs/provide.ts") },
     { find: "@fest-lib/lure/idb-fs", replacement: resolve(lureSrc, "utils/opfs/IdbFs.ts") },
     { find: "@fest-lib/lure/remote-fs", replacement: resolve(lureSrc, "utils/opfs/remote-fs.ts") },
@@ -116,6 +118,31 @@ const lureSubpathAliases = [
         replacement: resolve(workspaceRoot, "modules/projects/uniform.ts/src/newer/messaging/MountedFs.ts")
     }
 ];
+
+/**
+ * WHY: view tsconfigs map `com/*` and `core/*` onto `subsystem/src/*`.
+ * Document/shell use a shorter map (`other/config`, `routing/workers`, `other/utils`).
+ * Longer finds are sorted ahead of those prefixes in `getViewResolveAliases`.
+ */
+const skuImportAliases = [
+    { find: /^shared\/routing\/app-layers$/, replacement: resolve(subsystemRoot, "routing/core/app-layers.ts") },
+    { find: "core/utils/", replacement: `${resolve(subsystemRoot, "other/utils")}/` },
+    { find: "core/config/", replacement: `${resolve(subsystemRoot, "other/config")}/` },
+    { find: "core/document/", replacement: `${resolve(subsystemRoot, "other/document")}/` },
+    { find: "core/workers/", replacement: `${resolve(subsystemRoot, "routing/workers")}/` },
+    { find: "core/pwa/", replacement: `${resolve(subsystemRoot, "routing/pwa")}/` },
+    { find: "com/config/", replacement: `${resolve(subsystemRoot, "other/config")}/` },
+    { find: "com/routing/", replacement: `${resolve(subsystemRoot, "routing")}/` },
+    { find: "com/service/", replacement: `${resolve(subsystemRoot, "service")}/` }
+];
+
+/** Longer find wins. File aliases are exact regexes; `com/*` is the short prefix `com`. */
+function aliasRank(find) {
+    if (find instanceof RegExp) {
+        return find.source.replace(/^\^/, "").replace(/\$$/, "").replace(/\\(.)/g, "$1").length;
+    }
+    return String(find).length;
+}
 
 const viewSharedAliases = [
     { find: "views/network", replacement: NETWORK_VIEW_ENTRY },
@@ -168,18 +195,15 @@ export function getViewResolveAliases(projectRoot, prepend = []) {
     const baseAliases = importFromTSConfig({ compilerOptions: { paths: basePaths } }, subsystemPkgRoot);
     const localAliases = importFromTSConfig({ compilerOptions: { paths: localPaths } }, layoutRoot).filter(
         (a) => aliasReplacementExists(a.replacement)
+        // WHY: `@fest-lib/*` becomes the prefix `@fest-lib` and hides package exports
+        // (`@fest-lib/lure/base64-data`, `@fest-lib/fl-ui/markdown/hex-editor`).
+        && a.find !== "@fest-lib"
     );
     const merged = mergeAliasLists(baseAliases, localAliases).filter(
         (a) => !cwspAirpadParityFinds.has(String(a.find))
     );
-    return [
-        ...prepend,
-        ...workspaceLibAliases,
-        ...lureSubpathAliases,
-        ...viewSharedAliases,
-        ...cwspAirpadParityAliases,
-        ...merged
-    ];
+    return [...prepend, ...workspaceLibAliases, ...lureSubpathAliases, ...viewSharedAliases, ...skuImportAliases, ...cwspAirpadParityAliases, ...merged]
+        .sort((a, b) => aliasRank(b.find) - aliasRank(a.find));
 }
 
 export { workspaceRoot, viewsRoot, sharedRoot, subsystemRoot };
