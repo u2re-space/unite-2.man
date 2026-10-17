@@ -1,25 +1,22 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-14T15:50:00+07:00",
-  "thread": "vds-user-wallpaper",
-  "intent": "Paint a stored custom wallpaper before the bundled photo on u2re.space.",
-  "status": "deployed",
-  "project": "CWSP-shell",
+  "updatedAt": "2026-10-17T20:30:00+07:00",
+  "thread": "queried-node-replace",
+  "intent": "Explain node swap for ui-canvas and ui-icon, where the bitmap lives on the instance.",
+  "status": "explained",
+  "project": "lur.e",
   "lastDone": [
-    "Custom pointer skips /assets/wallpaper.jpg; IDB bytes also go to Cache cwsp-user-wallpaper",
-    "SW addRoutes serves GET /assets/user-wallpaper from that cache before the worker starts",
-    "Canvas cold start no longer assigns the stock file when the pointer is idb:rs-wallpaper",
-    "Deployed vds-main to 153.76.161.210"
+    "ui-canvas 2d context and ImageBitmap are instance fields; no disconnectedCallback; data-src repaints only a real upgraded canvas",
+    "blobImageMap is keyed by Blob object, so a new fetch misses the decoded bitmap",
+    "ui-icon phosphor paint is :host CSS and survives if the icon attribute is on the new tag",
+    "resource icons keep the URL in #resourceImageUrl and a shadow img; connectedCallback rebuilds only from the resource attribute"
   ],
-  "next": "Rebuild the launcher APK so the same early path is on device.",
+  "next": "If asked, publish a slot from disconnectedCallback and claim it in connectedCallback.",
   "blockers": [],
   "paths": [
+    "modules/projects/lur.e/src/lure/node/Queried.ts",
     "modules/projects/image.ts/src/canvas/Canvas.ts",
-    "modules/projects/subsystem/src/routing/pwa/sw-lifecycle.ts",
-    "apps/CWSP-shell/src/pwa/sw.ts",
-    "apps/CWSP-shell/src/frontend/web/vds-main/index.html",
-    "apps/CWSP-shell/src/index.ts",
-    "apps/CWSP-shell/src/frontend/web/capacitor-launcher/index.html"
+    "modules/projects/icon.ts/src/loader/Phosphor.ts"
   ],
   "models": {
     "implementer": "Grok 4.6",

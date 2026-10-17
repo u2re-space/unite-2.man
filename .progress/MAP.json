@@ -197,6 +197,12 @@
       "modules/views/markdown-view/src/needs-to-API.ts",
       "modules/views/settings-view/src/ts/settings-styles-attach.ts"
     ],
+    "element-replace": [
+      "modules/projects/lur.e/src/lure/node/Queried.ts",
+      "modules/projects/dom.ts/src/mixin/Observer.ts",
+      "modules/projects/image.ts/src/canvas/Canvas.ts",
+      "modules/projects/icon.ts/src/loader/Phosphor.ts"
+    ],
     "style-baker": [
       "modules/projects/style.ts/src/baker.ts",
       "modules/projects/style.ts/src/cssom.ts",
