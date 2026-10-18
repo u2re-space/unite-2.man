@@ -1,22 +1,20 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-17T20:30:00+07:00",
-  "thread": "queried-node-replace",
-  "intent": "Explain node swap for ui-canvas and ui-icon, where the bitmap lives on the instance.",
-  "status": "explained",
-  "project": "lur.e",
+  "updatedAt": "2026-10-18T14:38:00+07:00",
+  "thread": "runtime-cwsp-build",
+  "intent": "Point runtime cwsp:build at the endpoint portable packer.",
+  "status": "fixed",
+  "project": "runtime",
   "lastDone": [
-    "ui-canvas 2d context and ImageBitmap are instance fields; no disconnectedCallback; data-src repaints only a real upgraded canvas",
-    "blobImageMap is keyed by Blob object, so a new fetch misses the decoded bitmap",
-    "ui-icon phosphor paint is :host CSS and survives if the icon attribute is on the new tag",
-    "resource icons keep the URL in #resourceImageUrl and a shadow img; connectedCallback rebuilds only from the resource attribute"
+    "cwsp:build no longer calls missing runtime/pack-portable.mjs",
+    "It runs pack:portable in runtime/cwsp/endpoint (CWSP-reborn SoT)"
   ],
-  "next": "If asked, publish a slot from disconnectedCallback and claim it in connectedCallback.",
+  "next": "deploy:vds still needs npm run build:vds-apps --prefix runtime/fastify before the rsync.",
   "blockers": [],
   "paths": [
-    "modules/projects/lur.e/src/lure/node/Queried.ts",
-    "modules/projects/image.ts/src/canvas/Canvas.ts",
-    "modules/projects/icon.ts/src/loader/Phosphor.ts"
+    "runtime/package.json",
+    "apps/CWSP-reborn/runtime/endpoint/scripts/pack-portable.mjs",
+    "runtime/scripts/deploy-vds-webapp.sh"
   ],
   "models": {
     "implementer": "Grok 4.6",

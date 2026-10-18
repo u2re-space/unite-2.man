@@ -632,6 +632,10 @@
       "modules/projects/subsystem/src/routing/native/capacitor-clipboard.ts",
       "apps/CWSP-shell/src/java/space/u2re/cwsp/CwsLauncherBridgePlugin.java"
     ],
+    "pack-portable": [
+      "apps/CWSP-reborn/runtime/endpoint/scripts/pack-portable.mjs",
+      "runtime/package.json"
+    ],
     "bluetooth": [
       "apps/CWSP-transfer/src/shared/src/v2/bluetooth-transport.ts",
       "apps/CWSP-transfer/src/backend/java/android/emission/BluetoothTransfer.java",
