@@ -1037,6 +1037,10 @@
       "modules/projects/dom.ts/src/agate/Viewport.ts",
       "modules/projects/veela.css/src/scss/ui/components/window.scss",
       "modules/projects/fl.ui/src/ui/containers/window/window-shell.ts"
+    ],
+    "vds-webapp": [
+      "runtime/scripts/vds-webapp-compose.sh",
+      "runtime/scripts/deploy-vds-webapp.sh"
     ]
   }
 }

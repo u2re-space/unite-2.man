@@ -1,19 +1,20 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-18T14:38:00+07:00",
-  "thread": "runtime-cwsp-build",
-  "intent": "Point runtime cwsp:build at the endpoint portable packer.",
+  "updatedAt": "2026-10-19T16:46:00+07:00",
+  "thread": "vds-webapp-down",
+  "intent": "Restore public Fastify on u2re.space after Docker 29 rejected compose build.",
   "status": "fixed",
   "project": "runtime",
   "lastDone": [
-    "cwsp:build no longer calls missing runtime/pack-portable.mjs",
-    "It runs pack:portable in runtime/cwsp/endpoint (CWSP-reborn SoT)"
+    "VDS was up; :443 refused because webapp-compose crash-looped on docker compose up --build",
+    "Docker 29.9.1 rejects build.network=host without --allow=network.host",
+    "Removed host build network in vds-webapp-compose.sh and on /root/webapp/docker-compose.yml",
+    "webapp-compose is healthy; https://u2re.space/ and /healthz return 200"
   ],
-  "next": "deploy:vds still needs npm run build:vds-apps --prefix runtime/fastify before the rsync.",
+  "next": "www.u2re.space has no DNS A record. Key passphrase for id_ed25519 is not the VDS login password.",
   "blockers": [],
   "paths": [
-    "runtime/package.json",
-    "apps/CWSP-reborn/runtime/endpoint/scripts/pack-portable.mjs",
+    "runtime/scripts/vds-webapp-compose.sh",
     "runtime/scripts/deploy-vds-webapp.sh"
   ],
   "models": {
