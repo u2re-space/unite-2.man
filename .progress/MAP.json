@@ -1041,6 +1041,10 @@
     "vds-webapp": [
       "runtime/scripts/vds-webapp-compose.sh",
       "runtime/scripts/deploy-vds-webapp.sh"
+    ],
+    "docx-math": [
+      "modules/projects/subsystem/src/other/document/docx/math.ts",
+      "modules/projects/fl.ui/src/ui/markdown/render.ts"
     ]
   }
 }

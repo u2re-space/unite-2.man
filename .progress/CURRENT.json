@@ -1,20 +1,17 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-19T16:46:00+07:00",
-  "thread": "vds-webapp-down",
-  "intent": "Restore public Fastify on u2re.space after Docker 29 rejected compose build.",
+  "updatedAt": "2026-10-20T08:09:00+07:00",
+  "thread": "vds-deploy-ssh",
+  "intent": "Make deploy:vds authenticate to the VDS without a signing agent.",
   "status": "fixed",
   "project": "runtime",
   "lastDone": [
-    "VDS was up; :443 refused because webapp-compose crash-looped on docker compose up --build",
-    "Docker 29.9.1 rejects build.network=host without --allow=network.host",
-    "Removed host build network in vds-webapp-compose.sh and on /root/webapp/docker-compose.yml",
-    "webapp-compose is healthy; https://u2re.space/ and /healthz return 200"
+    "deploy-vds-webapp.sh uses an agent only when it can sign; otherwise the login secret in ~/.ssh/vds-153.76.161.210",
+    "npm run deploy:vds finished; container healthy; https://u2re.space/healthz is 200"
   ],
-  "next": "www.u2re.space has no DNS A record. Key passphrase for id_ed25519 is not the VDS login password.",
+  "next": "",
   "blockers": [],
   "paths": [
-    "runtime/scripts/vds-webapp-compose.sh",
     "runtime/scripts/deploy-vds-webapp.sh"
   ],
   "models": {
