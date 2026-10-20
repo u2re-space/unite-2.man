@@ -479,7 +479,9 @@
     ],
     "high-refresh": [
       "apps/CWSP-shell/src/java/space/u2re/cwsp/DisplayRefreshUnlock.java",
-      "apps/CWSP-shell/src/java/space/u2re/cwsp/MainActivity.java"
+      "apps/CWSP-shell/src/java/space/u2re/cwsp/MainActivity.java",
+      "apps/CWSP-transfer/src/backend/java/space/u2re/cwsp/MainActivity.java",
+      "modules/shells/environment-shell/src/scss/capacitor-native.scss"
     ],
     "webview-flags": [
       "apps/CWSP-shell/src/java/space/u2re/cwsp/WebViewPlatformFlags.java",

@@ -1,18 +1,20 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-20T08:09:00+07:00",
-  "thread": "vds-deploy-ssh",
-  "intent": "Make deploy:vds authenticate to the VDS without a signing agent.",
-  "status": "fixed",
-  "project": "runtime",
+  "updatedAt": "2026-10-21T00:45:00+07:00",
+  "thread": "capacitor-high-refresh",
+  "intent": "Restore app-menu blur on the non-scrolling frame.",
+  "status": "done",
+  "project": "capacitor",
   "lastDone": [
-    "deploy-vds-webapp.sh uses an agent only when it can sign; otherwise the login secret in ~/.ssh/vds-153.76.161.210",
-    "npm run deploy:vds finished; container healthy; https://u2re.space/healthz is 200"
+    "Detached shadow/backdrop removed — WebView gave that layer no box to sample",
+    "Blur, tint, and shadow are on .env-shell-app-menu__frame, which does not scroll",
+    "The panel stays transparent and is the only scrolling layer; icon plates have no backdrop-filter"
   ],
-  "next": "",
+  "next": "Reload Apps. The frame should blur the wallpaper; scrolling should move only the list.",
   "blockers": [],
   "paths": [
-    "runtime/scripts/deploy-vds-webapp.sh"
+    "modules/projects/fl.ui/src/ui/navigation/app-menu/AppMenu.ts",
+    "modules/projects/veela.css/src/scss/ui/components/app-menu.scss"
   ],
   "models": {
     "implementer": "Grok 4.6",
