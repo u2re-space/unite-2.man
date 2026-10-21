@@ -518,7 +518,8 @@
       "apps/CWSP-transfer/src/backend/java/space/u2re/cwsp/MainActivity.java",
       "apps/CWSP-shell/src/java/space/u2re/cwsp/MainActivity.java",
       "modules/projects/fl.ui/src/ui/navigation/statusbar/capacitor-native-safe-area.ts",
-      "modules/shells/environment-shell/src/scss/capacitor-native.scss"
+      "modules/shells/environment-shell/src/scss/capacitor-native.scss",
+      "modules/shells/minimal-shell/src/minimal.scss"
     ],
     "hang-open": [
       "modules/projects/fl.ui/src/ui/containers/window/native-theme-color.ts",

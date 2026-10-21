@@ -1,20 +1,26 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-21T00:45:00+07:00",
-  "thread": "capacitor-high-refresh",
-  "intent": "Restore app-menu blur on the non-scrolling frame.",
+  "updatedAt": "2026-10-21T12:10:00+07:00",
+  "thread": "capacitor-native-navbar",
+  "intent": "Enable the native Android nav bar for the document/process/transfer/explorer SKU APKs.",
   "status": "done",
   "project": "capacitor",
   "lastDone": [
-    "Detached shadow/backdrop removed — WebView gave that layer no box to sample",
-    "Blur, tint, and shadow are on .env-shell-app-menu__frame, which does not scroll",
-    "The panel stays transparent and is the only scrolling layer; icon plates have no backdrop-filter"
+    "Shared MainActivity (document/process/explorer) shows navigationBars() for sibling SKUs; launcher hub still hides it",
+    "Transfer MainActivity shows the nav bar instead of hiding it",
+    "SystemBars.hide(NavigationBar) removed from the four SKU boot entries",
+    "minimal-shell .app-shell reserves env(safe-area-inset-bottom); .app-shell__status lifted above the bar"
   ],
-  "next": "Reload Apps. The frame should blur the wallpaper; scrolling should move only the list.",
+  "next": "Rebuild the four Capacitor APKs (build:capacitor) and check the bottom row / toasts clear the system nav bar on device.",
   "blockers": [],
   "paths": [
-    "modules/projects/fl.ui/src/ui/navigation/app-menu/AppMenu.ts",
-    "modules/projects/veela.css/src/scss/ui/components/app-menu.scss"
+    "apps/CWSP-shell/src/java/space/u2re/cwsp/MainActivity.java",
+    "apps/CWSP-transfer/src/backend/java/space/u2re/cwsp/MainActivity.java",
+    "apps/CWSP-document/src/frontend/web/sku-boot.ts",
+    "apps/CWSP-process/src/frontend/web/sku-boot.ts",
+    "apps/CWSP-explorer/src/web/sku-boot.ts",
+    "apps/CWSP-transfer/src/frontend/web/capacitor/shared/entry.ts",
+    "modules/shells/minimal-shell/src/minimal.scss"
   ],
   "models": {
     "implementer": "Grok 4.6",
