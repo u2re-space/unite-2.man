@@ -10,8 +10,8 @@
         --sv-fg: var(--sv-on-surface, var(--color-on-surface, --u2-color-mod(var(--base-color, #5a9ec8), 900)));
         --sv-muted: var(--sv-on-surface-variant, var(--color-on-surface-variant, --u2-color-mod(var(--base-color, #5a9ec8), 700)));
         --sv-outline: var(--sv-outline-variant, var(--color-outline-variant, --u2-color-mod(var(--base-color, #5a9ec8), 400)));
-        --sv-surface-1: var(--color-surface-container-low, --u2-color-mod(var(--base-color, #5a7fff), 10));
-        --sv-surface-2: var(--color-surface, --u2-color-mod(var(--base-color, #5a7fff), 10));
+        --sv-surface-1: var(--color-surface, --u2-color-mod(var(--base-color, #5a7fff), 10));
+        --sv-surface-2: var(--color-surface-container-low, --u2-color-mod(var(--base-color, #5a7fff), 10));
     }
 
     :is(html[data-theme="dark"] .cw-network-view-host, html[data-theme="dark"] .cw-network-view) {
@@ -20,8 +20,8 @@
         --sv-fg: var(--sv-on-surface, var(--color-on-surface, --u2-color-mod(var(--base-color, #5a9ec8), 100)));
         --sv-muted: var(--sv-on-surface-variant, var(--color-on-surface-variant, --u2-color-mod(var(--base-color, #5a9ec8), 280)));
         --sv-outline: var(--sv-outline-variant, var(--color-outline-variant, --u2-color-mod(var(--base-color, #5a9ec8), 640)));
-        --sv-surface-1: var(--color-surface-container-low, --u2-color-mod(var(--base-color, #5a7fff), 900));
-        --sv-surface-2: var(--color-surface, --u2-color-mod(var(--base-color, #5a7fff), 960));
+        --sv-surface-1: var(--color-surface, --u2-color-mod(var(--base-color, #5a7fff), 900));
+        --sv-surface-2: var(--color-surface-container-low, --u2-color-mod(var(--base-color, #5a7fff), 960));
     }
 
     /* Host fills minimal-shell absolute view slot */
