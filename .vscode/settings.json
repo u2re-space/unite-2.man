@@ -95,8 +95,8 @@
     "editor.unicodeHighlight.includeComments": false,
     "editor.unicodeHighlight.nonBasicASCII": false,
     "editor.suggest.shareSuggestSelections": true,
-    "chat.agent.sandbox.allowNetwork": true,
     "terminal.integrated.allowMnemonics": true,
     "debug.allowBreakpointsEverywhere": true,
-    "extensions.allowOpenInModalEditor": true
+    "extensions.allowOpenInModalEditor": true,
+    "chat.agent.sandbox.network.allowNetwork": true
 }
