@@ -150,7 +150,7 @@ Currently we used native CSS custom functions (and own implementations for veela
 
 - `--c2-surface(tone = 0, base-color = var(--current), scheme-id = 2)` - returns a surface color based on the tone, base color and theme id
 - `--c2-on-surface(tone = 0, base-color = var(--current), scheme-id = 2)` - returns a on-surface color based on the tone, base color and theme id
-- `--c2-contrast(tone = 0, base-color = var(--current), scheme-id = 2)` - returns a contrast color based on the tone, base color and theme id
+- `--u2-contrast(tone = 0, base-color = var(--current), scheme-id = 2)` - returns a contrast color based on the tone, base color and theme id
 - `--c2-on-contrast(tone = 0, base-color = var(--current), scheme-id = 2)` - returns a on-contrast color based on the tone, base color and theme id
 
 ### Alpha channel
