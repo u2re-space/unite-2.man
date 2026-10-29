@@ -31,7 +31,7 @@ Live agent contract. Overrides pantry, superpowers, Bugbot, review loops, and GS
 ## Model interaction
 
 Roles, not brands: **implementer** patches SoT and real files; **mapper** (wide context) returns `CONFLICTS` / `SAFE_FIRST_FIXES` / `DO_NOT_TOUCH` and does not rewrite SoT.
-Current pair: Grok 4.6 groups = implementer; GPT 5.6 Luna (1M Max) = mapper. Protocol: `.cursor/rules/model-pair.mdc`.
+Current pair: Grok 4.6 groups = implementer; GPT 6 Luna (1M Max) = mapper. Protocol: `.cursor/rules/model-pair.mdc`.
 If both would edit one file, implementer writes.
 After a meaningful turn, update `.progress/CURRENT.json` (`intent`, `lastDone`, `next`, `paths`, `models.last`). Mapper writes findings there; implementer writes code. New hubs go in `MAP.json`.
 

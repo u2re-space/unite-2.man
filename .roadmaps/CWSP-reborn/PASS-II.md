@@ -4,7 +4,7 @@
 - **Updated:** 2026-07-10T17:15:00+07:00
 - **Status:** in progress
 - **Baseline archive:** `.archives/CWSP-reborn/pass-II-2026-07-10/manifest.json`
-- **Models:** Grok 4.5 Highest + GLM-5.2 Highest (GPT-5.6-Sol excluded)
+- **Models:** Grok 4.5 Highest + GLM-5.2 Highest (GPT-6-Sol excluded)
 - **Rule:** independent agents own disjoint files; shared boundaries merge in dependency order
 
 ## Wave 0 — Continuity

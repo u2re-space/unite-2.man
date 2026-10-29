@@ -54,6 +54,6 @@
   },
   "agents": {
     "models": ["grok-4.5-fast-xhigh", "glm-5.2-high"],
-    "excluded": ["gpt-5.6-sol"]
+    "excluded": ["gpt-6.1-sol"]
   }
 }

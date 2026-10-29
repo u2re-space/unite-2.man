@@ -196,7 +196,7 @@ Thread: `.progress/CURRENT.json` (then `.progress/<project>/STATE.json` if named
 | Role | Default (2026-08-22) | Writes |
 | --- | --- | --- |
 | Implementer | Grok 4.6 groups | SoT and real files |
-| Mapper | GPT 5.6 Luna (1M Max) | `CONFLICTS` / `SAFE_FIRST_FIXES` / `DO_NOT_TOUCH` in CURRENT only |
+| Mapper | GPT 6 Luna (1M Max) | `CONFLICTS` / `SAFE_FIRST_FIXES` / `DO_NOT_TOUCH` in CURRENT only |
 
 The user may name GLM / Claude / others. If two models would edit one file, implementer writes.
 
@@ -204,13 +204,13 @@ Brand lists below are historical suitables, not the live contract.
 
 **Архитектура и фундамент (основа):**
 
-- GPT-5.6 Luna (1M Max) as mapper
+- GPT-6 Luna (1M Max) as mapper
 - Grok 4.6 as implementer when the scan is already in CURRENT
 
 **Дизайн и UI/UX:**
 
 - Grok 4.6 (implementer) after mapper scan
-- GPT-5.6 Luna / Terra when the user names them
+- GPT-6 Luna / Terra when the user names them
 - Sonnet / GLM when the user names them
 
 **Имплементация и реализация основного кода:**

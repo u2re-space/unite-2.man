@@ -11,7 +11,7 @@ alwaysApply: false
 ## Roles
 
 - **Implementer** (Grok 4.6 groups by default): patch SoT and real package files. Own the write if both would touch the same path.
-- **Mapper** (GPT 5.6 Luna 1M Max by default): wide consumer/duplicate/prelude scan. Return `CONFLICTS` / `SAFE_FIRST_FIXES` / `DO_NOT_TOUCH`. Do not rewrite SoT.
+- **Mapper** (GPT 6 Luna 1M Max by default): wide consumer/duplicate/prelude scan. Return `CONFLICTS` / `SAFE_FIRST_FIXES` / `DO_NOT_TOUCH`. Do not rewrite SoT.
 
 Same roles apply to GLM / Claude / others when the user names them.
 

@@ -19,7 +19,7 @@
 > ```
 > - Reasoning         : XHight
 > - Context           : 1M
-> - Preferred-LLM     : GPT-5.6 (or GPT-5.5 if first still no exists), GLM-5.2 (if available), Claude-Opus-4.8 (if available)
+> - Preferred-LLM     : GPT-6 (or GPT-6 if first still no exists), GLM-5.2 (if available), Claude-Opus-4.8 (if available)
 > - Speciality-Level  : Senior or beyond
 > - Knowledge-Database: N >= 2026
 > - Speciality-Area   : Frontend, Backend, UI/UX-Design
@@ -94,7 +94,7 @@
 
 **Type:** PWA-application
 **Stack:** TypeScript, JS, custom framework
-**Preferred-AI:** GPT-5.5 (or GPT-5.6 if available), GLM-5.2, Opus-4.8
+**Preferred-AI:** GPT-6 (or GPT-6 if available), GLM-5.2, Opus-4.8
 **Preferred-Reasoning:** Medium or High
 **Preferred-Context:** 1M
 
@@ -102,7 +102,7 @@
 
 **Type:** CRX-extension
 **Stack:** TypeScript, JS, custom framework
-**Preferred-AI:** GPT-5.5 (or GPT-5.6 if available), GLM-5.2, Opus-4.8
+**Preferred-AI:** GPT-6 (or GPT-6 if available), GLM-5.2, Opus-4.8
 **Preferred-Reasoning:** Medium or High
 **Preferred-Context:** 1M
 
@@ -111,7 +111,7 @@
 **Type:** Capacitor-application
 **Stack-A:** Java, Kotlin (Native, CWSP-port, compatibility)
 **Stack-C:** TypeScript, JS, custom framework (Web, UI/UX, Frontend)
-**Preferred-AI:** GPT-5.6 (or GPT-5.5 if first not available), GLM-5.2, Opus-4.8, Fable-5 (if available)
+**Preferred-AI:** GPT-6 (or GPT-6 if first not available), GLM-5.2, Opus-4.8, Fable-5 (if available)
 **Preferred-Reasoning:** High, Extra-High or Pro
 **Preferred-Context:** 1M
 **Inspired-by-projects:**
@@ -1135,17 +1135,17 @@ export const importShared = <T>(key: symbol) => {
 **Архитектура и фундамент (основа):**
 
 - Fable 5 (Highest reasoning or High, 1M context)
-- GPT-5.6 (Highest reasoning, 1M context) [Sol]
+- GPT-6 (Highest reasoning, 1M context) [Sol]
 
 **Дизайн и UI/UX:**
 
 - Fable 5  (Highest reasoning or High, 1M context)
-- GPT-5.6  (Highest reasoning or High, 1M context) [Sol or Terra]
+- GPT-6  (Highest reasoning or High, 1M context) [Sol or Terra]
 - Sonnet 5 (High reasoning, most suitable context)
 
 **Имплементация и реализация основного кода (компонентов, модулей):**
 
-- GPT-5.6 (Highest reasoning, 1M context or more) [Sol]
+- GPT-6 (Highest reasoning, 1M context or more) [Sol]
 - Fable 5 (Highest reasoning or High, 1M context)
 - GLM-5.2 (Highest, maximum suitable context)
 
@@ -1154,13 +1154,13 @@ export const importShared = <T>(key: symbol) => {
 - Sonnet 5 (High reasoning, or bit lower, most suitable context)
 - Grok 4.5 (High reasoning, most suitable context) [may be Fast]
 - GLM-5.2  (Highest, maximum suitable context)
-- GPT 5.6  (Highest, High or Medium reasoning, 1M context or Fast) [Terra or Luna]
+- GPT 6  (Highest, High or Medium reasoning, 1M context or Fast) [Terra or Luna]
 - Gemini 3.5 Flash
 
 **Code Review:**
 
 - GLM-5.2  (Highest, maximum suitable context)
-- GPT-5.6  (Highest reasoning or High, 200k or 1M context) [Sol or Terra]
+- GPT-6  (Highest reasoning or High, 200k or 1M context) [Sol or Terra]
 - Fable 5  (Highest reasoning or High/Medium , 1M context)
 - Sonnet 5 (High reasoning, most suitable context)
 - Grok 4.5 (High reasoning)
@@ -1168,5 +1168,5 @@ export const importShared = <T>(key: symbol) => {
 
 **Documentation and Specification:**
 
-- GPT-5.6 (Highest reasoning, 1M context, cachable) [Sol]
+- GPT-6 (Highest reasoning, 1M context, cachable) [Sol]
 - Fable 5 (Highest reasoning, 1M context)
