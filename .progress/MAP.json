@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-14T13:30:00+07:00",
+  "updatedAt": "2026-11-22T01:31:00+07:00",
   "how": "Resolve tag or synonym → Read only those paths. If missing: one Grep for FIND:<tag>. Never walk skip.",
   "skip": [
     ".archives",
@@ -123,21 +123,56 @@
     "viewer-path": "file-markdown"
   },
   "tags": {
-    "thread": [".progress/CURRENT.json"],
-    "map": [".progress/MAP.json"],
-    "budget": ["AGENTS.md", ".cursor/rules/optimization.mdc"],
-    "pair": [".cursor/rules/model-pair.mdc"],
-    "constitution": [".memories/Constitution.md"],
-    "comments": [".cursor/rules/comments-special-comments.mdc"],
-    "hierarchy": [".cursor/rules/project.mdc"],
-    "veela": [".cursor/rules/design-tokens.mdc", "modules/projects/veela.css/src/scss/core/_tokens.scss"],
-    "veela-resolve": ["modules/projects/veela.css/package.json", "apps/CWSP-transfer/vite.config.ts"],
-    "image-process": ["modules/projects/subsystem/src/routing/workers/ImageProcess.ts", "modules/projects/subsystem/src/service/processing/adapters.ts"],
-    "veela-ui": ["modules/projects/veela.css/src/scss/ui/index.scss", "modules/projects/veela.css/src/scss/ui/components"],
-    "veela-layers": ["modules/projects/veela.css/src/scss/_layers.scss"],
-    "overlays": [".cursor/rules/library-contracts.mdc"],
-    "network": [".cursor/rules/network.mdc"],
-    "debug": [".cursor/rules/debugging.mdc"],
+    "thread": [
+      ".progress/CURRENT.json"
+    ],
+    "map": [
+      ".progress/MAP.json"
+    ],
+    "budget": [
+      "AGENTS.md",
+      ".cursor/rules/optimization.mdc"
+    ],
+    "pair": [
+      ".cursor/rules/model-pair.mdc"
+    ],
+    "constitution": [
+      ".memories/Constitution.md"
+    ],
+    "comments": [
+      ".cursor/rules/comments-special-comments.mdc"
+    ],
+    "hierarchy": [
+      ".cursor/rules/project.mdc"
+    ],
+    "veela": [
+      ".cursor/rules/design-tokens.mdc",
+      "modules/projects/veela.css/src/scss/core/_tokens.scss"
+    ],
+    "veela-resolve": [
+      "modules/projects/veela.css/package.json",
+      "apps/CWSP-transfer/vite.config.ts"
+    ],
+    "image-process": [
+      "modules/projects/subsystem/src/routing/workers/ImageProcess.ts",
+      "modules/projects/subsystem/src/service/processing/adapters.ts"
+    ],
+    "veela-ui": [
+      "modules/projects/veela.css/src/scss/ui/index.scss",
+      "modules/projects/veela.css/src/scss/ui/components"
+    ],
+    "veela-layers": [
+      "modules/projects/veela.css/src/scss/_layers.scss"
+    ],
+    "overlays": [
+      ".cursor/rules/library-contracts.mdc"
+    ],
+    "network": [
+      ".cursor/rules/network.mdc"
+    ],
+    "debug": [
+      ".cursor/rules/debugging.mdc"
+    ],
     "fest-shared": [
       "modules/shared/fest-web-libs.mjs",
       "modules/projects/scripts/stage-fest-libs.mjs",
@@ -147,7 +182,9 @@
       "apps/CWSP-shell/shared/vite.config.js",
       "apps/CWSP-shell/shared/vite-chunk-placement.mjs"
     ],
-    "core": ["modules/projects/core.ts"],
+    "core": [
+      "modules/projects/core.ts"
+    ],
     "promise-keyed": [
       "modules/projects/core.ts/src/utils/PromiseTry.ts",
       "modules/projects/core.ts/src/utils/Resolved.ts",
@@ -156,10 +193,18 @@
       "modules/projects/object.ts/src/core/Resolved.ts",
       "modules/projects/object.ts/src/core/Specific.ts"
     ],
-    "dom": ["modules/projects/dom.ts"],
-    "object": ["modules/projects/object.ts"],
-    "uniform": ["modules/projects/uniform.ts"],
-    "lure": ["modules/projects/lur.e"],
+    "dom": [
+      "modules/projects/dom.ts"
+    ],
+    "object": [
+      "modules/projects/object.ts"
+    ],
+    "uniform": [
+      "modules/projects/uniform.ts"
+    ],
+    "lure": [
+      "modules/projects/lur.e"
+    ],
     "ssre": [
       "modules/projects/ssr.e",
       "modules/projects/ssr.e/src/index.ts",
@@ -177,7 +222,9 @@
       "modules/projects/subsystem/vite-ssre.mjs",
       "modules/projects/ssr.e/src/ssre/vite/plugin.ts"
     ],
-    "icon": ["modules/projects/icon.ts"],
+    "icon": [
+      "modules/projects/icon.ts"
+    ],
     "icon-hydrate": [
       "modules/projects/icon.ts/src/loader/Loader.ts",
       "modules/projects/icon.ts/src/loader/OPFSCache.ts",
@@ -264,7 +311,9 @@
       "modules/projects/dom.ts/src/decor/Animation.ts",
       "modules/projects/dom.ts/src/decor/Appear.ts"
     ],
-    "image": ["modules/projects/image.ts"],
+    "image": [
+      "modules/projects/image.ts"
+    ],
     "wallpaper-boot": [
       "modules/projects/image.ts/src/canvas/Canvas.ts",
       "modules/projects/subsystem/src/routing/pwa/sw-lifecycle.ts",
@@ -356,8 +405,12 @@
       "modules/projects/subsystem/view-resolve-aliases.js",
       "modules/projects/subsystem/vite.view.config.js"
     ],
-    "fl-ui": ["modules/projects/fl.ui"],
-    "speed-dial": ["modules/projects/fl.ui/src/ui/speed-dial"],
+    "fl-ui": [
+      "modules/projects/fl.ui"
+    ],
+    "speed-dial": [
+      "modules/projects/fl.ui/src/ui/speed-dial"
+    ],
     "speed-dial-widgets": [
       "modules/projects/fl.ui/src/ui/speed-dial/widgets.ts",
       "modules/projects/fl.ui/src/ui/speed-dial/launcher-state.ts",
@@ -401,7 +454,9 @@
       "modules/projects/fl.ui/src/ui/navigation/app-menu/AppMenu.scss",
       "modules/projects/fl.ui/src/ui/speed-dial/tile-icon.ts"
     ],
-    "icon-picker": ["modules/projects/fl.ui/src/ui/speed-dial/icon-resource-picker.ts"],
+    "icon-picker": [
+      "modules/projects/fl.ui/src/ui/speed-dial/icon-resource-picker.ts"
+    ],
     "pwa-icons": [
       "apps/CWSP-document/src/pwa/icons",
       "apps/CWSP-process/src/pwa/icons",
@@ -415,7 +470,9 @@
       "runtime/fastify/apps/host-apps.ts",
       "runtime/fastify/plugins/host-apps.ts"
     ],
-    "publish": ["modules/projects/scripts/bump-patch-version.mjs"],
+    "publish": [
+      "modules/projects/scripts/bump-patch-version.mjs"
+    ],
     "readme": [
       "README.md",
       "apps/README.md",
@@ -491,7 +548,9 @@
       ".progress/CWSP-reborn/STATE.json",
       ".cursor/skills/cwsp-reborn-pass/SKILL.md"
     ],
-    "trunk": [".trunk"],
+    "trunk": [
+      ".trunk"
+    ],
     "gradle-wrapper": [
       "apps/CWSP-shell/scripts/project-sibling-sku-android.mjs",
       "apps/CWSP-transfer/scripts/build-capacitor.mjs",
@@ -560,7 +619,9 @@
       "runtime/fastify/plugins/host-apps.ts",
       "runtime/fastify/apps/host-apps.ts"
     ],
-    "fastify-tsconfig": ["runtime/fastify/tsconfig.json"],
+    "fastify-tsconfig": [
+      "runtime/fastify/tsconfig.json"
+    ],
     "layers": [
       "runtime/fastify/layers.ts",
       "runtime/fastify/plugins/api.ts",
@@ -959,10 +1020,11 @@
     ],
     "crx-snip": [
       "apps/CWSP-crx/src/crx/sw.ts",
-      "apps/CWSP-crx/src/crx/lib/ShareTargetUtils.ts",
-      "modules/projects/subsystem/src/store/FileSystem.ts",
-      "modules/projects/subsystem/src/other/config/Settings.ts",
-      "modules/projects/subsystem/src/routing/channel/LogSanitizer.ts"
+      "apps/CWSP-crx/src/crx/service/api.ts",
+      "apps/CWSP-crx/src/crx/content/snip.ts",
+      "apps/CWSP-crx/src/crx/content/rect-selector.ts",
+      "apps/CWSP-crx/src/crx/content/main.ts",
+      "modules/projects/subsystem/src/boot/overlay.ts"
     ],
     "workcenter-chat-events": [
       "modules/views/workcenter-view/src/ts/WorkCenterEvents.ts"
@@ -1048,6 +1110,17 @@
     "docx-math": [
       "modules/projects/subsystem/src/other/document/docx/math.ts",
       "modules/projects/fl.ui/src/ui/markdown/render.ts"
+    ],
+    "exit-layer": [
+      "modules/projects/lur.e/src/lure/context/ExitLayer.ts",
+      "modules/projects/lur.e/src/lure/context/Utils.ts",
+      "modules/projects/lur.e/src/lure/node/Mapped.ts",
+      "modules/projects/lur.e/test/exit-layer.node.test.ts"
+    ],
+    "crx-popup": [
+      "apps/CWSP-crx/src/crx/popup/index.scss",
+      "apps/CWSP-crx/src/crx/popup/index.ts",
+      "apps/CWSP-crx/src/crx/popup/index.html"
     ]
   }
 }

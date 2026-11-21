@@ -1,29 +1,31 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-10-21T12:10:00+07:00",
-  "thread": "capacitor-native-navbar",
-  "intent": "Enable the native Android nav bar for the document/process/transfer/explorer SKU APKs.",
+  "updatedAt": "2026-11-22T01:30:00+07:00",
+  "thread": "cwsp-crx-snip-popup-fix",
+  "intent": "Fix CWSP-crx snip (select & recognize) pipeline and restore popup (actions) design.",
   "status": "done",
-  "project": "capacitor",
+  "project": "crx",
   "lastDone": [
-    "Shared MainActivity (document/process/explorer) shows navigationBars() for sibling SKUs; launcher hub still hides it",
-    "Transfer MainActivity shows the nav bar instead of hiding it",
-    "SystemBars.hide(NavigationBar) removed from the four SKU boot entries",
-    "minimal-shell .app-shell reserves env(safe-area-inset-bottom); .app-shell__status lifted above the bar"
+    "Root cause of broken popup design: @scope(:root[data-crx-page=popup]) — inner :root/html selectors never match (scope rules apply to descendants only); theme tokens never applied. Replaced token declarations with :scope (popup/index.scss)",
+    "Popup 'Rectangle Capture' was dead: globalThis.close() destroyed the popup context before its setTimeout(100ms) relay could send crx-snip-select-rect. Popup now sends crx-snip-screen-select to the SW, SW drives select→capture→process after the popup closes (popup/index.ts, sw.ts)",
+    "captureVisibleTab has no rect param — rect was silently ignored (full-window screenshots recognized). Added OffscreenCanvas crop in sw.ts captureScreenArea and service/api.ts captureVisibleTab",
+    "Rect-selector readiness: one 100ms wait lost the race on slow pages (dynamic import after document_start); now polls up to 2s (content/main.ts)",
+    "Overlay SoT (subsystem/boot/overlay.ts): showSelection now forces pointer-events:auto when showPopover fails (overlay visible but mouse-dead before); hideSelection clears the fallback",
+    "Rebuilt dist (v1.0.4); tsc crx errors unchanged vs baseline (10 pre-existing @types/chrome drift errors, Vite build unaffected)"
   ],
-  "next": "Rebuild the four Capacitor APKs (build:capacitor) and check the bottom row / toasts clear the system nav bar on device.",
+  "next": "Load unpacked dist/ in Chrome and verify: popup dark theme renders, Rectangle Capture shows selector after popup closes, recognize receives only the selected rect.",
   "blockers": [],
   "paths": [
-    "apps/CWSP-shell/src/java/space/u2re/cwsp/MainActivity.java",
-    "apps/CWSP-transfer/src/backend/java/space/u2re/cwsp/MainActivity.java",
-    "apps/CWSP-document/src/frontend/web/sku-boot.ts",
-    "apps/CWSP-process/src/frontend/web/sku-boot.ts",
-    "apps/CWSP-explorer/src/web/sku-boot.ts",
-    "apps/CWSP-transfer/src/frontend/web/capacitor/shared/entry.ts",
-    "modules/shells/minimal-shell/src/minimal.scss"
+    "apps/CWSP-crx/src/crx/popup/index.scss",
+    "apps/CWSP-crx/src/crx/popup/index.ts",
+    "apps/CWSP-crx/src/crx/sw.ts",
+    "apps/CWSP-crx/src/crx/service/api.ts",
+    "apps/CWSP-crx/src/crx/content/main.ts",
+    "apps/CWSP-crx/src/crx/manifest.json",
+    "modules/projects/subsystem/src/boot/overlay.ts"
   ],
   "models": {
-    "implementer": "Grok 4.6",
+    "implementer": "GLM 5.3 FlashX",
     "mapper": "GPT 6 Luna",
     "last": "implementer"
   }
