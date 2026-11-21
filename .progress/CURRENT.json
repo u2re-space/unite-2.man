@@ -1,28 +1,25 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-22T01:30:00+07:00",
-  "thread": "cwsp-crx-snip-popup-fix",
-  "intent": "Fix CWSP-crx snip (select & recognize) pipeline and restore popup (actions) design.",
+  "updatedAt": "2026-11-22T02:10:00+07:00",
+  "thread": "cwsp-shell-wallpaper-not-painting",
+  "intent": "Fix CWSP-shell wallpaper not painting (asset 404 + canvas render defects in image.ts).",
   "status": "done",
-  "project": "crx",
+  "project": "shell",
   "lastDone": [
-    "Root cause of broken popup design: @scope(:root[data-crx-page=popup]) — inner :root/html selectors never match (scope rules apply to descendants only); theme tokens never applied. Replaced token declarations with :scope (popup/index.scss)",
-    "Popup 'Rectangle Capture' was dead: globalThis.close() destroyed the popup context before its setTimeout(100ms) relay could send crx-snip-select-rect. Popup now sends crx-snip-screen-select to the SW, SW drives select→capture→process after the popup closes (popup/index.ts, sw.ts)",
-    "captureVisibleTab has no rect param — rect was silently ignored (full-window screenshots recognized). Added OffscreenCanvas crop in sw.ts captureScreenArea and service/api.ts captureVisibleTab",
-    "Rect-selector readiness: one 100ms wait lost the race on slow pages (dynamic import after document_start); now polls up to 2s (content/main.ts)",
-    "Overlay SoT (subsystem/boot/overlay.ts): showSelection now forces pointer-events:auto when showPopover fails (overlay visible but mouse-dead before); hideSelection clears the fallback",
-    "Rebuilt dist (v1.0.4); tsc crx errors unchanged vs baseline (10 pre-existing @types/chrome drift errors, Vite build unaffected)"
+    "ROOT CAUSE 1 (asset 404): shell builds never served /assets/wallpaper.jpg — viteStaticCopy dest was outDir/assets (static-copy joins root-relative path → assets/assets/wallpaper.jpg) in createHostSpaConfig, and shared/vite.config.js (PWA/dist) did not copy wallpapers at all. Fixed both (dest=outDir/dist root) + dev-server route for /assets/wallpaper.jpg.",
+    "ROOT CAUSE 2 (canvas render): image.ts #render passed the rafYield resolution value (rAF timestamp) as $renderPass(whatIsReady) → guard rejected the pass → blank canvas. Now the payload id is passed explicitly.",
+    "ROOT CAUSE 3: bindCache was keyed by the prototype method ($renderPass) → a second ui-canvas reused the FIRST canvas's bound context (visible canvas stayed blank). Cache is now keyed per element.",
+    "ROOT CAUSE 4: createImageBitmapCache used `blob instanceof OffscreenCanvas/Image` → ReferenceError when the global is missing (WebView) → source marked failed → no wallpaper. Added typeof-guarded probes.",
+    "RO create guarded by try/catch (one throw used to abort the whole init), RO falls back to contentBoxSize × dpr when devicePixelContentBoxSize is missing.",
+    "Verified: dist/assets/wallpaper.jpg, build/vds-main/assets/wallpaper.jpg, build/capacitor/web/assets/wallpaper.jpg all present; jsdom smoke shows drawImage called on both canvases with real 2160×4800 size."
   ],
-  "next": "Load unpacked dist/ in Chrome and verify: popup dark theme renders, Rectangle Capture shows selector after popup closes, recognize receives only the selected rect.",
+  "next": "Check on device/PWA: wallpaper paints on first frame (no rotation needed); custom IDB wallpaper still paints.",
   "blockers": [],
   "paths": [
-    "apps/CWSP-crx/src/crx/popup/index.scss",
-    "apps/CWSP-crx/src/crx/popup/index.ts",
-    "apps/CWSP-crx/src/crx/sw.ts",
-    "apps/CWSP-crx/src/crx/service/api.ts",
-    "apps/CWSP-crx/src/crx/content/main.ts",
-    "apps/CWSP-crx/src/crx/manifest.json",
-    "modules/projects/subsystem/src/boot/overlay.ts"
+    "apps/CWSP-shell/vite.config.js",
+    "apps/CWSP-shell/shared/vite.config.js",
+    "modules/projects/image.ts/src/canvas/Canvas.ts",
+    "modules/projects/image.ts/dist/image.js"
   ],
   "models": {
     "implementer": "GLM 5.3 FlashX",

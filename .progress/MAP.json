@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-22T01:31:00+07:00",
+  "updatedAt": "2026-11-22T02:20:00+07:00",
   "how": "Resolve tag or synonym → Read only those paths. If missing: one Grep for FIND:<tag>. Never walk skip.",
   "skip": [
     ".archives",
@@ -316,10 +316,8 @@
     ],
     "wallpaper-boot": [
       "modules/projects/image.ts/src/canvas/Canvas.ts",
-      "modules/projects/subsystem/src/routing/pwa/sw-lifecycle.ts",
-      "apps/CWSP-shell/src/frontend/web/vds-main/index.html",
-      "apps/CWSP-shell/src/frontend/web/capacitor-launcher/index.html",
-      "apps/CWSP-shell/src/index.ts"
+      "modules/projects/image.ts/src/engine/WallpaperTheme.ts",
+      "modules/shells/environment-shell/src/components/wallpaper.ts"
     ],
     "wallpaper-ink": [
       "modules/projects/image.ts/src/canvas/Canvas.ts",
