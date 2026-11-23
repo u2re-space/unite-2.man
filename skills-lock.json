@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "skills": {
+    "file-search": {
+      "source": "netresearch/file-search-skill",
+      "commit": "dcb377b95a8c7f31e8d1f1d817c3012b7c121720",
+      "sourceType": "github",
+      "skillPath": "skills/file-search/SKILL.md",
+      "computedHash": "afc8be6c7791d3e854ba51dfe2f91e18f3cd5b71e14511e287f5172fd6339573"
+    }
+  }
+}

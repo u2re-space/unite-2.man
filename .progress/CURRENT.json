@@ -1,28 +1,28 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-11-22T02:10:00+07:00",
-  "thread": "cwsp-shell-wallpaper-not-painting",
-  "intent": "Fix CWSP-shell wallpaper not painting (asset 404 + canvas render defects in image.ts).",
-  "status": "done",
-  "project": "shell",
+  "updatedAt": "2026-11-23T20:05:00+07:00",
+  "thread": "cwsp-crx-hidpi-snip-crop",
+  "intent": "Fix CWSP-crx snip on strict AI gateways (routerai): Responses-API extras rejected; add minimal-body retry + full error-body logging.",
+  "status": "fixing",
+  "project": "cwsp-crx",
   "lastDone": [
-    "ROOT CAUSE 1 (asset 404): shell builds never served /assets/wallpaper.jpg — viteStaticCopy dest was outDir/assets (static-copy joins root-relative path → assets/assets/wallpaper.jpg) in createHostSpaConfig, and shared/vite.config.js (PWA/dist) did not copy wallpapers at all. Fixed both (dest=outDir/dist root) + dev-server route for /assets/wallpaper.jpg.",
-    "ROOT CAUSE 2 (canvas render): image.ts #render passed the rafYield resolution value (rAF timestamp) as $renderPass(whatIsReady) → guard rejected the pass → blank canvas. Now the payload id is passed explicitly.",
-    "ROOT CAUSE 3: bindCache was keyed by the prototype method ($renderPass) → a second ui-canvas reused the FIRST canvas's bound context (visible canvas stayed blank). Cache is now keyed per element.",
-    "ROOT CAUSE 4: createImageBitmapCache used `blob instanceof OffscreenCanvas/Image` → ReferenceError when the global is missing (WebView) → source marked failed → no wallpaper. Added typeof-guarded probes.",
-    "RO create guarded by try/catch (one throw used to abort the whole init), RO falls back to contentBoxSize × dpr when devicePixelContentBoxSize is missing.",
-    "Verified: dist/assets/wallpaper.jpg, build/vds-main/assets/wallpaper.jpg, build/capacitor/web/assets/wallpaper.jpg all present; jsdom smoke shows drawImage called on both canvases with real 2160×4800 size."
+    "User: proxyapi.ru works, routerai gateway 'internal error'. Cause: sendRequest body is pure OpenAI Responses API with extras — max_output_tokens:400000 (over model limits), reasoning:{effort}, text:{verbosity}, truncation, prompt_cache_retention, max_tool_calls. Strict gateways 4xx/5xx; proxyapi tolerates.",
+    "GPT-Responses.ts sendRequest: buildMinimalBody() (model+input+tools+instructions+configuredMaxTokens only); attempt>0 sends it; 4xx now retries once with minimal body instead of immediate throw; error body logged up to 1KB ('[GPT] API error body:').",
+    "sw.ts gpt:translate (test path): same full/minimal double-fetch with detail logging; also parses choices[0].message.content (chat-style) as fallback output.",
+    "Verified dist: workbox-core.js carries dual-body translate handler; tsc clean (22 pre-existing errors in unrelated generated files); build:crx OK.",
+    "Earlier thread context: HiDPI crop fixed (runtime.ts capture now passes dprHint+cssViewportWidth; measured bitmap/viewport ratio wins); rect stays pure {x,y,width,height} (Chrome 148+ validates native rect option and rejects extra keys)."
   ],
-  "next": "Check on device/PWA: wallpaper paints on first frame (no rotation needed); custom IDB wallpaper still paints.",
+  "next": "User: reload extension, retry snip on routerai. If still failing, read '[GPT] API error body:' in SW console — it names the rejected param; if the model id itself is rejected on /responses, consider a per-gateway chat/completions fallback in sendRequest.",
   "blockers": [],
   "paths": [
-    "apps/CWSP-shell/vite.config.js",
-    "apps/CWSP-shell/shared/vite.config.js",
-    "modules/projects/image.ts/src/canvas/Canvas.ts",
-    "modules/projects/image.ts/dist/image.js"
+    "apps/CWSP-crx/src/crx/service/api.ts",
+    "apps/CWSP-crx/src/crx/content/snip.ts",
+    "apps/CWSP-crx/src/crx/content/main.ts",
+    "apps/CWSP-crx/src/crx/sw.ts",
+    "apps/CWSP-crx/src/crx/shared/runtime.ts"
   ],
   "models": {
-    "implementer": "GLM 5.3 FlashX",
+    "implementer": "GLM 5.3 Flash",
     "mapper": "GPT 6 Luna",
     "last": "implementer"
   }
